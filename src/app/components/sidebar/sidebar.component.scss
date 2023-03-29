@@ -1,0 +1,22 @@
+@import "../../../variables.scss";
+
+.sidebar {
+  height: 100%;
+  border-right: 2px solid rgba($foreground, 0.2);
+
+  .datetime {
+    text-align: center;
+    color: $foreground;
+    padding-top: 30px;
+
+    .time {
+      font-size: 80px;
+      margin-bottom: 30px;
+      padding-top: 30px;
+    }
+
+    .date {
+      font-size: 32px;
+    }
+  }
+}

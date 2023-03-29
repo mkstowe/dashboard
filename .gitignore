@@ -43,6 +43,7 @@ Thumbs.db
 
 .env
 /src/environments/environment*.ts
+/src/proxy.conf.json
 
 ### VisualStudioCode ###
 .vscode/*
