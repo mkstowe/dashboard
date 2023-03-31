@@ -40,7 +40,7 @@
       padding: 30px 0;
       text-align: center;
       color: $foreground;
-      border: 1px solid rgba($foreground, 0.1);
+      border: 2px solid rgba($foreground, 0.2);
       width: 80%;
       margin: 0 auto;
       border-radius: 10px;
@@ -49,11 +49,11 @@
       transition: 100ms ease-in-out;
 
       &.active {
-        color: $color-3;
+        color: $accent;
       }
 
       &:hover {
-        background-color: rgba($foreground, 0.1);
+        background-color: rgba($accent-lighter, 0.1);
       }
     }
   }
