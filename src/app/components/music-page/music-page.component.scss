@@ -1,0 +1,15 @@
+@import "../../../variables.scss";
+
+.music-page {
+  height: 100%;
+  width: 100%;
+  background-color: $background;
+}
+
+.sidebar-wrapper {
+  height: 100%;
+  width: 500px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

@@ -3,4 +3,14 @@
     <div class="time">{{ date | date : "shortTime" }}</div>
     <div class="date">{{ date | date : "EEEE MMMM d" }}</div>
   </div>
+  <div class="weather">
+    {{ weather }}
+  </div>
+  <nav>
+    <a routerLink="/home" routerLinkActive="active">Home</a>
+    <a routerLink="/music" routerLinkActive="active">Music</a>
+  </nav>
+  <div class="active-devices">
+    {{ activeDeviceString }}
+  </div>
 </div>
