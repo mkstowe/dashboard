@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatExpansionPanel } from '@angular/material/expansion';
 import { HassService } from 'src/app/services/HassService';
 
 @Component({
@@ -7,8 +8,10 @@ import { HassService } from 'src/app/services/HassService';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
+  @ViewChild(MatExpansionPanel) deviceList: MatExpansionPanel;
   public date: Date = new Date();
   public activeDevices: any;
+  public numActiveDevices: number;
   public weather: string;
   public activeDeviceString: string;
 
@@ -48,11 +51,16 @@ export class SidebarComponent implements OnInit {
           )
           .map((s) => result[s].attributes.friendly_name);
         this.activeDevices = [...activeLights, ...activeSpeakers];
+        this.numActiveDevices = this.activeDevices.length;
 
-        if (this.activeDevices.length > 1 || this.activeDevices.length === 0) {
-          this.activeDeviceString = `${this.activeDevices.length} devices are on`;
+        if (this.numActiveDevices > 1 || this.numActiveDevices === 0) {
+          this.activeDeviceString = `${this.numActiveDevices} devices are on`;
         } else {
           this.activeDeviceString = `${this.activeDevices[0]} is on`;
+        }
+
+        if (this.numActiveDevices < 2) {
+          this.deviceList.close();
         }
       },
     });
