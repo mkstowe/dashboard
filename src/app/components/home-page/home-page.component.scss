@@ -1,15 +1,46 @@
-@import "../../../variables.scss";
+@import "../../../variables";
 
 .home-page {
-  height: 100%;
+  display: flex;
   width: 100%;
-  background-color: $background;
-}
-
-.sidebar-wrapper {
   height: 100%;
-  width: 500px;
-  position: absolute;
-  top: 0;
-  left: 0;
+  background-color: $background;
+
+  .sidebar-wrapper {
+    width: 33%;
+    max-width: 500px;
+    height: 100vh;
+  }
+
+  .home-dash {
+    overflow: scroll;
+    flex-grow: 1;
+    padding: 50px;
+
+    .group-grid {
+      $group-gap: 50px;
+
+      display: flex;
+      flex-wrap: wrap;
+      gap: $group-gap;
+      align-items: flex-start;
+
+      width: 100%;
+      height: 100%;
+
+      app-card-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $group-gap;
+
+        aspect-ratio: 1/1;
+        width: calc(50% - $group-gap/2);
+        padding: 25px;
+
+        .title {
+          flex-basis: 100%;
+        }
+      }
+    }
+  }
 }

@@ -1,20 +1,20 @@
-@import "../../../variables.scss";
+@import "../../../variables";
 
 .sidebar {
-  height: 100%;
-  border-right: 2px solid rgba($foreground, 0.2);
   display: flex;
   flex-direction: column;
+  height: 100%;
+  border-right: 2px solid rgba($foreground, 0.2);
 
   .datetime {
-    text-align: center;
-    color: $foreground;
     padding-top: 30px;
+    color: $foreground;
+    text-align: center;
 
     .time {
-      font-size: 80px;
       margin-bottom: 30px;
       padding-top: 30px;
+      font-size: 80px;
     }
 
     .date {
@@ -24,28 +24,32 @@
 
   .weather {
     padding: 30px 0;
-    text-align: center;
     font-size: 24px;
     color: $foreground;
+    text-align: center;
   }
 
   nav {
-    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    padding: 50px 0;
+    flex-grow: 1;
     gap: 15px;
 
+    padding: 50px 0;
+
     a {
-      padding: 30px 0;
-      text-align: center;
-      color: $foreground;
-      border: 2px solid rgba($foreground, 0.2);
       width: 80%;
       margin: 0 auto;
-      border-radius: 10px;
+      padding: 30px 0;
+
       font-size: 32px;
       font-weight: 600;
+      color: $foreground;
+      text-align: center;
+
+      border: 2px solid rgba($foreground, 0.2);
+      border-radius: 10px;
+
       transition: 100ms ease-in-out;
 
       &.active {
@@ -59,25 +63,34 @@
   }
 
   .active-devices {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
     width: 50%;
     margin: 0 auto;
     padding-bottom: 30px;
-    background-color: $background;
+
     color: $foreground;
+
+    background-color: $background;
     box-shadow: none;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+
+    ::ng-deep mat-expansion-panel-header .mat-content {
+      margin-right: 0;
+    }
 
     mat-panel-title {
       display: inline;
-      text-align: center;
-      color: $foreground;
-      margin: 0;
+
+      margin-right: 0;
+
       font-size: 18px;
+      color: $foreground;
+      text-align: center;
     }
 
-    ::ng-deep .mat-expansion-indicator:after {
+    ::ng-deep .mat-expansion-indicator::after {
       color: $foreground;
     }
 

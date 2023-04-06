@@ -1,6 +1,6 @@
 <div class="sidebar">
   <div class="sidebar-section datetime">
-    <div class="time">{{ date | date : "shortTime" }}</div>
+    <div class="time">{{ date | date : "hh:mm" }}</div>
     <div class="date">{{ date | date : "EEEE MMMM d" }}</div>
   </div>
   <div class="weather">
@@ -11,7 +11,7 @@
     <a routerLink="/music" routerLinkActive="active">Music</a>
   </nav>
 
-  <mat-expansion-panel class="active-devices" [disabled]="numActiveDevices < 2">
+  <mat-expansion-panel #deviceList class="active-devices" [disabled]="numActiveDevices < 2">
     <mat-expansion-panel-header class="specific-class">
       <mat-panel-title>
         {{ activeDeviceString }}

@@ -10,12 +10,16 @@ import { HassService } from './services/HassService';
 import { HttpClientModule } from '@angular/common/http';
 import { MusicPageComponent } from './components/music-page/music-page.component';
 
-import { MatButtonModule } from '@angular/material/button';
-import { MatExpansionModule } from '@angular/material/expansion'; 
+import { SensorComponent } from './components/sensor/sensor.component';
+import { EntityCardComponent } from './components/entity-card/entity-card.component';
+import { MaterialModule } from './shared/material.module';
+import { IconModule } from './shared/icon.module';
+import { LightCardComponent } from './components/entity-card/light-card/light-card.component';
+import { CardGroupComponent } from './components/card-group/card-group.component';
 
 @NgModule({
-  declarations: [AppComponent, SidebarComponent, HomePageComponent, MusicPageComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, HttpClientModule, MatButtonModule, MatExpansionModule],
+  declarations: [AppComponent, SidebarComponent, HomePageComponent, MusicPageComponent, EntityCardComponent, SensorComponent, LightCardComponent, CardGroupComponent, ],
+  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, HttpClientModule, MaterialModule, IconModule],
   providers: [HassService],
   bootstrap: [AppComponent],
 })

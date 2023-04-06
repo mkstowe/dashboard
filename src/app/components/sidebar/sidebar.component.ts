@@ -60,7 +60,7 @@ export class SidebarComponent implements OnInit {
         }
 
         if (this.numActiveDevices < 2) {
-          this.deviceList.close();
+          this.deviceList?.close();
         }
       },
     });

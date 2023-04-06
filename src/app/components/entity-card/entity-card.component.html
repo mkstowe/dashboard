@@ -1,0 +1,11 @@
+<div class="card-wrapper" [class.active]="isActive" (click)="onButtonClick()">
+    <div class="entity-icon">
+        <mat-icon svgIcon="{{ isActive ? iconActive || icon : icon }}"></mat-icon>
+    </div>
+    <div class="entity-name">{{ entityName | titlecase }}</div>
+    <div class="entity-state">{{ entityState | titlecase }}</div>
+
+    <div class="test">
+        <ng-content></ng-content>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+@import "../../../variables";
+
+.group-wrapper {
+  $group-gap: 25px;
+  $title-height: 40px;
+
+  position: relative;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: $group-gap;
+
+  width: 100%;
+  height: 100%;
+
+  .title {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    height: $title-height;
+
+    font-size: 32px;
+    font-weight: 600;
+    color: $foreground;
+  }
+
+  .card-grid {
+    $card-gap: 15px;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: $card-gap;
+    align-items: flex-start;
+
+    aspect-ratio: 1/1;
+    height: calc(100% - $title-height);
+    margin-top: 20px;
+    padding-top: $title-height;
+
+    app-entity-card, app-light-card {
+      aspect-ratio: 1/1;
+      width: calc(50% - $card-gap/2);
+    }
+  }
+}

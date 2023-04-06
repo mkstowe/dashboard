@@ -3,5 +3,41 @@
     <app-sidebar></app-sidebar>
   </div>
 
-  <div class="dashboard home-dash"></div>
+  <div class="dashboard home-dash">
+    <div class="group-grid">
+      <app-card-group class="group" [title]="'Lights'">
+        <app-light-card
+          class="card"
+          [entityId]="'light.office'"
+          [icon]="'floor-lamp'"
+          [iconActive]="'floor-lamp-active'"
+          [service]="{
+            type: 'call_service',
+            domain: 'light',
+            service: 'toggle',
+            target: {
+              entity_id: 'light.office'
+            }
+          }"
+        ></app-light-card>
+
+        <app-light-card
+          class="card"
+          [icon]="'floor-lamp'"
+          [iconActive]="'floor-lamp-active'"
+          [cardOptions]="{
+            entityId: 'light.office'
+          }"
+        ></app-light-card>
+
+        <app-light-card
+          class="card"
+          [cardOptions]="{
+            entityId: 'light.living_room'
+          }"
+        ></app-light-card>
+      </app-card-group>
+      <app-card-group class="group"></app-card-group>
+    </div>
+  </div>
 </div>

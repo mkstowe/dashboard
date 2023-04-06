@@ -15,6 +15,8 @@ import { BehaviorSubject} from 'rxjs';
 export class HassService {
   public entities: BehaviorSubject<any> = new BehaviorSubject<any>({});
 
+  private connection: any;
+
   constructor() {
     this.connect();
   }
@@ -25,7 +27,11 @@ export class HassService {
       environment.authToken.access_token
     );
 
-    const connection = await createConnection({ auth });
-    subscribeEntities(connection, (ent) => this.entities.next(ent));
+    this.connection = await createConnection({ auth });
+    subscribeEntities(this.connection, (ent) => this.entities.next(ent));
+  }
+
+  public async callService(msg: any) {
+    this.connection.sendMessage(msg);
   }
 }
