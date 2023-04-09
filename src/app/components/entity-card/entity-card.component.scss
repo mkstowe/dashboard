@@ -9,7 +9,7 @@
   justify-content: end;
 
   aspect-ratio: 1/1;
-  padding: 15px;
+  padding: 20px;
 
   color: $foreground;
 
@@ -18,8 +18,8 @@
 
   .entity-icon {
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: 30px;
+    left: 30px;
 
     aspect-ratio: 1/1;
     width: 33%;
@@ -30,18 +30,32 @@
     }
   }
 
-  .entity-name {
-    font-size: 26px;
-    font-weight: 600;
-  }
+  .name-state {
+    .entity-name {
+      margin-bottom: 5px;
+      font-size: 26px;
+      font-weight: 600;
+    }
 
-  .entity-state {
-    font-size: 24px;
-    font-weight: 500;
+    .entity-state {
+      font-size: 24px;
+      font-weight: 500;
+    }
   }
 
   &.active {
     color: $background;
     background-color: $foreground;
+  }
+
+  &.has-action {
+    &:hover {
+      cursor: pointer;
+      background-color: rgba($foreground, 0.05);
+
+      &.active {
+        background-color: rgba($foreground, 0.9);
+      }
+    }
   }
 }

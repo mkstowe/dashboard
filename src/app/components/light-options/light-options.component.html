@@ -1,0 +1,20 @@
+<div class="light-options-wrapper">
+  <div class="header">
+    <h2>{{ name }}</h2>
+    <div class="power-btn" [class.active]="active" (click)="onPowerClick()">
+      <mat-icon svgIcon="power"></mat-icon>
+    </div>
+  </div>
+  <div class="brightness">
+    <h3>Brightness</h3>
+    <mat-slider
+      [min]="0"
+      [max]="255"
+      [discrete]="true"
+      [displayWith]="formatFunction"
+      (change)="onBrightnessChange($event)"
+    >
+      <input matSliderThumb [value]="brightness" />
+    </mat-slider>
+  </div>
+</div>

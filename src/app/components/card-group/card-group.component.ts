@@ -4,9 +4,8 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
   selector: 'app-card-group',
   templateUrl: './card-group.component.html',
   styleUrls: ['./card-group.component.scss'],
-  encapsulation: ViewEncapsulation.ShadowDom
+  encapsulation: ViewEncapsulation.None,
 })
 export class CardGroupComponent {
   @Input() title: string;
-
 }

@@ -6,12 +6,11 @@
 
   position: relative;
 
-  display: flex;
   flex-wrap: wrap;
   gap: $group-gap;
+  align-items: center;
 
   width: 100%;
-  height: 100%;
 
   .title {
     position: absolute;
@@ -34,11 +33,14 @@
     align-items: flex-start;
 
     aspect-ratio: 1/1;
-    height: calc(100% - $title-height);
+    width: 650px;
     margin-top: 20px;
     padding-top: $title-height;
 
-    app-entity-card, app-light-card {
+    app-entity-card,
+    app-light-card,
+    app-sensor-group {
+      display: block;
       aspect-ratio: 1/1;
       width: calc(50% - $card-gap/2);
     }

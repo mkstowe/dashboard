@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { HassService } from 'src/app/services/HassService';
+import {
+  HassService,
+  ServiceCall,
+  StateOptions,
+} from 'src/app/services/HassService';
 
 @Component({
   selector: 'app-entity-card',
@@ -18,11 +22,13 @@ export class EntityCardComponent implements OnInit {
   @Input() serviceData: any;
   @Input() lock: boolean;
   @Input() cardOptions: any;
+  @Input() stateOptions: StateOptions;
 
   public entity: any;
   public entityName: string;
   public entityState: string;
   public isActive: boolean;
+  public hasAction: boolean;
 
   private onStates = ['on', 'playing'];
 
@@ -44,36 +50,39 @@ export class EntityCardComponent implements OnInit {
         } else {
           this.isActive = false;
         }
+
+        this.entityState = this.hassService.resolveStateOptions(
+          this.entityState,
+          this.stateOptions
+        );
       },
     });
+
+    if (
+      this.action ||
+      this.service ||
+      this.cardOptions?.action ||
+      this.cardOptions?.service
+    ) {
+      this.hasAction = true;
+    }
   }
 
   public onButtonClick() {
-    const msg = this.service || this.cardOptions?.service || {
-      type: 'call_service',
-      domain:
-        this.serviceDomain ||
-        this.entityId?.split('.')[0] ||
-        this.cardOptions?.entityId?.split('.')[0],
-      service: this.action || this.cardOptions?.action,
-      service_data: this.serviceData || this.cardOptions?.serviceData,
-      target: {
-        entity_id: this.entityId || this.cardOptions?.entityId,
-      },
-    };
+    const msg = this.service ||
+      this.cardOptions?.service || {
+        type: 'call_service',
+        domain:
+          this.serviceDomain ||
+          this.entityId?.split('.')[0] ||
+          this.cardOptions?.entityId?.split('.')[0],
+        service: this.action || this.cardOptions?.action,
+        service_data: this.serviceData || this.cardOptions?.serviceData,
+        target: {
+          entity_id: this.entityId || this.cardOptions?.entityId,
+        },
+      };
 
     this.hassService.callService(msg);
   }
-}
-
-export interface ServiceCall {
-  type: string;
-  domain: string;
-  service: string;
-  service_data?: any;
-  target: {
-    entity_id?: string;
-    area_id?: string;
-    device_id?: string;
-  };
 }

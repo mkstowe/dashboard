@@ -11,14 +11,18 @@
     <a routerLink="/music" routerLinkActive="active">Music</a>
   </nav>
 
-  <mat-expansion-panel #deviceList class="active-devices" [disabled]="numActiveDevices < 2">
+  <mat-expansion-panel
+    #deviceList
+    class="active-devices"
+    [disabled]="numActiveDevices < 2"
+  >
     <mat-expansion-panel-header class="specific-class">
       <mat-panel-title>
         {{ activeDeviceString }}
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="device-list">
-    <p *ngFor="let device of activeDevices">{{ device }}</p>
+      <p *ngFor="let device of activeDevices">{{ device }}</p>
     </div>
   </mat-expansion-panel>
 </div>

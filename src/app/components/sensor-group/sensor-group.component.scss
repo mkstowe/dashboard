@@ -1,0 +1,16 @@
+.sensor-group-wrapper {
+  $group-gap: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: $group-gap;
+  align-items: start;
+
+  width: 100%;
+  height: 100%;
+
+  app-sensor {
+    width: 100%;
+    height: calc(50% - $group-gap/2);
+  }
+}

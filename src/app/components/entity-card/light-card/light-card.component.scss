@@ -1,0 +1,13 @@
+.light-card-wrapper {
+  width: 100%;
+  height: 100%;
+
+  .light-options-wrapper app-light-options {
+    display: block;
+  }
+
+  div app-entity-card {
+    width: 100%;
+    height: 100%;
+  }
+}

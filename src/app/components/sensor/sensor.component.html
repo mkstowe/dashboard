@@ -1,1 +1,9 @@
-<p>sensor works!</p>
+<div class="sensor-wrapper">
+  <div class="entity-icon">
+    <mat-icon svgIcon="{{ icon }}"></mat-icon>
+  </div>
+  <div class="info-wrapper">
+    <div class="entity-name">{{ entityName | titlecase }}</div>
+    <div class="entity-state">{{ entityState | titlecase }}</div>
+  </div>
+</div>

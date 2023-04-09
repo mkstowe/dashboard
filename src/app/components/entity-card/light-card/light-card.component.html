@@ -1,1 +1,30 @@
-<app-entity-card class="light-card" [entityId]="entityId" [icon]="icon" [iconActive]="iconActive" [name]="name" [state]="state" [service]="service" [action]="action" [serviceDomain]="serviceDomain" [serviceData]="serviceData" [lock]="lock" [cardOptions]="cardOptions"></app-entity-card>
+<div
+  class="light-card-wrapper"
+  (contextmenu)="onRightMouseClick()"
+  [ngSwitch]="showOptions"
+>
+  <div *ngSwitchCase="false">
+    <app-entity-card
+      class="light-card"
+      [entityId]="entityId"
+      [icon]="icon"
+      [iconActive]="iconActive"
+      [name]="name"
+      [state]="state"
+      [service]="service"
+      [action]="action"
+      [serviceDomain]="serviceDomain"
+      [serviceData]="serviceData"
+      [lock]="lock"
+      [cardOptions]="cardOptions"
+    ></app-entity-card>
+  </div>
+  <div class="light-options-wrapper" *ngSwitchCase="true">
+    <app-light-options
+      [entity]="entity"
+      [name]="entityName"
+      [state]="entityState"
+      [active]="isActive"
+    ></app-light-options>
+  </div>
+</div>
