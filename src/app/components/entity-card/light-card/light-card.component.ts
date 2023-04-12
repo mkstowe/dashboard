@@ -7,7 +7,7 @@ import { EntityCardComponent } from '../entity-card.component';
   styleUrls: ['./light-card.component.scss'],
 })
 export class LightCardComponent extends EntityCardComponent {
-  public showOptions = true;
+  public showOptions = false;
   public onRightMouseClick() {
     this.showOptions = !this.showOptions;
     return false;

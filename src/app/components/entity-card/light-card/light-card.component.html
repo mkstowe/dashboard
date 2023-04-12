@@ -4,7 +4,7 @@
   [ngSwitch]="showOptions"
 >
   <div *ngSwitchCase="false">
-    <app-entity-card
+    <!-- <app-entity-card
       class="light-card"
       [entityId]="entityId"
       [icon]="icon"
@@ -17,7 +17,8 @@
       [serviceData]="serviceData"
       [lock]="lock"
       [cardOptions]="cardOptions"
-    ></app-entity-card>
+    ></app-entity-card> -->
+    <app-entity-card [cardOptions]="cardOptions"></app-entity-card>
   </div>
   <div class="light-options-wrapper" *ngSwitchCase="true">
     <app-light-options

@@ -1,9 +1,12 @@
-@import "../../../variables";
+@import "src/variables";
 
 .sidebar {
   display: flex;
   flex-direction: column;
+
+  min-width: 350px;
   height: 100%;
+
   border-right: 2px solid rgba($foreground, 0.2);
 
   .datetime {

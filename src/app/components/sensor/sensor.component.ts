@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { HassService, StateOptions } from 'src/app/services/HassService';
+import { HassService } from 'src/app/services/HassService';
+import { SensorOptions, StateOptions } from 'src/app/shared/core.models';
 
 @Component({
   selector: 'app-sensor',
@@ -8,33 +9,38 @@ import { HassService, StateOptions } from 'src/app/services/HassService';
 })
 export class SensorComponent implements OnInit {
   @Input() entityId: string;
-  @Input() icon: string;
+  // @Input() icon: string;
   @Input() name: string;
   @Input() state: string;
   @Input() cardOptions: any;
   @Input() stateOptions: StateOptions;
+  @Input() sensorOptions: SensorOptions;
 
   public entity: any;
   public entityName: string;
   public entityState: string;
+  public icon: string;
 
   constructor(private hassService: HassService) {}
 
   ngOnInit(): void {
     this.hassService.entities.subscribe({
       next: (result) => {
-        this.entity = result[this.entityId || this.cardOptions?.entityId];
+        // this.entity = result[this.entityId || this.cardOptions?.entityId];
+        this.entity = result[this.sensorOptions.entityId];
         this.entityName =
-          this.name ||
-          this.cardOptions?.name ||
+          // this.name ||
+          this.sensorOptions?.name ||
           this.entity?.attributes.friendly_name;
         this.entityState =
-          this.state || this.cardOptions?.state || this.entity?.state;
+          // this.state ||
+          this.sensorOptions?.state || this.entity?.state;
 
         this.entityState = this.hassService.resolveStateOptions(
           this.entityState,
-          this.stateOptions
+          this.sensorOptions?.stateOptions
         );
+        this.icon = this.sensorOptions.icon || '';
       },
     });
   }

@@ -15,9 +15,10 @@ import { EntityCardComponent } from './components/entity-card/entity-card.compon
 import { MaterialModule } from './shared/material.module';
 import { IconModule } from './shared/icon.module';
 import { LightCardComponent } from './components/entity-card/light-card/light-card.component';
-import { CardGroupComponent } from './components/card-group/card-group.component';
 import { SensorGroupComponent } from './components/sensor-group/sensor-group.component';
 import { LightOptionsComponent } from './components/light-options/light-options.component';
+import { CardGridComponent } from './components/card-grid/card-grid.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
   declarations: [
@@ -28,9 +29,9 @@ import { LightOptionsComponent } from './components/light-options/light-options.
     EntityCardComponent,
     SensorComponent,
     LightCardComponent,
-    CardGroupComponent,
     SensorGroupComponent,
     LightOptionsComponent,
+    CardGridComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +40,7 @@ import { LightOptionsComponent } from './components/light-options/light-options.
     HttpClientModule,
     MaterialModule,
     IconModule,
+    ColorPickerModule
   ],
   providers: [HassService],
   bootstrap: [AppComponent],

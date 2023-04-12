@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { HassService, ServiceCall } from 'src/app/services/HassService';
+import { Subject, delay } from 'rxjs';
+import { HassService } from 'src/app/services/HassService';
+import { ServiceCall } from 'src/app/shared/core.models';
 
 @Component({
   selector: 'app-light-options',
@@ -13,18 +15,33 @@ export class LightOptionsComponent implements OnInit {
   @Input() active: boolean;
 
   public brightness: number;
+  public color: string;
   public min = 0;
   public max = 255;
   public showLabel = true;
 
+  public presetColors = ['#ffc791', '#ff0000'];
+
+  private entityUpdate: Subject<any> = new Subject<any>();
+
   constructor(private hassService: HassService) {}
 
   ngOnInit(): void {
-    this.hassService.entities.subscribe({
+    this.hassService.entities
+      .subscribe({
+        next: () => {
+          this.brightness = this.entity?.attributes.brightness || 0;
+        },
+      });
+
+    this.entityUpdate.pipe(delay(500)).subscribe({
       next: () => {
-        this.brightness = this.entity?.attributes.brightness || 0;
-      },
-    });
+        const rgbColor: number[] = this.entity.attributes.rgb_color;
+        this.color = rgbToHex(rgbColor);
+      }
+    })
+
+    this.entityUpdate.next(null);
   }
 
   public onPowerClick() {
@@ -38,6 +55,8 @@ export class LightOptionsComponent implements OnInit {
     };
 
     this.hassService.callService(service);
+
+    this.entityUpdate.next(null);
   }
 
   public onBrightnessChange($event: any) {
@@ -54,10 +73,51 @@ export class LightOptionsComponent implements OnInit {
     };
 
     this.hassService.callService(service);
+
+    this.entityUpdate.next(null);
   }
 
   public formatFunction(value: number) {
     const percent = Math.round((value / this.max) * 100);
     return `${percent}%`;
   }
+
+  public onColorChange($event: any) {
+    const service: ServiceCall = {
+      type: 'call_service',
+      domain: 'light',
+      service: 'turn_on',
+      service_data: {
+        rgb_color: hexToRgb($event),
+      },
+      target: {
+        entity_id: this.entity.entity_id,
+      },
+    };
+
+    this.hassService.callService(service);
+  }
+}
+
+function rgbToHex(rgb: number[]) {
+  return (
+    '#' +
+    rgb
+      ?.map((c) => {
+        const hex = c.toString(16);
+        return hex.length == 1 ? '0' + hex : hex;
+      })
+      .join('')
+  );
+}
+
+function hexToRgb(hex: string) {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result
+    ? [
+        parseInt(result[1], 16),
+        parseInt(result[2], 16),
+        parseInt(result[3], 16),
+      ]
+    : null;
 }

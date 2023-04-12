@@ -6,6 +6,7 @@ import {
   createLongLivedTokenAuth,
 } from 'home-assistant-js-websocket';
 import { BehaviorSubject } from 'rxjs';
+import { ServiceCall, StateOptions } from '../shared/core.models';
 
 @Injectable({
   providedIn: 'root',
@@ -29,11 +30,11 @@ export class HassService {
     subscribeEntities(this.connection, (ent) => this.entities.next(ent));
   }
 
-  public async callService(msg: any) {
+  public async callService(msg: ServiceCall) {
     this.connection.sendMessage(msg);
   }
 
-  public resolveStateOptions(state: string, options: StateOptions): string {
+  public resolveStateOptions(state: string, options: StateOptions | undefined): string {
     if (!state || !options) return state;
 
     let newState = state;
@@ -51,22 +52,4 @@ export class HassService {
 
     return newState;
   }
-}
-
-export interface ServiceCall {
-  type: string;
-  domain: string;
-  service: string;
-  service_data?: any;
-  target: {
-    entity_id?: string;
-    area_id?: string;
-    device_id?: string;
-  };
-}
-
-export interface StateOptions {
-  round?: boolean;
-  beforeString?: string;
-  afterString?: string;
 }

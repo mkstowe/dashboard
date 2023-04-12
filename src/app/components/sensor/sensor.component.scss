@@ -1,4 +1,4 @@
-@import "../../../variables";
+@import "src/variables";
 
 .sensor-wrapper {
   position: relative;
@@ -30,15 +30,14 @@
   .info-wrapper {
     display: flex;
     flex-direction: column;
-    align-items: end;
+    align-items: flex-end;
 
-    // height: 100%;
     justify-content: center;
 
     .entity-name {
+      margin-bottom: 5px;
       font-size: 22px;
       font-weight: 600;
-      margin-bottom: 5px;
     }
 
     .entity-state {
