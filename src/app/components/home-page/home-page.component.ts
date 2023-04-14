@@ -105,5 +105,59 @@ export class HomePageComponent {
         },
       ],
     },
+    {
+      title: 'Cats',
+      cards: [
+        {
+          type: 'entityCard',
+          cardOptions: {
+            entityId: 'vacuum.litter_robot_litter_box',
+            icon: 'toilet',
+            name: 'Litter Robot',
+            service: {
+              type: 'call_service',
+              domain: 'vacuum',
+              service: 'start',
+              target: {
+                entity_id: 'vacuum.litter_robot_litter_box',
+              },
+            },
+          },
+        },
+        {
+          type: 'sensorGroup',
+          sensors: [
+            {
+              entityId: 'sensor.litter_robot_litter_level',
+              icon: 'litter',
+              name: 'Litter Level',
+              stateOptions: {
+                round: true,
+                afterString: '%',
+              },
+            },
+            {
+              entityId: 'sensor.litter_robot_waste_drawer',
+              icon: 'poop',
+              name: 'Waste Level',
+              stateOptions: {
+                round: true,
+                afterString: '%'
+              }
+            }
+          ],
+        },
+        {
+          type: 'sensorGroup',
+          sensors: [
+            {
+              entityId: 'sensor.food_level',
+              icon: 'chicken-leg',
+              name: 'Food Level'
+            }
+          ]
+        }
+      ],
+    },
   ];
 }
