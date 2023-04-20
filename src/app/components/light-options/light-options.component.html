@@ -17,8 +17,20 @@
       <input matSliderThumb [value]="brightness" />
     </mat-slider>
   </div>
-  <div class="color" *ngIf="active">
+  <div class="color" *ngIf="active && color">
     <h3>Color</h3>
-    <input #colorPicker [(colorPicker)]="color" [style.background]="color" [cpOKButton]="true" [cpCancelButton]="true" cpAlphaChannel="disabled" cpOutputFormat="hex" [cpSaveClickOutside]="false" [value]="color" [cpPresetColors]="presetColors" (colorPickerSelect)="onColorChange($event)" >
+    <input
+      #colorPicker
+      [(colorPicker)]="color"
+      [style.background]="color"
+      [cpOKButton]="true"
+      [cpCancelButton]="true"
+      cpAlphaChannel="disabled"
+      cpOutputFormat="hex"
+      [cpSaveClickOutside]="false"
+      [value]="color"
+      [cpPresetColors]="presetColors"
+      (colorPickerSelect)="onColorChange($event)"
+    />
   </div>
 </div>

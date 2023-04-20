@@ -1,11 +1,19 @@
+/* stylelint-disable scss/dollar-variable-empty-line-before */
 $color-1: #252425;
 $color-2: #d8dae6;
 $color-3: #97929c;
 $color-4: #786572;
 $color-5: #5f4455;
 $color-6: #678a9b;
+
 $background: $color-1;
 $foreground: $color-2;
 $accent: $color-6;
 $accent-lighter: $color-6;
 $accent-darker: $color-6;
+
+$danger: #bb7979;
+$warn: #f1d597;
+
+$breakpoint-1: 1200px;
+$breakpoint-2: 900px;

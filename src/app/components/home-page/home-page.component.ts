@@ -9,6 +9,29 @@ import { CardGroup } from 'src/app/shared/core.models';
 export class HomePageComponent {
   public data: CardGroup[] = [
     {
+      title: 'Quick Toggles',
+      cards: [
+        {
+          type: 'entityCard',
+          cardOptions: {
+            entityId: 'script.sleepy_time',
+            icon: 'zzz',
+            name: 'Sleepy Time',
+            state: ' ',
+            lock: true,
+            service: {
+              type: 'call_service',
+              domain: 'script',
+              service: 'turn_on',
+              target: {
+                entity_id: 'script.sleepy_time',
+              },
+            },
+          },
+        },
+      ],
+    },
+    {
       title: 'Overview',
       cards: [
         {
@@ -22,6 +45,7 @@ export class HomePageComponent {
                 round: true,
                 afterString: '°',
               },
+              enableGraph: true,
             },
             {
               entityId: 'sensor.broadlink_humidity',
@@ -31,13 +55,28 @@ export class HomePageComponent {
                 round: true,
                 afterString: '%',
               },
+              enableGraph: true,
+            },
+          ],
+        },
+        {
+          type: 'sensorGroup',
+          sensors: [
+            {
+              entityId: 'sensor.network_speeds',
+              icon: 'speedometer',
+              stateOptions: {
+                round: true,
+                afterString: ' Mbps',
+              },
+              enableGraph: true,
             },
           ],
         },
       ],
     },
     {
-      title: 'Lights',
+      title: 'Office',
       cards: [
         {
           type: 'lightCard',
@@ -56,6 +95,28 @@ export class HomePageComponent {
           },
         },
         {
+          type: 'entityCard',
+          cardOptions: {
+            entityId: 'script.desktop_sleep',
+            icon: 'zzz',
+            state: ' ',
+            lock: true,
+            service: {
+              type: 'call_service',
+              domain: 'script',
+              service: 'turn_on',
+              target: {
+                entity_id: 'script.desktop_sleep',
+              },
+            },
+          },
+        },
+      ],
+    },
+    {
+      title: 'Bedroom',
+      cards: [
+        {
           type: 'lightCard',
           cardOptions: {
             entityId: 'light.bedroom',
@@ -71,6 +132,11 @@ export class HomePageComponent {
             },
           },
         },
+      ],
+    },
+    {
+      title: 'Living Room',
+      cards: [
         {
           type: 'lightCard',
           cardOptions: {
@@ -99,6 +165,22 @@ export class HomePageComponent {
               service: 'toggle',
               target: {
                 entity_id: 'switch.plug_1',
+              },
+            },
+          },
+        },
+        {
+          type: 'lightCard',
+          cardOptions: {
+            entityId: 'light.loft_light',
+            icon: 'ceiling-light',
+            iconActive: 'ceiling-light-active',
+            service: {
+              type: 'call_service',
+              domain: 'light',
+              service: 'toggle',
+              target: {
+                entity_id: 'light.loft_light',
               },
             },
           },
@@ -134,7 +216,10 @@ export class HomePageComponent {
               stateOptions: {
                 round: true,
                 afterString: '%',
+                warningExpression: '<= 70',
+                dangerExpression: '<= 40',
               },
+              enableGraph: true,
             },
             {
               entityId: 'sensor.litter_robot_waste_drawer',
@@ -142,9 +227,12 @@ export class HomePageComponent {
               name: 'Waste Level',
               stateOptions: {
                 round: true,
-                afterString: '%'
-              }
-            }
+                afterString: '%',
+                warningExpression: '>= 50',
+                dangerExpression: '>= 80',
+              },
+              enableGraph: true,
+            },
           ],
         },
         {
@@ -153,10 +241,14 @@ export class HomePageComponent {
             {
               entityId: 'sensor.food_level',
               icon: 'chicken-leg',
-              name: 'Food Level'
-            }
-          ]
-        }
+              name: 'Food Level',
+              stateOptions: {
+                dangerExpression: '=== "empty"',
+              },
+              enableGraph: false,
+            },
+          ],
+        },
       ],
     },
   ];

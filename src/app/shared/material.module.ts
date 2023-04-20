@@ -3,8 +3,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
-import { MatPaginatorModule } from '@angular/material/paginator'
-import { MatGridListModule } from '@angular/material/grid-list'
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { MatGridListModule } from '@angular/material/grid-list'
     MatIconModule,
     MatSliderModule,
     MatPaginatorModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDialogModule,
   ],
   exports: [
     MatButtonModule,
@@ -21,7 +23,8 @@ import { MatGridListModule } from '@angular/material/grid-list'
     MatIconModule,
     MatSliderModule,
     MatPaginatorModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDialogModule,
   ],
   providers: [MatIconRegistry],
 })

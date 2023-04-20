@@ -24,6 +24,14 @@
     .mat-icon {
       width: 100%;
       height: 100%;
+
+      &.warn {
+        color: $warn;
+      }
+
+      &.danger {
+        color: $danger;
+      }
     }
   }
 
@@ -31,7 +39,6 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-
     justify-content: center;
 
     .entity-name {

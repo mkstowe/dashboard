@@ -30,6 +30,20 @@
     }
   }
 
+  .lock-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    color: $color-3;
+
+    transition: opacity 0.3s ease-in;
+
+    &.unlocked {
+      opacity: 0;
+    }
+  }
+
   .name-state {
     .entity-name {
       margin-bottom: 5px;

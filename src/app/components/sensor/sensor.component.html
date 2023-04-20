@@ -1,6 +1,10 @@
-<div class="sensor-wrapper">
+<div class="sensor-wrapper" (contextmenu)="onRightMouseClick()">
   <div class="entity-icon">
-    <mat-icon svgIcon="{{ icon }}"></mat-icon>
+    <mat-icon
+      [class.warn]="dangerLevel === dangerLevels.Warning"
+      [class.danger]="dangerLevel === dangerLevels.Danger"
+      svgIcon="{{ icon }}"
+    ></mat-icon>
   </div>
   <div class="info-wrapper">
     <div class="entity-name">{{ entityName | titlecase }}</div>

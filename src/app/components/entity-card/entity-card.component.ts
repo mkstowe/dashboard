@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {
-  HassService,
-} from 'src/app/services/HassService';
-import { ServiceCall, StateOptions } from 'src/app/shared/core.models';
+import { HassService } from 'src/app/services/HassService';
+import { CardOptions } from 'src/app/shared/core.models';
 
 @Component({
   selector: 'app-entity-card',
@@ -10,18 +8,7 @@ import { ServiceCall, StateOptions } from 'src/app/shared/core.models';
   styleUrls: ['./entity-card.component.scss'],
 })
 export class EntityCardComponent implements OnInit {
-  // @Input() entityId: string;
-  // @Input() icon: string;
-  // @Input() iconActive: string;
-  // @Input() name: string;
-  // @Input() state: string;
-  // @Input() service: ServiceCall;
-  // @Input() action: string;
-  // @Input() serviceDomain: string;
-  // @Input() serviceData: any;
-  // @Input() lock: boolean;
-  @Input() cardOptions: any;
-  // @Input() stateOptions: StateOptions;
+  @Input() cardOptions: CardOptions;
 
   public entity: any;
   public entityName: string;
@@ -30,72 +17,62 @@ export class EntityCardComponent implements OnInit {
   public iconActive: string;
   public isActive: boolean;
   public hasAction: boolean;
+  public unlocked: boolean;
 
   private onStates = ['on', 'playing'];
+  private lockTimer: any;
 
   constructor(private hassService: HassService) {}
 
   ngOnInit(): void {
     this.hassService.entities.subscribe({
       next: (result) => {
-        this.entity = result[
-          // this.entityId ||
-          this.cardOptions?.entityId];
+        this.entity = result[this.cardOptions?.entityId];
         this.entityName =
-          // this.name ||
-          this.cardOptions?.name ||
-          this.entity?.attributes.friendly_name;
-        this.entityState =
-          // this.state ||
-          this.cardOptions?.state || this.entity?.state;
-          this.icon = this.cardOptions?.icon;
-          this.iconActive = this.cardOptions?.iconActive;
+          this.cardOptions?.name || this.entity?.attributes.friendly_name;
+        this.entityState = this.cardOptions?.state || this.entity?.state;
+        this.icon = this.cardOptions?.icon || '';
+        this.iconActive = this.cardOptions?.iconActive || '';
 
         if (this.onStates.includes(this.entityState)) {
           this.isActive = true;
         } else {
           this.isActive = false;
         }
-
-        // this.entityState = this.hassService.resolveStateOptions(
-        //   this.entityState,
-        //   this.stateOptions
-        // );
       },
     });
 
-    if (
-      // this.action ||
-      // this.service ||
-      this.cardOptions?.action ||
-      this.cardOptions?.service
-    ) {
+    if (this.cardOptions?.service) {
       this.hasAction = true;
     }
   }
 
-  public onButtonClick() {
-    const msg =
-    // this.service ||
-      this.cardOptions?.service || {
-        type: 'call_service',
+  public onButtonClick($event: any) {
+    if (!this.cardOptions.lock || this.unlocked) {
+      const msg = {
+        type: this.cardOptions.service?.type || 'call_service',
         domain:
-          // this.serviceDomain ||
-          // this.entityId?.split('.')[0] ||
+          this.cardOptions.service?.domain ||
           this.cardOptions?.entityId?.split('.')[0],
-        service:
-        // this.action ||
-        this.cardOptions?.action,
-        service_data:
-        // this.serviceData ||
-        this.cardOptions?.serviceData,
-        target: {
-          entity_id:
-          // this.entityId ||
-          this.cardOptions?.entityId,
+        service: this.cardOptions.service?.service || '',
+        service_data: this.cardOptions.service?.service_data,
+        target: this.cardOptions.service?.target || {
+          entity_id: this.cardOptions.entityId,
         },
       };
 
-    this.hassService.callService(msg);
+      this.hassService.callService(msg);
+    }
+
+    if (this.cardOptions.lock && !this.unlocked) {
+      $event.stopPropagation();
+      this.unlocked = true;
+    }
+
+    clearTimeout(this.lockTimer);
+    this.startLockTimer();
+  }
+  private startLockTimer() {
+    this.lockTimer = setTimeout(() => (this.unlocked = false), 5000);
   }
 }

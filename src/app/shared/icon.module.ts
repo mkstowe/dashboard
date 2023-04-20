@@ -49,6 +49,7 @@ export class IconModule {
       )
       .addSvgIcon('gas-pump', this.setPath(`${this.path}/gas-pump.svg`))
       .addSvgIcon('house', this.setPath(`${this.path}/house.svg`))
+      .addSvgIcon('speedometer', this.setPath(`${this.path}/speedometer.svg`))
       .addSvgIcon('light-bulb', this.setPath(`${this.path}/light_bulb.svg`))
       .addSvgIcon(
         'light-bulb-active',
@@ -73,7 +74,8 @@ export class IconModule {
       .addSvgIcon('tv', this.setPath(`${this.path}/tv.svg`))
       .addSvgIcon('tv-active', this.setPath(`${this.path}/tv_active.svg`))
       .addSvgIcon('water-drops', this.setPath(`${this.path}/water_drops.svg`))
-      .addSvgIcon('wifi', this.setPath(`${this.path}/wifi.svg`));
+      .addSvgIcon('wifi', this.setPath(`${this.path}/wifi.svg`))
+      .addSvgIcon('zzz', this.setPath(`${this.path}/zzz.svg`));
   }
 
   private setPath(url: string): SafeResourceUrl {

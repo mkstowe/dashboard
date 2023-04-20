@@ -2,15 +2,21 @@
 
 <!-- <mat-paginator [length]="10" [pageSize]="4" (page)="onPage()"></mat-paginator> -->
 <div class="card-grid">
-<div class="card" *ngFor="let card of cards">
-  <ng-container [ngSwitch]="card.type">
-    <app-entity-card *ngSwitchCase="'entityCard'" [cardOptions]="card.cardOptions"></app-entity-card>
-    <app-light-card *ngSwitchCase="'lightCard'" [cardOptions]="card.cardOptions"></app-light-card>
-    <app-sensor-group *ngSwitchCase="'sensorGroup'">
-      <ng-container *ngFor="let sensor of card.sensors">
-        <app-sensor [sensorOptions]="sensor"></app-sensor>
-      </ng-container>
-    </app-sensor-group>
-  </ng-container>
-</div>
+  <div class="card" *ngFor="let card of cards">
+    <ng-container [ngSwitch]="card.type">
+      <app-entity-card
+        *ngSwitchCase="'entityCard'"
+        [cardOptions]="card.cardOptions"
+      ></app-entity-card>
+      <app-light-card
+        *ngSwitchCase="'lightCard'"
+        [cardOptions]="card.cardOptions"
+      ></app-light-card>
+      <app-sensor-group *ngSwitchCase="'sensorGroup'">
+        <ng-container *ngFor="let sensor of card.sensors">
+          <app-sensor [sensorOptions]="sensor"></app-sensor>
+        </ng-container>
+      </app-sensor-group>
+    </ng-container>
+  </div>
 </div>

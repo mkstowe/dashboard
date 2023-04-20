@@ -19,6 +19,8 @@ import { SensorGroupComponent } from './components/sensor-group/sensor-group.com
 import { LightOptionsComponent } from './components/light-options/light-options.component';
 import { CardGridComponent } from './components/card-grid/card-grid.component';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { NgChartsModule } from 'ng2-charts';
+import { StateGraphComponent } from './components/state-graph/state-graph.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
     SensorGroupComponent,
     LightOptionsComponent,
     CardGridComponent,
+    StateGraphComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
     HttpClientModule,
     MaterialModule,
     IconModule,
-    ColorPickerModule
+    ColorPickerModule,
+    NgChartsModule,
   ],
   providers: [HassService],
   bootstrap: [AppComponent],

@@ -29,43 +29,17 @@
       height: 100%;
 
       .title {
-          margin-bottom: 25px;
-          font-size: 34px;
-          font-weight: 600;
-          color: $foreground;
-        }
+        margin-bottom: 25px;
+        font-size: 34px;
+        font-weight: 600;
+        color: $foreground;
+      }
 
       .group {
         position: relative;
-
-        // display: flex;
-        // flex-wrap: wrap;
-        // align-content: flex-start;
-        // justify-content: flex-start;
-
         aspect-ratio: 1/1;
         width: calc(50% - $group-gap/2);
         padding: 25px;
-
-        // .card-grid {
-        //   $card-gap: 15px;
-
-        //   display: flex;
-        //   flex-wrap: wrap;
-        //   gap: $card-gap;
-        //   align-items: flex-start;
-
-        //   aspect-ratio: 1/1;
-        //   width: 100%;
-
-        //   app-entity-card,
-        //   app-light-card,
-        //   app-sensor-group {
-        //     display: block;
-        //     aspect-ratio: 1/1;
-        //     width: calc(50% - $card-gap/2);
-        //   }
-        // }
       }
     }
   }

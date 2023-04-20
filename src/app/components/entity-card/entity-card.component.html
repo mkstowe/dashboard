@@ -2,10 +2,13 @@
   class="card-wrapper"
   [class.active]="isActive"
   [class.has-action]="hasAction"
-  (click)="onButtonClick()"
+  (click)="onButtonClick($event)"
 >
   <div class="entity-icon">
     <mat-icon svgIcon="{{ isActive ? iconActive || icon : icon }}"></mat-icon>
+  </div>
+  <div class="lock-icon" *ngIf="cardOptions.lock" [class.unlocked]="unlocked">
+    <mat-icon svgIcon="lock"></mat-icon>
   </div>
   <div class="name-state">
     <div class="entity-name">{{ entityName | titlecase }}</div>

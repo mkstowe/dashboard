@@ -15,7 +15,7 @@ export class LightOptionsComponent implements OnInit {
   @Input() active: boolean;
 
   public brightness: number;
-  public color: string;
+  public color: string | null;
   public min = 0;
   public max = 255;
   public showLabel = true;
@@ -27,19 +27,18 @@ export class LightOptionsComponent implements OnInit {
   constructor(private hassService: HassService) {}
 
   ngOnInit(): void {
-    this.hassService.entities
-      .subscribe({
-        next: () => {
-          this.brightness = this.entity?.attributes.brightness || 0;
-        },
-      });
+    this.hassService.entities.subscribe({
+      next: () => {
+        this.brightness = this.entity?.attributes.brightness || 0;
+      },
+    });
 
     this.entityUpdate.pipe(delay(500)).subscribe({
       next: () => {
         const rgbColor: number[] = this.entity.attributes.rgb_color;
-        this.color = rgbToHex(rgbColor);
-      }
-    })
+        this.color = rgbToHex(rgbColor) || null;
+      },
+    });
 
     this.entityUpdate.next(null);
   }
@@ -100,6 +99,8 @@ export class LightOptionsComponent implements OnInit {
 }
 
 function rgbToHex(rgb: number[]) {
+  if (!rgb) return null;
+
   return (
     '#' +
     rgb

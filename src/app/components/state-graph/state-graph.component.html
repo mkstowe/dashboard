@@ -1,0 +1,10 @@
+<div class="graph-wrapper">
+  <h2>{{ sensorOptions.name }}</h2>
+  <canvas
+    baseChart
+    class="chart"
+    [data]="lineChartData"
+    [options]="lineChartOptions"
+    type="line"
+  ></canvas>
+</div>

@@ -7,6 +7,7 @@ import {
 } from 'home-assistant-js-websocket';
 import { BehaviorSubject } from 'rxjs';
 import { ServiceCall, StateOptions } from '../shared/core.models';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,12 @@ export class HassService {
 
   private connection: any;
 
-  constructor() {
+  private headers: HttpHeaders = new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${environment.authToken.access_token}`,
+  });
+
+  constructor(private http: HttpClient) {
     this.connect();
   }
 
@@ -34,12 +40,31 @@ export class HassService {
     this.connection.sendMessage(msg);
   }
 
-  public resolveStateOptions(state: string, options: StateOptions | undefined): string {
+  public resolveStateOptions(
+    state: string,
+    options: StateOptions | undefined
+  ): any {
     if (!state || !options) return state;
 
     let newState = state;
+    let dangerLevel = DangerLevel.Normal;
+
     if (options.round && !isNaN(+newState)) {
       newState = String(Math.round(+newState));
+    }
+
+    if (
+      options.warningExpression &&
+      Function('return ' + `"${newState}"` + options.warningExpression)()
+    ) {
+      dangerLevel = DangerLevel.Warning;
+    }
+
+    if (
+      options.dangerExpression &&
+      Function('return ' + `"${newState}"` + options.dangerExpression)()
+    ) {
+      dangerLevel = DangerLevel.Danger;
     }
 
     if (options.beforeString) {
@@ -50,6 +75,21 @@ export class HassService {
       newState = newState + options.afterString;
     }
 
-    return newState;
+    return {
+      state: newState,
+      dangerLevel,
+    };
   }
+
+  public getEntityHistory(entityId: string) {
+    return this.http.get(`/api/history/period?filter_entity_id=${entityId}`, {
+      headers: this.headers,
+    });
+  }
+}
+
+export enum DangerLevel {
+  Normal,
+  Warning,
+  Danger,
 }
