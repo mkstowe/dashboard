@@ -18,8 +18,8 @@
 
   .entity-icon {
     aspect-ratio: 1/1;
-    width: 25%;
-    padding-left: 10px;
+    width: 20%;
+    margin: 0 5% 0 3%;
 
     .mat-icon {
       width: 100%;
@@ -40,16 +40,18 @@
     flex-direction: column;
     align-items: flex-end;
     justify-content: center;
+    text-align: right;
+    flex-grow: 1;
 
     .entity-name {
       margin-bottom: 5px;
-      font-size: 22px;
       font-weight: 600;
+      @include fluid-type(320px, 3000px, 12px, 28px);
     }
 
     .entity-state {
-      font-size: 20px;
       font-weight: 500;
+      @include fluid-type(320px, 3000px, 10px, 24px);
     }
   }
 }

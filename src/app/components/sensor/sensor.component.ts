@@ -52,8 +52,7 @@ export class SensorComponent implements OnInit {
 
     this.dialog.open(StateGraphComponent, {
       width: '70%',
-      // height: '500px',
-      data: { entity: this.entity, sensorOptions: this.sensorOptions },
+      data: { entity: this.entity, entityName: this.entityName, stateOptions: this.sensorOptions.stateOptions},
     });
     return false;
   }

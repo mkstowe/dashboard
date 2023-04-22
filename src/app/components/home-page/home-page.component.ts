@@ -29,6 +29,24 @@ export class HomePageComponent {
             },
           },
         },
+        {
+          type: 'entityCard',
+          cardOptions: {
+            entityId: 'script.sleepy_time',
+            icon: 'zzz',
+            name: 'Sleepy Time',
+            state: ' ',
+            lock: true,
+            service: {
+              type: 'call_service',
+              domain: 'script',
+              service: 'turn_on',
+              target: {
+                entity_id: 'script.sleepy_time',
+              },
+            },
+          },
+        },
       ],
     },
     {
@@ -172,7 +190,7 @@ export class HomePageComponent {
         {
           type: 'lightCard',
           cardOptions: {
-            entityId: 'light.loft_light',
+            entityId: 'light.loft_lights',
             icon: 'ceiling-light',
             iconActive: 'ceiling-light-active',
             service: {
@@ -180,7 +198,7 @@ export class HomePageComponent {
               domain: 'light',
               service: 'toggle',
               target: {
-                entity_id: 'light.loft_light',
+                entity_id: 'light.loft_lights',
               },
             },
           },
@@ -252,4 +270,10 @@ export class HomePageComponent {
       ],
     },
   ];
+
+  public sidebarActive = false;
+
+  public toggleSidebar() {
+    this.sidebarActive = !this.sidebarActive;
+  }
 }

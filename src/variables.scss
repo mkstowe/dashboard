@@ -1,4 +1,7 @@
+/* stylelint-disable scss/no-global-function-names */
 /* stylelint-disable scss/dollar-variable-empty-line-before */
+
+
 $color-1: #252425;
 $color-2: #d8dae6;
 $color-3: #97929c;
@@ -11,9 +14,44 @@ $foreground: $color-2;
 $accent: $color-6;
 $accent-lighter: $color-6;
 $accent-darker: $color-6;
+$hamburger-layer-color: $foreground;
+$hamburger-layer-width: 30px;
 
 $danger: #bb7979;
 $warn: #f1d597;
 
-$breakpoint-1: 1200px;
-$breakpoint-2: 900px;
+@import '/node_modules/hamburgers/_sass/hamburgers/hamburgers';
+
+$three-col-break: 3300px;
+$two-col-break: 2000px;
+$one-col-break: 1400px;
+$mobile-break: 900px;
+
+$card-break-1: calc(($three-col-break + $two-col-break) / 2);
+$card-break-2: calc(($two-col-break + $one-col-break) / 2);
+
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+  $u1: unit($min-vw);
+  $u2: unit($max-vw);
+  $u3: unit($min-font-size);
+  $u4: unit($max-font-size);
+
+  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+    & {
+      font-size: $min-font-size;
+      @media screen and (min-width: $min-vw) {
+        font-size: calc(
+          #{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} *
+            ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
+        );
+      }
+      @media screen and (min-width: $max-vw) {
+        font-size: $max-font-size;
+      }
+    }
+  }
+}

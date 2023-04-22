@@ -1,8 +1,10 @@
 @import "src/variables";
+@import "node_modules/rfs/scss";
 
 .card-wrapper {
   position: relative;
 
+  container-name: card;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -18,11 +20,11 @@
 
   .entity-icon {
     position: absolute;
-    top: 30px;
-    left: 30px;
+    top: 15%;
+    left: 15%;
 
     aspect-ratio: 1/1;
-    width: 33%;
+    width: 25%;
 
     .mat-icon {
       width: 100%;
@@ -46,13 +48,15 @@
 
   .name-state {
     .entity-name {
+      @include fluid-type(320px, 3000px, 16px, 32px);
+
       margin-bottom: 5px;
-      font-size: 26px;
       font-weight: 600;
     }
 
     .entity-state {
-      font-size: 24px;
+            @include fluid-type(320px, 3000px, 12px, 28px);
+
       font-weight: 500;
     }
   }
@@ -71,5 +75,11 @@
         background-color: rgba($foreground, 0.9);
       }
     }
+  }
+}
+
+@container card (max-width: 250px) {
+  .entity-name {
+    font-size: 10px;
   }
 }

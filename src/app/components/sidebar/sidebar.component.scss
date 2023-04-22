@@ -4,32 +4,53 @@
   display: flex;
   flex-direction: column;
 
-  min-width: 350px;
+  min-width: 375px;
   height: 100%;
+  background-color: $background;
 
   border-right: 2px solid rgba($foreground, 0.2);
 
+  // @media screen and (max-width: $mobile-break) {
+  //   // flex-direction: row;
+  //   // align-items: center;
+  //   // justify-content: center;
+  // }
+
   .datetime {
+    display: flex;
+    flex-direction: column;
     padding-top: 30px;
     color: $foreground;
     text-align: center;
 
+    // @media screen and (max-width: $mobile-break) {
+    //   // flex-direction: row;
+    //   align-items: center;
+    //   justify-content: center;
+    //   // gap: 50px;
+    //   padding: 0;
+    // }
+
     .time {
       margin-bottom: 30px;
       padding-top: 30px;
-      font-size: 80px;
+      font-size: clamp(64px, 4vw, 96px);
     }
 
     .date {
-      font-size: 32px;
+      font-size: clamp(24px, 1.5vw, 40px);
     }
   }
 
   .weather {
     padding: 30px 0;
-    font-size: 24px;
+    font-size: clamp(22px, 1.2vw, 32px);
     color: $foreground;
     text-align: center;
+
+    // @media screen and (max-width: $mobile-break) {
+    //   display: none;
+    // }
   }
 
   nav {
@@ -43,9 +64,9 @@
     a {
       width: 80%;
       margin: 0 auto;
-      padding: 30px 0;
+      padding: 20px 0;
 
-      font-size: 32px;
+      font-size: clamp(24px, 1.2vw, 28px);
       font-weight: 600;
       color: $foreground;
       text-align: center;
@@ -62,6 +83,13 @@
       &:hover {
         background-color: rgba($accent-lighter, 0.1);
       }
+    @media screen and (max-width: $one-col-break) {
+        width: 70%
+    }
+
+    // @media screen and (max-width: $mobile-break) {
+    //   display: none;
+    // }
     }
   }
 
@@ -78,6 +106,10 @@
 
     background-color: $background;
     box-shadow: none;
+
+    // @media screen and (max-width: $mobile-break) {
+    //   display: none;
+    // }
 
     ::ng-deep mat-expansion-panel-header .mat-content {
       margin-right: 0;

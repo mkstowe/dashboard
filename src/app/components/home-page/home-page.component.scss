@@ -6,8 +6,18 @@
   height: 100%;
   background-color: $background;
 
+  .mobile-header {
+    display: none;
+
+    .hamburger {
+      .hamburger-box .hamburger-inner {
+        color: $foreground;
+      }
+    }
+  }
+
   .sidebar-wrapper {
-    width: 33%;
+    width: 100%;
     max-width: 500px;
     height: 100vh;
   }
@@ -38,8 +48,61 @@
       .group {
         position: relative;
         aspect-ratio: 1/1;
-        width: calc(50% - $group-gap/2);
+        width: calc(25% - ($group-gap * 3 / 4));
         padding: 25px;
+
+        @media screen and (max-width: $three-col-break) {
+          width: calc(33% - ($group-gap * 2 / 3));
+        }
+
+        @media screen and (max-width: $two-col-break) {
+          width: calc(50% - ($group-gap / 2));
+        }
+
+        @media screen and (max-width: $one-col-break) {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: $mobile-break) {
+    flex-direction: column;
+
+    .mobile-header {
+      display: block;
+
+      width: 100%;
+      min-height: 75px;
+
+      background-color: $background;
+      box-shadow: 0 20px 20px rgba(0 0 0 / 30%);
+
+      .hamburger {
+        position: absolute;
+        z-index: 999;
+        top: 10px;
+        right: 30px;
+
+        display: block;
+      }
+    }
+
+    .sidebar-wrapper {
+      position: fixed;
+      z-index: 998;
+      top: -120%;
+
+      width: 100%;
+      min-width: 100%;
+
+      box-shadow: 0 20px 20px rgba(0 0 0 / 30%);
+
+      transition: top 300ms ease;
+
+      &.is-active {
+        top: 0;
+        display: block;
       }
     }
   }
