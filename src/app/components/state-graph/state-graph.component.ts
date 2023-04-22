@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { HassService } from 'src/app/services/HassService';
-import { ChartConfiguration } from 'chart.js';
+import { Chart, ChartConfiguration } from 'chart.js';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { StateOptions } from 'src/app/shared/core.models';
 import 'chartjs-adapter-moment';
-import { SensorOptions } from 'src/app/shared/core.models';
+import { default as Annotation } from 'chartjs-plugin-annotation';
 
 @Component({
   selector: 'app-state-graph',
@@ -13,24 +14,27 @@ import { SensorOptions } from 'src/app/shared/core.models';
 })
 export class StateGraphComponent implements OnInit {
   public entity: any;
-  public stateData: any;
-  public labels: any;
-  public sensorOptions: SensorOptions;
+  public entityName: string;
+  public stateOptions: StateOptions;
 
-  public lineChartData: ChartConfiguration['data'];
+  public chartData: ChartConfiguration['data'];
 
-  public lineChartOptions: ChartConfiguration['options'];
+  public chartOptions: ChartConfiguration['options'];
 
   constructor(
     private hassService: HassService,
-    @Inject(MAT_DIALOG_DATA) data: { entity: any; sensorOptions: SensorOptions }
+    @Inject(MAT_DIALOG_DATA)
+    data: { entity: any; entityName: string; stateOptions: StateOptions }
   ) {
     this.entity = data.entity;
-    this.sensorOptions = data.sensorOptions;
+    this.entityName = data.entityName;
+    this.stateOptions = data.stateOptions;
+
+    Chart.register(Annotation);
   }
 
   ngOnInit(): void {
-    this.lineChartOptions = {
+    this.chartOptions = {
       parsing: false,
       scales: {
         x: {
@@ -61,27 +65,46 @@ export class StateGraphComponent implements OnInit {
           samples: 100,
           threshold: 1,
         },
+        annotation: {
+          annotations: [
+            {
+              type: 'line',
+              borderColor: '#d8dae6',
+              borderDash: [6, 6],
+              borderDashOffset: 0,
+              borderWidth: 1,
+              label: {
+                display: true,
+                backgroundColor: 'rgba(102,102,102,0.5)',
+                content: () =>
+                  'Average: ' + average(this.chartData)?.toFixed(2),
+                position: 'end',
+                yAdjust: -25,
+              },
+              scaleID: 'y',
+              value: () => average(this.chartData) || 0,
+            },
+          ],
+        },
       },
     };
     this.hassService
-      .getEntityHistory(this.sensorOptions.entityId)
+      .getEntityHistory(this.entity.entity_id)
       .subscribe((history) => {
-        this.lineChartData = {
+        this.chartData = {
           datasets: [
             {
               data: (history as Array<any>)[0].map((s: any) => {
                 return {
                   x: new Date(s.last_updated).getTime(),
-                  y: this.sensorOptions.stateOptions?.round
-                    ? Math.round(+s.state)
-                    : +s.state,
+                  y: this.stateOptions?.round ? Math.round(+s.state) : +s.state,
                 };
               }),
               label: 'State',
               backgroundColor: '#252425',
-              borderColor: '#d8dae6',
+              borderColor: '#678a9b',
               pointBackgroundColor: '#252425',
-              pointBorderColor: '#d8dae6',
+              pointBorderColor: '#678a9b',
               pointRadius: 3,
               pointHitRadius: 5,
               fill: 'origin',
@@ -92,4 +115,14 @@ export class StateGraphComponent implements OnInit {
         };
       });
   }
+}
+
+function average(ctx: any) {
+  if (!ctx) return;
+
+  const values = ctx.datasets[0].data;
+  let sum = 0;
+  values.forEach((item: any) => (sum += item.y));
+
+  return sum / values.length;
 }

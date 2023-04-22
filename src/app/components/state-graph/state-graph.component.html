@@ -1,10 +1,10 @@
 <div class="graph-wrapper">
-  <h2>{{ sensorOptions.name }}</h2>
+  <h2>{{ entityName }}</h2>
   <canvas
     baseChart
     class="chart"
-    [data]="lineChartData"
-    [options]="lineChartOptions"
+    [data]="chartData"
+    [options]="chartOptions"
     type="line"
   ></canvas>
 </div>
