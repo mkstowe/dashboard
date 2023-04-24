@@ -122,7 +122,7 @@ function average(ctx: any) {
 
   const values = ctx.datasets[0].data;
   let sum = 0;
-  values.forEach((item: any) => (sum += item.y));
+  values.filter((item: any) => !isNaN(item.y)).forEach((item: any) => (sum += item.y));
 
   return sum / values.length;
 }
