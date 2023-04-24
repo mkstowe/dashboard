@@ -1,7 +1,11 @@
 <div class="music-page">
-  <div class="sidebar-wrapper">
-    <app-sidebar></app-sidebar>
-  </div>
 
-  <div class="dashboard music-dash"></div>
+  <div class="dashboard music-dash">
+    <div class="group-grid">
+      <div class="group" *ngFor="let group of data">
+        <div class="title">{{ group.title }}</div>
+        <app-card-grid [cards]="group.cards"></app-card-grid>
+      </div>
+    </div>
+  </div>
 </div>

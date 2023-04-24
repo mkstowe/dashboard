@@ -5,8 +5,8 @@ import { MusicPageComponent } from './components/music-page/music-page.component
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomePageComponent },
-  { path: 'music', component: MusicPageComponent },
+  { path: 'home', component: HomePageComponent, data: { tab: 1 } },
+  { path: 'music', component: MusicPageComponent, data: { tab: 2 } },
 ];
 
 @NgModule({

@@ -1,16 +1,4 @@
 <div class="home-page">
-  <div class="mobile-header">
-    <button class="hamburger hamburger--squeeze" type="button" [class.is-active]="sidebarActive" (click)="toggleSidebar()">
-      <span class="hamburger-box">
-        <span class="hamburger-inner"></span>
-      </span>
-    </button>
-  </div>
-
-  <div class="sidebar-wrapper" [class.is-active]="sidebarActive">
-    <app-sidebar></app-sidebar>
-  </div>
-
   <div class="dashboard home-dash">
     <div class="group-grid">
       <div class="group" *ngFor="let group of data">

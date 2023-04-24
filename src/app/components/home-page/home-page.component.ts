@@ -29,24 +29,6 @@ export class HomePageComponent {
             },
           },
         },
-        {
-          type: 'entityCard',
-          cardOptions: {
-            entityId: 'script.sleepy_time',
-            icon: 'zzz',
-            name: 'Sleepy Time',
-            state: ' ',
-            lock: true,
-            service: {
-              type: 'call_service',
-              domain: 'script',
-              service: 'turn_on',
-              target: {
-                entity_id: 'script.sleepy_time',
-              },
-            },
-          },
-        },
       ],
     },
     {
