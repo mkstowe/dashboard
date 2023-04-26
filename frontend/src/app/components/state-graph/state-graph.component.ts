@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { HassService } from 'src/app/services/HassService';
+import { HassService } from 'src/app/services/hass.service';
 import { Chart, ChartConfiguration } from 'chart.js';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { StateOptions } from 'src/app/shared/core.models';

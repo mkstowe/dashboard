@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Subject, delay } from 'rxjs';
-import { HassService } from 'src/app/services/HassService';
+import { HassService } from 'src/app/services/hass.service';
 import { ServiceCall } from 'src/app/shared/core.models';
 
 @Component({

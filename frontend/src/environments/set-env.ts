@@ -16,10 +16,11 @@ const setEnv = () => {
   // `environment.ts` file structure
   const devConfigFile = `export const environment = {
         hassUrl: '${process.env.HASS_URL}',
-        authToken: {
+        hassAuthToken: {
             type: 'auth',
-            access_token: '${process.env.ACCESS_TOKEN}'
+            access_token: '${process.env.HASS_ACCESS_TOKEN}'
         },
+        apiUrl: '${process.env.API_URL}',
         appVersion: '${appVersion}',
         production: false,
     };
@@ -28,10 +29,11 @@ const setEnv = () => {
   // `environment.development.ts` file structure
   const prodConfigFile = `export const environment = {
         hassUrl: '${process.env.HASS_URL}',
-        authToken: {
+        hassAuthToken: {
             type: 'auth',
-            access_token: '${process.env.ACCESS_TOKEN}'
+            access_token: '${process.env.HASS_ACCESS_TOKEN}'
         },
+        apiUrl: '${process.env.API_URL}',
         appVersion: '${appVersion}',
         production: true,
     };

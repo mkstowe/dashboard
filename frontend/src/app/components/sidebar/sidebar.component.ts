@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatExpansionPanel } from '@angular/material/expansion';
-import { HassService } from 'src/app/services/HassService';
+import { HassService } from 'src/app/services/hass.service';
 
 @Component({
   selector: 'app-sidebar',

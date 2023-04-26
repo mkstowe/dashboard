@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
-import { HassService } from './services/HassService';
+import { HassService } from './services/hass.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MusicPageComponent } from './components/music-page/music-page.component';
 

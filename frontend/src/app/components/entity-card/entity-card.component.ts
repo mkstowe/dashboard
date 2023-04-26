@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { HassService } from 'src/app/services/HassService';
+import { HassService } from 'src/app/services/hass.service';
 import { CardOptions } from 'src/app/shared/core.models';
 
 @Component({

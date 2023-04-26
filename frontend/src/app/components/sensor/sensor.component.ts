@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DangerLevel, HassService } from 'src/app/services/HassService';
+import { DangerLevel, HassService } from 'src/app/services/hass.service';
 import { SensorOptions, StateOptions } from 'src/app/shared/core.models';
 import { MatDialog } from '@angular/material/dialog';
 import { StateGraphComponent } from '../state-graph/state-graph.component';
