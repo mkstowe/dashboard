@@ -82,7 +82,7 @@ export class HassService {
   }
 
   public getEntityHistory(entityId: string) {
-    return this.http.get(`/api/history/period?filter_entity_id=${entityId}`, {
+    return this.http.get(`/api/hass/history/period?filter_entity_id=${entityId}`, {
       headers: this.headers,
     });
   }

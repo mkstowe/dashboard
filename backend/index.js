@@ -562,7 +562,7 @@ app.get('/spotify/recommendations', (req, res) => {
 /* -------------------------------------------------------------------------- */
 
 /* ----------------------- Get Current User's Profile ----------------------- */
-app.get('/spotify/me', (req, res) => {
+app.get('/me', (req, res) => {
 	axios({
 		method: 'get',
 		url: `${SPOTIFY_API_URL}/me`,

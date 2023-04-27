@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
 
 interface QueryParams {
   accessToken: string | null;
@@ -22,7 +21,6 @@ export class SpotifyService {
     spotifyTokenExpireTime: localStorage.getItem('spotify_token_expire_time'),
     spotifyTokenTimestamp: localStorage.getItem('spotify_token_timestamp'),
   };
-  private apiUrl = environment.apiUrl;
 
   constructor(
     private http: HttpClient,
@@ -111,7 +109,7 @@ export class SpotifyService {
     // Use `/refresh_token` endpoint from our Node app
     this.http
       .get(
-        `${this.apiUrl}/spotify/refresh_token?refresh_token=${this.localStorageItems.spotifyRefreshToken}`
+        `/api/spotify/refresh_token?refresh_token=${this.localStorageItems.spotifyRefreshToken}`
       )
       .subscribe({
         next: (res: any) => {
@@ -142,7 +140,7 @@ export class SpotifyService {
   public async getProfileInfo() {
     // console.log(await axios.get(`${this.spotifyApiUrl}/me`));
     this.http
-      .get(`${this.apiUrl}/spotify/me`, {
+      .get(`/api/spotify/me`, {
         headers: {
           "Authorization": `Bearer ${this.localStorageItems.spotifyAccessToken}`,
           'Content-Type': 'application/json',
