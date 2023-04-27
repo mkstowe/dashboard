@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 /*                                Authorization                               */
 /* -------------------------------------------------------------------------- */
 
-app.get('/spotify/login', (req, res) => {
+app.get('/login', (req, res) => {
 	const state = generateRandomString(16);
 	res.cookie('spotify_auth_state', state);
 
@@ -51,7 +51,7 @@ app.get('/spotify/login', (req, res) => {
 	res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
 });
 
-app.get('/spotify/callback', (req, res) => {
+app.get('/callback', (req, res) => {
 	const code = req.query.code || null;
 
 	axios({
@@ -87,7 +87,7 @@ app.get('/spotify/callback', (req, res) => {
 		});
 });
 
-app.get('/spotify/refresh_token', (req, res) => {
+app.get('/refresh_token', (req, res) => {
 	const { refresh_token } = req.query;
 
 	axios({
@@ -115,42 +115,42 @@ app.get('/spotify/refresh_token', (req, res) => {
 /* -------------------------------------------------------------------------- */
 
 /* -------------------------------- Get Album ------------------------------- */
-app.get('/spotify/albums/:id', (req, res) => {
+app.get('/albums/:id', (req, res) => {
 
 })
 
 /* --------------------------- Get Several Albums --------------------------- */
-app.get('/spotify/albums/:ids', (req, res) => {
+app.get('/albums/:ids', (req, res) => {
 
 })
 
 /* ---------------------------- Get Album Tracks ---------------------------- */
-app.get('/spotify/slbums/:id/tracks', (req, res) => {
+app.get('/slbums/:id/tracks', (req, res) => {
 
 })
 
 /* ------------------------- Get User's Saved Albums ------------------------ */
-app.get('/spotify/me/albums', (req, res) => {
+app.get('/me/albums', (req, res) => {
 
 });
 
 /* ---------------------- Save Albums for Current User ---------------------- */
-app.put('/spotify/me/albums/:ids', (req, res) => {
+app.put('/me/albums/:ids', (req, res) => {
 
 });
 
 /* ----------------------- Remove Users's Saved Albums ---------------------- */
-app.delete('/spotify/me/albums/:ids', (req, res) => {
+app.delete('/me/albums/:ids', (req, res) => {
 
 });
 
 /* ------------------------ Check User's Saved Albums ----------------------- */
-app.get('/spotify/me/albums/contains/:id', (req, res) => {
+app.get('/me/albums/contains/:id', (req, res) => {
 
 });
 
 /* ---------------------------- Get New Releases ---------------------------- */
-app.get('/spotify/browse/new-releases', (req, res) => {
+app.get('/browse/new-releases', (req, res) => {
 
 });
 
@@ -159,27 +159,27 @@ app.get('/spotify/browse/new-releases', (req, res) => {
 /* -------------------------------------------------------------------------- */
 
 /* ------------------------------- Get Artist ------------------------------- */
-app.get('/spotify/artists/:id', (req, res) => {
+app.get('/artists/:id', (req, res) => {
 
 });
 
 /* --------------------------- Get Several Artists -------------------------- */
-app.get('/spotify/artists/:ids', (req, res) => {
+app.get('/artists/:ids', (req, res) => {
 
 });
 
 /* --------------------------- Get Artist's Albums -------------------------- */
-app.get('/spotify/artists/:id/albums', (req, res) => {
+app.get('/artists/:id/albums', (req, res) => {
 
 });
 
 /* ------------------------- Get Artist's Top Tracks ------------------------ */
-app.get('/spotify/artists/:id/top-tracks', (req, res) => {
+app.get('/artists/:id/top-tracks', (req, res) => {
 
 });
 
 /* ---------------------- Get Artist's Related Artists ---------------------- */
-app.get('/spotify/artists/:id/related-artists', (req, res) => {
+app.get('/artists/:id/related-artists', (req, res) => {
 
 });
 
@@ -188,37 +188,37 @@ app.get('/spotify/artists/:id/related-artists', (req, res) => {
 /* -------------------------------------------------------------------------- */
 
 /* ---------------------------- Get an Audiobook ---------------------------- */
-app.get('/spotify/audiobooks/:id', (req, res) => {
+app.get('/audiobooks/:id', (req, res) => {
 
 });
 
 /* ------------------------- Get Several Audiobooks ------------------------- */
-app.get('/spotify/audiobooks/:ids', (req, res) => {
+app.get('/audiobooks/:ids', (req, res) => {
 
 });
 
 /* ------------------------- Get Audiobook Chapters ------------------------- */
-app.get('/spotify/audiobooks/:id/chapters', (req, res) => {
+app.get('/audiobooks/:id/chapters', (req, res) => {
 
 });
 
 /* ----------------------- Get User's Saved Audiobooks ---------------------- */
-app.get('/spotify/me/audiobooks', (req, res) => {
+app.get('/me/audiobooks', (req, res) => {
 
 });
 
 /* -------------------- Save Audiobooks for Current User -------------------- */
-app.put('/spotify/me/audiobooks/:ids', (req, res) => {
+app.put('/me/audiobooks/:ids', (req, res) => {
 
 });
 
 /* --------------------- Remove User's Saved Audiobooks --------------------- */
-app.delete('/spotify/me/audiobooks/:ids', (req, res) => {
+app.delete('/me/audiobooks/:ids', (req, res) => {
 
 });
 
 /* ---------------------- Check User's Saved Audiobooks --------------------- */
-app.get('/spotify/me/audiobooks/contains/:ids', (req, res) => {
+app.get('/me/audiobooks/contains/:ids', (req, res) => {
 
 });
 
@@ -227,12 +227,12 @@ app.get('/spotify/me/audiobooks/contains/:ids', (req, res) => {
 /* -------------------------------------------------------------------------- */
 
 /* ---------------------- Get Several Browse Categories --------------------- */
-app.get('/spotify/browse/categories', (req, res) => {
+app.get('/browse/categories', (req, res) => {
 
 });
 
 /* ----------------------- Get Single Browse Category ----------------------- */
-app.get('/spotify/browse/categories/:id', (req, res) => {
+app.get('/browse/categories/:id', (req, res) => {
 
 });
 
@@ -241,12 +241,12 @@ app.get('/spotify/browse/categories/:id', (req, res) => {
 /* -------------------------------------------------------------------------- */
 
 /* ------------------------------ Get a Chapter ----------------------------- */
-app.get('/spotify/chapters/:id', (req, res) => {
+app.get('/chapters/:id', (req, res) => {
 
 });
 
 /* -------------------------- Get Several Chapters -------------------------- */
-app.get('/spotify/chapters', (req, res) => {
+app.get('/chapters', (req, res) => {
 
 });
 
@@ -255,32 +255,32 @@ app.get('/spotify/chapters', (req, res) => {
 /* -------------------------------------------------------------------------- */
 
 /* ------------------------------- Get Episode ------------------------------ */
-app.get('/spotify/episodes/:id', (req, res) => {
+app.get('/episodes/:id', (req, res) => {
 
 });
 
 /* -------------------------- Get Several Episodes -------------------------- */
-app.get('/spotify/episodes/:ids', (req, res) => {
+app.get('/episodes/:ids', (req, res) => {
 
 });
 
 /* ------------------------ Get User's Saved Episodes ----------------------- */
-app.get('/spotify/me/episodes', (req, res) => {
+app.get('/me/episodes', (req, res) => {
 
 });
 
 /* --------------------- Save Episodes for Current User --------------------- */
-app.put('/spotify/me/episodes/:ids', (req, res) => {
+app.put('/me/episodes/:ids', (req, res) => {
 
 });
 
 /* ---------------------- Remove User's Saved Episodes ---------------------- */
-app.delete('/spotify/me/episodes/:ids', (req, res) => {
+app.delete('/me/episodes/:ids', (req, res) => {
 
 });
 
 /* ----------------------- Check User's Saved Episodes ---------------------- */
-app.get('/spotify/me/episodes/contains/:ids', (req, res) => {
+app.get('/me/episodes/contains/:ids', (req, res) => {
 
 });
 
@@ -289,7 +289,7 @@ app.get('/spotify/me/episodes/contains/:ids', (req, res) => {
 /* -------------------------------------------------------------------------- */
 
 /* ------------------------ Get Available Genre Seeds ----------------------- */
-app.get('/spotify/recommendations/available-genre-seeds', (req, res) => {
+app.get('/recommendations/available-genre-seeds', (req, res) => {
 
 });
 
@@ -298,7 +298,7 @@ app.get('/spotify/recommendations/available-genre-seeds', (req, res) => {
 /* -------------------------------------------------------------------------- */
 
 /* -------------------------- Get Available Markets ------------------------- */
-app.get('/spotify/markets', (req, res) => {
+app.get('/markets', (req, res) => {
 
 });
 
@@ -307,78 +307,78 @@ app.get('/spotify/markets', (req, res) => {
 /* -------------------------------------------------------------------------- */
 
 /* --------------------------- Get Playback State --------------------------- */
-app.get('/spotify/me/player', (req, res) => {
+app.get('/me/player', (req, res) => {
 
 });
 
 /* ---------------------------- Transfer Playback --------------------------- */
-app.put('/spotify/me/player', (req, res) => {
+app.put('/me/player', (req, res) => {
 
 });
 
 /* -------------------------- Get Available Devices ------------------------- */
-app.get('/spotify/me/player/devices', (req, res) => {
+app.get('/me/player/devices', (req, res) => {
 
 });
 
 /* ----------------------- Get Currently Playing Track ---------------------- */
-app.get('/spotify/me/player/currently-playing', (req, res) => {
+app.get('/me/player/currently-playing', (req, res) => {
 
 });
 
 /* -------------------------- Start/Resume Playback ------------------------- */
-app.put('/spotify/me/player/play', (req, res) => {
+app.put('/me/player/play', (req, res) => {
 
 });
 
 /* ----------------------------- Pause Playback ----------------------------- */
-app.put('/spotify/me/player/pause', (req, res) => {
+app.put('/me/player/pause', (req, res) => {
 
 });
 
 
 /* ------------------------------ Skip to Next ------------------------------ */
-app.post('/spotify/me/player/next', (req, res) => {
+app.post('/me/player/next', (req, res) => {
 
 });
 
 /* ---------------------------- Skip to Previous ---------------------------- */
-app.post('/spotify/me/player/previous', (req, res) => {
+app.post('/me/player/previous', (req, res) => {
 
 });
 
 /* ---------------------------- Seek to Position ---------------------------- */
-app.put('/spotify/me/player/seek', (req, res) => {
+app.put('/me/player/seek', (req, res) => {
 
 });
 
 /* ----------------------------- Set Repeat Mode ---------------------------- */
-app.put('/spotify/me/player/repeat', (req, res) => {
+app.put('/me/player/repeat', (req, res) => {
 
 });
 
 /* --------------------------- Set Playback Volume -------------------------- */
-app.put('/spotify/me/player/volume', (req, res) => {
+app.put('/me/player/volume', (req, res) => {
 
 });
 
 /* ------------------------- Toggle Playback Shuffle ------------------------ */
-app.put('/spotify/me/player/shuffle', (req, res) => {
+app.put('/me/player/shuffle', (req, res) => {
 
 });
 
 /* ----------------------- Get Recently Played Tracks ----------------------- */
-app.get('/spotify/me/player/recently-played', (req, res) => {
+app.get('/me/player/recently-played', (req, res) => {
 
 });
 
 /* -------------------------- Get the User's Queue -------------------------- */
-app.get('/spotify/me/player/queue', (req, res) => {
+app.get('/me/player/queue', (req, res) => {
 
 });
 
 /* ----------------------- Add Item to Playback Queue ----------------------- */
-app.post('/spotify/me/player/queue', (req, res) => {
+app.post('/me/player/queue', (req, res) => {
 
 });
 
@@ -388,67 +388,67 @@ app.post('/spotify/me/player/queue', (req, res) => {
 /* -------------------------------------------------------------------------- */
 
 /* ------------------------------ Get Playlist ------------------------------ */
-app.get('/spotify/playlists/:id', (req, res) => {
+app.get('/playlists/:id', (req, res) => {
 
 });
 
 /* ------------------------- Change Playlist Details ------------------------ */
-app.put('/spotify/playlists/:id', (req, res) => {
+app.put('/playlists/:id', (req, res) => {
 
 });
 
 /* --------------------------- Get Playlist Items --------------------------- */
-app.get('/spotify/playlists/:id/tracks', (req, res) => {
+app.get('/playlists/:id/tracks', (req, res) => {
 
 });
 
 /* -------------------------- Update Playlist Items ------------------------- */
-app.put('/spotify/playlists/:id/tracks', (req, res) => {
+app.put('/playlists/:id/tracks', (req, res) => {
 
 });
 
 /* -------------------------- Add Items to Playlist ------------------------- */
-app.post('/spotify/playlists/:id/tracks', (req, res) => {
+app.post('/playlists/:id/tracks', (req, res) => {
 
 });
 
 /* -------------------------- Remove Playlist Items ------------------------- */
-app.delete('/spotify/playlists/:id/tracks', (req, res) => {
+app.delete('/playlists/:id/tracks', (req, res) => {
 
 });
 
 /* ---------------------- Get Current User's Playlists ---------------------- */
-app.get('/spotify/me/playlists', (req, res) => {
+app.get('/me/playlists', (req, res) => {
 
 });
 
 /* -------------------------- Get User's Playlists -------------------------- */
-app.get('/spotify/users/:id/playlists', (req, res) => {
+app.get('/users/:id/playlists', (req, res) => {
 
 });
 
 /* ----------------------------- Create Playlist ---------------------------- */
-app.post('/spotify/users/:id/playlists', (req, res) => {
+app.post('/users/:id/playlists', (req, res) => {
 
 });
 
 /* ------------------------- Get Featured Playlists ------------------------- */
-app.get('/spotify/browse/featured-playlists', (req, res) => {
+app.get('/browse/featured-playlists', (req, res) => {
 
 });
 
 /* ------------------------ Get Category's Playlists ------------------------ */
-app.get('/spotify/browse/categories/:id/playlists', (req, res) => {
+app.get('/browse/categories/:id/playlists', (req, res) => {
 
 });
 
 /* ------------------------ Get Playlist Cover Image ------------------------ */
-app.get('/spotify/playlists/:id/images', (req, res) => {
+app.get('/playlists/:id/images', (req, res) => {
 
 });
 
 /* --------------------- Add Custom Playlist Cover Image -------------------- */
-app.put('/spotify/playlists/:id/images', (req, res) => {
+app.put('/playlists/:id/images', (req, res) => {
 
 });
 
@@ -458,7 +458,7 @@ app.put('/spotify/playlists/:id/images', (req, res) => {
 /* -------------------------------------------------------------------------- */
 
 /* ----------------------------- Search for Item ---------------------------- */
-app.get('/spotify/search', (req, res) => {
+app.get('/search', (req, res) => {
 
 });
 
@@ -469,37 +469,37 @@ app.get('/spotify/search', (req, res) => {
 /* -------------------------------------------------------------------------- */
 
 /* -------------------------------- Get Show -------------------------------- */
-app.get('/spotify/shows/:id', (req, res) => {
+app.get('/shows/:id', (req, res) => {
 
 });
 
 /* ---------------------------- Get Several Shows --------------------------- */
-app.get('/spotify/shows', (req, res) => {
+app.get('/shows', (req, res) => {
 
 });
 
 /* ---------------------------- Get Show Episodes --------------------------- */
-app.get('/spotify/shows/:id/episodes', (req, res) => {
+app.get('/shows/:id/episodes', (req, res) => {
 
 });
 
 /* ------------------------- Get User's Saved Shows ------------------------- */
-app.get('/spotify/me/shows', (req, res) => {
+app.get('/me/shows', (req, res) => {
 
 });
 
 /* ----------------------- Save Shows for Current User ---------------------- */
-app.put('/spotify/me/shows', (req, res) => {
+app.put('/me/shows', (req, res) => {
 
 });
 
 /* ------------------------ Remove User's Saved Shows ----------------------- */
-app.delete('/spotify/me/shows', (req, res) => {
+app.delete('/me/shows', (req, res) => {
 
 });
 
 /* ------------------------ Check User's Saved Shows ------------------------ */
-app.get('/spotify/me/shows/contains', (req, res) => {
+app.get('/me/shows/contains', (req, res) => {
 
 });
 
@@ -508,52 +508,52 @@ app.get('/spotify/me/shows/contains', (req, res) => {
 /* -------------------------------------------------------------------------- */
 
 /* -------------------------------- Get Track ------------------------------- */
-app.get('/spotify/tracks/:id', (req, res) => {
+app.get('/tracks/:id', (req, res) => {
 
 });
 
 /* --------------------------- Get Several Tracks --------------------------- */
-app.get('/spotify/tracks', (req, res) => {
+app.get('/tracks', (req, res) => {
 
 });
 
 /* ------------------------- Get User's Saved Tracks ------------------------ */
-app.get('/spotify/me/tracks', (req, res) => {
+app.get('/me/tracks', (req, res) => {
 
 });
 
 /* ---------------------- Save Tracks for Current User ---------------------- */
-app.put('/spotify/me/tracks', (req, res) => {
+app.put('/me/tracks', (req, res) => {
 
 });
 
 /* ----------------------- Remove User's Saved Tracks ----------------------- */
-app.delete('/spotify/me/tracks', (req, res) => {
+app.delete('/me/tracks', (req, res) => {
 
 });
 
 /* ------------------------ Check User's Saved Tracks ----------------------- */
-app.get('/spotify/me/tracks/contains', (req, res) => {
+app.get('/me/tracks/contains', (req, res) => {
 
 });
 
 /* ----------------------- Get Tracks' Audio Features ----------------------- */
-app.get('/spotify/audio-features', (req, res) => {
+app.get('/audio-features', (req, res) => {
 
 });
 
 /* ----------------------- Get Track's Audio Features ----------------------- */
-app.get('/spotify/audio-features/:id', (req, res) => {
+app.get('/audio-features/:id', (req, res) => {
 
 });
 
 /* ----------------------- Get Track's Audio Analysis ----------------------- */
-app.get('/spotify/audio-analysis/:id', (req, res) => {
+app.get('/audio-analysis/:id', (req, res) => {
 
 });
 
 /* --------------------------- Get Recommendations -------------------------- */
-app.get('/spotify/recommendations', (req, res) => {
+app.get('/recommendations', (req, res) => {
 
 });
 
@@ -579,48 +579,48 @@ app.get('/me', (req, res) => {
 });
 
 /* -------------------------- Get User's Top Items -------------------------- */
-app.get('/spotify/me/:type', (req, res) => {
+app.get('/me/:type', (req, res) => {
 
 });
 
 /* --------------------------- Get User's Profile --------------------------- */
-app.get('/spotify/users/:id', (req, res) => {
+app.get('/users/:id', (req, res) => {
 
 });
 
 
 /* ----------------------------- Follow Playlist ---------------------------- */
-app.put('/spotify/playlists/:id/followers', (req, res) => {
+app.put('/playlists/:id/followers', (req, res) => {
 
 });
 
 /* ---------------------------- Unfollow Playlist --------------------------- */
-app.delete('/spotify/playlists/:id/followers', (req, res) => {
+app.delete('/playlists/:id/followers', (req, res) => {
 
 });
 
 /* -------------------------- Get Followed Artists -------------------------- */
-app.get('/spotify/me/following', (req, res) => {
+app.get('/me/following', (req, res) => {
 
 });
 
 /* ------------------------- Follow Artists or Users ------------------------ */
-app.put('/spotify/me/following', (req, res) => {
+app.put('/me/following', (req, res) => {
 
 });
 
 /* ------------------------ Unfollow Artists or Users ----------------------- */
-app.delete('/spotify/me/following', (req, res) => {
+app.delete('/me/following', (req, res) => {
 
 });
 
 /* ----------------- Check if User Follows Artists or Users ----------------- */
-app.get('/spotify/me/following/contains', (req, res) => {
+app.get('/me/following/contains', (req, res) => {
 
 });
 
 /* --------------------- Check if Users Follow Playlist --------------------- */
-app.get('/spotify/playlists/:id/followers/contains', (req, res) => {
+app.get('/playlists/:id/followers/contains', (req, res) => {
 
 });
 
