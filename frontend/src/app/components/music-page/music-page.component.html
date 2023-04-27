@@ -1,13 +1,10 @@
 <div class="music-page">
-
   <div class="dashboard music-dash">
-      <button type="button" *ngIf="!access_token; else loggedIn"><a href="{{ apiUrl }}/spotify/login">Spotify</a></button>
+    <button type="button" *ngIf="!access_token; else loggedIn">
+      <a href="{{ apiUrl }}/spotify/login">Spotify</a>
+    </button>
     <ng-template #loggedIn>Logged In</ng-template>
-    <!--<div class="group-grid">
-      <div class="group" *ngFor="let group of data">
-        <div class="title">{{ group.title }}</div>
-        <app-card-grid [cards]="group.cards"></app-card-grid>
-      </div>
-    </div> -->
+
+    <button type="button" (click)="getProfileInfo()">Profile</button>
   </div>
 </div>

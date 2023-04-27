@@ -12,10 +12,12 @@ import { environment } from 'src/environments/environment';
 export class MusicPageComponent implements OnInit {
   public apiUrl = environment.apiUrl;
 
-  constructor(private spotifyService: SpotifyService, private route: ActivatedRoute, private router: Router) {}
-  public data: CardGroup[] = [
-
-  ];
+  constructor(
+    private spotifyService: SpotifyService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+  public data: CardGroup[] = [];
 
   public access_token: string | null;
 
@@ -24,4 +26,7 @@ export class MusicPageComponent implements OnInit {
     return;
   }
 
+  public getProfileInfo() {
+    this.spotifyService.getProfileInfo();
+  }
 }
