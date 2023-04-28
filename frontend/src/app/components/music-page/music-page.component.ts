@@ -27,6 +27,14 @@ export class MusicPageComponent implements OnInit {
   }
 
   public getProfileInfo() {
-    this.spotifyService.getProfileInfo();
+    this.spotifyService.getMyProfile();
+  }
+
+  public getPlaylist(id: string) {
+    this.spotifyService.getPlaylist(id);
+  }
+
+  public getPlaylists() {
+    this.spotifyService.getMyPlaylists();
   }
 }
