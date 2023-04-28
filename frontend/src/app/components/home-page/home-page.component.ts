@@ -188,6 +188,27 @@ export class HomePageComponent {
       ],
     },
     {
+      title: "Reading Nook",
+      cards: [
+        {
+          type: "lightCard",
+          cardOptions: {
+            entityId: 'light.reading_nook',
+            icon: 'floor-lamp',
+            iconActive: 'floor-lamp-active',
+            service: {
+              type: 'call_service',
+              domain: 'light',
+              service: 'toggle',
+              target: {
+                entity_id: 'light.reading_nook'
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
       title: 'Cats',
       cards: [
         {
