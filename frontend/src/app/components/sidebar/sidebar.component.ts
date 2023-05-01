@@ -64,5 +64,9 @@ export class SidebarComponent implements OnInit {
         }
       },
     });
+
+    setInterval(() => {
+      this.date = new Date();
+    }, 1000);
   }
 }
