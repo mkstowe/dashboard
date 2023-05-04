@@ -1,8 +1,8 @@
 <!-- <ng-content></ng-content> -->
 
 <!-- <mat-paginator [length]="10" [pageSize]="4" (page)="onPage()"></mat-paginator> -->
-<div class="card-grid">
-  <div class="card" *ngFor="let card of cards">
+<div class="card-grid" (swipe)="onSwipe($event)">
+  <div class="card" *ngFor="let card of currCards">
     <ng-container [ngSwitch]="card.type">
       <app-entity-card
         *ngSwitchCase="'entityCard'"

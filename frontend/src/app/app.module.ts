@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -21,6 +21,22 @@ import { CardGridComponent } from './components/card-grid/card-grid.component';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { NgChartsModule } from 'ng2-charts';
 import { StateGraphComponent } from './components/state-graph/state-graph.component';
+import { PlaylistCardComponent } from './components/playlist-card/playlist-card.component';
+import { MediaPlayerComponent } from './components/media-player/media-player.component';
+
+import * as Hammer from 'hammerjs';
+import {
+  HammerModule,
+  HammerGestureConfig,
+  HAMMER_GESTURE_CONFIG,
+} from '@angular/platform-browser';
+
+@Injectable()
+export class MyHammerConfig extends HammerGestureConfig {
+  override = <any>{
+    swipe: { direction: Hammer.DIRECTION_ALL },
+  };
+}
 
 @NgModule({
   declarations: [
@@ -35,6 +51,8 @@ import { StateGraphComponent } from './components/state-graph/state-graph.compon
     LightOptionsComponent,
     CardGridComponent,
     StateGraphComponent,
+    PlaylistCardComponent,
+    MediaPlayerComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,8 +63,15 @@ import { StateGraphComponent } from './components/state-graph/state-graph.compon
     IconModule,
     ColorPickerModule,
     NgChartsModule,
+    HammerModule,
   ],
-  providers: [HassService],
+  providers: [
+    HassService,
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: MyHammerConfig,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
