@@ -3,9 +3,22 @@
     <button type="button" *ngIf="!access_token; else loggedIn">
       <a href="/api/spotify/login">Spotify</a>
     </button>
-    <ng-template #loggedIn>Logged In</ng-template>
+    <ng-template #loggedIn>
+      <app-media-player></app-media-player>
+      <div class="playlist-cards">
+        <app-playlist-card id="4vNldb5p8tQ9RmX7XSaTIM"></app-playlist-card>
+        <app-playlist-card id="0P9fhX6DxKRemFppitUO40"></app-playlist-card>
+        <app-playlist-card id="3vMB7rfIss8XpqjrJqGE4D"></app-playlist-card>
+        <app-playlist-card id="3sc1x7K65uAAikfznMD8sd"></app-playlist-card>
+        <app-playlist-card id="0tgz34iRZ1VLeMVtHx0Od9"></app-playlist-card>
+        <app-playlist-card id="7oROe52RFDdNFrInhWSXMd"></app-playlist-card>
+        <app-playlist-card id="7tDigJ9KogRDHhl8k804So"></app-playlist-card>
+        <app-playlist-card id="6g0GoROlTNHnPtEWmmV3uw"></app-playlist-card>
+        <app-playlist-card id="7KrR37m0IMyREptGTQLU6W"></app-playlist-card>
+        <app-playlist-card id="4fg2H1M5YfQ7hP4Jswstdb"></app-playlist-card>
+        <app-playlist-card id="37i9dQZEVXcBLmltz3RQwu"></app-playlist-card>
+      </div>
+    </ng-template>
 
-    <button type="button" (click)="getProfileInfo()">Profile</button>
-    <button type="button" (click)="getPlaylist('4vNldb5p8tQ9RmX7XSaTIM')">Playlists</button>
+    </div>
   </div>
-</div>

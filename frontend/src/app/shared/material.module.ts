@@ -6,6 +6,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatPaginatorModule,
     MatGridListModule,
     MatDialogModule,
+    MatProgressBarModule
   ],
   exports: [
     MatButtonModule,
@@ -25,6 +27,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatPaginatorModule,
     MatGridListModule,
     MatDialogModule,
+    MatProgressBarModule
   ],
   providers: [MatIconRegistry],
 })

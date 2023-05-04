@@ -86,7 +86,6 @@ router.get('/callback', (req, res) => {
 					expires_in,
 				});
 
-				res.send(queryParams);
 				res.redirect(`http://localhost:4200/music/?${queryParams}`);
 			} else {
 				res.redirect(`/?${querystring.stringify({ error: 'invalid_token' })}`);

@@ -1,0 +1,29 @@
+@import "src/variables";
+
+.playlist-wrapper {
+  width: 200px;
+  border-radius: 10%;
+  position: relative;
+
+  .playlist-img img {
+    object-fit: cover;
+    aspect-ratio: 1/1;
+    width: 100%;
+    border-radius: 10%;
+  }
+
+  .playlist-name {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    padding: 15px;
+    font-size: 20px;
+    color: $foreground;
+    background-color: rgba($background, 0.4);
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}

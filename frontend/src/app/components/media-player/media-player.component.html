@@ -1,0 +1,38 @@
+<div class="player-wrapper">
+  <div class="cover-img">
+    <img src="{{ currentTrack?.cover }}" />
+  </div>
+  <div class="player-footer">
+    <div class="song-info">
+        <p>{{ currentTrack?.title }} - {{ currentTrack?.artist }}</p>
+      </div>
+<div>
+    </div>
+    <div class="actions">
+      <div class="controls">
+        <mat-icon (click)="nextTrack()">skip_previous</mat-icon>
+        <mat-icon (click)="togglePlayback()">{{
+          isPlaying ? "pause" : "play_arrow"
+        }}</mat-icon>
+        <mat-icon (click)="nextTrack()">skip_next</mat-icon>
+      </div>
+      <div class="volume">
+        <mat-slider
+        [min]="0"
+        [max]="100"
+        [discrete]="true"
+        [displayWith]="formatFunction"
+        (change)="onVolumeChange($event)"
+        >
+        <input matSliderThumb [value]="volume" />
+      </mat-slider>
+    </div>
+    </div>
+  <div class="progress-bar">
+    <mat-progress-bar
+      mode="determinate"
+      [value]="currProgress"
+    ></mat-progress-bar>
+  </div>
+  </div>
+</div>

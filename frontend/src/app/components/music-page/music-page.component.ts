@@ -20,6 +20,7 @@ export class MusicPageComponent implements OnInit {
   public data: CardGroup[] = [];
 
   public access_token: string | null;
+  public playlists: any;
 
   ngOnInit(): void {
     this.access_token = this.spotifyService.getAccessToken();
@@ -27,14 +28,42 @@ export class MusicPageComponent implements OnInit {
   }
 
   public getProfileInfo() {
-    this.spotifyService.getMyProfile();
+    this.spotifyService.getMyProfile().subscribe();
   }
 
   public getPlaylist(id: string) {
-    this.spotifyService.getPlaylist(id);
+    this.spotifyService.getPlaylist(id).subscribe();
   }
 
   public getPlaylists() {
-    this.spotifyService.getMyPlaylists();
+    this.spotifyService.getMyPlaylists().subscribe();
+  }
+
+  public transferPlayback(deviceIds: string[], play?: boolean) {
+    this.spotifyService.transferPlayback(deviceIds, { play }).subscribe();
+  }
+
+  public getAvailableDevices() {
+    this.spotifyService.getAvailableDevices().subscribe();
+  }
+
+  public startPlayback(deviceId: string) {
+    this.spotifyService.startPlayback({ deviceId }).subscribe();
+  }
+
+  public pausePlayback(deviceId: string) {
+    this.spotifyService.pausePlayback({ deviceId }).subscribe();
+  }
+
+  public nextTrack(deviceId: string) {
+    this.spotifyService.nextTrack({ deviceId }).subscribe();
+  }
+
+  public previousTrack(deviceId: string) {
+    this.spotifyService.previousTrack({ deviceId }).subscribe();
+  }
+
+  public seekToPosition(position: number, deviceId?: string) {
+    this.spotifyService.seekToPosition(position, { deviceId }).subscribe();
   }
 }
