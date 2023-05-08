@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { translateTransition } from './shared/routing-transitions';
+import { translateTransition } from './routing-transitions';
 import { RouterOutlet } from '@angular/router';
 
 @Component({

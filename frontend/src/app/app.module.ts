@@ -4,25 +4,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { HomePageComponent } from './components/home-page/home-page.component';
-import { HassService } from './services/hass.service';
 import { HttpClientModule } from '@angular/common/http';
-import { MusicPageComponent } from './components/music-page/music-page.component';
 
-import { SensorComponent } from './components/sensor/sensor.component';
-import { EntityCardComponent } from './components/entity-card/entity-card.component';
-import { MaterialModule } from './shared/material.module';
-import { IconModule } from './shared/icon.module';
-import { LightCardComponent } from './components/entity-card/light-card/light-card.component';
-import { SensorGroupComponent } from './components/sensor-group/sensor-group.component';
-import { LightOptionsComponent } from './components/light-options/light-options.component';
-import { CardGridComponent } from './components/card-grid/card-grid.component';
-import { ColorPickerModule } from 'ngx-color-picker';
-import { NgChartsModule } from 'ng2-charts';
-import { StateGraphComponent } from './components/state-graph/state-graph.component';
-import { PlaylistCardComponent } from './components/playlist-card/playlist-card.component';
-import { MediaPlayerComponent } from './components/media-player/media-player.component';
+import { IconModule } from './icon.module';
 
 import * as Hammer from 'hammerjs';
 import {
@@ -30,6 +14,12 @@ import {
   HammerGestureConfig,
   HAMMER_GESTURE_CONFIG,
 } from '@angular/platform-browser';
+// import { HassService } from './home-assistant/services/hass.service';
+import { CoreModule } from './core/core.module';
+import { MusicModule } from './music/music.module';
+import { HomeAssistantModule } from './home-assistant/home-assistant.module';
+import { RecipesModule } from './recipes/recipes.module';
+import { MaterialModule } from './material.module';
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -39,34 +29,22 @@ export class MyHammerConfig extends HammerGestureConfig {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SidebarComponent,
-    HomePageComponent,
-    MusicPageComponent,
-    EntityCardComponent,
-    SensorComponent,
-    LightCardComponent,
-    SensorGroupComponent,
-    LightOptionsComponent,
-    CardGridComponent,
-    StateGraphComponent,
-    PlaylistCardComponent,
-    MediaPlayerComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    MaterialModule,
     IconModule,
-    ColorPickerModule,
-    NgChartsModule,
     HammerModule,
+    CoreModule,
+    MusicModule,
+    HomeAssistantModule,
+    RecipesModule,
+    MaterialModule,
   ],
   providers: [
-    HassService,
+    // HassService,
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: MyHammerConfig,

@@ -1,0 +1,85 @@
+@import "node_modules/rfs/scss";
+@import "../../../../assets/scss/variables";
+
+.card-wrapper {
+  position: relative;
+
+  container-name: card;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+
+  aspect-ratio: 1/1;
+  padding: 20px;
+
+  color: $foreground;
+
+  border: 2px solid rgba($foreground, 0.2);
+  border-radius: 5%;
+
+  .entity-icon {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+
+    aspect-ratio: 1/1;
+    width: 25%;
+
+    .mat-icon {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .lock-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    color: $color-3;
+
+    transition: opacity 0.3s ease-in;
+
+    &.unlocked {
+      opacity: 0;
+    }
+  }
+
+  .name-state {
+    .entity-name {
+      @include fluid-type(320px, 3000px, 16px, 32px);
+
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .entity-state {
+      @include fluid-type(320px, 3000px, 12px, 28px);
+
+      font-weight: 500;
+    }
+  }
+
+  &.active {
+    color: $background;
+    background-color: $foreground;
+  }
+
+  &.has-action {
+    &:hover {
+      cursor: pointer;
+      background-color: rgba($foreground, 0.05);
+
+      &.active {
+        background-color: rgba($foreground, 0.9);
+      }
+    }
+  }
+}
+
+@container card (max-width: 250px) {
+  .entity-name {
+    font-size: 10px;
+  }
+}

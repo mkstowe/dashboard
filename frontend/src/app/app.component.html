@@ -1,7 +1,11 @@
 <div class="app-wrapper" [@routeAnim]="prepareRoute(outlet)">
-  <div class="mobile-header">
-  </div>
-  <button class="hamburger hamburger--squeeze" type="button" [class.is-active]="sidebarActive" (click)="toggleSidebar()">
+  <div class="mobile-header"></div>
+  <button
+    class="hamburger hamburger--squeeze"
+    type="button"
+    [class.is-active]="sidebarActive"
+    (click)="toggleSidebar()"
+  >
     <span class="hamburger-box">
       <span class="hamburger-inner"></span>
     </span>
