@@ -18,7 +18,20 @@ export class MusicPageComponent implements OnInit {
   ) {}
 
   public access_token: string | null;
-  public playlists: any;
+  public playlists = [
+    '4vNldb5p8tQ9RmX7XSaTIM',
+    '0P9fhX6DxKRemFppitUO40',
+    '3vMB7rfIss8XpqjrJqGE4D',
+    '3sc1x7K65uAAikfznMD8sd',
+    '0tgz34iRZ1VLeMVtHx0Od9',
+    '7oROe52RFDdNFrInhWSXMd',
+    '7tDigJ9KogRDHhl8k804So',
+    '6g0GoROlTNHnPtEWmmV3uw',
+    '7KrR37m0IMyREptGTQLU6W',
+    '4fg2H1M5YfQ7hP4Jswstdb',
+    '3tT78lDIRF5kjOuilwihr4',
+    '37i9dQZEVXcBLmltz3RQwu',
+  ];
 
   ngOnInit(): void {
     this.access_token = this.spotifyService.getAccessToken();

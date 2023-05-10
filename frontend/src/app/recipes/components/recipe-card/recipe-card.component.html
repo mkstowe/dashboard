@@ -1,1 +1,14 @@
-<p>recipe-card works!</p>
+<div class="recipe-card-wrapper" [class.has-image]="hasImage">
+  <div class="recipe-img">
+    <img src="{{ imageUrl }}" *ngIf="hasImage; else icon" />
+    <ng-template #icon>
+      <mat-icon #icon svgIcon="cleaver"></mat-icon>
+    </ng-template>
+  </div>
+  <div class="summary" *ngIf="summary">
+    <span>{{ summary }}</span>
+  </div>
+  <div class="name">
+    <span>{{ name }}</span>
+  </div>
+</div>

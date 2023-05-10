@@ -21,6 +21,11 @@ const setEnv = () => {
             access_token: '${process.env.HASS_ACCESS_TOKEN}'
         },
         apiUrl: '${process.env.API_URL}',
+        mealieAuthToken: {
+          type: 'auth',
+          access_token: '${process.env.MEALIE_ACCESS_TOKEN}',
+        },
+        mealieUrl: '${process.env.MEALIE_URL}',
         appVersion: '${appVersion}',
         production: false,
     };
@@ -34,6 +39,11 @@ const setEnv = () => {
             access_token: '${process.env.HASS_ACCESS_TOKEN}'
         },
         apiUrl: '${process.env.API_URL}',
+        mealieAuthToken: {
+          type: 'auth',
+          access_token: '${process.env.MEALIE_ACCESS_TOKEN}',
+        },
+        mealieUrl: '${process.env.MEALIE_URL}',
         appVersion: '${appVersion}',
         production: true,
     };

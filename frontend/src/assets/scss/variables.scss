@@ -10,14 +10,17 @@ $color-6: #678a9b;
 
 $background: $color-1;
 $foreground: $color-2;
+
 $accent: $color-6;
-$accent-lighter: $color-6;
-$accent-darker: $color-6;
-$hamburger-layer-color: $foreground;
-$hamburger-layer-width: 30px;
+$accent-lighter: #a2bac7;
+$accent-darker: #335462;
 
 $danger: #bb7979;
 $warn: #f1d597;
+
+$hamburger-layer-color: $foreground;
+$hamburger-layer-width: 30px;
+
 
 @import "/node_modules/hamburgers/_sass/hamburgers/hamburgers";
 

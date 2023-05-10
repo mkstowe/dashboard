@@ -69,4 +69,8 @@ export class SidebarComponent implements OnInit {
       this.date = new Date();
     }, 1000);
   }
+
+  public trackDevice(index: number, device: any) {
+    return device.id;
+  }
 }

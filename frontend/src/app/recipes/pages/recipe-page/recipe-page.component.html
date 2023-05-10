@@ -1,1 +1,22 @@
-<p>recipe-page works!</p>
+<div class="recipe-page">
+  <div class="dashboard recipe-dash">
+    <div class="recipe-grid">
+      <ng-container *ngFor="let recipe of recipes; trackBy: trackRecipe">
+        <app-recipe-card
+          [id]="recipe.id"
+          [name]="recipe.name"
+          [summary]="recipe.description"
+          [slug]="recipe.slug"
+          [hasImage]="recipe.image"
+        ></app-recipe-card>
+      </ng-container>
+      <mat-paginator 
+        [length]="numRecipes"
+        [pageSizeOptions]="pageSizeOptions"
+        [pageSize]="pageSize"
+        (page)="onPage($event)"
+        [showFirstLastButtons]="true"
+      ></mat-paginator>
+    </div>
+  </div>
+</div>
