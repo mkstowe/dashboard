@@ -48,14 +48,14 @@
 
   .name-state {
     .entity-name {
-      @include fluid-type(320px, 3000px, 16px, 32px);
+      font-size: 28px;
 
       margin-bottom: 5px;
       font-weight: 600;
     }
 
     .entity-state {
-      @include fluid-type(320px, 3000px, 12px, 28px);
+      font-size: 24px;
 
       font-weight: 500;
     }

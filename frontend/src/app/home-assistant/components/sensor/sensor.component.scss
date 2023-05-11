@@ -46,12 +46,12 @@
     .entity-name {
       margin-bottom: 5px;
       font-weight: 600;
-      @include fluid-type(320px, 3000px, 12px, 28px);
+      font-size: 24px;
     }
 
     .entity-state {
       font-weight: 500;
-      @include fluid-type(320px, 3000px, 10px, 24px);
+      font-size: 20px;
     }
   }
 }
