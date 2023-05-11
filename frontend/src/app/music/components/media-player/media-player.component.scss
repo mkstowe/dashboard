@@ -1,64 +1,71 @@
 @import "../../../../assets/scss/variables";
 
 .player-wrapper {
-  width: 100%;
-  aspect-ratio: 1/1;
-  border-radius: 5%;
   position: relative;
+  aspect-ratio: 1/1;
+  width: 100%;
+  border-radius: 5%;
 
   .cover-img img {
-    object-fit: cover;
     aspect-ratio: 1/1;
     width: 100%;
+    object-fit: cover;
     border-radius: 5%;
   }
 
   .player-footer {
     position: absolute;
     bottom: 0;
-    width: 100%;
-    padding: 20px;
-    color: $foreground;
-    background-color: rgba($background, 0.75);
-    backdrop-filter: blur(4px);
+
     display: flex;
     flex-direction: column;
 
+    width: 100%;
+    padding: 20px;
+
+    color: $foreground;
+
+    background-color: rgba($background, 0.75);
+    backdrop-filter: blur(4px);
+
     .song-info {
-      font-weight: 500;
-      font-size: 20px;
       width: 100%;
-      white-space: nowrap;
       padding: 10px 0;
+
+      font-size: 20px;
+      font-weight: 500;
+      white-space: nowrap;
 
       p {
         overflow: hidden;
-        text-overflow: ellipsis;
         margin: 0;
+        text-overflow: ellipsis;
       }
     }
 
     .actions {
       display: flex;
-      justify-content: space-between;
       gap: 50px;
       align-items: center;
+      justify-content: space-between;
+
       margin-bottom: 20px;
 
       .controls {
-        justify-content: center;
         display: flex;
-        gap: 30px;
         flex-grow: 1;
+        gap: 30px;
+        justify-content: center;
 
         mat-icon {
-          font-size: 32px;
           cursor: pointer;
+          font-size: 32px;
         }
       }
 
       .volume {
         flex-grow: 1;
+
         .mat-mdc-slider {
           width: 100%;
         }
@@ -75,6 +82,7 @@
   height: 6px !important;
   border-radius: 10px;
 }
+
 .mdc-linear-progress__bar-inner {
   border-top-width: 6px !important;
 }

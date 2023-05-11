@@ -1,6 +1,6 @@
 @import "@angular/material/theming";
 
-@include mat.core();
+@include mat.core;
 
 $primary: (
   50: #e3eff7,
@@ -170,7 +170,6 @@ $triadic-2: (
     A700: #d8dae6,
   ),
 );
-
 $palette-primary: mat.define-palette($primary, 400, 200, 700);
 $palette-accent: mat.define-palette($complementary, 400, 200, 700);
 $palette-warn: mat.define-palette($triadic-2, 400, 200, 700);

@@ -38,20 +38,21 @@
   .info-wrapper {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     align-items: flex-end;
     justify-content: center;
+
     text-align: right;
-    flex-grow: 1;
 
     .entity-name {
       margin-bottom: 5px;
-      font-weight: 600;
       font-size: 24px;
+      font-weight: 600;
     }
 
     .entity-state {
-      font-weight: 500;
       font-size: 20px;
+      font-weight: 500;
     }
   }
 }
