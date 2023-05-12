@@ -1,0 +1,50 @@
+<div class="recipe-detail-wrapper">
+  <img class="recipe-img" [src]="imageUrl" *ngIf="recipe?.image" />
+  <h2 class="recipe-name">{{ recipe?.name }}</h2>
+  <div class="recipe-info">
+    <span class="recipe-time" *ngIf="recipe?.totalTime">Total | {{ recipe?.totalTime }}</span>
+    <span class="recipe-time" *ngIf="recipe?.prepTime">Prep | {{ recipe?.prepTime }}</span>
+    <span class="recipe-time"  *ngIf="recipe?.performTime">Cook | {{ recipe?.performTime }}</span>
+    <span class="recipe-servings" *ngIf="recipe?.recipeYield">{{ recipe?.recipeYield }}</span>
+  </div>
+  <p class="recipe-summary">{{ recipe?.description }}</p>
+
+  <div class="recipe-content">
+    <div class="recipe-details">
+      <div class="ingredients">
+        <h3>Ingredients</h3>
+        <mat-selection-list class="ingredient-list" color="primary">
+          <mat-list-option
+            class="ingredient"
+            togglePosition="before"
+            *ngFor="let ingredient of recipe?.recipeIngredient"
+            >{{ ingredient.note }}</mat-list-option
+          >
+        </mat-selection-list>
+      </div>
+      <div class="instructions">
+        <h3>Instructions</h3>
+        <mat-list class="instruction-list" color="primary">
+          <mat-list-item
+            class="instruction"
+            togglePosition="before"
+            *ngFor="let instruction of recipe?.recipeInstructions"
+            >{{ instruction.text }}</mat-list-item
+          >
+        </mat-list>
+      </div>
+    </div>
+    <div class="recipe-notes" *ngIf="recipe?.notes && recipe?.notes.length">
+      <h3>Notes</h3>
+      <mat-list class="notes-list" color="primary">
+        <mat-list-item class="note" *ngFor="let note of recipe?.notes">
+          <span matListItemTitle>{{ note.title }}</span>
+          <span matListItemLine>{{ note.text }}</span>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+
+  <span class="recipe-source" *ngIf="recipe?.orgURL"><a [href]="recipe?.orgURL">Original Source</a></span>
+
+</div>

@@ -1,10 +1,12 @@
-@import "../../../../assets/scss/variables.scss";
+@import "../../../../assets/scss/variables";
 
 .recipe-page {
   display: flex;
   flex-direction: column;
+
   width: 100%;
   height: 100%;
+
   background-color: $background;
 
   .recipe-dash {
@@ -15,23 +17,22 @@
     .recipe-grid {
       display: flex;
       flex-wrap: wrap;
+      gap: 50px;
       align-content: flex-start;
       justify-content: center;
 
       width: 100%;
       height: 100%;
 
-      gap: 50px;
-
       app-recipe-card {
-        width: 300px;
         aspect-ratio: 1/1;
+        width: 300px;
       }
 
       mat-paginator {
         width: 100%;
-        background-color: transparent;
         color: $foreground;
+        background-color: transparent;
 
         .mat-mdc-icon-button:not([disabled]) .mat-mdc-paginator-icon {
           fill: $foreground;
@@ -41,9 +42,13 @@
           color: $foreground !important;
         }
 
-        .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading, .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch, .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+        .mdc-text-field--outlined:not(.mdc-text-field--disabled)
+          .mdc-notched-outline__leading,
+        .mdc-text-field--outlined:not(.mdc-text-field--disabled)
+          .mdc-notched-outline__notch,
+        .mdc-text-field--outlined:not(.mdc-text-field--disabled)
+          .mdc-notched-outline__trailing {
           border-color: rgba($foreground, 0.4) !important;
-
         }
 
         .mat-mdc-select-arrow {

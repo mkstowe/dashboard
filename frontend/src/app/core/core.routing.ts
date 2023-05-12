@@ -24,7 +24,7 @@ const routes: Routes = [
   },
   {
     path: 'recipes',
-    component: RecipePageComponent,
+    // component: RecipePageComponent,
     data: { tab: 3 },
     loadChildren: () =>
       import('../recipes/recipes.module').then((m) => m.RecipesModule),

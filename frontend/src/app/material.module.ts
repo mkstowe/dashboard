@@ -7,6 +7,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+ import { MatCheckboxModule } from '@angular/material/checkbox';
+  import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   imports: [
@@ -18,6 +20,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatGridListModule,
     MatDialogModule,
     MatProgressBarModule,
+    MatCheckboxModule,
+    MatListModule,
   ],
   exports: [
     MatButtonModule,
@@ -28,6 +32,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatGridListModule,
     MatDialogModule,
     MatProgressBarModule,
+    MatCheckboxModule,
+    MatListModule,
   ],
   providers: [MatIconRegistry],
 })

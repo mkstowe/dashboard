@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
-import { map, mergeMap, switchMap, tap, toArray } from 'rxjs/operators';
-import { of } from 'rxjs';
 
 @Component({
   templateUrl: './recipe-page.component.html',
@@ -10,7 +8,7 @@ import { of } from 'rxjs';
 })
 export class RecipePageComponent implements OnInit {
   public recipes: any[];
-  public pageSize = 10;
+  public pageSize = 25;
   public pageSizeOptions = [5, 10, 25, 50, 100];
   public pageIndex = 0;
   public numRecipes: number;
@@ -20,11 +18,11 @@ export class RecipePageComponent implements OnInit {
   constructor(private recipeService: RecipeService) {}
 
   ngOnInit(): void {
-    this.recipeService.getAllRecipes().subscribe((res: any) => {
+    this.recipeService.$recipes.subscribe((res: any) => {
       this.allRecipes = res;
-      this.numRecipes = this.allRecipes.length;
-      this.recipes = this.allRecipes.slice(0, this.pageSize);
-    });
+      this.numRecipes = this.allRecipes?.length;
+      this.recipes = this.allRecipes?.slice(0, this.pageSize);
+    })
   }
 
   public trackRecipe(index: number, recipe: any) {

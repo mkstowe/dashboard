@@ -8,9 +8,10 @@
           [summary]="recipe.description"
           [slug]="recipe.slug"
           [hasImage]="recipe.image"
+          [routerLink]="[recipe.slug]"
         ></app-recipe-card>
       </ng-container>
-      <mat-paginator 
+      <mat-paginator
         [length]="numRecipes"
         [pageSizeOptions]="pageSizeOptions"
         [pageSize]="pageSize"
