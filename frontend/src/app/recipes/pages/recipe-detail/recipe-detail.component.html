@@ -2,10 +2,18 @@
   <img class="recipe-img" [src]="imageUrl" *ngIf="recipe?.image" />
   <h2 class="recipe-name">{{ recipe?.name }}</h2>
   <div class="recipe-info">
-    <span class="recipe-time" *ngIf="recipe?.totalTime">Total | {{ recipe?.totalTime }}</span>
-    <span class="recipe-time" *ngIf="recipe?.prepTime">Prep | {{ recipe?.prepTime }}</span>
-    <span class="recipe-time"  *ngIf="recipe?.performTime">Cook | {{ recipe?.performTime }}</span>
-    <span class="recipe-servings" *ngIf="recipe?.recipeYield">{{ recipe?.recipeYield }}</span>
+    <span class="recipe-time" *ngIf="recipe?.totalTime"
+      >Total | {{ recipe?.totalTime }}</span
+    >
+    <span class="recipe-time" *ngIf="recipe?.prepTime"
+      >Prep | {{ recipe?.prepTime }}</span
+    >
+    <span class="recipe-time" *ngIf="recipe?.performTime"
+      >Cook | {{ recipe?.performTime }}</span
+    >
+    <span class="recipe-servings" *ngIf="recipe?.recipeYield">{{
+      recipe?.recipeYield
+    }}</span>
   </div>
   <p class="recipe-summary">{{ recipe?.description }}</p>
 
@@ -45,6 +53,7 @@
     </div>
   </div>
 
-  <span class="recipe-source" *ngIf="recipe?.orgURL"><a [href]="recipe?.orgURL">Original Source</a></span>
-
+  <span class="recipe-source" *ngIf="recipe?.orgURL"
+    ><a [href]="recipe?.orgURL">Original Source</a></span
+  >
 </div>

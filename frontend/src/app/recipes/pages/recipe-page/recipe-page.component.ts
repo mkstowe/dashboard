@@ -4,7 +4,7 @@ import { RecipeService } from '../../services/recipe.service';
 @Component({
   templateUrl: './recipe-page.component.html',
   styleUrls: ['./recipe-page.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class RecipePageComponent implements OnInit {
   public recipes: any[];
@@ -22,7 +22,7 @@ export class RecipePageComponent implements OnInit {
       this.allRecipes = res;
       this.numRecipes = this.allRecipes?.length;
       this.recipes = this.allRecipes?.slice(0, this.pageSize);
-    })
+    });
   }
 
   public trackRecipe(index: number, recipe: any) {
@@ -32,6 +32,9 @@ export class RecipePageComponent implements OnInit {
   public onPage($event: any) {
     this.pageIndex = $event.pageIndex;
     this.pageSize = $event.pageSize;
-    this.recipes = this.allRecipes.slice(this.pageIndex * this.pageSize, (this.pageIndex + 1) * this.pageSize);
+    this.recipes = this.allRecipes.slice(
+      this.pageIndex * this.pageSize,
+      (this.pageIndex + 1) * this.pageSize
+    );
   }
 }

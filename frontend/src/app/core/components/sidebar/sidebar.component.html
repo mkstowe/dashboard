@@ -23,7 +23,9 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="device-list">
-      <p *ngFor="let device of activeDevices; trackBy:trackDevice">{{ device }}</p>
+      <p *ngFor="let device of activeDevices; trackBy: trackDevice">
+        {{ device }}
+      </p>
     </div>
   </mat-expansion-panel>
 </div>

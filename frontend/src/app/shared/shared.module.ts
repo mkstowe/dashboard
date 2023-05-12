@@ -7,7 +7,13 @@ import { IconModule } from '../icon.module';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, MaterialModule, IconModule, ColorPickerModule, NgChartsModule],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    IconModule,
+    ColorPickerModule,
+    NgChartsModule,
+  ],
   exports: [MaterialModule, IconModule, NgChartsModule, ColorPickerModule],
 })
 export class SharedModule {}

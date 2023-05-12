@@ -6,9 +6,9 @@
     <ng-template #loggedIn>
       <app-media-player></app-media-player>
       <div class="playlist-cards">
-      <ng-container *ngFor="let id of playlists">
-        <app-playlist-card [id]="id"></app-playlist-card>
-      </ng-container>
+        <ng-container *ngFor="let id of playlists">
+          <app-playlist-card [id]="id"></app-playlist-card>
+        </ng-container>
       </div>
     </ng-template>
   </div>

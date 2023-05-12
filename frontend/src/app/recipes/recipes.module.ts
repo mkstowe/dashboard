@@ -9,7 +9,11 @@ import { RECIPE_ROUTES } from './recipes.routing';
 import { RecipeService } from './services/recipe.service';
 
 @NgModule({
-  declarations: [RecipeCardComponent, RecipePageComponent, RecipeDetailComponent],
+  declarations: [
+    RecipeCardComponent,
+    RecipePageComponent,
+    RecipeDetailComponent,
+  ],
   imports: [CommonModule, SharedModule, RouterModule.forChild(RECIPE_ROUTES)],
   exports: [RecipePageComponent],
 })

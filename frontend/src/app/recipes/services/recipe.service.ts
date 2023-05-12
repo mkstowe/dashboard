@@ -4,7 +4,7 @@ import { BehaviorSubject, Subject, shareReplay, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RecipeService {
   public $recipes = new BehaviorSubject<any>(null);
@@ -12,12 +12,15 @@ export class RecipeService {
 
   constructor(private http: HttpClient) {
     this.getAllRecipes();
-   }
+  }
 
   public getAllRecipes() {
-    return this.http.get(`${this.apiUrl}/recipes/summary`).pipe(shareReplay(1), take(1)).subscribe((res: any) => {
-      this.$recipes.next(res);
-    });
+    return this.http
+      .get(`${this.apiUrl}/recipes/summary`)
+      .pipe(shareReplay(1), take(1))
+      .subscribe((res: any) => {
+        this.$recipes.next(res);
+      });
   }
 
   public getRecipe(slug: string) {
@@ -25,7 +28,8 @@ export class RecipeService {
   }
 
   public getRecipeImage(slug: string, fileName: string) {
-    return this.http.get(`${this.apiUrl}/media/recipes/${slug}/images/${fileName}`);
+    return this.http.get(
+      `${this.apiUrl}/media/recipes/${slug}/images/${fileName}`
+    );
   }
-
 }

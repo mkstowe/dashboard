@@ -8,7 +8,7 @@
     "watch": "npm run build --watch --configuration development",
     "config": "ts-node src/environments/set-env.ts",
     "lint": "ng lint",
-    "pretty": "prettier --write \"./**/*.{js,ts,json,html,scss}\""
+    "pretty": "prettier --ignore-path ../.gitignore --write \"./**/*.{js,ts,json,html,scss}\""
   },
   "private": true,
   "proxy": "http://localhost:3000",
