@@ -4,13 +4,13 @@
   position: relative;
   aspect-ratio: 1/1;
   width: 100%;
-  border-radius: 5%;
+  border-radius: 25px;
 
   .cover-img img {
     aspect-ratio: 1/1;
     width: 100%;
     object-fit: cover;
-    border-radius: 5%;
+    border-radius: 25px;
   }
 
   .player-footer {
@@ -27,6 +27,8 @@
 
     background-color: rgba($background, 0.75);
     backdrop-filter: blur(4px);
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
 
     .song-info {
       width: 100%;

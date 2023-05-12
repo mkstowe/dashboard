@@ -3,13 +3,12 @@
 .playlist-wrapper {
   position: relative;
   width: 200px;
-  border-radius: 10%;
 
   .playlist-img img {
     aspect-ratio: 1/1;
     width: 100%;
     object-fit: cover;
-    border-radius: 10%;
+    border-radius: 10px;
   }
 
   .playlist-name {
@@ -25,6 +24,8 @@
 
     background-color: rgba($background, 0.75);
     backdrop-filter: blur(4px);
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
   }
 
   &:hover {

@@ -12,7 +12,7 @@
   color: $foreground;
 
   border: 2px solid rgba($foreground, 0.2);
-  border-radius: 5%;
+  border-radius: 15px;
 
   .header {
     display: flex;
@@ -101,7 +101,7 @@
     ::ng-deep color-picker {
       .color-picker {
         border: 0;
-        border-radius: 5%;
+        border-radius: 15px;
         box-shadow: 5px 7px 32px -5px rgb(0 0 0 / 60%);
 
         .saturation-lightness {
