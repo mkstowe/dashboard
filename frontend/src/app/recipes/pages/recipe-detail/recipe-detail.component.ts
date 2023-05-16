@@ -13,6 +13,7 @@ export class RecipeDetailComponent implements OnInit {
   public recipe: any;
   public imageUrl: string;
   private sub: any;
+  private mealieUrl = process.env.MEALIE_URL || environment.mealieUrl;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,7 +27,7 @@ export class RecipeDetailComponent implements OnInit {
 
     this.recipeService.getRecipe(this.slug).subscribe((res) => {
       this.recipe = res;
-      this.imageUrl = `${environment.mealieUrl}/api/media/recipes/${this.slug}/images/min-original.webp`;
+      this.imageUrl = `${this.mealieUrl}/api/media/recipes/${this.slug}/images/min-original.webp`;
       console.log(this.recipe);
     });
   }

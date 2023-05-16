@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class RecipeService {
   public $recipes = new BehaviorSubject<any>(null);
-  private apiUrl = `${environment.mealieUrl}/api`;
+  private apiUrl = `${process.env.MEALIE_URL || environment.mealieUrl}/api`;
 
   constructor(private http: HttpClient) {
     this.getAllRecipes();

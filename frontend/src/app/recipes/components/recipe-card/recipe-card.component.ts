@@ -14,8 +14,9 @@ export class RecipeCardComponent implements OnInit {
   @Input() hasImage: boolean;
 
   public imageUrl: string;
+  private mealieUrl = process.env.MEALIE_URL || environment.mealieUrl;
 
   ngOnInit(): void {
-    this.imageUrl = `${environment.mealieUrl}/api/media/recipes/${this.slug}/images/min-original.webp`;
+    this.imageUrl = `${this.mealieUrl}/api/media/recipes/${this.slug}/images/min-original.webp`;
   }
 }
