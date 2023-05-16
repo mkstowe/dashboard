@@ -1,5 +1,5 @@
 <div class="recipe-detail-wrapper">
-  <img class="recipe-img" [src]="imageUrl" *ngIf="recipe?.image" />
+  <img class="recipe-img" [src]="imageUrl" *ngIf="recipe?.image && recipe?.image !== 'no image'" />
   <h2 class="recipe-name">{{ recipe?.name }}</h2>
   <div class="recipe-info">
     <span class="recipe-time" *ngIf="recipe?.totalTime"
@@ -54,6 +54,6 @@
   </div>
 
   <span class="recipe-source" *ngIf="recipe?.orgURL"
-    ><a [href]="recipe?.orgURL">Original Source</a></span
+    ><a target="_blank" [href]="recipe?.orgURL">Original Source</a></span
   >
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
+import { take } from 'rxjs';
 
 @Component({
   templateUrl: './recipe-page.component.html',
@@ -10,18 +11,18 @@ export class RecipePageComponent implements OnInit {
   public recipes: any[];
   public pageSize = 25;
   public pageSizeOptions = [5, 10, 25, 50, 100];
-  public pageIndex = 0;
+  public page = 1;
   public numRecipes: number;
+  public numPages: number;
 
-  private allRecipes: any[];
 
   constructor(private recipeService: RecipeService) {}
 
   ngOnInit(): void {
-    this.recipeService.$recipes.subscribe((res: any) => {
-      this.allRecipes = res;
-      this.numRecipes = this.allRecipes?.length;
-      this.recipes = this.allRecipes?.slice(0, this.pageSize);
+    this.recipeService.getRecipes(this.page, this.pageSize).pipe(take(1)).subscribe((res: any) => {
+      this.recipes = res?.items;
+      this.numRecipes = res?.total;
+      this.numPages = res?.total_pages;
     });
   }
 
@@ -30,11 +31,14 @@ export class RecipePageComponent implements OnInit {
   }
 
   public onPage($event: any) {
-    this.pageIndex = $event.pageIndex;
+    this.page = $event.pageIndex + 1;
     this.pageSize = $event.pageSize;
-    this.recipes = this.allRecipes.slice(
-      this.pageIndex * this.pageSize,
-      (this.pageIndex + 1) * this.pageSize
-    );
+
+    this.recipeService
+      .getRecipes(this.page, this.pageSize)
+      .pipe(take(1))
+      .subscribe((res: any) => {
+        this.recipes = res?.items;
+      });
   }
 }

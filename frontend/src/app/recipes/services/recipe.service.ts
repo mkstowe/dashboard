@@ -1,35 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject, shareReplay, take } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, shareReplay, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService {
-  public $recipes = new BehaviorSubject<any>(null);
-  private apiUrl = `${environment.mealieUrl}/api`;
-
-  constructor(private http: HttpClient) {
-    this.getAllRecipes();
+  public $pageOptions = new BehaviorSubject<any>(null);
+  private headers = {
+    "Authorization": `Bearer ${environment.mealieAuthToken.access_token}`
   }
 
-  public getAllRecipes() {
-    return this.http
-      .get(`${this.apiUrl}/recipes/summary`)
-      .pipe(shareReplay(1), take(1))
-      .subscribe((res: any) => {
-        this.$recipes.next(res);
-      });
+  constructor(private http: HttpClient) {
   }
 
   public getRecipe(slug: string) {
-    return this.http.get(`${this.apiUrl}/recipes/${slug}`);
+    return this.http.get(`/api/mealie/recipes/${slug}`, { headers: this.headers });
   }
 
-  public getRecipeImage(slug: string, fileName: string) {
-    return this.http.get(
-      `${this.apiUrl}/media/recipes/${slug}/images/${fileName}`
-    );
+
+  public getRecipes(page: number, perPage: number) {
+    return this.http.get(`/api/mealie/recipes?page=${page}&perPage=${perPage}`, {
+      headers: this.headers
+    })
   }
 }

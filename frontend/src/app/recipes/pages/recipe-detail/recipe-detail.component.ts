@@ -26,8 +26,7 @@ export class RecipeDetailComponent implements OnInit {
 
     this.recipeService.getRecipe(this.slug).subscribe((res) => {
       this.recipe = res;
-      this.imageUrl = `${environment.mealieUrl}/api/media/recipes/${this.slug}/images/min-original.webp`;
-      console.log(this.recipe);
+      this.imageUrl = `/api/mealie/media/recipes/${this.recipe.id}/images/min-original.webp`;
     });
   }
 }
