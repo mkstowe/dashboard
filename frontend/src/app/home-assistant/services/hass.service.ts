@@ -24,6 +24,7 @@ export class HassService {
   });
 
   constructor(private http: HttpClient) {
+    console.log(this.headers);
     this.connect();
   }
 
