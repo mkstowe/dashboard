@@ -17,26 +17,20 @@ export class HassService {
   public entities: BehaviorSubject<any> = new BehaviorSubject<any>({});
 
   private connection: any;
-  private accessToken = process.env.HASS_ACCESS_TOKEN || environment.hassAuthToken.access_token;
-  private hassURL = process.env.HASS_URL || environment.hassUrl;
 
   private headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${this.accessToken}`,
+    Authorization: `Bearer ${environment.hassAuthToken.access_token}`,
   });
 
   constructor(private http: HttpClient) {
-    console.log("HERE");
-    console.log(process.env.HASS_ACCESS_TOKEN);
-    console.log(environment.hassAuthToken.access_token);
-    console.log(this.accessToken)
     this.connect();
   }
 
   private async connect() {
     const auth = createLongLivedTokenAuth(
-      this.hassURL,
-      this.accessToken
+      environment.hassUrl,
+      environment.hassAuthToken.access_token
     );
 
     this.connection = await createConnection({ auth });

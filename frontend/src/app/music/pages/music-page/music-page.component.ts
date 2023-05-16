@@ -9,7 +9,7 @@ import { SpotifyService } from '../../services/spotify.service';
   styleUrls: ['./music-page.component.scss'],
 })
 export class MusicPageComponent implements OnInit {
-  public apiUrl = process.env.apiURL || environment.apiUrl;
+  public apiUrl = environment.apiUrl;
 
   constructor(
     private spotifyService: SpotifyService,
