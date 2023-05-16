@@ -24,7 +24,8 @@ export class HassService {
   });
 
   constructor(private http: HttpClient) {
-    console.log(this.headers);
+    console.log("HERE");
+    console.log(environment.hassAuthToken.access_token);
     this.connect();
   }
 
