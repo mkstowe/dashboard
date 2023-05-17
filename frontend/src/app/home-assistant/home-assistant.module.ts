@@ -9,6 +9,8 @@ import { StateGraphComponent } from './components/state-graph/state-graph.compon
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SharedModule } from '../shared/shared.module';
 import { LightCardComponent } from './components/entity-card/light-card/light-card.component';
+import { TvCardComponent } from './components/entity-card/tv-card/tv-card.component';
+import { TvDetailComponent } from './components/tv-detail/tv-detail.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { LightCardComponent } from './components/entity-card/light-card/light-ca
     SensorGroupComponent,
     StateGraphComponent,
     HomePageComponent,
+    TvCardComponent,
+    TvDetailComponent,
   ],
   imports: [CommonModule, SharedModule],
   exports: [HomePageComponent],

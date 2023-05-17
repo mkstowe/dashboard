@@ -154,6 +154,22 @@ export class HomePageComponent {
           },
         },
         {
+          type: 'tvCard',
+          cardOptions: {
+            entityId: 'remote.living_room_tv',
+            icon: 'tv',
+            iconActive: 'tv-active',
+            service: {
+              type: 'call_service',
+              domain: 'remote',
+              service: 'toggle',
+              target: {
+                entity_id: 'remote.living_room_tv'
+              }
+            }
+          }
+        },
+        {
           type: 'lightCard',
           cardOptions: {
             entityId: 'light.candle_lamp',
