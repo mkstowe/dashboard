@@ -1,19 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subject, delay } from 'rxjs';
 import { HassService } from '../../services/hass.service';
 import { ServiceCall } from '../../models/service-call';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-light-options',
-  templateUrl: './light-options.component.html',
-  styleUrls: ['./light-options.component.scss'],
+  selector: 'app-light-detail',
+  templateUrl: './light-detail.component.html',
+  styleUrls: ['./light-detail.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
-export class LightOptionsComponent implements OnInit {
-  @Input() entity: any;
-  @Input() name: string;
-
-  @Input() state: string;
-  @Input() active: boolean;
+export class LightDetailComponent implements OnInit {
+  public entity: any;
+  public entityName: string;
+  public isActive: boolean;
 
   public brightness: number;
   public color: string | null;
@@ -25,7 +25,19 @@ export class LightOptionsComponent implements OnInit {
 
   private entityUpdate: Subject<any> = new Subject<any>();
 
-  constructor(private hassService: HassService) {}
+  constructor(
+    private hassService: HassService,
+    @Inject(MAT_DIALOG_DATA)
+    data: {
+      entity: any;
+      entityName: string;
+      isActive: boolean;
+    }
+  ) {
+    this.entity = data.entity;
+    this.entityName = data.entityName;
+    this.isActive = data.isActive;
+  }
 
   ngOnInit(): void {
     this.hassService.entities.subscribe({

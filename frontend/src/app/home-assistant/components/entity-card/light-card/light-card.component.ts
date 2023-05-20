@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { EntityCardComponent } from '../entity-card.component';
+import { MatDialog } from '@angular/material/dialog';
+import { HassService } from 'src/app/home-assistant/services/hass.service';
+import { LightDetailComponent } from '../../light-detail/light-detail.component';
 
 @Component({
   selector: 'app-light-card',
@@ -7,9 +10,18 @@ import { EntityCardComponent } from '../entity-card.component';
   styleUrls: ['./light-card.component.scss'],
 })
 export class LightCardComponent extends EntityCardComponent {
-  public showOptions = false;
+  constructor(hassService: HassService, private dialog: MatDialog) {
+    super(hassService);
+  }
   public onRightMouseClick() {
-    this.showOptions = !this.showOptions;
+    this.dialog.open(LightDetailComponent, {
+      width: '500px',
+      data: {
+        entity: this.entity,
+        entityName: this.entityName,
+        isActive: this.isActive,
+      },
+    });
     return false;
   }
 }

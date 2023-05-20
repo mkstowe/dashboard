@@ -9,20 +9,23 @@ import { environment } from 'src/environments/environment';
 export class RecipeService {
   public $pageOptions = new BehaviorSubject<any>(null);
   private headers = {
-    "Authorization": `Bearer ${environment.mealieAuthToken.access_token}`
-  }
+    Authorization: `Bearer ${environment.mealieAuthToken.access_token}`,
+  };
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   public getRecipe(slug: string) {
-    return this.http.get(`/api/mealie/recipes/${slug}`, { headers: this.headers });
+    return this.http.get(`/api/mealie/recipes/${slug}`, {
+      headers: this.headers,
+    });
   }
 
-
   public getRecipes(page: number, perPage: number) {
-    return this.http.get(`/api/mealie/recipes?page=${page}&perPage=${perPage}`, {
-      headers: this.headers
-    })
+    return this.http.get(
+      `/api/mealie/recipes?page=${page}&perPage=${perPage}`,
+      {
+        headers: this.headers,
+      }
+    );
   }
 }

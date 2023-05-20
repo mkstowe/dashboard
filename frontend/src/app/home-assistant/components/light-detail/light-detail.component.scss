@@ -1,17 +1,14 @@
 @import "../../../../assets/scss/variables";
 
 .light-options-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  aspect-ratio: 1/1;
   width: 100%;
-  padding: 20px;
+  height: 100%;
+  padding: 25px;
+  padding-bottom: 50px;
 
   color: $foreground;
 
-  border: 2px solid rgba($foreground, 0.2);
+  background-color: $background;
   border-radius: 15px;
 
   .header {
@@ -24,7 +21,7 @@
     margin-bottom: 10px;
 
     h2 {
-      margin: 0;
+      padding-left: 10px;
     }
 
     .power-btn {
@@ -38,17 +35,18 @@
 
       width: 50px;
       height: 50px;
-      margin-top: 2px;
 
       border-radius: 50%;
 
-      .mat-icon {
-        width: 50%;
-      }
+      transition: all 100ms ease-in-out;
 
       &.active {
         color: $accent;
         background-color: rgba($foreground, 0.05);
+      }
+
+      &:hover {
+        color: $accent;
       }
     }
   }
@@ -130,4 +128,9 @@
       }
     }
   }
+}
+
+mat-dialog-container .mat-mdc-dialog-surface {
+  background-color: $background !important;
+  border-radius: 15px !important;
 }

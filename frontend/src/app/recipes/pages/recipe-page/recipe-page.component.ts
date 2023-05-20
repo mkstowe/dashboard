@@ -15,15 +15,17 @@ export class RecipePageComponent implements OnInit {
   public numRecipes: number;
   public numPages: number;
 
-
   constructor(private recipeService: RecipeService) {}
 
   ngOnInit(): void {
-    this.recipeService.getRecipes(this.page, this.pageSize).pipe(take(1)).subscribe((res: any) => {
-      this.recipes = res?.items;
-      this.numRecipes = res?.total;
-      this.numPages = res?.total_pages;
-    });
+    this.recipeService
+      .getRecipes(this.page, this.pageSize)
+      .pipe(take(1))
+      .subscribe((res: any) => {
+        this.recipes = res?.items;
+        this.numRecipes = res?.total;
+        this.numPages = res?.total_pages;
+      });
   }
 
   public trackRecipe(index: number, recipe: any) {

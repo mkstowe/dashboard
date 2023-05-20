@@ -14,8 +14,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     IconModule,
     ColorPickerModule,
     NgChartsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  exports: [MaterialModule, IconModule, NgChartsModule, ColorPickerModule, ReactiveFormsModule],
+  exports: [
+    MaterialModule,
+    IconModule,
+    NgChartsModule,
+    ColorPickerModule,
+    ReactiveFormsModule,
+  ],
 })
 export class SharedModule {}

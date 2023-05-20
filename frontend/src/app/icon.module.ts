@@ -85,7 +85,7 @@ export class IconModule {
       .addSvgIcon('prime', this.setPath(`${this.path}/prime.svg`))
       .addSvgIcon('spotify', this.setPath(`${this.path}/spotify.svg`))
       .addSvgIcon('tubi', this.setPath(`${this.path}/tubi.svg`))
-      .addSvgIcon('youtube', this.setPath(`${this.path}/youtube.svg`))
+      .addSvgIcon('youtube', this.setPath(`${this.path}/youtube.svg`));
   }
 
   private setPath(url: string): SafeResourceUrl {

@@ -164,10 +164,10 @@ export class HomePageComponent {
               domain: 'remote',
               service: 'toggle',
               target: {
-                entity_id: 'remote.living_room_tv'
-              }
-            }
-          }
+                entity_id: 'remote.living_room_tv',
+              },
+            },
+          },
         },
         {
           type: 'lightCard',

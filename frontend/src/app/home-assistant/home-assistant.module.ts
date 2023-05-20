@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardGridComponent } from './components/card-grid/card-grid.component';
 import { EntityCardComponent } from './components/entity-card/entity-card.component';
-import { LightOptionsComponent } from './components/light-options/light-options.component';
+import { LightDetailComponent } from './components/light-detail/light-detail.component';
 import { SensorComponent } from './components/sensor/sensor.component';
 import { SensorGroupComponent } from './components/sensor-group/sensor-group.component';
 import { StateGraphComponent } from './components/state-graph/state-graph.component';
@@ -17,7 +17,7 @@ import { TvDetailComponent } from './components/tv-detail/tv-detail.component';
     CardGridComponent,
     EntityCardComponent,
     LightCardComponent,
-    LightOptionsComponent,
+    LightDetailComponent,
     SensorComponent,
     SensorGroupComponent,
     StateGraphComponent,

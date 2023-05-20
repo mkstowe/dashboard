@@ -1,7 +1,7 @@
 <div class="light-options-wrapper">
   <div class="header">
-    <h2>{{ name }}</h2>
-    <div class="power-btn" [class.active]="active" (click)="onPowerClick()">
+    <h2>{{ entityName }}</h2>
+    <div class="power-btn" [class.active]="isActive" (click)="onPowerClick()">
       <mat-icon svgIcon="power"></mat-icon>
     </div>
   </div>
@@ -17,7 +17,7 @@
       <input matSliderThumb [value]="brightness" />
     </mat-slider>
   </div>
-  <div class="color" *ngIf="active && color">
+  <div class="color" *ngIf="isActive && color">
     <h3>Color</h3>
     <input
       #colorPicker

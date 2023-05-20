@@ -25,7 +25,7 @@ import { MatInputModule } from '@angular/material/input';
     MatCheckboxModule,
     MatListModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
   ],
   exports: [
     MatButtonModule,
@@ -39,7 +39,7 @@ import { MatInputModule } from '@angular/material/input';
     MatCheckboxModule,
     MatListModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
   ],
   providers: [MatIconRegistry],
 })

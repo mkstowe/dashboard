@@ -7,7 +7,7 @@ import { TvDetailComponent } from '../../tv-detail/tv-detail.component';
 @Component({
   selector: 'app-tv-card',
   templateUrl: './tv-card.component.html',
-  styleUrls: ['./tv-card.component.scss']
+  styleUrls: ['./tv-card.component.scss'],
 })
 export class TvCardComponent extends EntityCardComponent {
   public showDetail = false;
@@ -21,8 +21,8 @@ export class TvCardComponent extends EntityCardComponent {
       data: {
         entity: this.entity,
         entityName: this.entityName,
-        isActive: this.isActive
-      }
+        isActive: this.isActive,
+      },
     });
     return false;
   }

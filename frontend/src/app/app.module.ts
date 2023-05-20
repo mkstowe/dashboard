@@ -14,7 +14,6 @@ import {
   HammerGestureConfig,
   HAMMER_GESTURE_CONFIG,
 } from '@angular/platform-browser';
-// import { HassService } from './home-assistant/services/hass.service';
 import { CoreModule } from './core/core.module';
 import { MusicModule } from './music/music.module';
 import { HomeAssistantModule } from './home-assistant/home-assistant.module';
@@ -44,7 +43,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     MaterialModule,
   ],
   providers: [
-    // HassService,
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: MyHammerConfig,
