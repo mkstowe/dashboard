@@ -75,7 +75,17 @@ export class IconModule {
       .addSvgIcon('tv-active', this.setPath(`${this.path}/tv_active.svg`))
       .addSvgIcon('water-drops', this.setPath(`${this.path}/water_drops.svg`))
       .addSvgIcon('wifi', this.setPath(`${this.path}/wifi.svg`))
-      .addSvgIcon('zzz', this.setPath(`${this.path}/zzz.svg`));
+      .addSvgIcon('zzz', this.setPath(`${this.path}/zzz.svg`))
+
+      // Logos
+      .addSvgIcon('crunchyroll', this.setPath(`${this.path}/crunchyroll.svg`))
+      .addSvgIcon('hbo', this.setPath(`${this.path}/hbo.svg`))
+      .addSvgIcon('netflix', this.setPath(`${this.path}/netflix.svg`))
+      .addSvgIcon('paramount', this.setPath(`${this.path}/paramount.svg`))
+      .addSvgIcon('prime', this.setPath(`${this.path}/prime.svg`))
+      .addSvgIcon('spotify', this.setPath(`${this.path}/spotify.svg`))
+      .addSvgIcon('tubi', this.setPath(`${this.path}/tubi.svg`))
+      .addSvgIcon('youtube', this.setPath(`${this.path}/youtube.svg`))
   }
 
   private setPath(url: string): SafeResourceUrl {

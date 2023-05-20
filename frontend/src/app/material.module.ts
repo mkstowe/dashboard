@@ -9,6 +9,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   imports: [
@@ -22,6 +24,8 @@ import { MatListModule } from '@angular/material/list';
     MatProgressBarModule,
     MatCheckboxModule,
     MatListModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [
     MatButtonModule,
@@ -34,6 +38,8 @@ import { MatListModule } from '@angular/material/list';
     MatProgressBarModule,
     MatCheckboxModule,
     MatListModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [MatIconRegistry],
 })

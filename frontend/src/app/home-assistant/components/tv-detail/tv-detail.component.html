@@ -6,4 +6,136 @@
     </div>
   </div>
 
+  <div class="tv-controls">
+    <div class="remote">
+      <div class="nav-controls">
+        <div class="remote-button" (click)="onButtonPress(remoteCommands.BACK)">
+          <mat-icon>arrow_back</mat-icon>
+        </div>
+        <div class="remote-button" (click)="onButtonPress(remoteCommands.HOME)">
+          <mat-icon>home</mat-icon>
+        </div>
+      </div>
+      <div class="d-pad">
+        <div class="placeholder"></div>
+        <div
+          class="remote-button"
+          (click)="onButtonPress(remoteCommands.DPAD_UP)"
+        >
+          <mat-icon>keyboard_arrow_up</mat-icon>
+        </div>
+        <div class="placeholder"></div>
+        <div
+          class="remote-button"
+          (click)="onButtonPress(remoteCommands.DPAD_LEFT)"
+        >
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </div>
+        <div
+          class="remote-button"
+          (click)="onButtonPress(remoteCommands.DPAD_CENTER)"
+        >
+          <mat-icon>circle</mat-icon>
+        </div>
+        <div
+          class="remote-button"
+          (click)="onButtonPress(remoteCommands.DPAD_RIGHT)"
+        >
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </div>
+        <div class="placeholder"></div>
+        <div
+          class="remote-button"
+          (click)="onButtonPress(remoteCommands.DPAD_DOWN)"
+        >
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </div>
+        <div class="placeholder"></div>
+      </div>
+
+      <div class="volume">
+        <div
+          class="remote-button"
+          (click)="onButtonPress(remoteCommands.VOLUME_UP)"
+        >
+          <mat-icon>volume_up</mat-icon>
+        </div>
+        <div
+          class="remote-button"
+          (click)="onButtonPress(remoteCommands.VOLUME_DOWN)"
+        >
+          <mat-icon>volume_down</mat-icon>
+        </div>
+        <div
+          class="remote-button"
+          (click)="onButtonPress(remoteCommands.VOLUME_MUTE)"
+        >
+          <mat-icon>volume_off</mat-icon>
+        </div>
+      </div>
+
+      <div class="media-controls">
+        <div
+          class="remote-button"
+          (click)="onButtonPress(remoteCommands.MEDIA_PREVIOUS)"
+        >
+          <mat-icon>skip_previous</mat-icon>
+        </div>
+        <div
+          class="remote-button"
+          (click)="onButtonPress(remoteCommands.MEDIA_PLAY_PAUSE)"
+        >
+          <mat-icon>play_arrow</mat-icon>
+        </div>
+        <div
+          class="remote-button"
+          (click)="onButtonPress(remoteCommands.MEDIA_NEXT)"
+        >
+          <mat-icon>skip_next</mat-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="launch">
+      <div class="search">
+        <form class="media-search" [formGroup]="form" (submit)="onSearch()">
+          <mat-form-field [class.hass-error]="hasError(search)">
+            <mat-label>Search</mat-label>
+            <input type="url" matInput formControlName="search" />
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+          <div *ngIf="hasError(search)">
+            <p class="error-message">Invalid URL</p>
+          </div>
+        </form>
+      </div>
+
+      <div class="shortcuts">
+        <div class="shortcut" (click)="launchApp(appShortcuts.NETFLIX)">
+          <mat-icon svgIcon="netflix"></mat-icon>
+        </div>
+        <div class="shortcut" (click)="launchApp(appShortcuts.TUBI)">
+          <mat-icon svgIcon="tubi"></mat-icon>
+        </div>
+        <div class="shortcut" (click)="launchApp(appShortcuts.HBO)">
+          <mat-icon svgIcon="hbo"></mat-icon>
+        </div>
+        <div class="shortcut" (click)="launchApp(appShortcuts.PARAMOUNT)">
+          <mat-icon svgIcon="paramount"></mat-icon>
+        </div>
+        <div class="shortcut" (click)="launchApp(appShortcuts.PRIME)">
+          <mat-icon svgIcon="prime"></mat-icon>
+        </div>
+        <div class="shortcut" (click)="launchApp(appShortcuts.CRUNCHYROLL)">
+          <mat-icon svgIcon="crunchyroll"></mat-icon>
+        </div>
+        <div class="shortcut" (click)="launchApp(appShortcuts.YOUTUBE)">
+          <mat-icon svgIcon="youtube"></mat-icon>
+        </div>
+        <div class="shortcut" (click)="launchApp(appShortcuts.SPOTIFY)">
+          <mat-icon svgIcon="spotify"></mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

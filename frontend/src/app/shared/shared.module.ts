@@ -4,6 +4,7 @@ import { MaterialModule } from '../material.module';
 import { NgChartsModule } from 'ng2-charts';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { IconModule } from '../icon.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -13,7 +14,8 @@ import { IconModule } from '../icon.module';
     IconModule,
     ColorPickerModule,
     NgChartsModule,
+    ReactiveFormsModule
   ],
-  exports: [MaterialModule, IconModule, NgChartsModule, ColorPickerModule],
+  exports: [MaterialModule, IconModule, NgChartsModule, ColorPickerModule, ReactiveFormsModule],
 })
 export class SharedModule {}
