@@ -22,4 +22,8 @@ export class AppComponent {
   public toggleSidebar() {
     this.sidebarActive = !this.sidebarActive;
   }
+
+  public closeSidebar() {
+    this.sidebarActive = false;
+  }
 }

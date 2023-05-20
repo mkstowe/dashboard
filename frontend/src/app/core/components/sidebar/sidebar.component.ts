@@ -19,8 +19,8 @@ export class SidebarComponent implements OnInit {
     'light.office',
     'light.living_room',
     'light.bedroom',
-    'light.dimmer',
-    'switch.plug_1',
+    'light.loft_lights',
+    'light.candle_lamp',
   ];
 
   private speakerList = [

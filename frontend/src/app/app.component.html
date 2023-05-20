@@ -16,6 +16,6 @@
   </div>
 
   <div class="dashboard" [class.disable-scroll]="sidebarActive">
-    <router-outlet #outlet="outlet"></router-outlet>
+    <router-outlet #outlet="outlet" (activate)="closeSidebar()"></router-outlet>
   </div>
 </div>
