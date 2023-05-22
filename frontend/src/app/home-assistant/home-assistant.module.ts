@@ -11,6 +11,9 @@ import { SharedModule } from '../shared/shared.module';
 import { LightCardComponent } from './components/entity-card/light-card/light-card.component';
 import { TvCardComponent } from './components/entity-card/tv-card/tv-card.component';
 import { TvDetailComponent } from './components/tv-detail/tv-detail.component';
+import { SpeakerCardComponent } from './components/entity-card/speaker-card/speaker-card.component';
+import { SpeakerDetailComponent } from './components/speaker-detail/speaker-detail.component';
+import { MusicModule } from '../music/music.module';
 
 @NgModule({
   declarations: [
@@ -24,8 +27,10 @@ import { TvDetailComponent } from './components/tv-detail/tv-detail.component';
     HomePageComponent,
     TvCardComponent,
     TvDetailComponent,
+    SpeakerCardComponent,
+    SpeakerDetailComponent,
   ],
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, SharedModule, MusicModule],
   exports: [HomePageComponent],
 })
 export class HomeAssistantModule {}

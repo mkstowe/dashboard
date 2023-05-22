@@ -16,6 +16,10 @@
         *ngSwitchCase="'tvCard'"
         [cardOptions]="card.cardOptions"
       ></app-tv-card>
+      <app-speaker-card
+        *ngSwitchCase="'speakerCard'"
+        [cardOptions]="card.cardOptions"
+      ></app-speaker-card>
       <app-sensor-group *ngSwitchCase="'sensorGroup'">
         <ng-container *ngFor="let sensor of card.sensors">
           <app-sensor [sensorOptions]="sensor"></app-sensor>

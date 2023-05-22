@@ -1,7 +1,6 @@
 import {
   Component,
   OnInit,
-  Input,
   Inject,
   ViewEncapsulation,
 } from '@angular/core';
@@ -12,9 +11,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {
   AbstractControl,
   FormBuilder,
-  FormControl,
   FormGroup,
-  Validators,
 } from '@angular/forms';
 
 @Component({

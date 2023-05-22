@@ -64,6 +64,8 @@ export class IconModule {
       .addSvgIcon('power', this.setPath(`${this.path}/power.svg`))
       .addSvgIcon('roomba', this.setPath(`${this.path}/roomba.svg`))
       .addSvgIcon('security-cam', this.setPath(`${this.path}/security_cam.svg`))
+      .addSvgIcon('speaker', this.setPath(`${this.path}/speaker.svg`))
+      .addSvgIcon('speaker-active', this.setPath(`${this.path}/speaker_active.svg`))
       .addSvgIcon('table-lamp', this.setPath(`${this.path}/table_lamp.svg`))
       .addSvgIcon(
         'table-lamp-active',

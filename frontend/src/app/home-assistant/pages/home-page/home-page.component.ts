@@ -132,6 +132,22 @@ export class HomePageComponent {
             },
           },
         },
+        {
+          type: 'speakerCard',
+          cardOptions: {
+            entityId: 'media_player.bedroom_speaker',
+            icon: 'speaker',
+            iconActive: 'speaker-active',
+            service: {
+              type: 'call_service',
+              domain: 'media_player',
+              service: 'toggle',
+              target: {
+                entity_id: 'media_player.bedroom_speaker',
+              },
+            },
+          },
+        },
       ],
     },
     {
@@ -218,6 +234,48 @@ export class HomePageComponent {
               service: 'toggle',
               target: {
                 entity_id: 'light.reading_nook',
+              },
+            },
+          },
+        },
+      ],
+    },
+    {
+      title: 'Kitchen',
+      cards: [
+        {
+          type: 'speakerCard',
+          cardOptions: {
+            entityId: 'media_player.kitchen_display',
+            icon: 'speaker',
+            iconActive: 'speaker-active',
+            service: {
+              type: 'call_service',
+              domain: 'media_player',
+              service: 'toggle',
+              target: {
+                entity_id: 'media_player.kitchen_display',
+              },
+            },
+          },
+        },
+      ],
+    },
+    {
+      title: 'Bathroom',
+      cards: [
+        {
+          type: 'speakerCard',
+          cardOptions: {
+            entityId: 'media_player.bathroom_speaker',
+            icon: 'speaker',
+            iconActive: 'speaker-active',
+            service: {
+              type: 'call_service',
+              domain: 'media_player',
+              service: 'toggle',
+              target: {
+                entity_id: 'media_player.bathroom_speaker',
               },
             },
           },

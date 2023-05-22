@@ -1,0 +1,15 @@
+<div class="speaker-detail-wrapper">
+  <div class="header">
+    <h2>{{ entityName }}</h2>
+    <div class="power-btn" [class.active]="isActive" (click)="onPowerClick()">
+      <mat-icon svgIcon="power"></mat-icon>
+    </div>
+  </div>
+
+<div class="speaker-controls">
+  <app-media-player *ngIf="isActive; else startPlayback"></app-media-player>
+  <ng-template #startPlayback>
+    <button mat-button color="primary" class="start-playback" (click)="transferPlayback()">Start Playback Here</button>
+  </ng-template>
+  </div>
+</div>

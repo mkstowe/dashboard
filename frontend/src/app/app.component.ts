@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { translateTransition } from './routing-transitions';
 import { RouterOutlet } from '@angular/router';
+import { SpotifyService } from './music/services/spotify.service';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,9 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   public sidebarActive = false;
+
+  // Instantiate service so we have spotify access on startup;
+  private spotifyService: SpotifyService;
 
   prepareRoute(outlet: RouterOutlet) {
     if (outlet.isActivated) {

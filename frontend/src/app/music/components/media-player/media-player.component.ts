@@ -3,7 +3,6 @@ import {
   ElementRef,
   OnDestroy,
   OnInit,
-  Renderer2,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -21,21 +20,12 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
   public volume: number;
   public currProgress: number;
   public isPlaying: boolean;
-  public state = 0;
 
   private unsub = new Subject<void>();
 
-  left = 0;
-  @ViewChild('parentTag', { static: false })
-  parentTag: ElementRef;
-
-  @ViewChild('target', { static: false })
-  target: ElementRef;
 
   constructor(
     private spotifyService: SpotifyService,
-    private el: ElementRef,
-    private renderer: Renderer2
   ) {}
   ngOnInit(): void {
     this.getCurrentTrack().subscribe();
