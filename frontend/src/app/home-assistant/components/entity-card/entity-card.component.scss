@@ -26,9 +26,16 @@
     aspect-ratio: 1/1;
     width: 25%;
 
-    .mat-icon {
+    .icon, .icon-active {
+      position: absolute;
       width: 100%;
       height: 100%;
+      z-index: 999;
+    }
+
+    .icon-active {
+      color: $accent;
+      z-index: 998;
     }
   }
 

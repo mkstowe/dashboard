@@ -23,11 +23,11 @@
      inkscape:document-units="pt"
      showgrid="false"
      inkscape:zoom="8.9113992"
-     inkscape:cx="36.245711"
-     inkscape:cy="38.209488"
-     inkscape:window-width="3740"
+     inkscape:cx="36.414035"
+     inkscape:cy="38.321704"
+     inkscape:window-width="1836"
      inkscape:window-height="1476"
-     inkscape:window-x="1112"
+     inkscape:window-x="3016"
      inkscape:window-y="56"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg4361" />
@@ -174,29 +174,30 @@
          id="path4276" />
     </symbol>
   </defs>
-  <path
-     d="m 48.377327,25 c 0,12.911078 -10.466249,23.377326 -23.377326,23.377326 C 12.088923,48.377326 1.6226749,37.911078 1.6226749,25 1.6226749,12.088923 12.088923,1.6226749 25.000001,1.6226749 37.911078,1.6226749 48.377327,12.088923 48.377327,25"
-     fill="none"
-     stroke="#000000"
-     stroke-miterlimit="10"
-     stroke-width="3.24535"
-     id="path4281" />
-  <path
-     d="M 25.000001,24.945911 V 8.2864568"
-     fill="none"
-     stroke="#000000"
-     stroke-linecap="round"
-     stroke-miterlimit="10"
-     stroke-width="3.24535"
-     id="path4283" />
-  <path
-     d="m 25.000001,24.945911 11.412808,6.588057"
-     fill="none"
-     stroke="#000000"
-     stroke-linecap="round"
-     stroke-miterlimit="10"
-     stroke-width="3.24535"
-     id="path4285" />
   <g
-     id="g4359" />
+     id="g5087">
+    <path
+       d="m 48.377327,25 c 0,12.911078 -10.466249,23.377326 -23.377326,23.377326 C 12.088923,48.377326 1.6226749,37.911078 1.6226749,25 1.6226749,12.088923 12.088923,1.6226749 25.000001,1.6226749 37.911078,1.6226749 48.377327,12.088923 48.377327,25"
+       fill="none"
+       stroke="#000000"
+       stroke-miterlimit="10"
+       stroke-width="3.24535"
+       id="path4281" />
+    <path
+       d="M 25.000001,24.945911 V 8.2864568"
+       fill="none"
+       stroke="#000000"
+       stroke-linecap="round"
+       stroke-miterlimit="10"
+       stroke-width="3.24535"
+       id="path4283" />
+    <path
+       d="m 25.000001,24.945911 11.412808,6.588057"
+       fill="none"
+       stroke="#000000"
+       stroke-linecap="round"
+       stroke-miterlimit="10"
+       stroke-width="3.24535"
+       id="path4285" />
+  </g>
 </svg>

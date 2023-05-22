@@ -5,7 +5,8 @@
   (click)="onButtonClick($event)"
 >
   <div class="entity-icon">
-    <mat-icon svgIcon="{{ isActive ? iconActive || icon : icon }}"></mat-icon>
+    <mat-icon class="icon" svgIcon="{{ icon }}"></mat-icon>
+    <mat-icon class="icon-active" *ngIf="isActive" svgIcon="{{iconActive }}"></mat-icon>
   </div>
   <div class="lock-icon" *ngIf="cardOptions.lock" [class.unlocked]="unlocked">
     <mat-icon svgIcon="lock"></mat-icon>
