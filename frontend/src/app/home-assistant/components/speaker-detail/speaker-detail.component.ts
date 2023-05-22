@@ -58,12 +58,12 @@ export class SpeakerDetailComponent implements OnInit {
       domain: 'script',
       service: 'transfer_spotify_playback',
       service_data: {
-        player: this.entity.attributes.friendly_name
+        player: this.entity.attributes.friendly_name,
       },
       target: {
-        entity_id: 'script.transfer_spotify_playback'
-      }
-    }
+        entity_id: 'script.transfer_spotify_playback',
+      },
+    };
 
     this.hassService.callService(service);
     this.entityUpdate.next(null);
