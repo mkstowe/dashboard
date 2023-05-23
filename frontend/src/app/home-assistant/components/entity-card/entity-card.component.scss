@@ -5,6 +5,7 @@
   position: relative;
 
   container-name: card;
+  container-type: inline-size;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -20,11 +21,14 @@
 
   .entity-icon {
     position: absolute;
-    top: 15%;
-    left: 15%;
+    top: 12%;
+    left: 12%;
+    width: 125px;
+    height: 125px;
 
-    aspect-ratio: 1/1;
-    width: 25%;
+
+    container-type: inline-size;
+    container-name: entity-icon;
 
     .icon, .icon-active {
       position: absolute;
@@ -37,6 +41,8 @@
       color: $accent;
       z-index: 888;
     }
+
+
   }
 
   .lock-icon {
@@ -56,12 +62,12 @@
   .name-state {
     .entity-name {
       margin-bottom: 5px;
-      font-size: 28px;
+      font-size: 36px;
       font-weight: 600;
     }
 
     .entity-state {
-      font-size: 24px;
+      font-size: 32px;
       font-weight: 500;
     }
   }
@@ -83,8 +89,72 @@
   }
 }
 
+@container card (max-width: 350px) {
+  .entity-icon {
+    width: 100px !important;
+    height: 100px !important;
+  }
+
+  .name-state {
+    .entity-name {
+      font-size: 32px !important;
+    }
+
+    .entity-state {
+      font-size: 28px !important;
+    }
+  }
+}
+
+@container card (max-width: 350px) {
+  .name-state {
+    .entity-name {
+      font-size: 28px !important;
+    }
+
+    .entity-state {
+      font-size: 24px !important;
+    }
+  }
+}
+
 @container card (max-width: 250px) {
-  .entity-name {
-    font-size: 10px;
+  .entity-icon {
+    width: 75px !important;
+    height: 75px !important;
+  }
+
+  .name-state {
+    .entity-name {
+      font-size: 24px !important;
+    }
+
+    .entity-state {
+      font-size: 20px !important;
+    }
+  }
+}
+
+@container card (max-width: 200px) {
+  .entity-icon {
+    width: 75px !important;
+    height: 75px !important;
+  }
+
+  .name-state {
+    .entity-name {
+      font-size: 22px !important;
+    }
+
+    .entity-state {
+      font-size: 18px !important;
+    }
+  }
+}
+
+@container card (max-width: 150px) {
+  .entity-icon {
+    width: 50px !important;
+    height: 50px !important;
   }
 }

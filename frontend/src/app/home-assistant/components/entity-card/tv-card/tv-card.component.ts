@@ -16,6 +16,7 @@ export class TvCardComponent extends EntityCardComponent {
   public onRightMouseClick() {
     this.dialog.open(TvDetailComponent, {
       width: '70%',
+      height: '80%',
       data: {
         entity: this.entity,
         entityName: this.entityName,
