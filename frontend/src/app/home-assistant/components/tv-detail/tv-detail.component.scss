@@ -2,6 +2,7 @@
 
 .tv-detail-wrapper {
   container-type: inline-size;
+  container-name: detail;
   overflow: auto;
 
   width: 100%;
@@ -218,7 +219,7 @@ mat-dialog-container .mat-mdc-dialog-surface {
   border-radius: 15px !important;
 }
 
-@container (max-width: 1100px) {
+@container detail (max-width: 1100px) {
   .tv-controls {
     flex-direction: column;
   }

@@ -11,6 +11,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { MatInputModule } from '@angular/material/input';
     MatListModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSlideToggleModule,
   ],
   exports: [
     MatButtonModule,
@@ -40,6 +42,7 @@ import { MatInputModule } from '@angular/material/input';
     MatListModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSlideToggleModule
   ],
   providers: [MatIconRegistry],
 })

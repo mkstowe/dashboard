@@ -14,6 +14,8 @@ import { TvDetailComponent } from './components/tv-detail/tv-detail.component';
 import { SpeakerCardComponent } from './components/entity-card/speaker-card/speaker-card.component';
 import { SpeakerDetailComponent } from './components/speaker-detail/speaker-detail.component';
 import { MusicModule } from '../music/music.module';
+import { FanCardComponent } from './components/entity-card/fan-card/fan-card.component';
+import { FanDetailComponent } from './components/fan-detail/fan-detail.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { MusicModule } from '../music/music.module';
     TvDetailComponent,
     SpeakerCardComponent,
     SpeakerDetailComponent,
+    FanCardComponent,
+    FanDetailComponent,
   ],
   imports: [CommonModule, SharedModule, MusicModule],
   exports: [HomePageComponent],

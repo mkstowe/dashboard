@@ -1,0 +1,46 @@
+<div class="fan-detail-wrapper">
+  <div class="header">
+    <h2>{{ entityName }}</h2>
+    <div class="power-btn" [class.active]="isActive" (click)="onPowerClick()">
+      <mat-icon svgIcon="power"></mat-icon>
+    </div>
+  </div>
+
+  <div class="fan-controls">
+    <div class="speed">
+      <h3>Speed</h3>
+      <mat-slider [min]="0" [max]="100" [discrete]="true" [displayWith]="formatFunction" [step]="5" (change)="setSpeed($event)"><input matSliderThumb [value]="speed" /></mat-slider>
+      <div class="speed-buttons">
+        <div class="speed-btn" (click)="decreaseSpeed()">
+          <mat-icon>remove</mat-icon>
+        </div>
+        <div class="speed-btn" (click)="increaseSpeed()">
+          <mat-icon>add</mat-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="separator"></div>
+
+    <div class="oscillation">
+      <div class="row"><h3>Oscillation</h3> <mat-slide-toggle [checked]="oscillateActive" color="primary" (change)="toggleOscillate()"></mat-slide-toggle>
+      <div class="direction-controls">
+        <div class="direction-btn" (click)="rotate(fanDirections.REVERSE)">
+          <mat-icon>arrow_back</mat-icon>
+        </div>
+        <div class="direction-btn" (click)="rotate(fanDirections.FORWARD)">
+          <mat-icon>arrow_forward</mat-icon>
+        </div>
+      </div>  </div>
+    </div>
+
+    <div class="modes">
+      <div class="mode-btn" [class.active]="currentMode === fanModes.NORMAL" (click)="setMode(fanModes.NORMAL)">
+        <mat-icon svgIcon="wind"></mat-icon>
+      </div>
+      <div class="mode-btn" [class.active]="currentMode === fanModes.NATURE" (click)="setMode(fanModes.NATURE)">
+        <mat-icon svgIcon="leaf"></mat-icon>
+      </div>
+    </div>
+  </div>
+</div>

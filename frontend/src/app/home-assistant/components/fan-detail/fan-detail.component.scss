@@ -1,0 +1,187 @@
+@import "../../../../assets/scss/variables";
+
+.fan-detail-wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 25px;
+  padding-bottom: 50px;
+
+  color: $foreground;
+
+  background-color: $background;
+  border-radius: 15px;
+
+  .header {
+    display: flex;
+    align-items: center;
+    align-self: start;
+    justify-content: space-between;
+
+    width: 100%;
+    margin-bottom: 10px;
+
+    h2 {
+      padding-left: 10px;
+    }
+
+    .power-btn {
+      cursor: pointer;
+
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 50px;
+      height: 50px;
+
+      border-radius: 50%;
+
+      transition: all 100ms ease-in-out;
+
+      &.active {
+        color: $accent;
+        background-color: rgba($foreground, 0.05);
+      }
+
+      &:hover {
+        color: $accent;
+      }
+    }
+  }
+
+  .fan-controls {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+
+    .speed {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      margin-top: 20px;
+      padding: 0 20px;
+      padding-bottom: 30px;
+
+      h3 {
+        margin: 0;
+      }
+
+      .speed-buttons {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        gap: 50px;
+        align-items: center;
+
+
+        .speed-btn {
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 100ms ease-in-out;
+
+            &:hover {
+              color: $accent;
+              background-color: rgba($foreground, 0.05);
+            }
+          }
+      }
+
+      .mat-mdc-slider {
+        align-self: center;
+        width: 100%;
+        color: $accent;
+      }
+    }
+
+    .oscillation {
+      width: 100%;
+      display: flex;
+      padding: 0 20px;
+      padding-top: 30px;
+
+      .row {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 40px;
+
+        .direction-controls {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          flex-grow: 1;
+          gap: 25px;
+
+          .direction-btn {
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 100ms ease-in-out;
+
+            &:hover {
+              color: $accent;
+              background-color: rgba($foreground, 0.05);
+            }
+          }
+        }
+      }
+    }
+
+    .modes {
+      margin-top: 50px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 50px;
+
+      .mode-btn {
+            cursor: pointer;
+            width: 75px;
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 100ms ease-in-out;
+            padding: 15px;
+
+            mat-icon {
+              width: 100%;
+              height: 100%;
+            }
+
+            &:hover, &.active {
+              color: $accent;
+              background-color: rgba($foreground, 0.05);
+            }
+                }
+    }
+
+    .separator {
+      width: 90%;
+      height: 2px;
+      border-bottom: 2px solid rgba($foreground, 0.2);
+    }
+  }
+}
+
+mat-dialog-container .mat-mdc-dialog-surface {
+  max-width: 1300px !important;
+  background-color: $background !important;
+  border-radius: 15px !important;
+}

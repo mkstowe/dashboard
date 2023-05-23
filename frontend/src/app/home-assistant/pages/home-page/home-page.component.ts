@@ -95,6 +95,22 @@ export class HomePageComponent {
           },
         },
         {
+          type: 'fanCard',
+          cardOptions: {
+            entityId: 'fan.office_fan',
+            icon: 'fan',
+            iconActive: 'fan-active',
+            service: {
+              type: 'call_service',
+              domain: 'fan',
+              service: 'toggle',
+              target: {
+                entity_id: 'fan.office_fan'
+              }
+            }
+          }
+        },
+        {
           type: 'entityCard',
           cardOptions: {
             entityId: 'script.desktop_sleep',
