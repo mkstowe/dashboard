@@ -15,20 +15,21 @@ export class SidebarComponent implements OnInit {
   public weather: string;
   public activeDeviceString: string;
 
-  private lightList = [
+  private devices = [
     'light.office',
     'light.living_room',
     'light.bedroom',
     'light.loft_lights',
     'light.candle_lamp',
-  ];
-
-  private speakerList = [
     'media_player.bathroom_speaker',
     'media_player.living_room_speaker',
     'media_player.kitchen_display',
     'media_player.bedroom_speaker',
+    'fan.office_fan',
+    'remote.living_room_tv'
   ];
+
+  private activeStates = ['on', 'playing'];
 
   constructor(private hassService: HassService) {}
 
@@ -40,17 +41,10 @@ export class SidebarComponent implements OnInit {
         const weatherSummary = result['sensor.pirateweather_summary']?.state;
         this.weather = `${weatherTemp}° and ${weatherSummary}`;
 
-        const activeLights = Object.keys(result)
-          .filter((e) => this.lightList.includes(e) && result[e].state === 'on')
-          .map((l) => result[l].attributes.friendly_name);
-        const activeSpeakers = Object.keys(result)
-          .filter(
-            (e) =>
-              this.speakerList.includes(e) &&
-              (result[e].state === 'on' || result[e].state === 'playing')
-          )
-          .map((s) => result[s].attributes.friendly_name);
-        this.activeDevices = [...activeLights, ...activeSpeakers];
+        this.activeDevices = Object.keys(result).filter((e) => this.devices
+        .includes(e) && this.activeStates.includes(result[e].state)).map((l) => result[l].attributes.friendly_name);
+
+
         this.numActiveDevices = this.activeDevices.length;
 
         if (this.numActiveDevices > 1 || this.numActiveDevices === 0) {
