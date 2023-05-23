@@ -3,6 +3,8 @@
 .sensor-wrapper {
   position: relative;
 
+  container-name: card;
+  container-type: inline-size;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -16,14 +18,11 @@
   border: 2px solid rgba($foreground, 0.2);
   border-radius: 15px;
 
-  container-type: inline-size;
-  container-name: card;
-
   .entity-icon {
     aspect-ratio: 1/1;
-    margin: 0 5% 0 3%;
     width: 100px;
     height: 100px;
+    margin: 0 5% 0 3%;
 
     .mat-icon {
       width: 100%;

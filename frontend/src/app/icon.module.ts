@@ -54,19 +54,22 @@ export class IconModule {
       .addSvgIcon(
         'light-bulb-active',
         this.setPath(`${this.path}/light_bulb_active.svg`)
-        )
-        .addSvgIcon('line-graph', this.setPath(`${this.path}/line_graph.svg`))
-        .addSvgIcon('litter', this.setPath(`${this.path}/litter.svg`))
-        .addSvgIcon('lock', this.setPath(`${this.path}/lock.svg`))
-        .addSvgIcon('lock-open', this.setPath(`${this.path}/lock_open.svg`))
-        .addSvgIcon('music-note', this.setPath(`${this.path}/music_note.svg`))
-        .addSvgIcon('poop', this.setPath(`${this.path}/poop.svg`))
-        .addSvgIcon('power', this.setPath(`${this.path}/power.svg`))
-        .addSvgIcon('roomba', this.setPath(`${this.path}/roomba.svg`))
-        .addSvgIcon('security-cam', this.setPath(`${this.path}/security_cam.svg`))
-        .addSvgIcon('speaker', this.setPath(`${this.path}/speaker.svg`))
-        .addSvgIcon('speaker-active', this.setPath(`${this.path}/speaker_active.svg`))
-        .addSvgIcon('speedometer', this.setPath(`${this.path}/speedometer.svg`))
+      )
+      .addSvgIcon('line-graph', this.setPath(`${this.path}/line_graph.svg`))
+      .addSvgIcon('litter', this.setPath(`${this.path}/litter.svg`))
+      .addSvgIcon('lock', this.setPath(`${this.path}/lock.svg`))
+      .addSvgIcon('lock-open', this.setPath(`${this.path}/lock_open.svg`))
+      .addSvgIcon('music-note', this.setPath(`${this.path}/music_note.svg`))
+      .addSvgIcon('poop', this.setPath(`${this.path}/poop.svg`))
+      .addSvgIcon('power', this.setPath(`${this.path}/power.svg`))
+      .addSvgIcon('roomba', this.setPath(`${this.path}/roomba.svg`))
+      .addSvgIcon('security-cam', this.setPath(`${this.path}/security_cam.svg`))
+      .addSvgIcon('speaker', this.setPath(`${this.path}/speaker.svg`))
+      .addSvgIcon(
+        'speaker-active',
+        this.setPath(`${this.path}/speaker_active.svg`)
+      )
+      .addSvgIcon('speedometer', this.setPath(`${this.path}/speedometer.svg`))
       .addSvgIcon('table-lamp', this.setPath(`${this.path}/table_lamp.svg`))
       .addSvgIcon(
         'table-lamp-active',

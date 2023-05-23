@@ -7,7 +7,7 @@ import { FanDetailComponent } from '../../fan-detail/fan-detail.component';
 @Component({
   selector: 'app-fan-card',
   templateUrl: './fan-card.component.html',
-  styleUrls: ['./fan-card.component.scss']
+  styleUrls: ['./fan-card.component.scss'],
 })
 export class FanCardComponent extends EntityCardComponent {
   constructor(hassService: HassService, private dialog: MatDialog) {
@@ -20,9 +20,9 @@ export class FanCardComponent extends EntityCardComponent {
       data: {
         entity: this.entity,
         entityName: this.entityName,
-        isActive: this.isActive
-      }
-    })
+        isActive: this.isActive,
+      },
+    });
     return false;
   }
 }

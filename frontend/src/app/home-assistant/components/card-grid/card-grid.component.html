@@ -20,8 +20,10 @@
         *ngSwitchCase="'speakerCard'"
         [cardOptions]="card.cardOptions"
       ></app-speaker-card>
-      <app-fan-card *ngSwitchCase="'fanCard'"
-      [cardOptions]="card.cardOptions"></app-fan-card>
+      <app-fan-card
+        *ngSwitchCase="'fanCard'"
+        [cardOptions]="card.cardOptions"
+      ></app-fan-card>
       <app-sensor-group *ngSwitchCase="'sensorGroup'">
         <ng-container *ngFor="let sensor of card.sensors">
           <app-sensor [sensorOptions]="sensor"></app-sensor>

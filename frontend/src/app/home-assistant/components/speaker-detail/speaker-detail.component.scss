@@ -25,6 +25,7 @@
 
     .power-btn {
       cursor: pointer;
+
       position: relative;
 
       display: flex;
@@ -50,20 +51,19 @@
   }
 
   .speaker-controls {
-    width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    width: 100%;
 
-
-  .start-playback {
-    border: 2px solid (rgba($foreground, 0.2));
-    padding: 20px;
+    .start-playback {
+      padding: 20px;
+      border: 2px solid (rgba($foreground, 0.2));
+    }
   }
 }
-}
 
-mat-dialog-container .mat-mdc-dialog-surface  {
+mat-dialog-container .mat-mdc-dialog-surface {
   max-width: 900px !important;
   background-color: $background !important;
   border-radius: 15px !important;

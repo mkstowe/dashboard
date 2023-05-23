@@ -54,14 +54,16 @@
   .fan-controls {
     display: flex;
     flex-direction: column;
-    width: 100%;
     align-items: center;
     justify-content: center;
+
+    width: 100%;
 
     .speed {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+
       width: 100%;
       margin-top: 20px;
       padding: 0 20px;
@@ -73,27 +75,31 @@
 
       .speed-buttons {
         display: flex;
-        width: 100%;
-        justify-content: center;
         gap: 50px;
         align-items: center;
+        justify-content: center;
 
+        width: 100%;
 
         .speed-btn {
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 100ms ease-in-out;
+          cursor: pointer;
 
-            &:hover {
-              color: $accent;
-              background-color: rgba($foreground, 0.05);
-            }
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          width: 40px;
+          height: 40px;
+
+          border-radius: 50%;
+
+          transition: all 100ms ease-in-out;
+
+          &:hover {
+            color: $accent;
+            background-color: rgba($foreground, 0.05);
           }
+        }
       }
 
       .mat-mdc-slider {
@@ -104,32 +110,36 @@
     }
 
     .oscillation {
-      width: 100%;
       display: flex;
+      width: 100%;
       padding: 0 20px;
       padding-top: 30px;
 
       .row {
-        width: 100%;
         display: flex;
-        align-items: center;
         gap: 40px;
+        align-items: center;
+        width: 100%;
 
         .direction-controls {
           display: flex;
-          align-items: center;
-          justify-content: flex-end;
           flex-grow: 1;
           gap: 25px;
+          align-items: center;
+          justify-content: flex-end;
 
           .direction-btn {
             cursor: pointer;
-            width: 40px;
-            height: 40px;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
+            width: 40px;
+            height: 40px;
+
             border-radius: 50%;
+
             transition: all 100ms ease-in-out;
 
             &:hover {
@@ -142,34 +152,40 @@
     }
 
     .modes {
-      margin-top: 50px;
-      width: 100%;
       display: flex;
-      justify-content: center;
-      align-items: center;
       gap: 50px;
+      align-items: center;
+      justify-content: center;
+
+      width: 100%;
+      margin-top: 50px;
 
       .mode-btn {
-            cursor: pointer;
-            width: 75px;
-            height: 75px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 100ms ease-in-out;
-            padding: 15px;
+        cursor: pointer;
 
-            mat-icon {
-              width: 100%;
-              height: 100%;
-            }
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-            &:hover, &.active {
-              color: $accent;
-              background-color: rgba($foreground, 0.05);
-            }
-                }
+        width: 75px;
+        height: 75px;
+        padding: 15px;
+
+        border-radius: 50%;
+
+        transition: all 100ms ease-in-out;
+
+        mat-icon {
+          width: 100%;
+          height: 100%;
+        }
+
+        &:hover,
+        &.active {
+          color: $accent;
+          background-color: rgba($foreground, 0.05);
+        }
+      }
     }
 
     .separator {

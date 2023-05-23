@@ -8,7 +8,7 @@ import { ServiceCall } from '../../models/service-call';
   selector: 'app-fan-detail',
   templateUrl: './fan-detail.component.html',
   styleUrls: ['./fan-detail.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class FanDetailComponent implements OnInit {
   public entity: any;
@@ -23,9 +23,15 @@ export class FanDetailComponent implements OnInit {
   public fanDirections = FanDirections;
   public fanModes = FanModes;
 
-  constructor(private hassService: HassService, @Inject(MAT_DIALOG_DATA) data: {
-    entity: any; entityName: string; isActive: boolean
-  }) {
+  constructor(
+    private hassService: HassService,
+    @Inject(MAT_DIALOG_DATA)
+    data: {
+      entity: any;
+      entityName: string;
+      isActive: boolean;
+    }
+  ) {
     this.entity = data.entity;
     this.entityName = data.entityName;
     this.isActive = data.isActive;
@@ -37,8 +43,6 @@ export class FanDetailComponent implements OnInit {
     this.currentMode = this.entity.attributes.preset_mode;
 
     this.entityUpdate.next(null);
-
-
   }
 
   public onPowerClick() {
@@ -47,9 +51,9 @@ export class FanDetailComponent implements OnInit {
       domain: 'fan',
       service: 'toggle',
       target: {
-        entity_id: this.entity.entity_id
-      }
-    }
+        entity_id: this.entity.entity_id,
+      },
+    };
 
     this.hassService.callService(service);
 
@@ -65,9 +69,9 @@ export class FanDetailComponent implements OnInit {
         percentage: $event.target.value,
       },
       target: {
-        entity_id: this.entity.entity_id
-      }
-    }
+        entity_id: this.entity.entity_id,
+      },
+    };
 
     this.hassService.callService(service);
     this.entityUpdate.next(null);
@@ -79,7 +83,7 @@ export class FanDetailComponent implements OnInit {
       domain: 'fan',
       service: 'increase_speed',
       service_data: {
-        percentage_step: 5
+        percentage_step: 5,
       },
       target: {
         entity_id: this.entity.entity_id,
@@ -91,20 +95,20 @@ export class FanDetailComponent implements OnInit {
   }
 
   public decreaseSpeed() {
-const service: ServiceCall = {
-  type: 'call_service',
-  domain: 'fan',
-  service: 'decrease_speed',
-  service_data: {
-    percentage_step: 5,
-  },
-  target: {
-    entity_id: this.entity.entity_id,
-  },
-};
+    const service: ServiceCall = {
+      type: 'call_service',
+      domain: 'fan',
+      service: 'decrease_speed',
+      service_data: {
+        percentage_step: 5,
+      },
+      target: {
+        entity_id: this.entity.entity_id,
+      },
+    };
 
-this.hassService.callService(service);
-this.entityUpdate.next(null);
+    this.hassService.callService(service);
+    this.entityUpdate.next(null);
   }
 
   public toggleOscillate() {
@@ -114,7 +118,7 @@ this.entityUpdate.next(null);
       domain: 'fan',
       service: 'oscillate',
       service_data: {
-        oscillating: this.oscillateActive
+        oscillating: this.oscillateActive,
       },
       target: {
         entity_id: this.entity.entity_id,
@@ -160,18 +164,17 @@ this.entityUpdate.next(null);
     this.entityUpdate.next(null);
   }
 
-  public formatFunction(value: number ) {
-    return `${value}%`
+  public formatFunction(value: number) {
+    return `${value}%`;
   }
-
 }
 
 enum FanDirections {
-  FORWARD = "forward",
-  REVERSE = "reverse"
+  FORWARD = 'forward',
+  REVERSE = 'reverse',
 }
 
 enum FanModes {
-  NORMAL = "Normal",
-  NATURE = "Nature"
+  NORMAL = 'Normal',
+  NATURE = 'Nature',
 }

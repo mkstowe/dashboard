@@ -105,10 +105,10 @@ export class HomePageComponent {
               domain: 'fan',
               service: 'toggle',
               target: {
-                entity_id: 'fan.office_fan'
-              }
-            }
-          }
+                entity_id: 'fan.office_fan',
+              },
+            },
+          },
         },
         {
           type: 'entityCard',

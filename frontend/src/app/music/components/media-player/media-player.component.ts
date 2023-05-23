@@ -23,10 +23,7 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
 
   private unsub = new Subject<void>();
 
-
-  constructor(
-    private spotifyService: SpotifyService,
-  ) {}
+  constructor(private spotifyService: SpotifyService) {}
   ngOnInit(): void {
     this.getCurrentTrack().subscribe();
     interval(1000)

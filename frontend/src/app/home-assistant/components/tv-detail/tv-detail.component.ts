@@ -1,18 +1,9 @@
-import {
-  Component,
-  OnInit,
-  Inject,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { HassService } from '../../services/hass.service';
 import { ServiceCall } from '../../models/service-call';
 import { Subject } from 'rxjs';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-} from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-tv-detail',

@@ -6,10 +6,17 @@
     </div>
   </div>
 
-<div class="speaker-controls">
-  <app-media-player *ngIf="isActive; else startPlayback"></app-media-player>
-  <ng-template #startPlayback>
-    <button mat-button color="primary" class="start-playback" (click)="transferPlayback()">Start Playback Here</button>
-  </ng-template>
+  <div class="speaker-controls">
+    <app-media-player *ngIf="isActive; else startPlayback"></app-media-player>
+    <ng-template #startPlayback>
+      <button
+        mat-button
+        color="primary"
+        class="start-playback"
+        (click)="transferPlayback()"
+      >
+        Start Playback Here
+      </button>
+    </ng-template>
   </div>
 </div>

@@ -7,23 +7,22 @@ import { SpeakerDetailComponent } from '../../speaker-detail/speaker-detail.comp
 @Component({
   selector: 'app-speaker-card',
   templateUrl: './speaker-card.component.html',
-  styleUrls: ['./speaker-card.component.scss']
+  styleUrls: ['./speaker-card.component.scss'],
 })
-export class SpeakerCardComponent extends EntityCardComponent
- {
- constructor(hassService: HassService, private dialog: MatDialog) {
-  super(hassService);
- }
+export class SpeakerCardComponent extends EntityCardComponent {
+  constructor(hassService: HassService, private dialog: MatDialog) {
+    super(hassService);
+  }
 
- public onRightMouseClick() {
-  this.dialog.open(SpeakerDetailComponent, {
-    width: '70%',
-    data: {
-      entity: this.entity,
-      entityName: this.entityName,
-      isActive: this.isActive,
-    }
-  })
-  return false;
- }
+  public onRightMouseClick() {
+    this.dialog.open(SpeakerDetailComponent, {
+      width: '70%',
+      data: {
+        entity: this.entity,
+        entityName: this.entityName,
+        isActive: this.isActive,
+      },
+    });
+    return false;
+  }
 }

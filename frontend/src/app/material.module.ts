@@ -42,7 +42,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatListModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
   ],
   providers: [MatIconRegistry],
 })

@@ -8,7 +8,7 @@ import { ServiceCall } from '../../models/service-call';
   selector: 'app-speaker-detail',
   templateUrl: './speaker-detail.component.html',
   styleUrls: ['./speaker-detail.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class SpeakerDetailComponent implements OnInit {
   public entity: any;

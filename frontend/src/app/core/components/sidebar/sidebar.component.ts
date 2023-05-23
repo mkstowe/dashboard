@@ -26,7 +26,7 @@ export class SidebarComponent implements OnInit {
     'media_player.kitchen_display',
     'media_player.bedroom_speaker',
     'fan.office_fan',
-    'remote.living_room_tv'
+    'remote.living_room_tv',
   ];
 
   private activeStates = ['on', 'playing'];
@@ -41,9 +41,13 @@ export class SidebarComponent implements OnInit {
         const weatherSummary = result['sensor.pirateweather_summary']?.state;
         this.weather = `${weatherTemp}° and ${weatherSummary}`;
 
-        this.activeDevices = Object.keys(result).filter((e) => this.devices
-        .includes(e) && this.activeStates.includes(result[e].state)).map((l) => result[l].attributes.friendly_name);
-
+        this.activeDevices = Object.keys(result)
+          .filter(
+            (e) =>
+              this.devices.includes(e) &&
+              this.activeStates.includes(result[e].state)
+          )
+          .map((l) => result[l].attributes.friendly_name);
 
         this.numActiveDevices = this.activeDevices.length;
 
