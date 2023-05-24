@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { take } from 'rxjs';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   templateUrl: './recipe-page.component.html',
@@ -32,7 +33,7 @@ export class RecipePageComponent implements OnInit {
     return recipe.id;
   }
 
-  public onPage($event: any) {
+  public onPage($event: PageEvent) {
     this.page = $event.pageIndex + 1;
     this.pageSize = $event.pageSize;
 

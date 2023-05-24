@@ -49,7 +49,7 @@ const setEnv = () => {
     };
     `;
 
-  writeFile(devPath, devConfigFile, (err: any) => {
+  writeFile(devPath, devConfigFile, (err: Error) => {
     if (err) {
       console.error(err);
       throw err;
@@ -60,7 +60,7 @@ const setEnv = () => {
     }
   });
 
-  writeFile(prodPath, prodConfigFile, (err: any) => {
+  writeFile(prodPath, prodConfigFile, (err: Error) => {
     if (err) {
       console.error(err);
       throw err;

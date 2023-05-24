@@ -2,13 +2,15 @@ import {
   Component,
   ContentChildren,
   Input,
+  OnDestroy,
   OnInit,
   QueryList,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
+import { Card } from '../../models/card';
 
 @Component({
   selector: 'app-card-grid',
@@ -16,24 +18,30 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./card-grid.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class CardGridComponent implements OnInit {
-  @ContentChildren('card') children: QueryList<any>;
+export class CardGridComponent implements OnInit, OnDestroy {
+  @ContentChildren('card') children: QueryList<HTMLElement>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  @Input() cards: any[];
+  @Input() cards: Card[];
 
   private index = 0;
   private _index = new BehaviorSubject<number>(0);
+  private notifier$ = new Subject<void>();
   private cardsPerPage = 4;
-  public currCards: any[];
+  public currCards: Card[];
 
   ngOnInit(): void {
-    this._index.subscribe((idx) => {
+    this._index.pipe(takeUntil(this.notifier$)).subscribe((idx) => {
       this.currCards = this.cards.slice(
         idx * this.cardsPerPage,
         idx * this.cardsPerPage + this.cardsPerPage
       );
     });
+  }
+
+  ngOnDestroy(): void {
+    this.notifier$.next();
+    this.notifier$.complete();
   }
 
   onSwipe(event: any) {

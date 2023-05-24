@@ -12,7 +12,7 @@
       svgIcon="{{ iconActive }}"
     ></mat-icon>
   </div>
-  <div class="lock-icon" *ngIf="cardOptions.lock" [class.unlocked]="unlocked">
+  <div class="lock-icon" *ngIf="cardOptions?.lock" [class.unlocked]="unlocked">
     <mat-icon svgIcon="lock"></mat-icon>
   </div>
   <div class="name-state">

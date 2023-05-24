@@ -1,8 +1,10 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { Subject, delay } from 'rxjs';
+import { Subject, delay, takeUntil } from 'rxjs';
 import { HassService } from '../../services/hass.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServiceCall } from '../../models/service-call';
+import { HassEntity } from 'home-assistant-js-websocket';
+import { MatSliderDragEvent } from '@angular/material/slider';
 
 @Component({
   selector: 'app-fan-detail',
@@ -11,7 +13,8 @@ import { ServiceCall } from '../../models/service-call';
   encapsulation: ViewEncapsulation.None,
 })
 export class FanDetailComponent implements OnInit {
-  public entity: any;
+  public entity: HassEntity;
+  public entityId: string;
   public entityName: string;
   public isActive: boolean;
 
@@ -19,30 +22,35 @@ export class FanDetailComponent implements OnInit {
   public oscillateActive: boolean;
   public currentMode: string;
 
-  private entityUpdate: Subject<any> = new Subject<any>();
   public fanDirections = FanDirections;
   public fanModes = FanModes;
+  private notifier$ = new Subject<void>();
 
   constructor(
     private hassService: HassService,
     @Inject(MAT_DIALOG_DATA)
     data: {
-      entity: any;
+      entityId: string;
       entityName: string;
       isActive: boolean;
     }
   ) {
-    this.entity = data.entity;
+    this.entityId = data.entityId;
     this.entityName = data.entityName;
     this.isActive = data.isActive;
   }
 
   ngOnInit(): void {
-    this.oscillateActive = this.entity.attributes.oscillating;
-    this.speed = this.entity.attributes.percentage;
-    this.currentMode = this.entity.attributes.preset_mode;
+    this.hassService.entities.pipe(takeUntil(this.notifier$)).subscribe((res) => {
+      this.entity = res[this.entityId];
 
-    this.entityUpdate.next(null);
+this.oscillateActive = this.entity.attributes.oscillating;
+this.speed = this.entity.attributes.percentage;
+this.currentMode = this.entity.attributes.preset_mode;
+    })
+
+
+
   }
 
   public onPowerClick() {
@@ -57,16 +65,15 @@ export class FanDetailComponent implements OnInit {
 
     this.hassService.callService(service);
 
-    this.entityUpdate.next(null);
   }
 
-  public setSpeed($event: any) {
+  public setSpeed($event: Event) {
     const service: ServiceCall = {
       type: 'call_service',
       domain: 'fan',
       service: 'set_percentage',
       service_data: {
-        percentage: $event.target.value,
+        percentage: ($event.target as HTMLInputElement).value,
       },
       target: {
         entity_id: this.entity.entity_id,
@@ -74,7 +81,6 @@ export class FanDetailComponent implements OnInit {
     };
 
     this.hassService.callService(service);
-    this.entityUpdate.next(null);
   }
 
   public increaseSpeed() {
@@ -91,7 +97,6 @@ export class FanDetailComponent implements OnInit {
     };
 
     this.hassService.callService(service);
-    this.entityUpdate.next(null);
   }
 
   public decreaseSpeed() {
@@ -108,7 +113,6 @@ export class FanDetailComponent implements OnInit {
     };
 
     this.hassService.callService(service);
-    this.entityUpdate.next(null);
   }
 
   public toggleOscillate() {
@@ -126,7 +130,6 @@ export class FanDetailComponent implements OnInit {
     };
 
     this.hassService.callService(service);
-    this.entityUpdate.next(null);
   }
 
   public setMode(mode: FanModes) {
@@ -144,7 +147,6 @@ export class FanDetailComponent implements OnInit {
     };
 
     this.hassService.callService(service);
-    this.entityUpdate.next(null);
   }
 
   public rotate(direction: FanDirections) {
@@ -161,7 +163,6 @@ export class FanDetailComponent implements OnInit {
     };
 
     this.hassService.callService(service);
-    this.entityUpdate.next(null);
   }
 
   public formatFunction(value: number) {

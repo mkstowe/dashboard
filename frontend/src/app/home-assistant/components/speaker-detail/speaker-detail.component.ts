@@ -1,8 +1,9 @@
-import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Component, Inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 import { HassService } from '../../services/hass.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServiceCall } from '../../models/service-call';
+import { HassEntity } from 'home-assistant-js-websocket';
 
 @Component({
   selector: 'app-speaker-detail',
@@ -10,31 +11,36 @@ import { ServiceCall } from '../../models/service-call';
   styleUrls: ['./speaker-detail.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class SpeakerDetailComponent implements OnInit {
-  public entity: any;
+export class SpeakerDetailComponent implements OnInit, OnDestroy {
+  public entity: HassEntity;
+  public entityId: string;
   public entityName: string;
   public isActive: boolean;
 
-  private entityUpdate: Subject<any> = new Subject<any>();
+  private notifier$ = new Subject<void>();
 
   constructor(
     private hassService: HassService,
     @Inject(MAT_DIALOG_DATA)
-    data: { entity: any; entityName: string; isActive: boolean }
+    data: { entityId: string; entityName: string; isActive: boolean }
   ) {
-    this.entity = data.entity;
+    this.entityId = data.entityId;
     this.entityName = data.entityName;
     this.isActive = data.isActive;
   }
 
   ngOnInit(): void {
-    this.hassService.entities.subscribe({
-      next: () => {
-        return;
+    this.hassService.entities.pipe(takeUntil(this.notifier$)).subscribe({
+      next: (res) => {
+        this.entity = res[this.entityId];
       },
     });
 
-    this.entityUpdate.next(null);
+  }
+
+  ngOnDestroy(): void {
+    this.notifier$.next();
+    this.notifier$.complete();
   }
 
   public onPowerClick() {
@@ -49,7 +55,6 @@ export class SpeakerDetailComponent implements OnInit {
 
     this.hassService.callService(service);
 
-    this.entityUpdate.next(null);
   }
 
   public transferPlayback() {
@@ -66,6 +71,5 @@ export class SpeakerDetailComponent implements OnInit {
     };
 
     this.hassService.callService(service);
-    this.entityUpdate.next(null);
   }
 }

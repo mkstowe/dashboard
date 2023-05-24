@@ -18,7 +18,7 @@ export class TvCardComponent extends EntityCardComponent {
       width: '70%',
       height: '80%',
       data: {
-        entity: this.entity,
+        entityId: this.entity?.entity_id,
         entityName: this.entityName,
         isActive: this.isActive,
       },

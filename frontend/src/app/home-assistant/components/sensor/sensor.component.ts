@@ -1,34 +1,37 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DangerLevel, HassService } from '../../services/hass.service';
 import { MatDialog } from '@angular/material/dialog';
 import { StateGraphComponent } from '../state-graph/state-graph.component';
 import { StateOptions } from '../../models/state-options';
 import { SensorOptions } from '../../models/sensor-options';
+import { Subject, takeUntil } from 'rxjs';
+import { HassEntity } from 'home-assistant-js-websocket';
 @Component({
   selector: 'app-sensor',
   templateUrl: './sensor.component.html',
   styleUrls: ['./sensor.component.scss'],
 })
-export class SensorComponent implements OnInit {
+export class SensorComponent implements OnInit, OnDestroy {
   @Input() stateOptions: StateOptions;
   @Input() sensorOptions: SensorOptions;
 
-  public entity: any;
+  public entity: HassEntity;
   public entityName: string;
   public entityState: string;
   public dangerLevel: DangerLevel = DangerLevel.Normal;
   public icon: string;
 
   public dangerLevels = DangerLevel;
+  private notifier$ = new Subject<void>();
 
   constructor(private hassService: HassService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.hassService.entities.subscribe({
+    this.hassService.entities.pipe(takeUntil(this.notifier$)).subscribe({
       next: (result) => {
         this.entity = result[this.sensorOptions.entityId];
         this.entityName =
-          this.sensorOptions?.name || this.entity?.attributes.friendly_name;
+          this.sensorOptions?.name || this.entity?.attributes.friendly_name || '';
         this.entityState = this.sensorOptions?.state || this.entity?.state;
 
         if (this.sensorOptions.stateOptions) {
@@ -46,6 +49,11 @@ export class SensorComponent implements OnInit {
         this.icon = this.sensorOptions.icon || '';
       },
     });
+  }
+
+  ngOnDestroy(): void {
+    this.notifier$.next();
+    this.notifier$.complete();
   }
 
   public onRightMouseClick() {

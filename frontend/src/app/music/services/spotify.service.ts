@@ -125,8 +125,6 @@ export class SpotifyService {
       )
       .subscribe({
         next: (res: any) => {
-          console.log('9');
-
           localStorage.setItem('spotify_access_token', res.access_token);
           localStorage.setItem(
             'spotify_token_timestamp',
@@ -444,7 +442,7 @@ export class SpotifyService {
     deviceId?: string;
     contextUri?: string;
     uris?: string[];
-    offset?: any;
+    offset?: number;
     position?: number;
   } = {}) {
     return this.http.put(

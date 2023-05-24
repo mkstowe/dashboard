@@ -18,7 +18,7 @@ export class FanCardComponent extends EntityCardComponent {
     this.dialog.open(FanDetailComponent, {
       width: '500px',
       data: {
-        entity: this.entity,
+        entityId: this.entity?.entity_id,
         entityName: this.entityName,
         isActive: this.isActive,
       },

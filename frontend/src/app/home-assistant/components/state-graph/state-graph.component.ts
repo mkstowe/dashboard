@@ -1,10 +1,12 @@
-import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { Chart, ChartConfiguration } from 'chart.js';
+import { Component, Inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Chart, ChartConfiguration, ChartData } from 'chart.js';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import 'chartjs-adapter-moment';
 import { default as Annotation } from 'chartjs-plugin-annotation';
 import { StateOptions } from '../../models/state-options';
 import { HassService } from '../../services/hass.service';
+import { Subject, takeUntil } from 'rxjs';
+import { HassEntity } from 'home-assistant-js-websocket';
 
 @Component({
   selector: 'app-state-graph',
@@ -12,19 +14,20 @@ import { HassService } from '../../services/hass.service';
   styleUrls: ['./state-graph.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class StateGraphComponent implements OnInit {
-  public entity: any;
+export class StateGraphComponent implements OnInit, OnDestroy {
+  public entity: HassEntity;
   public entityName: string;
   public stateOptions: StateOptions;
 
   public chartData: ChartConfiguration['data'];
 
   public chartOptions: ChartConfiguration['options'];
+  private notifier$ = new Subject<void>();
 
   constructor(
     private hassService: HassService,
     @Inject(MAT_DIALOG_DATA)
-    data: { entity: any; entityName: string; stateOptions: StateOptions }
+    data: { entity: HassEntity; entityName: string; stateOptions: StateOptions }
   ) {
     this.entity = data.entity;
     this.entityName = data.entityName;
@@ -90,11 +93,12 @@ export class StateGraphComponent implements OnInit {
     };
     this.hassService
       .getEntityHistory(this.entity.entity_id)
+      .pipe(takeUntil(this.notifier$))
       .subscribe((history) => {
         this.chartData = {
           datasets: [
             {
-              data: (history as Array<any>)[0].map((s: any) => {
+              data: (history as Array<any>)[0].map((s: HassEntity) => {
                 return {
                   x: new Date(s.last_updated).getTime(),
                   y: this.stateOptions?.round ? Math.round(+s.state) : +s.state,
@@ -115,9 +119,14 @@ export class StateGraphComponent implements OnInit {
         };
       });
   }
+
+  ngOnDestroy(): void {
+    this.notifier$.next();
+    this.notifier$.complete();
+  }
 }
 
-function average(ctx: any) {
+function average(ctx: ChartData) {
   if (!ctx) return;
 
   const values = ctx.datasets[0].data;

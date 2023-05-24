@@ -2,7 +2,7 @@ export interface ServiceCall {
   type?: string;
   domain?: string;
   service: string;
-  service_data?: any;
+  service_data?: object;
   target: {
     entity_id?: string;
     area_id?: string;

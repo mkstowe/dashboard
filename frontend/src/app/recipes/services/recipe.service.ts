@@ -7,7 +7,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class RecipeService {
-  public $pageOptions = new BehaviorSubject<any>(null);
   private headers = {
     Authorization: `Bearer ${environment.mealieAuthToken.access_token}`,
   };

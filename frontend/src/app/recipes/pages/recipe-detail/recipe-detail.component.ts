@@ -12,7 +12,6 @@ export class RecipeDetailComponent implements OnInit {
   slug: string;
   public recipe: any;
   public imageUrl: string;
-  private sub: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,7 +19,7 @@ export class RecipeDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.sub = this.route.params.subscribe((params) => {
+    this.route.params.subscribe((params) => {
       this.slug = params['slug'];
     });
 

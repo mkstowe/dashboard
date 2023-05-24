@@ -1,8 +1,9 @@
-import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { Subject, delay } from 'rxjs';
+import { Component, Inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Subject, delay, takeUntil } from 'rxjs';
 import { HassService } from '../../services/hass.service';
 import { ServiceCall } from '../../models/service-call';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { HassEntity } from 'home-assistant-js-websocket';
 
 @Component({
   selector: 'app-light-detail',
@@ -10,8 +11,9 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./light-detail.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class LightDetailComponent implements OnInit {
-  public entity: any;
+export class LightDetailComponent implements OnInit, OnDestroy {
+  public entity: HassEntity;
+  public entityId: string;
   public entityName: string;
   public isActive: boolean;
 
@@ -23,37 +25,47 @@ export class LightDetailComponent implements OnInit {
 
   public presetColors = ['#ffc791', '#ff0000'];
 
-  private entityUpdate: Subject<any> = new Subject<any>();
+  private notifier$ = new Subject<void>();
 
   constructor(
     private hassService: HassService,
     @Inject(MAT_DIALOG_DATA)
     data: {
-      entity: any;
+      entityId: string;
       entityName: string;
       isActive: boolean;
     }
   ) {
-    this.entity = data.entity;
+    this.entityId = data.entityId;
     this.entityName = data.entityName;
     this.isActive = data.isActive;
   }
 
   ngOnInit(): void {
-    this.hassService.entities.subscribe({
-      next: () => {
-        this.brightness = this.entity?.attributes.brightness || 0;
-      },
-    });
+    this.hassService.entities.pipe(takeUntil(this.notifier$)).subscribe({
+      next: (res) => {
+        this.entity = res[this.entityId];
 
-    this.entityUpdate.pipe(delay(500)).subscribe({
-      next: () => {
-        const rgbColor: number[] = this.entity.attributes.rgb_color;
+        this.brightness = this.entity?.attributes.brightness || 0;
+
+        const rgbColor: number[] = this.entity?.attributes.rgb_color;
         this.color = rgbToHex(rgbColor) || null;
       },
     });
 
-    this.entityUpdate.next(null);
+    // this.entityUpdate.pipe(delay(500), takeUntil(this.notifier$)).subscribe({
+    //   next: () => {
+    //     const rgbColor: number[] = this.entity.attributes.rgb_color;
+    //     this.color = rgbToHex(rgbColor) || null;
+    //   },
+    // });
+
+    // this.entityUpdate.next(null);
+  }
+
+  ngOnDestroy(): void {
+    this.notifier$.next();
+    this.notifier$.complete();
   }
 
   public onPowerClick() {
@@ -68,16 +80,15 @@ export class LightDetailComponent implements OnInit {
 
     this.hassService.callService(service);
 
-    this.entityUpdate.next(null);
   }
 
-  public onBrightnessChange($event: any) {
+  public onBrightnessChange($event: Event) {
     const service: ServiceCall = {
       type: 'call_service',
       domain: 'light',
       service: 'turn_on',
       service_data: {
-        brightness: $event.target.value,
+        brightness: ($event.target as HTMLInputElement).value,
       },
       target: {
         entity_id: this.entity.entity_id,
@@ -86,7 +97,6 @@ export class LightDetailComponent implements OnInit {
 
     this.hassService.callService(service);
 
-    this.entityUpdate.next(null);
   }
 
   public formatFunction(value: number) {
@@ -94,7 +104,7 @@ export class LightDetailComponent implements OnInit {
     return `${percent}%`;
   }
 
-  public onColorChange($event: any) {
+  public onColorChange($event: string) {
     const service: ServiceCall = {
       type: 'call_service',
       domain: 'light',

@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { Subject, first, interval, map, switchMap, takeUntil } from 'rxjs';
 import { SpotifyService } from '../../services/spotify.service';
+import { Track } from '../../models/track';
 
 @Component({
   selector: 'app-media-player',
@@ -16,19 +17,19 @@ import { SpotifyService } from '../../services/spotify.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class MediaPlayerComponent implements OnInit, OnDestroy {
-  public currentTrack: any;
+  public currentTrack: Track;
   public volume: number;
   public currProgress: number;
   public isPlaying: boolean;
 
-  private unsub = new Subject<void>();
+  private notifier$ = new Subject<void>();
 
   constructor(private spotifyService: SpotifyService) {}
   ngOnInit(): void {
     this.getCurrentTrack().subscribe();
     interval(1000)
       .pipe(
-        takeUntil(this.unsub),
+        takeUntil(this.notifier$),
         switchMap(() => this.getCurrentTrack())
       )
       .subscribe();
@@ -37,17 +38,17 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.unsub.next();
-    this.unsub.unsubscribe();
+    this.notifier$.next();
+    this.notifier$.complete();
   }
 
   public formatFunction(value: number) {
     return `${value}%`;
   }
 
-  public onVolumeChange($event: any) {
+  public onVolumeChange($event: Event) {
     this.spotifyService
-      .setVolume($event.target.value)
+      .setVolume(+($event.target as HTMLInputElement).value)
       .pipe(first())
       .subscribe();
   }

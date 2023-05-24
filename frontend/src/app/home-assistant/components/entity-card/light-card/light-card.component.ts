@@ -17,7 +17,7 @@ export class LightCardComponent extends EntityCardComponent {
     this.dialog.open(LightDetailComponent, {
       width: '500px',
       data: {
-        entity: this.entity,
+        entityId: this.entity?.entity_id,
         entityName: this.entityName,
         isActive: this.isActive,
       },

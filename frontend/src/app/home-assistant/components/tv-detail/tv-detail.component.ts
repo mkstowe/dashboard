@@ -1,9 +1,10 @@
-import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { HassService } from '../../services/hass.service';
 import { ServiceCall } from '../../models/service-call';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { HassEntity } from 'home-assistant-js-websocket';
 
 @Component({
   selector: 'app-tv-detail',
@@ -11,25 +12,25 @@ import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./tv-detail.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class TvDetailComponent implements OnInit {
-  public entity: any;
+export class TvDetailComponent implements OnInit, OnDestroy {
+  public entity: HassEntity;
+  public entityId: string;
   public entityName: string;
   public isActive: boolean;
   public remoteCommands = RemoteCommands;
   public appShortcuts = AppShortcuts;
 
-  private entityUpdate: Subject<any> = new Subject<any>();
-  // public searchForm = new FormControl();
   public form: FormGroup = new FormGroup({});
   public isSubmitted = false;
+  private notifier$ = new Subject<void>();
 
   constructor(
     private hassService: HassService,
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA)
-    data: { entity: any; entityName: string; isActive: boolean }
+    data: { entityId: string; entityName: string; isActive: boolean }
   ) {
-    this.entity = data.entity;
+    this.entityId = data.entityId;
     this.entityName = data.entityName;
     this.isActive = data.isActive;
   }
@@ -42,13 +43,17 @@ export class TvDetailComponent implements OnInit {
       search: [''],
     });
 
-    this.hassService.entities.subscribe({
-      next: () => {
-        return;
+    this.hassService.entities.pipe(takeUntil(this.notifier$)).subscribe({
+      next: (res) => {
+        this.entity = res[this.entityId];
       },
     });
 
-    this.entityUpdate.next(null);
+  }
+
+  ngOnDestroy(): void {
+    this.notifier$.next();
+    this.notifier$.complete();
   }
 
   public onPowerClick() {
@@ -63,7 +68,6 @@ export class TvDetailComponent implements OnInit {
 
     this.hassService.callService(service);
 
-    this.entityUpdate.next(null);
   }
 
   public onButtonPress(command: RemoteCommands) {
@@ -81,7 +85,6 @@ export class TvDetailComponent implements OnInit {
     };
 
     this.hassService.callService(service);
-    this.entityUpdate.next(null);
   }
 
   public launchApp(appUrl: AppShortcuts) {
@@ -98,7 +101,6 @@ export class TvDetailComponent implements OnInit {
     };
 
     this.hassService.callService(service);
-    this.entityUpdate.next(null);
   }
 
   public onSearch() {
@@ -119,7 +121,6 @@ export class TvDetailComponent implements OnInit {
     };
 
     this.hassService.callService(service);
-    this.entityUpdate.next(null);
 
     return false;
   }

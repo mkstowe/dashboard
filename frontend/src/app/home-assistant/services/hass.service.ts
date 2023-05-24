@@ -4,8 +4,11 @@ import {
   createConnection,
   subscribeEntities,
   createLongLivedTokenAuth,
+  HassEntities,
+  Connection,
+  MessageBase,
 } from 'home-assistant-js-websocket';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ServiceCall } from '../models/service-call';
 import { StateOptions } from '../models/state-options';
@@ -14,9 +17,10 @@ import { StateOptions } from '../models/state-options';
   providedIn: 'root',
 })
 export class HassService {
-  public entities: BehaviorSubject<any> = new BehaviorSubject<any>({});
+  private _entities: BehaviorSubject<HassEntities> = new BehaviorSubject<HassEntities>({});
+  public readonly entities: Observable<HassEntities> = this._entities.asObservable();
 
-  private connection: any;
+  private connection: Connection;
 
   private headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
@@ -34,11 +38,11 @@ export class HassService {
     );
 
     this.connection = await createConnection({ auth });
-    subscribeEntities(this.connection, (ent) => this.entities.next(ent));
+    subscribeEntities(this.connection, (ent) => this._entities.next(ent));
   }
 
   public async callService(msg: ServiceCall) {
-    this.connection.sendMessage(msg);
+    this.connection.sendMessage(msg as MessageBase);
   }
 
   public resolveStateOptions(
