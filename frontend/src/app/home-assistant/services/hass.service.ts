@@ -17,8 +17,10 @@ import { StateOptions } from '../models/state-options';
   providedIn: 'root',
 })
 export class HassService {
-  private _entities: BehaviorSubject<HassEntities> = new BehaviorSubject<HassEntities>({});
-  public readonly entities: Observable<HassEntities> = this._entities.asObservable();
+  private _entities: BehaviorSubject<HassEntities> =
+    new BehaviorSubject<HassEntities>({});
+  public readonly entities: Observable<HassEntities> =
+    this._entities.asObservable();
 
   private connection: Connection;
 

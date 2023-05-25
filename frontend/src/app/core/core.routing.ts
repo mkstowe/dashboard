@@ -1,7 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { HomePageComponent } from '../home-assistant/pages/home-page/home-page.component';
 import { MusicPageComponent } from '../music/pages/music-page/music-page.component';
-import { RecipePageComponent } from '../recipes/pages/recipe-page/recipe-page.component';
 import { NgModule } from '@angular/core';
 
 const routes: Routes = [
@@ -24,7 +23,6 @@ const routes: Routes = [
   },
   {
     path: 'recipes',
-    // component: RecipePageComponent,
     data: { tab: 3 },
     loadChildren: () =>
       import('../recipes/recipes.module').then((m) => m.RecipesModule),

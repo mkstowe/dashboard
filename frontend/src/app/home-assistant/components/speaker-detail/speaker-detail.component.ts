@@ -1,4 +1,10 @@
-import { Component, Inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { HassService } from '../../services/hass.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -35,7 +41,6 @@ export class SpeakerDetailComponent implements OnInit, OnDestroy {
         this.entity = res[this.entityId];
       },
     });
-
   }
 
   ngOnDestroy(): void {
@@ -54,7 +59,6 @@ export class SpeakerDetailComponent implements OnInit, OnDestroy {
     };
 
     this.hassService.callService(service);
-
   }
 
   public transferPlayback() {

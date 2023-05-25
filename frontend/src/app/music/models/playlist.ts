@@ -1,5 +1,5 @@
 export interface Playlist {
-  name: string,
-  image: string,
-  context: string
+  name: string;
+  image: string;
+  context: string;
 }

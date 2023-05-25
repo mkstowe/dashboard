@@ -1,10 +1,9 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { Subject, delay, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { HassService } from '../../services/hass.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServiceCall } from '../../models/service-call';
 import { HassEntity } from 'home-assistant-js-websocket';
-import { MatSliderDragEvent } from '@angular/material/slider';
 
 @Component({
   selector: 'app-fan-detail',
@@ -41,16 +40,15 @@ export class FanDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.hassService.entities.pipe(takeUntil(this.notifier$)).subscribe((res) => {
-      this.entity = res[this.entityId];
+    this.hassService.entities
+      .pipe(takeUntil(this.notifier$))
+      .subscribe((res) => {
+        this.entity = res[this.entityId];
 
-this.oscillateActive = this.entity.attributes.oscillating;
-this.speed = this.entity.attributes.percentage;
-this.currentMode = this.entity.attributes.preset_mode;
-    })
-
-
-
+        this.oscillateActive = this.entity.attributes.oscillating;
+        this.speed = this.entity.attributes.percentage;
+        this.currentMode = this.entity.attributes.preset_mode;
+      });
   }
 
   public onPowerClick() {
@@ -64,7 +62,6 @@ this.currentMode = this.entity.attributes.preset_mode;
     };
 
     this.hassService.callService(service);
-
   }
 
   public setSpeed($event: Event) {

@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeService } from '../../services/recipe.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   templateUrl: './recipe-detail.component.html',

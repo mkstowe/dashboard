@@ -6,7 +6,6 @@ import { SharedModule } from '../shared/shared.module';
 import { RecipeDetailComponent } from './pages/recipe-detail/recipe-detail.component';
 import { RouterModule } from '@angular/router';
 import { RECIPE_ROUTES } from './recipes.routing';
-import { RecipeService } from './services/recipe.service';
 
 @NgModule({
   declarations: [

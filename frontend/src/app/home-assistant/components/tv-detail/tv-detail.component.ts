@@ -1,4 +1,10 @@
-import { Component, OnInit, Inject, ViewEncapsulation, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Inject,
+  ViewEncapsulation,
+  OnDestroy,
+} from '@angular/core';
 import { HassService } from '../../services/hass.service';
 import { ServiceCall } from '../../models/service-call';
 import { Subject, takeUntil } from 'rxjs';
@@ -36,10 +42,7 @@ export class TvDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const urlReg =
-      '/^https?://(?:www.)?[-a-zA-Z0-9@:%._+~#=]{1,256}.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/';
     this.form = this.formBuilder.group({
-      // search: ['', [Validators.pattern(urlReg)]],
       search: [''],
     });
 
@@ -48,7 +51,6 @@ export class TvDetailComponent implements OnInit, OnDestroy {
         this.entity = res[this.entityId];
       },
     });
-
   }
 
   ngOnDestroy(): void {
@@ -67,7 +69,6 @@ export class TvDetailComponent implements OnInit, OnDestroy {
     };
 
     this.hassService.callService(service);
-
   }
 
   public onButtonPress(command: RemoteCommands) {

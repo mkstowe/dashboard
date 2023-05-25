@@ -1,11 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subject, first, interval, map, switchMap, takeUntil } from 'rxjs';
 import { SpotifyService } from '../../services/spotify.service';
 import { Track } from '../../models/track';
@@ -18,11 +11,10 @@ import { Track } from '../../models/track';
 })
 export class MediaPlayerComponent implements OnInit, OnDestroy {
   public currentTrack: Track;
+  private notifier$ = new Subject<void>();
   public volume: number;
   public currProgress: number;
   public isPlaying: boolean;
-
-  private notifier$ = new Subject<void>();
 
   constructor(private spotifyService: SpotifyService) {}
   ngOnInit(): void {

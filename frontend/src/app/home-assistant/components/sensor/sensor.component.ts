@@ -31,7 +31,9 @@ export class SensorComponent implements OnInit, OnDestroy {
       next: (result) => {
         this.entity = result[this.sensorOptions.entityId];
         this.entityName =
-          this.sensorOptions?.name || this.entity?.attributes.friendly_name || '';
+          this.sensorOptions?.name ||
+          this.entity?.attributes.friendly_name ||
+          '';
         this.entityState = this.sensorOptions?.state || this.entity?.state;
 
         if (this.sensorOptions.stateOptions) {

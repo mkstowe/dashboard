@@ -1,4 +1,10 @@
-import { Component, Inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { Chart, ChartConfiguration, ChartData } from 'chart.js';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import 'chartjs-adapter-moment';

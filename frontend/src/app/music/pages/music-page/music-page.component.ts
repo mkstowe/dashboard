@@ -46,11 +46,17 @@ export class MusicPageComponent implements OnInit, OnDestroy {
   }
 
   public getProfileInfo() {
-    this.spotifyService.getMyProfile().pipe(takeUntil(this.notifier$)).subscribe();
+    this.spotifyService
+      .getMyProfile()
+      .pipe(takeUntil(this.notifier$))
+      .subscribe();
   }
 
   public getPlaylist(id: string) {
-    this.spotifyService.getPlaylist(id).pipe(takeUntil(this.notifier$)).subscribe();
+    this.spotifyService
+      .getPlaylist(id)
+      .pipe(takeUntil(this.notifier$))
+      .subscribe();
   }
 
   public getPlaylists() {
@@ -58,7 +64,10 @@ export class MusicPageComponent implements OnInit, OnDestroy {
   }
 
   public transferPlayback(deviceIds: string[], play?: boolean) {
-    this.spotifyService.transferPlayback(deviceIds, { play }).pipe(takeUntil(this.notifier$)).subscribe();
+    this.spotifyService
+      .transferPlayback(deviceIds, { play })
+      .pipe(takeUntil(this.notifier$))
+      .subscribe();
   }
 
   public getAvailableDevices() {

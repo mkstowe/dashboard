@@ -1,5 +1,11 @@
-import { Component, Inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { Subject, delay, takeUntil } from 'rxjs';
+import {
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 import { HassService } from '../../services/hass.service';
 import { ServiceCall } from '../../models/service-call';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -52,15 +58,6 @@ export class LightDetailComponent implements OnInit, OnDestroy {
         this.color = rgbToHex(rgbColor) || null;
       },
     });
-
-    // this.entityUpdate.pipe(delay(500), takeUntil(this.notifier$)).subscribe({
-    //   next: () => {
-    //     const rgbColor: number[] = this.entity.attributes.rgb_color;
-    //     this.color = rgbToHex(rgbColor) || null;
-    //   },
-    // });
-
-    // this.entityUpdate.next(null);
   }
 
   ngOnDestroy(): void {
@@ -79,7 +76,6 @@ export class LightDetailComponent implements OnInit, OnDestroy {
     };
 
     this.hassService.callService(service);
-
   }
 
   public onBrightnessChange($event: Event) {
@@ -96,7 +92,6 @@ export class LightDetailComponent implements OnInit, OnDestroy {
     };
 
     this.hassService.callService(service);
-
   }
 
   public formatFunction(value: number) {
