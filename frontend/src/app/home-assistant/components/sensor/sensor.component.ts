@@ -12,21 +12,26 @@ import { HassEntity } from 'home-assistant-js-websocket';
   styleUrls: ['./sensor.component.scss'],
 })
 export class SensorComponent implements OnInit, OnDestroy {
-  @Input() stateOptions: StateOptions;
-  @Input() sensorOptions: SensorOptions;
+  @Input() public sensorOptions: SensorOptions;
+  @Input() public stateOptions: StateOptions;
 
+  public dangerLevel: DangerLevel = DangerLevel.Normal;
+  public dangerLevels = DangerLevel;
   public entity: HassEntity;
   public entityName: string;
   public entityState: string;
-  public dangerLevel: DangerLevel = DangerLevel.Normal;
   public icon: string;
 
-  public dangerLevels = DangerLevel;
   private notifier$ = new Subject<void>();
 
   constructor(private hassService: HassService, private dialog: MatDialog) {}
 
-  ngOnInit(): void {
+  public ngOnDestroy(): void {
+    this.notifier$.next();
+    this.notifier$.complete();
+  }
+
+  public ngOnInit(): void {
     this.hassService.entities.pipe(takeUntil(this.notifier$)).subscribe({
       next: (result) => {
         this.entity = result[this.sensorOptions.entityId];
@@ -51,11 +56,6 @@ export class SensorComponent implements OnInit, OnDestroy {
         this.icon = this.sensorOptions.icon || '';
       },
     });
-  }
-
-  ngOnDestroy(): void {
-    this.notifier$.next();
-    this.notifier$.complete();
   }
 
   public onRightMouseClick() {

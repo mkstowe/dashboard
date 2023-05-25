@@ -3,11 +3,11 @@ import { StateOptions } from './state-options';
 
 export interface CardOptions {
   entityId: string;
-  name?: string;
-  state?: string;
   icon?: string;
   iconActive?: string;
   lock?: boolean;
+  name?: string;
   service?: ServiceCall;
+  state?: string;
   stateOptions?: StateOptions;
 }

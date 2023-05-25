@@ -15,7 +15,11 @@ export class AppComponent {
   // Instantiate service so we have spotify access on startup;
   private spotifyService: SpotifyService;
 
-  prepareRoute(outlet: RouterOutlet) {
+  public closeSidebar() {
+    this.sidebarActive = false;
+  }
+
+  public prepareRoute(outlet: RouterOutlet) {
     if (outlet.isActivated) {
       const tab = outlet.activatedRouteData['tab'];
       if (!tab) return 'secondary';
@@ -25,9 +29,5 @@ export class AppComponent {
 
   public toggleSidebar() {
     this.sidebarActive = !this.sidebarActive;
-  }
-
-  public closeSidebar() {
-    this.sidebarActive = false;
   }
 }

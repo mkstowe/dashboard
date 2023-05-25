@@ -8,16 +8,16 @@ import { RecipeService } from '../../services/recipe.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class RecipeDetailComponent implements OnInit {
-  slug: string;
-  public recipe: any;
   public imageUrl: string;
+  public recipe: any;
+  public slug: string;
 
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.slug = params['slug'];
     });

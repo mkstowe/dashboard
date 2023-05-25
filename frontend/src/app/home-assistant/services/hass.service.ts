@@ -17,34 +17,32 @@ import { StateOptions } from '../models/state-options';
   providedIn: 'root',
 })
 export class HassService {
+  public readonly entities: Observable<HassEntities>;
+
   private _entities: BehaviorSubject<HassEntities> =
     new BehaviorSubject<HassEntities>({});
-  public readonly entities: Observable<HassEntities> =
-    this._entities.asObservable();
-
   private connection: Connection;
-
   private headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
     Authorization: `Bearer ${environment.hassAuthToken.access_token}`,
   });
 
   constructor(private http: HttpClient) {
+    this.entities = this._entities.asObservable();
     this.connect();
-  }
-
-  private async connect() {
-    const auth = createLongLivedTokenAuth(
-      environment.hassUrl,
-      environment.hassAuthToken.access_token
-    );
-
-    this.connection = await createConnection({ auth });
-    subscribeEntities(this.connection, (ent) => this._entities.next(ent));
   }
 
   public async callService(msg: ServiceCall) {
     this.connection.sendMessage(msg as MessageBase);
+  }
+
+  public getEntityHistory(entityId: string) {
+    return this.http.get(
+      `/api/hass/history/period?filter_entity_id=${entityId}`,
+      {
+        headers: this.headers,
+      }
+    );
   }
 
   public resolveStateOptions(
@@ -88,13 +86,14 @@ export class HassService {
     };
   }
 
-  public getEntityHistory(entityId: string) {
-    return this.http.get(
-      `/api/hass/history/period?filter_entity_id=${entityId}`,
-      {
-        headers: this.headers,
-      }
+  private async connect() {
+    const auth = createLongLivedTokenAuth(
+      environment.hassUrl,
+      environment.hassAuthToken.access_token
     );
+
+    this.connection = await createConnection({ auth });
+    subscribeEntities(this.connection, (ent) => this._entities.next(ent));
   }
 }
 

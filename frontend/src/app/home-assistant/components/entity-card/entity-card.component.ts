@@ -10,24 +10,29 @@ import { HassEntity } from 'home-assistant-js-websocket';
   styleUrls: ['./entity-card.component.scss'],
 })
 export class EntityCardComponent implements OnInit, OnDestroy {
-  @Input() cardOptions: CardOptions | undefined;
+  @Input() public cardOptions: CardOptions | undefined;
 
   public entity: HassEntity | undefined;
   public entityName: string;
   public entityState: string;
+  public hasAction: boolean;
   public icon: string;
   public iconActive: string;
   public isActive: boolean;
-  public hasAction: boolean;
   public unlocked: boolean;
 
-  private onStates = ['on', 'playing'];
   private lockTimer: number;
   private notifier$ = new Subject<void>();
+  private onStates = ['on', 'playing'];
 
   constructor(private hassService: HassService) {}
 
-  ngOnInit(): void {
+  public ngOnDestroy(): void {
+    this.notifier$.next();
+    this.notifier$.complete();
+  }
+
+  public ngOnInit(): void {
     this.hassService.entities.pipe(takeUntil(this.notifier$)).subscribe({
       next: (result) => {
         this.entity = this.cardOptions && result[this.cardOptions.entityId];
@@ -48,11 +53,6 @@ export class EntityCardComponent implements OnInit, OnDestroy {
     if (this.cardOptions?.service) {
       this.hasAction = true;
     }
-  }
-
-  ngOnDestroy(): void {
-    this.notifier$.next();
-    this.notifier$.complete();
   }
 
   public onButtonClick($event: Event) {
@@ -80,6 +80,7 @@ export class EntityCardComponent implements OnInit, OnDestroy {
     clearTimeout(this.lockTimer);
     this.startLockTimer();
   }
+
   private startLockTimer() {
     this.lockTimer = window.setTimeout(() => (this.unlocked = false), 5000);
   }

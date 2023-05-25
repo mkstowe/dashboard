@@ -10,16 +10,8 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrls: ['./music-page.component.scss'],
 })
 export class MusicPageComponent implements OnInit, OnDestroy {
-  public apiUrl = environment.apiUrl;
-  private notifier$ = new Subject<void>();
-
-  constructor(
-    private spotifyService: SpotifyService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
-
   public access_token: string | null;
+  public apiUrl = environment.apiUrl;
   public playlists = [
     '4vNldb5p8tQ9RmX7XSaTIM',
     '0P9fhX6DxKRemFppitUO40',
@@ -35,19 +27,17 @@ export class MusicPageComponent implements OnInit, OnDestroy {
     '37i9dQZEVXcBLmltz3RQwu',
   ];
 
-  ngOnInit(): void {
-    this.access_token = this.spotifyService.getAccessToken();
-    return;
-  }
+  private notifier$ = new Subject<void>();
 
-  ngOnDestroy(): void {
-    this.notifier$.next();
-    this.notifier$.complete();
-  }
+  constructor(
+    private spotifyService: SpotifyService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
-  public getProfileInfo() {
+  public getAvailableDevices() {
     this.spotifyService
-      .getMyProfile()
+      .getAvailableDevices()
       .pipe(takeUntil(this.notifier$))
       .subscribe();
   }
@@ -63,30 +53,9 @@ export class MusicPageComponent implements OnInit, OnDestroy {
     this.spotifyService.getMyPlaylists().subscribe();
   }
 
-  public transferPlayback(deviceIds: string[], play?: boolean) {
+  public getProfileInfo() {
     this.spotifyService
-      .transferPlayback(deviceIds, { play })
-      .pipe(takeUntil(this.notifier$))
-      .subscribe();
-  }
-
-  public getAvailableDevices() {
-    this.spotifyService
-      .getAvailableDevices()
-      .pipe(takeUntil(this.notifier$))
-      .subscribe();
-  }
-
-  public startPlayback(deviceId: string) {
-    this.spotifyService
-      .startPlayback({ deviceId })
-      .pipe(takeUntil(this.notifier$))
-      .subscribe();
-  }
-
-  public pausePlayback(deviceId: string) {
-    this.spotifyService
-      .pausePlayback({ deviceId })
+      .getMyProfile()
       .pipe(takeUntil(this.notifier$))
       .subscribe();
   }
@@ -94,6 +63,23 @@ export class MusicPageComponent implements OnInit, OnDestroy {
   public nextTrack(deviceId: string) {
     this.spotifyService
       .nextTrack({ deviceId })
+      .pipe(takeUntil(this.notifier$))
+      .subscribe();
+  }
+
+  public ngOnDestroy(): void {
+    this.notifier$.next();
+    this.notifier$.complete();
+  }
+
+  public ngOnInit(): void {
+    this.access_token = this.spotifyService.getAccessToken();
+    return;
+  }
+
+  public pausePlayback(deviceId: string) {
+    this.spotifyService
+      .pausePlayback({ deviceId })
       .pipe(takeUntil(this.notifier$))
       .subscribe();
   }
@@ -108,6 +94,20 @@ export class MusicPageComponent implements OnInit, OnDestroy {
   public seekToPosition(position: number, deviceId?: string) {
     this.spotifyService
       .seekToPosition(position, { deviceId })
+      .pipe(takeUntil(this.notifier$))
+      .subscribe();
+  }
+
+  public startPlayback(deviceId: string) {
+    this.spotifyService
+      .startPlayback({ deviceId })
+      .pipe(takeUntil(this.notifier$))
+      .subscribe();
+  }
+
+  public transferPlayback(deviceIds: string[], play?: boolean) {
+    this.spotifyService
+      .transferPlayback(deviceIds, { play })
       .pipe(takeUntil(this.notifier$))
       .subscribe();
   }

@@ -9,13 +9,20 @@ import { Playlist } from '../../models/playlist';
   styleUrls: ['./playlist-card.component.scss'],
 })
 export class PlaylistCardComponent implements OnInit, OnDestroy {
-  @Input() id: string;
+  @Input() public id: string;
+
   public playlist: Playlist;
+
   private notifier$ = new Subject<void>();
 
   constructor(private spotifyService: SpotifyService) {}
 
-  ngOnInit(): void {
+  public ngOnDestroy(): void {
+    this.notifier$.next();
+    this.notifier$.complete();
+  }
+
+  public ngOnInit(): void {
     this.spotifyService
       .getPlaylist(this.id)
       .pipe(takeUntil(this.notifier$))
@@ -26,11 +33,6 @@ export class PlaylistCardComponent implements OnInit, OnDestroy {
           context: res.uri,
         };
       });
-  }
-
-  ngOnDestroy(): void {
-    this.notifier$.next();
-    this.notifier$.complete();
   }
 
   public onClick() {

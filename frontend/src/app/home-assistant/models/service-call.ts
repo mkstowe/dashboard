@@ -1,5 +1,4 @@
 export interface ServiceCall {
-  type?: string;
   domain?: string;
   service: string;
   service_data?: object;
@@ -8,4 +7,5 @@ export interface ServiceCall {
     area_id?: string;
     device_id?: string;
   };
+  type?: string;
 }

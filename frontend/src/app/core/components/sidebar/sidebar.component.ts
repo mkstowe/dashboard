@@ -10,15 +10,15 @@ import { HassService } from 'src/app/home-assistant/services/hass.service';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit, OnDestroy {
-  @ViewChild(MatExpansionPanel) deviceList: MatExpansionPanel;
-  public date: Date = new Date();
+  @ViewChild(MatExpansionPanel) public deviceList: MatExpansionPanel;
+
+  public activeDeviceString: string;
   public activeDevices: string[];
+  public date: Date = new Date();
   public numActiveDevices: number;
   public weather: string;
-  public activeDeviceString: string;
 
-  private notifier$ = new Subject<void>();
-
+  private activeStates = ['on', 'playing'];
   private devices = [
     'light.office',
     'light.living_room',
@@ -32,12 +32,16 @@ export class SidebarComponent implements OnInit, OnDestroy {
     'fan.office_fan',
     'remote.living_room_tv',
   ];
-
-  private activeStates = ['on', 'playing'];
+  private notifier$ = new Subject<void>();
 
   constructor(private hassService: HassService) {}
 
-  ngOnInit(): void {
+  public ngOnDestroy(): void {
+    this.notifier$.next();
+    this.notifier$.complete();
+  }
+
+  public ngOnInit(): void {
     this.hassService.entities.pipe(takeUntil(this.notifier$)).subscribe({
       next: (res) => {
         this.updateSidebarContent(res);
@@ -47,10 +51,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     setInterval(() => {
       this.date = new Date();
     }, 1000);
-  }
-  ngOnDestroy(): void {
-    this.notifier$.next();
-    this.notifier$.complete();
   }
 
   public trackDevice(index: number, device: any) {

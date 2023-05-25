@@ -363,7 +363,6 @@ export class HomePageComponent {
       ],
     },
   ];
-
   public sidebarActive = false;
 
   public toggleSidebar() {

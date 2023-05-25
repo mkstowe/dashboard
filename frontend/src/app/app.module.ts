@@ -22,7 +22,7 @@ import { MaterialModule } from './material.module';
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
-  override = <any>{
+  public override = <any>{
     swipe: { direction: Hammer.DIRECTION_ALL },
   };
 }

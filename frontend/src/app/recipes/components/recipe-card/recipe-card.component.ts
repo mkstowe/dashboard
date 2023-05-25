@@ -6,15 +6,15 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./recipe-card.component.scss'],
 })
 export class RecipeCardComponent implements OnInit {
-  @Input() id: string;
-  @Input() name: string;
-  @Input() summary: string;
-  @Input() slug: string;
-  @Input() hasImage: boolean;
+  @Input() public hasImage: boolean;
+  @Input() public id: string;
+  @Input() public name: string;
+  @Input() public slug: string;
+  @Input() public summary: string;
 
   public imageUrl: string;
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.imageUrl = `/api/mealie/media/recipes/${this.id}/images/min-original.webp`;
   }
 }

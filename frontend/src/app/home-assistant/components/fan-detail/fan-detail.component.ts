@@ -12,17 +12,16 @@ import { HassEntity } from 'home-assistant-js-websocket';
   encapsulation: ViewEncapsulation.None,
 })
 export class FanDetailComponent implements OnInit {
+  public currentMode: string;
   public entity: HassEntity;
   public entityId: string;
   public entityName: string;
-  public isActive: boolean;
-
-  public speed: number;
-  public oscillateActive: boolean;
-  public currentMode: string;
-
   public fanDirections = FanDirections;
   public fanModes = FanModes;
+  public isActive: boolean;
+  public oscillateActive: boolean;
+  public speed: number;
+
   private notifier$ = new Subject<void>();
 
   constructor(
@@ -39,7 +38,43 @@ export class FanDetailComponent implements OnInit {
     this.isActive = data.isActive;
   }
 
-  ngOnInit(): void {
+  public decreaseSpeed() {
+    const service: ServiceCall = {
+      type: 'call_service',
+      domain: 'fan',
+      service: 'decrease_speed',
+      service_data: {
+        percentage_step: 5,
+      },
+      target: {
+        entity_id: this.entity.entity_id,
+      },
+    };
+
+    this.hassService.callService(service);
+  }
+
+  public formatFunction(value: number) {
+    return `${value}%`;
+  }
+
+  public increaseSpeed() {
+    const service: ServiceCall = {
+      type: 'call_service',
+      domain: 'fan',
+      service: 'increase_speed',
+      service_data: {
+        percentage_step: 5,
+      },
+      target: {
+        entity_id: this.entity.entity_id,
+      },
+    };
+
+    this.hassService.callService(service);
+  }
+
+  public ngOnInit(): void {
     this.hassService.entities
       .pipe(takeUntil(this.notifier$))
       .subscribe((res) => {
@@ -64,62 +99,13 @@ export class FanDetailComponent implements OnInit {
     this.hassService.callService(service);
   }
 
-  public setSpeed($event: Event) {
+  public rotate(direction: FanDirections) {
     const service: ServiceCall = {
       type: 'call_service',
       domain: 'fan',
-      service: 'set_percentage',
+      service: 'set_direction',
       service_data: {
-        percentage: ($event.target as HTMLInputElement).value,
-      },
-      target: {
-        entity_id: this.entity.entity_id,
-      },
-    };
-
-    this.hassService.callService(service);
-  }
-
-  public increaseSpeed() {
-    const service: ServiceCall = {
-      type: 'call_service',
-      domain: 'fan',
-      service: 'increase_speed',
-      service_data: {
-        percentage_step: 5,
-      },
-      target: {
-        entity_id: this.entity.entity_id,
-      },
-    };
-
-    this.hassService.callService(service);
-  }
-
-  public decreaseSpeed() {
-    const service: ServiceCall = {
-      type: 'call_service',
-      domain: 'fan',
-      service: 'decrease_speed',
-      service_data: {
-        percentage_step: 5,
-      },
-      target: {
-        entity_id: this.entity.entity_id,
-      },
-    };
-
-    this.hassService.callService(service);
-  }
-
-  public toggleOscillate() {
-    this.oscillateActive = !this.oscillateActive;
-    const service: ServiceCall = {
-      type: 'call_service',
-      domain: 'fan',
-      service: 'oscillate',
-      service_data: {
-        oscillating: this.oscillateActive,
+        direction,
       },
       target: {
         entity_id: this.entity.entity_id,
@@ -146,13 +132,13 @@ export class FanDetailComponent implements OnInit {
     this.hassService.callService(service);
   }
 
-  public rotate(direction: FanDirections) {
+  public setSpeed($event: Event) {
     const service: ServiceCall = {
       type: 'call_service',
       domain: 'fan',
-      service: 'set_direction',
+      service: 'set_percentage',
       service_data: {
-        direction,
+        percentage: ($event.target as HTMLInputElement).value,
       },
       target: {
         entity_id: this.entity.entity_id,
@@ -162,8 +148,21 @@ export class FanDetailComponent implements OnInit {
     this.hassService.callService(service);
   }
 
-  public formatFunction(value: number) {
-    return `${value}%`;
+  public toggleOscillate() {
+    this.oscillateActive = !this.oscillateActive;
+    const service: ServiceCall = {
+      type: 'call_service',
+      domain: 'fan',
+      service: 'oscillate',
+      service_data: {
+        oscillating: this.oscillateActive,
+      },
+      target: {
+        entity_id: this.entity.entity_id,
+      },
+    };
+
+    this.hassService.callService(service);
   }
 }
 

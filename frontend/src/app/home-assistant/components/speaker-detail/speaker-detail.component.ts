@@ -35,17 +35,17 @@ export class SpeakerDetailComponent implements OnInit, OnDestroy {
     this.isActive = data.isActive;
   }
 
-  ngOnInit(): void {
+  public ngOnDestroy(): void {
+    this.notifier$.next();
+    this.notifier$.complete();
+  }
+
+  public ngOnInit(): void {
     this.hassService.entities.pipe(takeUntil(this.notifier$)).subscribe({
       next: (res) => {
         this.entity = res[this.entityId];
       },
     });
-  }
-
-  ngOnDestroy(): void {
-    this.notifier$.next();
-    this.notifier$.complete();
   }
 
   public onPowerClick() {

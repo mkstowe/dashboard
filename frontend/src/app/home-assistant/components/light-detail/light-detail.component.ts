@@ -18,18 +18,16 @@ import { HassEntity } from 'home-assistant-js-websocket';
   encapsulation: ViewEncapsulation.None,
 })
 export class LightDetailComponent implements OnInit, OnDestroy {
+  public brightness: number;
+  public color: string | null;
   public entity: HassEntity;
   public entityId: string;
   public entityName: string;
   public isActive: boolean;
-
-  public brightness: number;
-  public color: string | null;
-  public min = 0;
   public max = 255;
-  public showLabel = true;
-
+  public min = 0;
   public presetColors = ['#ffc791', '#ff0000'];
+  public showLabel = true;
 
   private notifier$ = new Subject<void>();
 
@@ -47,7 +45,17 @@ export class LightDetailComponent implements OnInit, OnDestroy {
     this.isActive = data.isActive;
   }
 
-  ngOnInit(): void {
+  public formatFunction(value: number) {
+    const percent = Math.round((value / this.max) * 100);
+    return `${percent}%`;
+  }
+
+  public ngOnDestroy(): void {
+    this.notifier$.next();
+    this.notifier$.complete();
+  }
+
+  public ngOnInit(): void {
     this.hassService.entities.pipe(takeUntil(this.notifier$)).subscribe({
       next: (res) => {
         this.entity = res[this.entityId];
@@ -58,24 +66,6 @@ export class LightDetailComponent implements OnInit, OnDestroy {
         this.color = rgbToHex(rgbColor) || null;
       },
     });
-  }
-
-  ngOnDestroy(): void {
-    this.notifier$.next();
-    this.notifier$.complete();
-  }
-
-  public onPowerClick() {
-    const service: ServiceCall = {
-      type: 'call_service',
-      domain: 'light',
-      service: 'toggle',
-      target: {
-        entity_id: this.entity.entity_id,
-      },
-    };
-
-    this.hassService.callService(service);
   }
 
   public onBrightnessChange($event: Event) {
@@ -94,11 +84,6 @@ export class LightDetailComponent implements OnInit, OnDestroy {
     this.hassService.callService(service);
   }
 
-  public formatFunction(value: number) {
-    const percent = Math.round((value / this.max) * 100);
-    return `${percent}%`;
-  }
-
   public onColorChange($event: string) {
     const service: ServiceCall = {
       type: 'call_service',
@@ -107,6 +92,19 @@ export class LightDetailComponent implements OnInit, OnDestroy {
       service_data: {
         rgb_color: hexToRgb($event),
       },
+      target: {
+        entity_id: this.entity.entity_id,
+      },
+    };
+
+    this.hassService.callService(service);
+  }
+
+  public onPowerClick() {
+    const service: ServiceCall = {
+      type: 'call_service',
+      domain: 'light',
+      service: 'toggle',
       target: {
         entity_id: this.entity.entity_id,
       },

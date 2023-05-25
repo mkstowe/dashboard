@@ -19,15 +19,15 @@ import { HassEntity } from 'home-assistant-js-websocket';
   encapsulation: ViewEncapsulation.None,
 })
 export class TvDetailComponent implements OnInit, OnDestroy {
+  public appShortcuts = AppShortcuts;
   public entity: HassEntity;
   public entityId: string;
   public entityName: string;
-  public isActive: boolean;
-  public remoteCommands = RemoteCommands;
-  public appShortcuts = AppShortcuts;
-
   public form: FormGroup = new FormGroup({});
+  public isActive: boolean;
   public isSubmitted = false;
+  public remoteCommands = RemoteCommands;
+
   private notifier$ = new Subject<void>();
 
   constructor(
@@ -41,7 +41,36 @@ export class TvDetailComponent implements OnInit, OnDestroy {
     this.isActive = data.isActive;
   }
 
-  ngOnInit(): void {
+  public get search(): AbstractControl {
+    return this.form.get('search')!.value;
+  }
+
+  public hasError(control: AbstractControl): boolean {
+    return control && control.invalid && this.isSubmitted;
+  }
+
+  public launchApp(appUrl: AppShortcuts) {
+    const service: ServiceCall = {
+      type: 'call_service',
+      domain: 'remote',
+      service: 'turn_on',
+      service_data: {
+        activity: appUrl,
+      },
+      target: {
+        entity_id: this.entity.entity_id,
+      },
+    };
+
+    this.hassService.callService(service);
+  }
+
+  public ngOnDestroy(): void {
+    this.notifier$.next();
+    this.notifier$.complete();
+  }
+
+  public ngOnInit(): void {
     this.form = this.formBuilder.group({
       search: [''],
     });
@@ -51,24 +80,6 @@ export class TvDetailComponent implements OnInit, OnDestroy {
         this.entity = res[this.entityId];
       },
     });
-  }
-
-  ngOnDestroy(): void {
-    this.notifier$.next();
-    this.notifier$.complete();
-  }
-
-  public onPowerClick() {
-    const service: ServiceCall = {
-      type: 'call_service',
-      domain: 'remote',
-      service: 'toggle',
-      target: {
-        entity_id: this.entity.entity_id,
-      },
-    };
-
-    this.hassService.callService(service);
   }
 
   public onButtonPress(command: RemoteCommands) {
@@ -88,14 +99,11 @@ export class TvDetailComponent implements OnInit, OnDestroy {
     this.hassService.callService(service);
   }
 
-  public launchApp(appUrl: AppShortcuts) {
+  public onPowerClick() {
     const service: ServiceCall = {
       type: 'call_service',
       domain: 'remote',
-      service: 'turn_on',
-      service_data: {
-        activity: appUrl,
-      },
+      service: 'toggle',
       target: {
         entity_id: this.entity.entity_id,
       },
@@ -124,14 +132,6 @@ export class TvDetailComponent implements OnInit, OnDestroy {
     this.hassService.callService(service);
 
     return false;
-  }
-
-  public get search(): AbstractControl {
-    return this.form.get('search')!.value;
-  }
-
-  public hasError(control: AbstractControl): boolean {
-    return control && control.invalid && this.isSubmitted;
   }
 }
 

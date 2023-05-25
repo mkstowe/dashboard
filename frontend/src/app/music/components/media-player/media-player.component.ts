@@ -10,14 +10,29 @@ import { Track } from '../../models/track';
   encapsulation: ViewEncapsulation.None,
 })
 export class MediaPlayerComponent implements OnInit, OnDestroy {
-  public currentTrack: Track;
-  private notifier$ = new Subject<void>();
-  public volume: number;
   public currProgress: number;
+  public currentTrack: Track;
   public isPlaying: boolean;
+  public volume: number;
+
+  private notifier$ = new Subject<void>();
 
   constructor(private spotifyService: SpotifyService) {}
-  ngOnInit(): void {
+
+  public formatFunction(value: number) {
+    return `${value}%`;
+  }
+
+  public nextTrack() {
+    this.spotifyService.nextTrack().pipe(first()).subscribe();
+  }
+
+  public ngOnDestroy(): void {
+    this.notifier$.next();
+    this.notifier$.complete();
+  }
+
+  public ngOnInit(): void {
     this.getCurrentTrack().subscribe();
     interval(1000)
       .pipe(
@@ -29,15 +44,6 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
     return;
   }
 
-  ngOnDestroy(): void {
-    this.notifier$.next();
-    this.notifier$.complete();
-  }
-
-  public formatFunction(value: number) {
-    return `${value}%`;
-  }
-
   public onVolumeChange($event: Event) {
     this.spotifyService
       .setVolume(+($event.target as HTMLInputElement).value)
@@ -45,18 +51,14 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  public nextTrack() {
-    this.spotifyService.nextTrack().pipe(first()).subscribe();
+  public previousTrack() {
+    this.spotifyService.previousTrack().pipe(first()).subscribe();
   }
 
   public togglePlayback() {
     this.isPlaying
       ? this.spotifyService.pausePlayback().pipe(first()).subscribe()
       : this.spotifyService.startPlayback().pipe(first()).subscribe();
-  }
-
-  public previousTrack() {
-    this.spotifyService.previousTrack().pipe(first()).subscribe();
   }
 
   private getCurrentTrack() {

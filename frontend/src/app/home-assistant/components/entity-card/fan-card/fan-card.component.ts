@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { HassService } from 'src/app/home-assistant/services/hass.service';
-import { EntityCardComponent } from '../entity-card.component';
 import { FanDetailComponent } from '../../fan-detail/fan-detail.component';
+import { EntityCardComponent } from '../entity-card.component';
 
 @Component({
   selector: 'app-fan-card',

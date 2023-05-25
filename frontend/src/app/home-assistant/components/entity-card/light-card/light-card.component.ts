@@ -13,6 +13,7 @@ export class LightCardComponent extends EntityCardComponent {
   constructor(hassService: HassService, private dialog: MatDialog) {
     super(hassService);
   }
+
   public onRightMouseClick() {
     this.dialog.open(LightDetailComponent, {
       width: '500px',

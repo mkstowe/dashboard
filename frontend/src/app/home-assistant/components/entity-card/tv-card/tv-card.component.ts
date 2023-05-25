@@ -13,6 +13,7 @@ export class TvCardComponent extends EntityCardComponent {
   constructor(hassService: HassService, private dialog: MatDialog) {
     super(hassService);
   }
+
   public onRightMouseClick() {
     this.dialog.open(TvDetailComponent, {
       width: '70%',

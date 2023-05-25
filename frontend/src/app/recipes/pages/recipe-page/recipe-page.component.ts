@@ -9,16 +9,16 @@ import { PageEvent } from '@angular/material/paginator';
   encapsulation: ViewEncapsulation.None,
 })
 export class RecipePageComponent implements OnInit {
-  public recipes: any[];
+  public numPages: number;
+  public numRecipes: number;
+  public page = 1;
   public pageSize = 25;
   public pageSizeOptions = [5, 10, 25, 50, 100];
-  public page = 1;
-  public numRecipes: number;
-  public numPages: number;
+  public recipes: any[];
 
   constructor(private recipeService: RecipeService) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.recipeService
       .getRecipes(this.page, this.pageSize)
       .pipe(take(1))
@@ -27,10 +27,6 @@ export class RecipePageComponent implements OnInit {
         this.numRecipes = res?.total;
         this.numPages = res?.total_pages;
       });
-  }
-
-  public trackRecipe(index: number, recipe: any) {
-    return recipe.id;
   }
 
   public onPage($event: PageEvent) {
@@ -43,5 +39,9 @@ export class RecipePageComponent implements OnInit {
       .subscribe((res: any) => {
         this.recipes = res?.items;
       });
+  }
+
+  public trackRecipe(index: number, recipe: any) {
+    return recipe.id;
   }
 }

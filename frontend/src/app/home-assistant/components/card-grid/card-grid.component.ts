@@ -19,18 +19,23 @@ import { Card } from '../../models/card';
   encapsulation: ViewEncapsulation.None,
 })
 export class CardGridComponent implements OnInit, OnDestroy {
-  @ContentChildren('card') children: QueryList<HTMLElement>;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ContentChildren('card') public children: QueryList<HTMLElement>;
+  @Input() public cards: Card[];
+  @ViewChild(MatPaginator) public paginator: MatPaginator;
 
-  @Input() cards: Card[];
-
-  private index = 0;
-  private _index = new BehaviorSubject<number>(0);
-  private notifier$ = new Subject<void>();
-  private cardsPerPage = 4;
   public currCards: Card[];
 
-  ngOnInit(): void {
+  private _index = new BehaviorSubject<number>(0);
+  private cardsPerPage = 4;
+  private index = 0;
+  private notifier$ = new Subject<void>();
+
+  public ngOnDestroy(): void {
+    this.notifier$.next();
+    this.notifier$.complete();
+  }
+
+  public ngOnInit(): void {
     this._index.pipe(takeUntil(this.notifier$)).subscribe((idx) => {
       this.currCards = this.cards.slice(
         idx * this.cardsPerPage,
@@ -39,12 +44,7 @@ export class CardGridComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    this.notifier$.next();
-    this.notifier$.complete();
-  }
-
-  onSwipe(event: any) {
+  public onSwipe(event: any) {
     if (event.deltaX < -40) {
       if ((this.index + 1) * this.cardsPerPage < this.cards.length) {
         this.index++;

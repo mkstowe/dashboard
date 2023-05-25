@@ -21,13 +21,12 @@ import { HassEntity } from 'home-assistant-js-websocket';
   encapsulation: ViewEncapsulation.None,
 })
 export class StateGraphComponent implements OnInit, OnDestroy {
+  public chartData: ChartConfiguration['data'];
+  public chartOptions: ChartConfiguration['options'];
   public entity: HassEntity;
   public entityName: string;
   public stateOptions: StateOptions;
 
-  public chartData: ChartConfiguration['data'];
-
-  public chartOptions: ChartConfiguration['options'];
   private notifier$ = new Subject<void>();
 
   constructor(
@@ -42,7 +41,12 @@ export class StateGraphComponent implements OnInit, OnDestroy {
     Chart.register(Annotation);
   }
 
-  ngOnInit(): void {
+  public ngOnDestroy(): void {
+    this.notifier$.next();
+    this.notifier$.complete();
+  }
+
+  public ngOnInit(): void {
     this.chartOptions = {
       parsing: false,
       scales: {
@@ -124,11 +128,6 @@ export class StateGraphComponent implements OnInit, OnDestroy {
           ],
         };
       });
-  }
-
-  ngOnDestroy(): void {
-    this.notifier$.next();
-    this.notifier$.complete();
   }
 }
 

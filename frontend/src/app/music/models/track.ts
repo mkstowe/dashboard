@@ -1,9 +1,9 @@
 export interface Track {
-  title: string;
-  artist: string;
   album: string;
-  duration: number;
+  artist: string;
   cover: string;
+  duration: number;
   isPlaying: boolean;
   progress: number;
+  title: string;
 }
