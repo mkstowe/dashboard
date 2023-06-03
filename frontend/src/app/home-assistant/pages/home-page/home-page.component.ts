@@ -29,6 +29,22 @@ export class HomePageComponent {
             },
           },
         },
+        {
+          type: 'entityCard',
+          cardOptions: {
+            entityId: 'input_boolean.air_conditioner_toggle',
+            icon: 'fan',
+            iconActive: 'fan-active',
+            service: {
+              type: 'call_service',
+              domain: 'input_boolean',
+              service: 'toggle',
+              target: {
+                entity_id: 'input_boolean.air_conditioner_toggle'
+              }
+            }
+          }
+        }
       ],
     },
     {
