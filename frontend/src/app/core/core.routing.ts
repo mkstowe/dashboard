@@ -27,6 +27,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('../recipes/recipes.module').then((m) => m.RecipesModule),
   },
+  {
+    path: 'plants',
+    data: { tab: 4 },
+    loadChildren: () =>
+      import('../plants/plants.module').then((m) => m.PlantsModule)
+  }
 ];
 
 @NgModule({
