@@ -276,6 +276,38 @@ export class HomePageComponent {
       title: 'Kitchen',
       cards: [
         {
+          type: 'entityCard',
+          cardOptions: {
+            entityId: 'light.kitchen_light_1',
+            icon: 'ceiling-light',
+            iconActive: 'ceiling-light-active',
+            service: {
+              type: 'call_service',
+              domain: 'light',
+              service: 'toggle',
+              target: {
+                entity_id: 'light.kitchen_light_1'
+              }
+            }
+          }
+        },
+        {
+          type: 'entityCard',
+          cardOptions: {
+            entityId: 'light.kitchen_light_2',
+            icon: 'ceiling-light',
+            iconActive: 'ceiling-light-active',
+            service: {
+              type: 'call_service',
+              domain: 'light',
+              service: 'toggle',
+              target: {
+                entity_id: 'light.kitchen_light_2'
+              }
+            }
+          }
+        },
+        {
           type: 'speakerCard',
           cardOptions: {
             entityId: 'media_player.kitchen_display',
@@ -296,6 +328,38 @@ export class HomePageComponent {
     {
       title: 'Bathroom',
       cards: [
+        {
+          type: 'entityCard',
+          cardOptions: {
+            entityId: 'light.bathroom_light',
+            icon: 'ceiling-light',
+            iconActive: 'ceiling-light-active',
+            service: {
+              type: 'call_service',
+              domain: 'light',
+              service: 'toggle',
+              target: {
+                entity_id: 'light.bathroom_light'
+              }
+            }
+          }
+        },
+        {
+          type: 'entityCard',
+          cardOptions: {
+            entityId: 'switch.bathroom_fan',
+            icon: 'fan',
+            iconActive: 'fan-active',
+            service: {
+              type: 'call_service',
+              domain: 'switch',
+              service: 'toggle',
+              target: {
+                entity_id: 'switch.bathroom_fan'
+              }
+            }
+          }
+        },
         {
           type: 'speakerCard',
           cardOptions: {
