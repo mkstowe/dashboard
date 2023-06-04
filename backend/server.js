@@ -6,7 +6,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const spotifyRoute = require("./routes/Spotify");
+const plantsRoute = require("./routes/Plants");
 app.use("/spotify", spotifyRoute);
+app.use("/plants", plantsRoute);
 
 const ALLOWED_ORIGINS = [
   "http://localhost:4200",
