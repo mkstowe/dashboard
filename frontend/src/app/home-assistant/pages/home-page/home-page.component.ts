@@ -44,7 +44,24 @@ export class HomePageComponent {
               }
             }
           }
-        }
+        },
+        {
+          type: 'entityCard',
+          cardOptions: {
+            entityId: 'script.shower_time',
+            icon: 'toilet',
+            name: 'Shower Time',
+            state: ' ',
+            service: {
+              type: 'call_service',
+              domain: 'script',
+              service: 'turn_on',
+              target: {
+                entity_id: 'script.shower_time',
+              },
+            },
+          },
+        },
       ],
     },
     {
@@ -236,6 +253,22 @@ export class HomePageComponent {
         {
           type: 'lightCard',
           cardOptions: {
+            entityId: 'light.grow_light_1',
+            icon: 'light-bulb',
+            iconActive: 'light-bulb-active',
+            service: {
+              type: 'call_service',
+              domain: 'light',
+              service: 'toggle',
+              target: {
+                entity_id: 'light.grow_light_1',
+              },
+            },
+          },
+        },
+        {
+          type: 'lightCard',
+          cardOptions: {
             entityId: 'light.loft_lights',
             icon: 'ceiling-light',
             iconActive: 'ceiling-light-active',
@@ -266,6 +299,43 @@ export class HomePageComponent {
               service: 'toggle',
               target: {
                 entity_id: 'light.reading_nook',
+              },
+            },
+          },
+        },
+        {
+          type: 'lightCard',
+          cardOptions: {
+            entityId: 'light.grow_light_2',
+            icon: 'light-bulb',
+            iconActive: 'light-bulb-active',
+            service: {
+              type: 'call_service',
+              domain: 'light',
+              service: 'toggle',
+              target: {
+                entity_id: 'light.grow_light_2',
+              },
+            },
+          },
+        },
+      ],
+    },
+    {
+      title: 'Craft Nook',
+      cards: [
+         {
+          type: 'lightCard',
+          cardOptions: {
+            entityId: 'light.grow_light_3',
+            icon: 'light-bulb',
+            iconActive: 'light-bulb-active',
+            service: {
+              type: 'call_service',
+              domain: 'light',
+              service: 'toggle',
+              target: {
+                entity_id: 'light.grow_light_3',
               },
             },
           },
