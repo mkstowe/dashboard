@@ -60,10 +60,12 @@ export class IconModule {
       .addSvgIcon('lock', this.setPath(`${this.path}/lock.svg`))
       .addSvgIcon('lock-open', this.setPath(`${this.path}/lock_open.svg`))
       .addSvgIcon('music-note', this.setPath(`${this.path}/music_note.svg`))
+      .addSvgIcon('plant', this.setPath(`${this.path}/plant.svg`))
       .addSvgIcon('poop', this.setPath(`${this.path}/poop.svg`))
       .addSvgIcon('power', this.setPath(`${this.path}/power.svg`))
       .addSvgIcon('roomba', this.setPath(`${this.path}/roomba.svg`))
       .addSvgIcon('security-cam', this.setPath(`${this.path}/security_cam.svg`))
+      .addSvgIcon('shower', this.setPath(`${this.path}/shower.svg`))
       .addSvgIcon('speaker', this.setPath(`${this.path}/speaker.svg`))
       .addSvgIcon(
         'speaker-active',
