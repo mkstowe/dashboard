@@ -49,7 +49,7 @@ export class HomePageComponent {
           type: 'entityCard',
           cardOptions: {
             entityId: 'script.shower_time',
-            icon: 'toilet',
+            icon: 'shower',
             name: 'Shower Time',
             state: ' ',
             service: {
