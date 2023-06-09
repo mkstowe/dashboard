@@ -33,6 +33,6 @@ export class PlantService {
   }
 
   public deletePlant(id: number) {
-    return this.http.delete(`/api/plant/${id}`).pipe(tap(() => this.refetchSubject.next(null)));
+    return this.http.delete(`/api/plants/${id}`).pipe(tap(() => this.refetchSubject.next(null)));
   }
 }

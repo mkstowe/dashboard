@@ -1,10 +1,20 @@
 <div class="add-plant-wrapper">
-  <h2>{{ this.plantExists ? "Edit Plant" : "Add Plant" }}</h2>
+  <div class="header">
+    <h2>{{ this.plantExists ? "Edit Plant" : "Add Plant" }}</h2>
+    <button class="close-btn" mat-icon-button mat-dialog-close>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
   <form [formGroup]="addPlantForm" (ngSubmit)="onSubmit()">
     <div class="row">
       <mat-label>Name</mat-label>
       <mat-form-field appearance="outline">
-        <input matInput placeholder="Rubber Tree" formControlName="name" />
+        <input
+          matInput
+          placeholder="Rubber Tree"
+          formControlName="name"
+          autofocus
+        />
       </mat-form-field>
     </div>
 
@@ -67,15 +77,11 @@
     </div>
 
     <div class="row">
-  <mat-label>Notes</mat-label>
-  <mat-form-field appearance="outline">
-    <textarea
-      matInput
-      formControlName="notes"
-    ></textarea>
-  </mat-form-field>
-</div>
-
+      <mat-label>Notes</mat-label>
+      <mat-form-field appearance="outline">
+        <textarea matInput formControlName="notes"></textarea>
+      </mat-form-field>
+    </div>
 
     <mat-accordion>
       <mat-expansion-panel>
@@ -102,9 +108,14 @@
         </div>
 
         <div class="row">
-            <mat-label>Is Toxic
-              <mat-checkbox color="primary" labelPosition="before" formControlName="isToxic"></mat-checkbox>
-            </mat-label>
+          <mat-label
+            >Is Toxic
+            <mat-checkbox
+              color="primary"
+              labelPosition="before"
+              formControlName="isToxic"
+            ></mat-checkbox>
+          </mat-label>
         </div>
 
         <div class="row">
@@ -154,10 +165,22 @@
     </mat-accordion>
 
     <div class="action-buttons">
-      <button mat-flat-button mat-dialog-close>Cancel</button>
-      <button mat-flat-button color="primary">{{ this.plantExists ? "Update Plant" : "Create Plant" }}</button>
+      <button
+        [disabled]="confirmDelete"
+        class="delete-btn"
+        mat-flat-button
+        (click)="onDelete()"
+        *ngIf="plantExists"
+      >
+        Delete
+      </button>
+      <p class="confirm-delete" *ngIf="confirmDelete">
+        Are you sure? <button mat-button (click)="close()">No</button> /
+        <button mat-button (click)="onDelete()">Yes</button>
+      </p>
+      <button class="create-btn" mat-flat-button color="primary">
+        {{ this.plantExists ? "Update Plant" : "Create Plant" }}
+      </button>
     </div>
   </form>
-
-
 </div>

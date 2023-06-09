@@ -8,6 +8,7 @@ import {
 } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Plant } from '../../models/plant';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-add-plant-modal",
@@ -18,11 +19,14 @@ import { Plant } from '../../models/plant';
 export class AddPlantModalComponent implements OnInit {
   public addPlantForm: FormGroup;
   public plantExists: boolean;
+  public confirmDelete: boolean;
   private plant: Plant;
 
-  constructor(private plantService: PlantService, private formBuilder: FormBuilder, private dialogRef: MatDialogRef<AddPlantModalComponent>, @Inject(MAT_DIALOG_DATA) data: { plant: Plant }) {
-    this.plant = data.plant;
-    this.plantExists = true;
+  constructor(private router: Router, private plantService: PlantService, private formBuilder: FormBuilder, private dialogRef: MatDialogRef<AddPlantModalComponent>, @Inject(MAT_DIALOG_DATA) data: { plant: Plant }) {
+    if (data?.plant) {
+      this.plant = data.plant;
+      this.plantExists = true;
+    }
   }
 
   public get name(): AbstractControl {
@@ -137,6 +141,20 @@ export class AddPlantModalComponent implements OnInit {
       this.plantService.createPlant(this.addPlantForm.value).subscribe();
     }
 
+    this.dialogRef.close();
+  }
+
+  public onDelete() {
+    if (this.confirmDelete) {
+      this.plantService.deletePlant(this.plant.id).subscribe();
+      this.router.navigate(['/plants']);
+      this.close();
+    } else {
+      this.confirmDelete = true;
+    }
+  }
+
+  public close() {
     this.dialogRef.close();
   }
 }

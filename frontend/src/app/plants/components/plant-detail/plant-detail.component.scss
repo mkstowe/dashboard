@@ -21,17 +21,6 @@
     font-weight: 600;
   }
 
-  .notes {
-    .label {
-      font-size: 22px;
-      font-size: 500;
-    }
-
-    .description {
-      font-size: 18px;
-    }
-  }
-
   .main-details {
     display: flex;
     flex-direction: column;
@@ -90,6 +79,19 @@
       .description {
         font-size: 18px;
       }
+    }
+  }
+
+  .notes {
+    margin-top: 50px;
+
+    .label {
+      font-size: 22px;
+      font-size: 500;
+    }
+
+    .description {
+      font-size: 18px;
     }
   }
 

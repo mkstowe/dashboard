@@ -53,3 +53,5 @@
 **/*.vsix
 
 **/.ionide
+
+**/dashboard.sqlite
