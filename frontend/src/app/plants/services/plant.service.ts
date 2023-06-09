@@ -1,36 +1,38 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { Plant } from '../models/plant';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlantService {
-  // public readonly plants: Observable<object>;
-  // private _plants: BehaviorSubject<object>;
+  private refetchSubject = new BehaviorSubject(null);
 
   constructor(private http: HttpClient) {
-    // this.plants = this._plants.asObservable();
   }
 
-  public getAllPlants() {
-    return this.http.get('/api/plants');
+  get refetch() {
+    return this.refetchSubject.asObservable();
+  }
+
+  public getAllPlants(): Observable<Plant[]> {
+    return this.http.get<Plant[]>('/api/plants');
   }
 
   public getPlant(id: number) {
-    return this.http.get(`/api/plants/${id}`)
+    return this.http.get<Plant>(`/api/plants/${id}`)
   }
 
   public createPlant(plant: Plant) {
-    return this.http.post('/api/plants', plant);
+    return this.http.post<Plant>('/api/plants', plant).pipe(tap(() => this.refetchSubject.next(null)));
   }
 
   public updatePlant(id: number, plant: Plant) {
-    return this.http.patch(`/api/plants/${id}`, plant);
+    return this.http.patch(`/api/plants/${id}`, plant).pipe(tap(() => this.refetchSubject.next(null)));
   }
 
   public deletePlant(id: number) {
-    return this.http.delete(`/api/plant/${id}`);
+    return this.http.delete(`/api/plant/${id}`).pipe(tap(() => this.refetchSubject.next(null)));
   }
 }

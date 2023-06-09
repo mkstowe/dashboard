@@ -1,0 +1,108 @@
+@import "../../../../assets/scss/variables";
+
+.plant-detail-wrapper {
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+  padding: 50px;
+
+  color: $foreground;
+
+  .primary-name {
+    font-size: 36px;
+    font-weight: 600;
+  }
+
+  .secondary-name {
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  .notes {
+    .label {
+      font-size: 22px;
+      font-size: 500;
+    }
+
+    .description {
+      font-size: 18px;
+    }
+  }
+
+  .main-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .row {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+
+      padding: 15px 0;
+
+      border-bottom: 2px solid rgba($foreground, 0.2);
+
+      .label {
+        margin: 0;
+        font-size: 22px;
+        font-weight: 500;
+
+        &.is-toxic {
+          color: $danger;
+        }
+      }
+
+      .description {
+        font-size: 18px;
+
+        p {
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  .extra-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    margin-top: 50px;
+
+    .care-box {
+      width: 250px;
+      height: 250px;
+      padding: 15px;
+
+      border: 2px solid rgba($foreground, 0.2);
+      border-radius: 15px;
+
+      .label {
+        padding-bottom: 10px;
+        font-size: 22px;
+        font-weight: 500;
+        border-bottom: 2px solid rgba($foreground, 0.2);
+      }
+
+      .description {
+        font-size: 18px;
+      }
+    }
+  }
+
+  button {
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+
+    width: 65px;
+    height: 65px;
+
+    mat-icon {
+      transform: scale(1.2);
+    }
+  }
+}

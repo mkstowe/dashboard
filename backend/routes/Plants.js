@@ -6,7 +6,7 @@ const db = require("../db/dashboard");
 // Get all plants
 router.get("/", async (req, res) => {
     const plants = await db.getAllPlants();
-    res.status(200).json({ plants });
+    res.status(200).json(plants);
 });
 
 // Get plant by id

@@ -6,4 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./plant-card.component.scss']
 })
 export class PlantCardComponent {
+  @Input() id: number;
+  @Input() name: string | undefined;
+  @Input() scientificName: string | undefined;
 }

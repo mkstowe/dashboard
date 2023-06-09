@@ -5,7 +5,7 @@ function getAllPlants() {
 }
 
 function getPlant(id) {
-    return knex("plants").select("*").where("id", id);
+    return knex("plants").select("*").where("id", id).first();
 }
 
 function createPlant(plant) {

@@ -1,1 +1,7 @@
-<p>plant-card works!</p>
+<div class="plant-card-wrapper">
+  <div class="plant-icon">
+    <mat-icon class="icon" svgIcon="plant"></mat-icon>
+  </div>
+  <div class="primary-name">{{ name || scientificName }}</div>
+  <div class="secondary-name" *ngIf="name">{{ scientificName }}</div>
+</div>

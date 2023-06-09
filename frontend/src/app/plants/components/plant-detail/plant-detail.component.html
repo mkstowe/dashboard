@@ -1,0 +1,79 @@
+<div class="plant-detail-wrapper" *ngIf="plant">
+  <div class="header">
+    <h2 class="primary-name">{{ plant.name || plant.scientificName }}</h2>
+    <h3 class="secondary-name" *ngIf="plant.name && plant?.scientificName">
+      {{ plant.scientificName }}
+    </h3>
+  </div>
+  <div class="main-details">
+    <div class="row" *ngIf="plant.type">
+      <div class="label">Type</div>
+      <p class="description">{{ plant.type }}</p>
+    </div>
+    <div class="row" *ngIf="plant.dateAdded">
+      <div class="label">Date Added</div>
+      <p class="description">{{ plant.dateAdded }}</p>
+    </div>
+
+    <div class="row" *ngIf="plant.temperature">
+      <div class="label">Temperature</div>
+      <p class="description">
+        {{ plant.temperature }}
+      </p>
+    </div>
+
+    <div class="row" *ngIf="plant.humidity">
+      <div class="label"><p>Humidity</p></div>
+      <p class="description">
+        {{ plant.humidity }}
+      </p>
+    </div>
+
+    <div class="row" *ngIf="plant.isToxic">
+      <div class="label is-toxic"><h4>TOXIC</h4></div>
+    </div>
+  </div>
+
+  <div class="extra-details">
+    <div class="care-box sunlight" *ngIf="plant.light">
+      <div class="label">Sunlight</div>
+      <p class="description">{{ plant.light }}</p>
+    </div>
+
+    <div class="care-box water" *ngIf="plant.water">
+      <div class="label">Water</div>
+      <p class="description">{{ plant.water }}</p>
+    </div>
+
+    <div class="care-box soil" *ngIf="plant.soil">
+      <div class="label">Soil</div>
+      <p class="description">{{ plant.soil }}</p>
+    </div>
+
+    <div class="care-box fertilizer" *ngIf="plant.fertilizer">
+      <div class="label">Fertilizer</div>
+      <p class="description">{{ plant.fertilizer }}</p>
+    </div>
+
+    <div class="care-box propagation" *ngIf="plant.propagation">
+      <div class="label">Propagation</div>
+      <p class="description">{{ plant.propagation }}</p>
+    </div>
+
+    <div class="care-box repotting" *ngIf="plant.repotting">
+      <div class="label">Repotting</div>
+      <p class="description">{{ plant.repotting }}</p>
+    </div>
+  </div>
+
+  <div class="notes" *ngIf="plant.notes">
+    <div class="label">Notes</div>
+    <p class="description">{{ plant.notes }}</p>
+  </div>
+
+  <div class="edit-button">
+    <button mat-fab color="primary" (click)="editPlant()">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
+</div>

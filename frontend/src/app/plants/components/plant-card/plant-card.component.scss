@@ -1,0 +1,50 @@
+@import "../../../../assets/scss/variables";
+
+.plant-card-wrapper {
+  position: relative;
+
+  container-name: card;
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+
+  aspect-ratio: 1/1;
+  padding: 20px;
+
+  color: $foreground;
+
+  border: 2px solid rgba($foreground, 0.2);
+  border-radius: 15px;
+
+  .icon {
+    position: absolute;
+    top: 12%;
+    left: 12%;
+
+    container-name: plant-icon;
+    container-type: inline-size;
+
+    width: 125px;
+    height: 125px;
+
+    .icon {
+      position: absolute;
+      z-index: 899;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .primary-name {
+    margin-bottom: 5px;
+    font-size: 32px;
+    font-weight: 600;
+  }
+
+  .secondary-name {
+    font-size: 24px;
+    font-weight: 600;
+  }
+}

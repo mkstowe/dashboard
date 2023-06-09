@@ -1,5 +1,5 @@
 <div class="add-plant-wrapper">
-  <h2>Add Plant</h2>
+  <h2>{{ this.plantExists ? "Edit Plant" : "Add Plant" }}</h2>
   <form [formGroup]="addPlantForm" (ngSubmit)="onSubmit()">
     <div class="row">
       <mat-label>Name</mat-label>
@@ -155,7 +155,7 @@
 
     <div class="action-buttons">
       <button mat-flat-button mat-dialog-close>Cancel</button>
-      <button mat-flat-button color="primary">Create Plant</button>
+      <button mat-flat-button color="primary">{{ this.plantExists ? "Update Plant" : "Create Plant" }}</button>
     </div>
   </form>
 

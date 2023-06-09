@@ -1,5 +1,18 @@
 <div class="plants-page">
-    <div class="dashboard plants-dash">
-        <button mat-flat-button color="primary" (click)="onAddPlant()">Add Plant</button>
+  <div class="dashboard plants-dash">
+    <div class="plant-grid">
+      <ng-container *ngFor="let plant of (plants | async)">
+        <app-plant-card
+          [id]="plant.id"
+          [name]="plant.name"
+          [scientificName]="plant.scientificName"
+          routerLink="{{plant.id}}"
+        ></app-plant-card>
+      </ng-container>
     </div>
+
+    <button mat-fab color="primary" (click)="onAddPlant()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
 </div>

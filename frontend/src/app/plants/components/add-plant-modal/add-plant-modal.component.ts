@@ -1,12 +1,13 @@
 import { PlantService } from './../../services/plant.service';
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, Inject, OnInit, ViewEncapsulation } from "@angular/core";
 import {
   AbstractControl,
   FormBuilder,
   FormGroup,
   Validators,
 } from "@angular/forms";
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Plant } from '../../models/plant';
 
 @Component({
   selector: "app-add-plant-modal",
@@ -16,8 +17,13 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class AddPlantModalComponent implements OnInit {
   public addPlantForm: FormGroup;
+  public plantExists: boolean;
+  private plant: Plant;
 
-  constructor(private plantService: PlantService, private formBuilder: FormBuilder, private dialogRef: MatDialogRef<AddPlantModalComponent>) {}
+  constructor(private plantService: PlantService, private formBuilder: FormBuilder, private dialogRef: MatDialogRef<AddPlantModalComponent>, @Inject(MAT_DIALOG_DATA) data: { plant: Plant }) {
+    this.plant = data.plant;
+    this.plantExists = true;
+  }
 
   public get name(): AbstractControl {
     return this.addPlantForm.get("name")!;
@@ -26,6 +32,10 @@ export class AddPlantModalComponent implements OnInit {
   public get scientificName(): AbstractControl {
     return this.addPlantForm.get("scientificName")!;
   }
+
+  // public get image(): AbstractControl {
+  // return this.addPlantForm.get('image')!;
+  // }
 
   public get type(): AbstractControl {
     return this.addPlantForm.get("type")!;
@@ -79,6 +89,7 @@ export class AddPlantModalComponent implements OnInit {
     this.addPlantForm = this.formBuilder.group({
       name: [""],
       scientificName: [""],
+      // image: [null],
       type: [""],
       dateAdded: [null],
       temperature: [""],
@@ -92,12 +103,40 @@ export class AddPlantModalComponent implements OnInit {
       repotting: [""],
       notes: [""],
     });
+
+    if (this.plant) {
+      this.addPlantForm.patchValue({
+        name: this.plant.name,
+        scientificName: this.plant.scientificName,
+        type: this.plant.type,
+        dateAdded: this.plant.dateAdded,
+        temperature: this.plant.temperature,
+        humidity: this.plant.humidity,
+        isToxic: this.plant.isToxic,
+        light: this.plant.light,
+        water: this.plant.water,
+        soil: this.plant.soil,
+        fertilizer: this.plant.fertilizer,
+        propagation: this.plant.propagation,
+        repotting: this.plant.repotting,
+        notes: this.plant.notes
+      })
+    }
   }
 
+  // public onFileUpload(event: any) {
+  // const file = event.target.files[0];
+  // }
+
   public onSubmit() {
-    if (!this.addPlantForm.pristine && !this.addPlantForm.invalid) {
+    if (this.addPlantForm.pristine || this.addPlantForm.invalid) return;
+
+    if (this.plant) {
+      this.plantService.updatePlant(this.plant.id, this.addPlantForm.value).subscribe();
+    } else {
       this.plantService.createPlant(this.addPlantForm.value).subscribe();
-      this.dialogRef.close();
     }
+
+    this.dialogRef.close();
   }
 }

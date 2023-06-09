@@ -6,6 +6,7 @@ import { PlantCardComponent } from './components/plant-card/plant-card.component
 import { AddPlantModalComponent } from './components/add-plant-modal/add-plant-modal.component';
 import { RouterModule } from '@angular/router';
 import { PLANT_ROUTES } from './plants.routing';
+import { PlantDetailComponent } from './components/plant-detail/plant-detail.component';
 
 
 
@@ -13,7 +14,8 @@ import { PLANT_ROUTES } from './plants.routing';
   declarations: [
     PlantsPageComponent,
     PlantCardComponent,
-    AddPlantModalComponent
+    AddPlantModalComponent,
+    PlantDetailComponent
   ],
   imports: [
     CommonModule,

@@ -26,9 +26,9 @@
       margin-top: 15px;
 
       mat-label {
-        margin-bottom: 10px;
         font-size: 20px;
         font-weight: 500;
+        margin-bottom: 10px;
       }
 
       mat-form-field {
@@ -46,19 +46,16 @@
         }
       }
 
+      .image-upload {
+        margin-top: 10px;
+        margin-bottom: 20px;
+      }
+
       mat-checkbox {
         margin-left: 15px;
 
         .mdc-checkbox__background {
-          border-color: $foreground !important;
-
-          &:checked {
-            border-color: $accent !important;
-          }
-        }
-
-        .mdc-checkbox__native-control:checked {
-          border-color: $accent;
+          border-color: rgba($foreground, 0.4) !important;
         }
       }
 
