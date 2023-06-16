@@ -96,7 +96,8 @@ export class HomePageComponent {
           type: 'sensorGroup',
           sensors: [
             {
-              entityId: 'sensor.network_speeds',
+              name: "Network Speeds",
+              entityId: 'sensor.speedtest_download',
               icon: 'speedometer',
               stateOptions: {
                 round: true,
