@@ -30,9 +30,21 @@ export class PlantDetailComponent implements OnInit {
     this.dialog.open(AddPlantModalComponent, {
       width: '700px',
       height: '90%',
+      enterAnimationDuration: 100,
+      exitAnimationDuration: 100,
       data: {
         plant: this.plant
       }
     });
+  }
+
+  public onWater() {
+    const lastWatered = new Date();
+    this.plantService.updatePlant(this.id, { lastWatered }).subscribe();
+  }
+
+  public onFertilize() {
+    const lastFertilized = new Date();
+    this.plantService.updatePlant(this.id, { lastFertilized }).subscribe();
   }
 }

@@ -28,7 +28,7 @@ export class PlantService {
     return this.http.post<Plant>('/api/plants', plant).pipe(tap(() => this.refetchSubject.next(null)));
   }
 
-  public updatePlant(id: number, plant: Plant) {
+  public updatePlant(id: number, plant: Partial<Plant>) {
     return this.http.patch(`/api/plants/${id}`, plant).pipe(tap(() => this.refetchSubject.next(null)));
   }
 

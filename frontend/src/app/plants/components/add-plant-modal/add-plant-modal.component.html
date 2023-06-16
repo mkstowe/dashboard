@@ -1,10 +1,11 @@
 <div class="add-plant-wrapper">
   <div class="header">
-    <h2>{{ this.plantExists ? "Edit Plant" : "Add Plant" }}</h2>
-    <button class="close-btn" mat-icon-button mat-dialog-close>
+    <h2 mat-dialog-header>{{ this.plantExists ? "Edit Plant" : "Add Plant" }}</h2>
+    <button class="close-btn" mat-icon-button mat-dialog-close tabindex="-1">
       <mat-icon>close</mat-icon>
     </button>
   </div>
+  <mat-dialog-content>
   <form [formGroup]="addPlantForm" (ngSubmit)="onSubmit()">
     <div class="row">
       <mat-label>Name</mat-label>
@@ -73,6 +74,42 @@
           placeholder="Let dry almost completely between waterings."
           formControlName="water"
         ></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="row" *ngIf="plantExists">
+      <mat-label>Last Watered</mat-label>
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          [matDatepicker]="lastWateredPicker"
+          formControlName="lastWatered"
+          placeholder="MM/DD/YYYY"
+        />
+        <mat-error *ngIf="lastWatered.invalid">Invalid date</mat-error>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="lastWateredPicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #lastWateredPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="row" *ngIf="plantExists">
+      <mat-label>Last Fertilized</mat-label>
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          [matDatepicker]="lastFertilizedPicker"
+          formControlName="lastFertilized"
+          placeholder="MM/DD/YYYY"
+        />
+        <mat-error *ngIf="lastFertilized.invalid">Invalid date</mat-error>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="lastFertilizedPicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #lastFertilizedPicker></mat-datepicker>
       </mat-form-field>
     </div>
 
@@ -164,23 +201,25 @@
       </mat-expansion-panel>
     </mat-accordion>
 
-    <div class="action-buttons">
-      <button
-        [disabled]="confirmDelete"
-        class="delete-btn"
-        mat-flat-button
-        (click)="onDelete()"
-        *ngIf="plantExists"
-      >
-        Delete
-      </button>
-      <p class="confirm-delete" *ngIf="confirmDelete">
-        Are you sure? <button mat-button (click)="close()">No</button> /
-        <button mat-button (click)="onDelete()">Yes</button>
-      </p>
-      <button class="create-btn" mat-flat-button color="primary">
-        {{ this.plantExists ? "Update Plant" : "Create Plant" }}
-      </button>
-    </div>
   </form>
+</mat-dialog-content>
+<mat-divider></mat-divider>
+<mat-dialog-actions>
+  <button
+    [disabled]="confirmDelete"
+    class="delete-btn"
+    mat-flat-button
+    (click)="onDelete()"
+    *ngIf="plantExists"
+  >
+    Delete
+  </button>
+  <p class="confirm-delete" *ngIf="confirmDelete">
+    Are you sure? <button mat-button (click)="close()">No</button> /
+    <button mat-button (click)="onDelete()">Yes</button>
+  </p>
+  <button class="create-btn" mat-flat-button color="primary">
+    {{ this.plantExists ? "Update Plant" : "Create Plant" }}
+  </button>
+</mat-dialog-actions>
 </div>

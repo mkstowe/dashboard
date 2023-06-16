@@ -89,6 +89,14 @@ export class AddPlantModalComponent implements OnInit {
     return this.addPlantForm.get("notes")!;
   }
 
+  public get lastWatered(): AbstractControl {
+    return this.addPlantForm.get("lastWatered")!;
+  }
+
+  public get lastFertilized(): AbstractControl {
+    return this.addPlantForm.get("lastFertilized")!;
+  }
+
   ngOnInit(): void {
     this.addPlantForm = this.formBuilder.group({
       name: [""],
@@ -106,6 +114,8 @@ export class AddPlantModalComponent implements OnInit {
       propagation: [""],
       repotting: [""],
       notes: [""],
+      lastWatered: [null],
+      lastFertilized: [null]
     });
 
     if (this.plant) {
@@ -123,7 +133,9 @@ export class AddPlantModalComponent implements OnInit {
         fertilizer: this.plant.fertilizer,
         propagation: this.plant.propagation,
         repotting: this.plant.repotting,
-        notes: this.plant.notes
+        notes: this.plant.notes,
+        lastWatered: this.plant.lastWatered,
+        lastFertilized: this.plant.lastFertilized
       })
     }
   }

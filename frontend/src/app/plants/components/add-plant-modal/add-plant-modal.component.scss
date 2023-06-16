@@ -2,12 +2,12 @@
 @import "../../../../assets/scss/variables";
 
 .add-plant-wrapper {
-  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
 
   width: 100%;
   height: 100%;
   padding: 25px 50px;
-  padding-bottom: 50px;
 
   color: $foreground;
 
@@ -18,107 +18,113 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 35px;
+    margin-bottom: 10px;
   }
 
-  form {
-    .row {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      margin-top: 15px;
+  mat-dialog-content {
+    margin-bottom: 35px;
 
-      mat-label {
-        margin-bottom: 10px;
-        font-size: 20px;
-        font-weight: 500;
-      }
-
-      mat-form-field {
-        ::placeholder {
-          color: rgba($foreground, 0.4) !important;
-        }
-
-        input,
-        textarea {
-          color: $foreground !important;
-        }
-
-        mat-datepicker-toggle {
-          color: rgba($foreground, 0.6) !important;
-        }
-      }
-
-      .image-upload {
-        margin-top: 10px;
-        margin-bottom: 20px;
-      }
-
-      mat-checkbox {
-        margin-left: 15px;
-
-        .mdc-checkbox__background {
-          border-color: rgba($foreground, 0.4) !important;
-        }
-      }
-
-      mat-error {
-        color: $danger;
-      }
-    }
-
-    mat-expansion-panel {
+    form {
       color: $foreground;
-      background-color: $background;
-      box-shadow: none !important;
 
-      mat-expansion-panel-header {
-        padding: 0;
-      }
+      .row {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 15px;
 
-      mat-panel-title {
-        display: inline;
-        margin-right: 0;
-        font-size: 18px;
-        color: $foreground;
-      }
+        mat-label {
+          margin-bottom: 10px;
+          font-size: 20px;
+          font-weight: 600;
+        }
 
-      .mat-expansion-indicator::after {
-        color: $foreground !important;
-      }
-    }
+        mat-form-field {
+          ::placeholder {
+            color: rgba($foreground, 0.4) !important;
+          }
 
-    .action-buttons {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+          input,
+          textarea {
+            color: $foreground !important;
+          }
 
-      margin-top: 30px;
-      padding-top: 50px;
+          mat-datepicker-toggle {
+            color: rgba($foreground, 0.6) !important;
+          }
+        }
 
-      border-top: 2px solid rgba($foreground, 0.2);
+        .image-upload {
+          margin-top: 10px;
+          margin-bottom: 20px;
+        }
 
-      button {
-        padding: 25px 30px;
-      }
+        mat-checkbox {
+          margin-left: 15px;
 
-      .create-btn {
-        margin-left: auto;
-      }
+          .mdc-checkbox__background {
+            border-color: rgba($foreground, 0.4) !important;
+          }
+        }
 
-      .delete-btn {
-        background-color: $danger;
-      }
-
-      .confirm-delete {
-        margin: 0;
-        margin-left: 20px;
-        color: $danger;
-
-        button {
-          padding: 0;
+        mat-error {
           color: $danger;
         }
+      }
+
+      mat-expansion-panel {
+        color: $foreground;
+        background-color: $background;
+        box-shadow: none !important;
+
+        mat-expansion-panel-header {
+          padding: 0;
+        }
+
+        mat-panel-title {
+          display: inline;
+          margin-right: 0;
+          font-size: 18px;
+          color: $foreground;
+        }
+
+        .mat-expansion-indicator::after {
+          color: $foreground !important;
+        }
+      }
+    }
+  }
+
+  mat-divider {
+    border-color: rgba($foreground, 0.2);
+  }
+
+  mat-dialog-actions {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    margin-top: 30px;
+
+    button {
+      padding: 25px 30px;
+    }
+
+    .create-btn {
+      margin-left: auto;
+    }
+
+    .delete-btn {
+      background-color: $danger;
+    }
+
+    .confirm-delete {
+      margin: 0;
+      margin-left: 20px;
+      color: $danger;
+
+      button {
+        padding: 0;
+        color: $danger;
       }
     }
   }

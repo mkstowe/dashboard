@@ -1,3 +1,4 @@
+/* stylelint-disable no-descending-specificity */
 @import "../../../../assets/scss/variables";
 
 .plant-detail-wrapper {
@@ -11,14 +12,39 @@
 
   color: $foreground;
 
-  .primary-name {
-    font-size: 36px;
-    font-weight: 600;
-  }
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-  .secondary-name {
-    font-size: 30px;
-    font-weight: 600;
+    .names {
+      .primary-name {
+        font-size: 36px;
+        font-weight: 600;
+      }
+
+      .secondary-name {
+        font-size: 30px;
+        font-weight: 600;
+      }
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+
+      .action {
+        display: flex;
+        gap: 25px;
+        align-items: center;
+        justify-content: end;
+
+        button {
+          padding: 15px;
+          width: 100px;
+        }
+      }
+    }
   }
 
   .main-details {
@@ -95,7 +121,7 @@
     }
   }
 
-  button {
+  .edit-button button {
     position: absolute;
     right: 30px;
     bottom: 30px;

@@ -23,7 +23,9 @@ export class PlantsPageComponent implements OnInit {
   public onAddPlant() {
     this.dialog.open(AddPlantModalComponent, {
       width: '700px',
-      height: '90%'
+      height: '90%',
+      enterAnimationDuration: 100,
+      exitAnimationDuration: 100,
     });
   }
 }

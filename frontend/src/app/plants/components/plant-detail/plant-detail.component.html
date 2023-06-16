@@ -1,9 +1,38 @@
 <div class="plant-detail-wrapper" *ngIf="plant">
   <div class="header">
-    <h2 class="primary-name">{{ plant.name || plant.scientificName }}</h2>
-    <h3 class="secondary-name" *ngIf="plant.name && plant?.scientificName">
-      {{ plant.scientificName }}
-    </h3>
+    <div class="names">
+      <h2 class="primary-name">{{ plant.name || plant.scientificName }}</h2>
+      <h3 class="secondary-name" *ngIf="plant.name && plant?.scientificName">
+        {{ plant.scientificName }}
+      </h3>
+    </div>
+
+    <div class="actions">
+      <div class="water action">
+        <p>
+          {{
+            plant.lastWatered
+              ? "Last watered " + (plant.lastWatered | dateAgo)
+              : "Never watered"
+          }}
+        </p>
+        <button mat-flat-button color="primary" (click)="onWater()">
+          Water
+        </button>
+      </div>
+      <div class="fertilize action">
+        <p>
+          {{
+            plant.lastFertilized
+              ? "Last fertilized " + (plant.lastFertilized | dateAgo)
+              : "Never fertilized"
+          }}
+        </p>
+        <button mat-flat-button color="primary" (click)="onFertilize()">
+          Fertilize
+        </button>
+      </div>
+    </div>
   </div>
   <div class="main-details">
     <div class="row" *ngIf="plant.type">
@@ -12,7 +41,7 @@
     </div>
     <div class="row" *ngIf="plant.dateAdded">
       <div class="label">Date Added</div>
-      <p class="description">{{ plant.dateAdded | date : 'longDate' }}</p>
+      <p class="description">{{ plant.dateAdded | date : "longDate" }}</p>
     </div>
 
     <div class="row" *ngIf="plant.temperature">
