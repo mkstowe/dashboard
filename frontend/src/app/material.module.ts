@@ -31,7 +31,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatInputModule,
     MatSlideToggleModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   exports: [
     MatButtonModule,
@@ -48,7 +48,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatInputModule,
     MatSlideToggleModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   providers: [MatIconRegistry],
 })

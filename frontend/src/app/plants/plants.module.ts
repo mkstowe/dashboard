@@ -9,21 +9,15 @@ import { PLANT_ROUTES } from './plants.routing';
 import { PlantDetailComponent } from './components/plant-detail/plant-detail.component';
 import { PlantActionModalComponent } from './components/plant-action-modal/plant-action-modal.component';
 
-
-
 @NgModule({
   declarations: [
     PlantsPageComponent,
     PlantCardComponent,
     AddPlantModalComponent,
     PlantDetailComponent,
-    PlantActionModalComponent
+    PlantActionModalComponent,
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule.forChild(PLANT_ROUTES)
-  ],
-  exports: [PlantsPageComponent]
+  imports: [CommonModule, SharedModule, RouterModule.forChild(PLANT_ROUTES)],
+  exports: [PlantsPageComponent],
 })
-export class PlantsModule { }
+export class PlantsModule {}

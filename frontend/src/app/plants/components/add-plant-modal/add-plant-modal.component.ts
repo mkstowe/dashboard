@@ -1,20 +1,20 @@
 import { PlantService } from './../../services/plant.service';
-import { Component, Inject, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
   FormGroup,
   Validators,
-} from "@angular/forms";
+} from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Plant } from '../../models/plant';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: "app-add-plant-modal",
-  templateUrl: "./add-plant-modal.component.html",
-  styleUrls: ["./add-plant-modal.component.scss"],
-  encapsulation: ViewEncapsulation.None
+  selector: 'app-add-plant-modal',
+  templateUrl: './add-plant-modal.component.html',
+  styleUrls: ['./add-plant-modal.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AddPlantModalComponent implements OnInit {
   public addPlantForm: FormGroup;
@@ -22,7 +22,13 @@ export class AddPlantModalComponent implements OnInit {
   public confirmDelete: boolean;
   private plant: Plant;
 
-  constructor(private router: Router, private plantService: PlantService, private formBuilder: FormBuilder, private dialogRef: MatDialogRef<AddPlantModalComponent>, @Inject(MAT_DIALOG_DATA) data: { plant: Plant }) {
+  constructor(
+    private router: Router,
+    private plantService: PlantService,
+    private formBuilder: FormBuilder,
+    private dialogRef: MatDialogRef<AddPlantModalComponent>,
+    @Inject(MAT_DIALOG_DATA) data: { plant: Plant }
+  ) {
     if (data?.plant) {
       this.plant = data.plant;
       this.plantExists = true;
@@ -30,11 +36,11 @@ export class AddPlantModalComponent implements OnInit {
   }
 
   public get name(): AbstractControl {
-    return this.addPlantForm.get("name")!;
+    return this.addPlantForm.get('name')!;
   }
 
   public get scientificName(): AbstractControl {
-    return this.addPlantForm.get("scientificName")!;
+    return this.addPlantForm.get('scientificName')!;
   }
 
   // public get image(): AbstractControl {
@@ -42,80 +48,80 @@ export class AddPlantModalComponent implements OnInit {
   // }
 
   public get type(): AbstractControl {
-    return this.addPlantForm.get("type")!;
+    return this.addPlantForm.get('type')!;
   }
 
   public get dateAdded(): AbstractControl {
-    return this.addPlantForm.get("dateAdded")!;
+    return this.addPlantForm.get('dateAdded')!;
   }
 
   public get temperature(): AbstractControl {
-    return this.addPlantForm.get("temperature")!;
+    return this.addPlantForm.get('temperature')!;
   }
 
   public get humidity(): AbstractControl {
-    return this.addPlantForm.get("humidity")!;
+    return this.addPlantForm.get('humidity')!;
   }
 
   public get isToxic(): AbstractControl {
-    return this.addPlantForm.get("isToxic")!;
+    return this.addPlantForm.get('isToxic')!;
   }
 
   public get light(): AbstractControl {
-    return this.addPlantForm.get("light")!;
+    return this.addPlantForm.get('light')!;
   }
 
   public get water(): AbstractControl {
-    return this.addPlantForm.get("water")!;
+    return this.addPlantForm.get('water')!;
   }
 
   public get soil(): AbstractControl {
-    return this.addPlantForm.get("soil")!;
+    return this.addPlantForm.get('soil')!;
   }
 
   public get fertilizer(): AbstractControl {
-    return this.addPlantForm.get("fertilizer")!;
+    return this.addPlantForm.get('fertilizer')!;
   }
 
   public get propagation(): AbstractControl {
-    return this.addPlantForm.get("propagation")!;
+    return this.addPlantForm.get('propagation')!;
   }
 
   public get repotting(): AbstractControl {
-    return this.addPlantForm.get("repotting")!;
+    return this.addPlantForm.get('repotting')!;
   }
 
   public get notes(): AbstractControl {
-    return this.addPlantForm.get("notes")!;
+    return this.addPlantForm.get('notes')!;
   }
 
   public get lastWatered(): AbstractControl {
-    return this.addPlantForm.get("lastWatered")!;
+    return this.addPlantForm.get('lastWatered')!;
   }
 
   public get lastFertilized(): AbstractControl {
-    return this.addPlantForm.get("lastFertilized")!;
+    return this.addPlantForm.get('lastFertilized')!;
   }
 
   ngOnInit(): void {
     this.addPlantForm = this.formBuilder.group({
-      name: [""],
-      scientificName: [""],
+      name: [''],
+      scientificName: [''],
       // image: [null],
-      type: [""],
+      type: [''],
       dateAdded: [null],
-      temperature: [""],
-      humidity: [""],
+      temperature: [''],
+      humidity: [''],
       isToxic: [false],
-      light: [""],
-      water: [""],
-      soil: [""],
-      fertilizer: [""],
-      propagation: [""],
-      repotting: [""],
-      notes: [""],
+      light: [''],
+      water: [''],
+      soil: [''],
+      fertilizer: [''],
+      propagation: [''],
+      repotting: [''],
+      notes: [''],
       lastWatered: [null],
-      lastFertilized: [null]
+      lastFertilized: [null],
     });
 
     if (this.plant) {
@@ -135,8 +141,8 @@ export class AddPlantModalComponent implements OnInit {
         repotting: this.plant.repotting,
         notes: this.plant.notes,
         lastWatered: this.plant.lastWatered,
-        lastFertilized: this.plant.lastFertilized
-      })
+        lastFertilized: this.plant.lastFertilized,
+      });
     }
   }
 
@@ -148,7 +154,9 @@ export class AddPlantModalComponent implements OnInit {
     if (this.addPlantForm.pristine || this.addPlantForm.invalid) return;
 
     if (this.plant) {
-      this.plantService.updatePlant(this.plant.id, this.addPlantForm.value).subscribe();
+      this.plantService
+        .updatePlant(this.plant.id, this.addPlantForm.value)
+        .subscribe();
     } else {
       this.plantService.createPlant(this.addPlantForm.value).subscribe();
     }

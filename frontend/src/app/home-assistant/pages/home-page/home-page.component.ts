@@ -40,10 +40,10 @@ export class HomePageComponent {
               domain: 'input_boolean',
               service: 'toggle',
               target: {
-                entity_id: 'input_boolean.air_conditioner_toggle'
-              }
-            }
-          }
+                entity_id: 'input_boolean.air_conditioner_toggle',
+              },
+            },
+          },
         },
         {
           type: 'entityCard',
@@ -96,7 +96,7 @@ export class HomePageComponent {
           type: 'sensorGroup',
           sensors: [
             {
-              name: "Network Speeds",
+              name: 'Network Speeds',
               entityId: 'sensor.speedtest_download',
               icon: 'speedometer',
               stateOptions: {
@@ -325,7 +325,7 @@ export class HomePageComponent {
     {
       title: 'Craft Nook',
       cards: [
-         {
+        {
           type: 'lightCard',
           cardOptions: {
             entityId: 'light.grow_light_3',
@@ -357,10 +357,10 @@ export class HomePageComponent {
               domain: 'light',
               service: 'toggle',
               target: {
-                entity_id: 'light.kitchen_light_1'
-              }
-            }
-          }
+                entity_id: 'light.kitchen_light_1',
+              },
+            },
+          },
         },
         {
           type: 'entityCard',
@@ -373,10 +373,10 @@ export class HomePageComponent {
               domain: 'light',
               service: 'toggle',
               target: {
-                entity_id: 'light.kitchen_light_2'
-              }
-            }
-          }
+                entity_id: 'light.kitchen_light_2',
+              },
+            },
+          },
         },
         {
           type: 'speakerCard',
@@ -410,10 +410,10 @@ export class HomePageComponent {
               domain: 'light',
               service: 'toggle',
               target: {
-                entity_id: 'light.bathroom_light'
-              }
-            }
-          }
+                entity_id: 'light.bathroom_light',
+              },
+            },
+          },
         },
         {
           type: 'entityCard',
@@ -426,10 +426,10 @@ export class HomePageComponent {
               domain: 'switch',
               service: 'toggle',
               target: {
-                entity_id: 'switch.bathroom_fan'
-              }
-            }
-          }
+                entity_id: 'switch.bathroom_fan',
+              },
+            },
+          },
         },
         {
           type: 'speakerCard',

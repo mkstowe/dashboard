@@ -8,22 +8,26 @@ import { Observable, switchMap } from 'rxjs';
 
 @Component({
   templateUrl: './plant-detail.component.html',
-  styleUrls: ['./plant-detail.component.scss']
+  styleUrls: ['./plant-detail.component.scss'],
 })
 export class PlantDetailComponent implements OnInit {
   public plant: Plant;
   private id: number;
 
-  constructor(private route: ActivatedRoute, private dialog: MatDialog, private plantService: PlantService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private dialog: MatDialog,
+    private plantService: PlantService
+  ) {}
 
   ngOnInit(): void {
     this.id = +this.route.snapshot.paramMap.get('id')!;
 
-    this.plantService.refetch.pipe(
-      switchMap(() => this.plantService.getPlant(this.id))
-    ).subscribe((res: any) => {
-      this.plant = res.plant;
-    })
+    this.plantService.refetch
+      .pipe(switchMap(() => this.plantService.getPlant(this.id)))
+      .subscribe((res: any) => {
+        this.plant = res.plant;
+      });
   }
 
   public editPlant() {
@@ -33,8 +37,8 @@ export class PlantDetailComponent implements OnInit {
       enterAnimationDuration: 100,
       exitAnimationDuration: 100,
       data: {
-        plant: this.plant
-      }
+        plant: this.plant,
+      },
     });
   }
 

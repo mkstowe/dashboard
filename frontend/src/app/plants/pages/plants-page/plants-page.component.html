@@ -1,14 +1,14 @@
 <div class="plants-page">
   <div class="dashboard plants-dash">
     <div class="plant-grid">
-      <ng-container *ngFor="let plant of (plants | async)">
+      <ng-container *ngFor="let plant of plants | async">
         <app-plant-card
           [id]="plant.id"
           [name]="plant.name"
           [scientificName]="plant.scientificName"
           [lastWatered]="plant.lastWatered"
           [lastFertilized]="plant.lastFertilized"
-          routerLink="{{plant.id}}"
+          routerLink="{{ plant.id }}"
         ></app-plant-card>
       </ng-container>
     </div>

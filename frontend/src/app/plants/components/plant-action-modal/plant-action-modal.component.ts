@@ -7,14 +7,22 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   selector: 'app-plant-action-modal',
   templateUrl: './plant-action-modal.component.html',
   styleUrls: ['./plant-action-modal.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class PlantActionModalComponent {
   public lastWatered: Date | undefined;
   public lastFertilized: Date | undefined;
   private id: number;
 
-  constructor(private plantService: PlantService, @Inject(MAT_DIALOG_DATA) data: { id: number, lastWatered: Date | undefined, lastFertilized: Date | undefined }) {
+  constructor(
+    private plantService: PlantService,
+    @Inject(MAT_DIALOG_DATA)
+    data: {
+      id: number;
+      lastWatered: Date | undefined;
+      lastFertilized: Date | undefined;
+    }
+  ) {
     this.id = data.id;
     this.lastWatered = data.lastWatered;
     this.lastFertilized = data.lastFertilized;
@@ -22,11 +30,15 @@ export class PlantActionModalComponent {
 
   public onWater() {
     this.lastWatered = new Date();
-    this.plantService.updatePlant(this.id, { lastWatered: this.lastWatered }).subscribe();
+    this.plantService
+      .updatePlant(this.id, { lastWatered: this.lastWatered })
+      .subscribe();
   }
 
   public onFertilize() {
     this.lastFertilized = new Date();
-    this.plantService.updatePlant(this.id, { lastFertilized: this.lastFertilized }).subscribe();
+    this.plantService
+      .updatePlant(this.id, { lastFertilized: this.lastFertilized })
+      .subscribe();
   }
 }

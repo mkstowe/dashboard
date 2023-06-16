@@ -7,7 +7,7 @@ import { Observable, switchMap } from 'rxjs';
 
 @Component({
   templateUrl: './plants-page.component.html',
-  styleUrls: ['./plants-page.component.scss']
+  styleUrls: ['./plants-page.component.scss'],
 })
 export class PlantsPageComponent implements OnInit {
   public plants: Observable<Plant[]>;
@@ -15,9 +15,9 @@ export class PlantsPageComponent implements OnInit {
   constructor(private plantService: PlantService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
-     this.plants = this.plantService.refetch.pipe(
+    this.plants = this.plantService.refetch.pipe(
       switchMap(() => this.plantService.getAllPlants())
-     )
+    );
   }
 
   public onAddPlant() {

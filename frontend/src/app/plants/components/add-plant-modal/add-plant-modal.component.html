@@ -1,225 +1,231 @@
 <div class="add-plant-wrapper">
   <div class="header">
-    <h2 mat-dialog-header>{{ this.plantExists ? "Edit Plant" : "Add Plant" }}</h2>
+    <h2 mat-dialog-header>
+      {{ this.plantExists ? "Edit Plant" : "Add Plant" }}
+    </h2>
     <button class="close-btn" mat-icon-button mat-dialog-close tabindex="-1">
       <mat-icon>close</mat-icon>
     </button>
   </div>
   <mat-dialog-content>
-  <form [formGroup]="addPlantForm" (ngSubmit)="onSubmit()">
-    <div class="row">
-      <mat-label>Name</mat-label>
-      <mat-form-field appearance="outline">
-        <input
-          matInput
-          placeholder="Rubber Tree"
-          formControlName="name"
-          autofocus
-        />
-      </mat-form-field>
-    </div>
+    <form [formGroup]="addPlantForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <mat-label>Name</mat-label>
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            placeholder="Rubber Tree"
+            formControlName="name"
+            autofocus
+          />
+        </mat-form-field>
+      </div>
 
-    <div class="row">
-      <mat-label>Scientific Name</mat-label>
-      <mat-form-field appearance="outline">
-        <input
-          matInput
-          placeholder="Ficus Elastica"
-          formControlName="scientificName"
-        />
-      </mat-form-field>
-    </div>
+      <div class="row">
+        <mat-label>Scientific Name</mat-label>
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            placeholder="Ficus Elastica"
+            formControlName="scientificName"
+          />
+        </mat-form-field>
+      </div>
 
-    <div class="row">
-      <mat-label>Type</mat-label>
-      <mat-form-field appearance="outline">
-        <input matInput placeholder="Tropical Tree" formControlName="type" />
-      </mat-form-field>
-    </div>
+      <div class="row">
+        <mat-label>Type</mat-label>
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="Tropical Tree" formControlName="type" />
+        </mat-form-field>
+      </div>
 
-    <div class="row">
-      <mat-label>Date Added</mat-label>
-      <mat-form-field appearance="outline">
-        <input
-          matInput
-          [matDatepicker]="dateAddedPicker"
-          formControlName="dateAdded"
-          placeholder="MM/DD/YYYY"
-        />
-        <mat-error *ngIf="dateAdded.invalid">Invalid date</mat-error>
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="dateAddedPicker"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #dateAddedPicker></mat-datepicker>
-      </mat-form-field>
-    </div>
+      <div class="row">
+        <mat-label>Date Added</mat-label>
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            [matDatepicker]="dateAddedPicker"
+            formControlName="dateAdded"
+            placeholder="MM/DD/YYYY"
+          />
+          <mat-error *ngIf="dateAdded.invalid">Invalid date</mat-error>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="dateAddedPicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #dateAddedPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
 
-    <div class="row">
-      <mat-label>Light</mat-label>
-      <mat-form-field appearance="outline">
-        <textarea
-          matInput
-          placeholder="Bright indirect light"
-          formControlName="light"
-        ></textarea>
-      </mat-form-field>
-    </div>
+      <div class="row">
+        <mat-label>Light</mat-label>
+        <mat-form-field appearance="outline">
+          <textarea
+            matInput
+            placeholder="Bright indirect light"
+            formControlName="light"
+          ></textarea>
+        </mat-form-field>
+      </div>
 
-    <div class="row">
-      <mat-label>Watering</mat-label>
-      <mat-form-field appearance="outline">
-        <textarea
-          matInput
-          placeholder="Let dry almost completely between waterings."
-          formControlName="water"
-        ></textarea>
-      </mat-form-field>
-    </div>
+      <div class="row">
+        <mat-label>Watering</mat-label>
+        <mat-form-field appearance="outline">
+          <textarea
+            matInput
+            placeholder="Let dry almost completely between waterings."
+            formControlName="water"
+          ></textarea>
+        </mat-form-field>
+      </div>
 
-    <div class="row" *ngIf="plantExists">
-      <mat-label>Last Watered</mat-label>
-      <mat-form-field appearance="outline">
-        <input
-          matInput
-          [matDatepicker]="lastWateredPicker"
-          formControlName="lastWatered"
-          placeholder="MM/DD/YYYY"
-        />
-        <mat-error *ngIf="lastWatered.invalid">Invalid date</mat-error>
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="lastWateredPicker"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #lastWateredPicker></mat-datepicker>
-      </mat-form-field>
-    </div>
+      <div class="row" *ngIf="plantExists">
+        <mat-label>Last Watered</mat-label>
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            [matDatepicker]="lastWateredPicker"
+            formControlName="lastWatered"
+            placeholder="MM/DD/YYYY"
+          />
+          <mat-error *ngIf="lastWatered.invalid">Invalid date</mat-error>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="lastWateredPicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #lastWateredPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
 
-    <div class="row" *ngIf="plantExists">
-      <mat-label>Last Fertilized</mat-label>
-      <mat-form-field appearance="outline">
-        <input
-          matInput
-          [matDatepicker]="lastFertilizedPicker"
-          formControlName="lastFertilized"
-          placeholder="MM/DD/YYYY"
-        />
-        <mat-error *ngIf="lastFertilized.invalid">Invalid date</mat-error>
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="lastFertilizedPicker"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #lastFertilizedPicker></mat-datepicker>
-      </mat-form-field>
-    </div>
+      <div class="row" *ngIf="plantExists">
+        <mat-label>Last Fertilized</mat-label>
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            [matDatepicker]="lastFertilizedPicker"
+            formControlName="lastFertilized"
+            placeholder="MM/DD/YYYY"
+          />
+          <mat-error *ngIf="lastFertilized.invalid">Invalid date</mat-error>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="lastFertilizedPicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #lastFertilizedPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
 
-    <div class="row">
-      <mat-label>Notes</mat-label>
-      <mat-form-field appearance="outline">
-        <textarea matInput formControlName="notes"></textarea>
-      </mat-form-field>
-    </div>
+      <div class="row">
+        <mat-label>Notes</mat-label>
+        <mat-form-field appearance="outline">
+          <textarea matInput formControlName="notes"></textarea>
+        </mat-form-field>
+      </div>
 
-    <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>Advanced Fields</mat-panel-title>
-        </mat-expansion-panel-header>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Advanced Fields</mat-panel-title>
+          </mat-expansion-panel-header>
 
-        <div class="row">
-          <mat-label>Temperature</mat-label>
-          <mat-form-field appearance="outline">
-            <input
-              matInput
-              placeholder="65°-80°F"
-              formControlName="temperature"
-            />
-          </mat-form-field>
-        </div>
+          <div class="row">
+            <mat-label>Temperature</mat-label>
+            <mat-form-field appearance="outline">
+              <input
+                matInput
+                placeholder="65°-80°F"
+                formControlName="temperature"
+              />
+            </mat-form-field>
+          </div>
 
-        <div class="row">
-          <mat-label>Humidity</mat-label>
-          <mat-form-field appearance="outline">
-            <input matInput placeholder="40-50%" formControlName="humidity" />
-          </mat-form-field>
-        </div>
+          <div class="row">
+            <mat-label>Humidity</mat-label>
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="40-50%" formControlName="humidity" />
+            </mat-form-field>
+          </div>
 
-        <div class="row">
-          <mat-label
-            >Is Toxic
-            <mat-checkbox
-              color="primary"
-              labelPosition="before"
-              formControlName="isToxic"
-            ></mat-checkbox>
-          </mat-label>
-        </div>
+          <div class="row">
+            <mat-label
+              >Is Toxic
+              <mat-checkbox
+                color="primary"
+                labelPosition="before"
+                formControlName="isToxic"
+              ></mat-checkbox>
+            </mat-label>
+          </div>
 
-        <div class="row">
-          <mat-label>Soil</mat-label>
-          <mat-form-field appearance="outline">
-            <textarea
-              matInput
-              placeholder="Well-draining soil, slightly acidic."
-              formControlName="soil"
-            ></textarea>
-          </mat-form-field>
-        </div>
+          <div class="row">
+            <mat-label>Soil</mat-label>
+            <mat-form-field appearance="outline">
+              <textarea
+                matInput
+                placeholder="Well-draining soil, slightly acidic."
+                formControlName="soil"
+              ></textarea>
+            </mat-form-field>
+          </div>
 
-        <div class="row">
-          <mat-label>Fertilizer</mat-label>
-          <mat-form-field appearance="outline">
-            <textarea
-              matInput
-              placeholder="10-10-10, once a month during growing season."
-              formControlName="fertilizer"
-            ></textarea>
-          </mat-form-field>
-        </div>
+          <div class="row">
+            <mat-label>Fertilizer</mat-label>
+            <mat-form-field appearance="outline">
+              <textarea
+                matInput
+                placeholder="10-10-10, once a month during growing season."
+                formControlName="fertilizer"
+              ></textarea>
+            </mat-form-field>
+          </div>
 
-        <div class="row">
-          <mat-label>Propagation</mat-label>
-          <mat-form-field appearance="outline">
-            <textarea
-              matInput
-              placeholder="Take cutting and let sap dry before potting in soil."
-              formControlName="propagation"
-            ></textarea>
-          </mat-form-field>
-        </div>
+          <div class="row">
+            <mat-label>Propagation</mat-label>
+            <mat-form-field appearance="outline">
+              <textarea
+                matInput
+                placeholder="Take cutting and let sap dry before potting in soil."
+                formControlName="propagation"
+              ></textarea>
+            </mat-form-field>
+          </div>
 
-        <div class="row">
-          <mat-label>Repotting</mat-label>
-          <mat-form-field appearance="outline">
-            <textarea
-              matInput
-              placeholder="Re-pot when rootbound, roughly once per year."
-              formControlName="repotting"
-            ></textarea>
-          </mat-form-field>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
-
-  </form>
-</mat-dialog-content>
-<mat-divider></mat-divider>
-<mat-dialog-actions>
-  <button
-    [disabled]="confirmDelete"
-    class="delete-btn"
-    mat-flat-button
-    (click)="onDelete()"
-    *ngIf="plantExists"
-  >
-    Delete
-  </button>
-  <p class="confirm-delete" *ngIf="confirmDelete">
-    Are you sure? <button mat-button (click)="close()">No</button> /
-    <button mat-button (click)="onDelete()">Yes</button>
-  </p>
-  <button class="create-btn" mat-flat-button color="primary" (click)="onSubmit()">
-    {{ this.plantExists ? "Update Plant" : "Create Plant" }}
-  </button>
-</mat-dialog-actions>
+          <div class="row">
+            <mat-label>Repotting</mat-label>
+            <mat-form-field appearance="outline">
+              <textarea
+                matInput
+                placeholder="Re-pot when rootbound, roughly once per year."
+                formControlName="repotting"
+              ></textarea>
+            </mat-form-field>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </form>
+  </mat-dialog-content>
+  <mat-divider></mat-divider>
+  <mat-dialog-actions>
+    <button
+      [disabled]="confirmDelete"
+      class="delete-btn"
+      mat-flat-button
+      (click)="onDelete()"
+      *ngIf="plantExists"
+    >
+      Delete
+    </button>
+    <p class="confirm-delete" *ngIf="confirmDelete">
+      Are you sure? <button mat-button (click)="close()">No</button> /
+      <button mat-button (click)="onDelete()">Yes</button>
+    </p>
+    <button
+      class="create-btn"
+      mat-flat-button
+      color="primary"
+      (click)="onSubmit()"
+    >
+      {{ this.plantExists ? "Update Plant" : "Create Plant" }}
+    </button>
+  </mat-dialog-actions>
 </div>

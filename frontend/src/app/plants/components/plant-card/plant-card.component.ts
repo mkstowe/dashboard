@@ -5,7 +5,7 @@ import { PlantActionModalComponent } from '../plant-action-modal/plant-action-mo
 @Component({
   selector: 'app-plant-card',
   templateUrl: './plant-card.component.html',
-  styleUrls: ['./plant-card.component.scss']
+  styleUrls: ['./plant-card.component.scss'],
 })
 export class PlantCardComponent {
   @Input() id: number;
@@ -14,7 +14,7 @@ export class PlantCardComponent {
   @Input() lastWatered: Date | undefined;
   @Input() lastFertilized: Date | undefined;
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog) {}
 
   onRightMouseClick() {
     this.dialog.open(PlantActionModalComponent, {
@@ -25,9 +25,9 @@ export class PlantCardComponent {
       data: {
         id: this.id,
         lastWatered: this.lastWatered,
-        lastFertilized: this.lastFertilized
-      }
-    })
+        lastFertilized: this.lastFertilized,
+      },
+    });
     return false;
   }
 }

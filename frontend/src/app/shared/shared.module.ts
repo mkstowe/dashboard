@@ -8,9 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
 
 @NgModule({
-  declarations: [
-    DateAgoPipe
-  ],
+  declarations: [DateAgoPipe],
   imports: [
     CommonModule,
     MaterialModule,

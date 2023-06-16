@@ -1,10 +1,24 @@
 <div class="plant-action-wrapper">
   <div class="water action">
-    <p>{{ lastWatered ? "Last watered " + (lastWatered | dateAgo) : "Never watered" }}</p>
+    <p>
+      {{
+        lastWatered
+          ? "Last watered " + (lastWatered | dateAgo)
+          : "Never watered"
+      }}
+    </p>
     <button mat-flat-button color="primary" (click)="onWater()">Water</button>
   </div>
   <div class="fertilize action">
-    <p>{{ lastFertilized ? "Last fertilized " + (lastFertilized | dateAgo) : "Never fertilized" }}</p>
-    <button mat-flat-button color="primary" (click)="onFertilize()">Fertilize</button>
+    <p>
+      {{
+        lastFertilized
+          ? "Last fertilized " + (lastFertilized | dateAgo)
+          : "Never fertilized"
+      }}
+    </p>
+    <button mat-flat-button color="primary" (click)="onFertilize()">
+      Fertilize
+    </button>
   </div>
 </div>

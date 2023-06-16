@@ -31,8 +31,8 @@ const routes: Routes = [
     path: 'plants',
     data: { tab: 4 },
     loadChildren: () =>
-      import('../plants/plants.module').then((m) => m.PlantsModule)
-  }
+      import('../plants/plants.module').then((m) => m.PlantsModule),
+  },
 ];
 
 @NgModule({
