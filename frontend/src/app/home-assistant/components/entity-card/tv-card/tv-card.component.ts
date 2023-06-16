@@ -18,6 +18,8 @@ export class TvCardComponent extends EntityCardComponent {
     this.dialog.open(TvDetailComponent, {
       width: '70%',
       height: '80%',
+      enterAnimationDuration: 100,
+      exitAnimationDuration: 100,
       data: {
         entityId: this.entity?.entity_id,
         entityName: this.entityName,

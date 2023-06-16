@@ -63,6 +63,8 @@ export class SensorComponent implements OnInit, OnDestroy {
 
     this.dialog.open(StateGraphComponent, {
       width: '70%',
+      enterAnimationDuration: 100,
+      exitAnimationDuration: 100,
       data: {
         entity: this.entity,
         entityName: this.entityName,

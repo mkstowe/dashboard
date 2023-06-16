@@ -38,7 +38,7 @@
 
       border-radius: 50%;
 
-      transition: all 100ms ease-in-out;
+      transition: $transition;
 
       &.active {
         color: $accent;

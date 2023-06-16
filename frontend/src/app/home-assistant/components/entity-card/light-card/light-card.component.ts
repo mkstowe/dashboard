@@ -17,6 +17,8 @@ export class LightCardComponent extends EntityCardComponent {
   public onRightMouseClick() {
     this.dialog.open(LightDetailComponent, {
       width: '500px',
+      enterAnimationDuration: 100,
+      exitAnimationDuration: 100,
       data: {
         entityId: this.entity?.entity_id,
         entityName: this.entityName,

@@ -18,7 +18,7 @@
   border: 2px solid rgba($foreground, 0.2);
   border-radius: 15px;
 
-  transition: all 100ms ease-in-out;
+  transition: $transition;
 
   &:hover {
     background-color: rgba($foreground, 0.05);

@@ -32,3 +32,5 @@ $mobile-break: 900px;
 
 $card-break-1: calc(($three-col-break + $two-col-break) / 2);
 $card-break-2: calc(($two-col-break + $one-col-break) / 2);
+
+$transition: all 100ms ease-in-out;

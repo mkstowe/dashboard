@@ -218,7 +218,7 @@
     Are you sure? <button mat-button (click)="close()">No</button> /
     <button mat-button (click)="onDelete()">Yes</button>
   </p>
-  <button class="create-btn" mat-flat-button color="primary">
+  <button class="create-btn" mat-flat-button color="primary" (click)="onSubmit()">
     {{ this.plantExists ? "Update Plant" : "Create Plant" }}
   </button>
 </mat-dialog-actions>

@@ -60,7 +60,7 @@
       border: 2px solid rgba($foreground, 0.2);
       border-radius: 10px;
 
-      transition: 100ms ease-in-out;
+      transition: $transition;
 
       &.active {
         color: $accent;

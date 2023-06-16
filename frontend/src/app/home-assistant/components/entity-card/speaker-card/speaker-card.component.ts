@@ -17,6 +17,8 @@ export class SpeakerCardComponent extends EntityCardComponent {
   public onRightMouseClick() {
     this.dialog.open(SpeakerDetailComponent, {
       width: '70%',
+      enterAnimationDuration: 100,
+      exitAnimationDuration: 100,
       data: {
         entityId: this.entity?.entity_id,
         entityName: this.entityName,

@@ -38,7 +38,7 @@
 
       border-radius: 50%;
 
-      transition: all 100ms ease-in-out;
+      transition: $transition;
 
       &.active {
         color: $accent;
@@ -93,7 +93,7 @@
 
           border-radius: 50%;
 
-          transition: all 100ms ease-in-out;
+          transition: $transition;
 
           &:hover {
             color: $accent;
@@ -140,7 +140,7 @@
 
             border-radius: 50%;
 
-            transition: all 100ms ease-in-out;
+            transition: transition;
 
             &:hover {
               color: $accent;
@@ -173,7 +173,7 @@
 
         border-radius: 50%;
 
-        transition: all 100ms ease-in-out;
+        transition: $transition;
 
         mat-icon {
           width: 100%;
