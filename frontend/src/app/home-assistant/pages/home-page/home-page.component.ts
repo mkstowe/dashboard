@@ -32,6 +32,23 @@ export class HomePageComponent {
         {
           type: 'entityCard',
           cardOptions: {
+            entityId: 'script.shower_time',
+            icon: 'shower',
+            name: 'Shower Time',
+            state: ' ',
+            service: {
+              type: 'call_service',
+              domain: 'script',
+              service: 'turn_on',
+              target: {
+                entity_id: 'script.shower_time',
+              },
+            },
+          },
+        },
+        {
+          type: 'entityCard',
+          cardOptions: {
             entityId: 'input_boolean.air_conditioner_toggle',
             icon: 'fan',
             iconActive: 'fan-active',
@@ -48,16 +65,16 @@ export class HomePageComponent {
         {
           type: 'entityCard',
           cardOptions: {
-            entityId: 'script.shower_time',
-            icon: 'shower',
-            name: 'Shower Time',
-            state: ' ',
+            entityId: 'light.grow_lights',
+            icon: 'light-bulb',
+            iconActive: 'light-bulb-active',
+            name: 'Grow Lights',
             service: {
               type: 'call_service',
-              domain: 'script',
-              service: 'turn_on',
+              domain: 'light',
+              service: 'toggle',
               target: {
-                entity_id: 'script.shower_time',
+                entity_id: 'light.grow_lights',
               },
             },
           },

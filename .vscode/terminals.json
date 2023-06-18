@@ -1,0 +1,21 @@
+{
+    "autorun": true,
+    "autokill": true,
+    "terminals": [
+        {
+            "name": "Run backend",
+            "commands": [
+                "cd backend",
+                "yarn watch"
+            ]
+        },
+        {
+            "name": "Run frontend",
+            "split": "Run backend",
+            "commands": [
+                "cd frontend",
+                "yarn start"
+            ]
+        }
+    ]
+}
