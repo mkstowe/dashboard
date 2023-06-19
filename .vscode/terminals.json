@@ -1,6 +1,7 @@
 {
     "autorun": true,
     "autokill": true,
+    "open": true,
     "terminals": [
         {
             "name": "Run backend",
