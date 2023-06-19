@@ -12,8 +12,7 @@ import { SpotifyService } from './music/services/spotify.service';
 export class AppComponent {
   public sidebarActive = false;
 
-  // Instantiate service so we have spotify access on startup;
-  private spotifyService: SpotifyService;
+  constructor(private spotifyService: SpotifyService) {}
 
   public closeSidebar() {
     this.sidebarActive = false;

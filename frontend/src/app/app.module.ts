@@ -19,6 +19,7 @@ import { MusicModule } from './music/music.module';
 import { HomeAssistantModule } from './home-assistant/home-assistant.module';
 import { RecipesModule } from './recipes/recipes.module';
 import { MaterialModule } from './material.module';
+import { AuthModule } from '@auth0/auth0-angular';
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -41,6 +42,14 @@ export class MyHammerConfig extends HammerGestureConfig {
     HomeAssistantModule,
     RecipesModule,
     MaterialModule,
+
+    AuthModule.forRoot({
+      domain: 'dev-1fguvr6cw0f84i24.us.auth0.com',
+      clientId: 'pR9aUf1ppRpE1hmHhokLwvS0LYiKPTc1',
+      authorizationParams: {
+        redirect_uri: window.location.origin
+      }
+    }),
   ],
   providers: [
     {
