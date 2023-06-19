@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { SpotifyService } from '../../services/spotify.service';
 import { Subject, takeUntil } from 'rxjs';
@@ -10,7 +9,7 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrls: ['./music-page.component.scss'],
 })
 export class MusicPageComponent implements OnInit, OnDestroy {
-  public access_token: string | null;
+  public accessToken: string | null;
   public apiUrl = environment.apiUrl;
   public playlists = [
     '4vNldb5p8tQ9RmX7XSaTIM',
@@ -31,9 +30,20 @@ export class MusicPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private spotifyService: SpotifyService,
-    private route: ActivatedRoute,
-    private router: Router
   ) {}
+
+  public ngOnInit(): void {
+    this.spotifyService.getAccessToken();
+    this.spotifyService.accessToken.subscribe((res) => {
+      this.accessToken = res;
+    })
+    return;
+  }
+
+  public ngOnDestroy(): void {
+    this.notifier$.next();
+    this.notifier$.complete();
+  }
 
   public getAvailableDevices() {
     this.spotifyService
@@ -65,16 +75,6 @@ export class MusicPageComponent implements OnInit, OnDestroy {
       .nextTrack({ deviceId })
       .pipe(takeUntil(this.notifier$))
       .subscribe();
-  }
-
-  public ngOnDestroy(): void {
-    this.notifier$.next();
-    this.notifier$.complete();
-  }
-
-  public ngOnInit(): void {
-    this.access_token = this.spotifyService.getAccessToken();
-    return;
   }
 
   public pausePlayback(deviceId: string) {

@@ -11,7 +11,7 @@ import { Playlist } from '../../models/playlist';
 export class PlaylistCardComponent implements OnInit, OnDestroy {
   @Input() public id: string;
 
-  public playlist: Playlist;
+  public playlist: Playlist | undefined;
 
   private notifier$ = new Subject<void>();
 
@@ -28,16 +28,16 @@ export class PlaylistCardComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.notifier$))
       .subscribe((res: any) => {
         this.playlist = {
-          name: res.name,
-          image: res.images[0].url,
-          context: res.uri,
+          name: res?.name,
+          image: res?.images[0].url,
+          context: res?.uri,
         };
       });
   }
 
   public onClick() {
     this.spotifyService
-      .startPlayback({ contextUri: this.playlist.context })
+      .startPlayback({ contextUri: this.playlist?.context })
       .pipe(takeUntil(this.notifier$))
       .subscribe();
   }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 interface QueryParams {
   accessToken: string | null;
@@ -15,6 +16,8 @@ const localStorageItems = {
   spotifyTokenTimestamp: localStorage.getItem('spotify_token_timestamp'),
 };
 
+const SPOTIFY_API_URL = "https://api.spotify.com/v1";
+
 @Injectable({
   providedIn: 'root',
 })
@@ -26,6 +29,8 @@ export class SpotifyService {
   private hasError: string | null;
   private queryParams: QueryParams;
 
+  private accessToken$ = new BehaviorSubject<string | null>(null);
+
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
@@ -34,20 +39,14 @@ export class SpotifyService {
     this.initialize();
   }
 
-  /* --------------------- Add Custom Playlist Cover Image -------------------- */
-  public addPlaylistImage() {
-    // TODO
-  }
-
-  /* -------------------------- Add Items to Playlist ------------------------- */
-  public addToPlaylist() {
-    // TODO
+  public get accessToken() {
+    return this.accessToken$.asObservable();
   }
 
   /* ----------------------- Add Item to Playback Queue ----------------------- */
   public addToQueue(uri: string, { deviceId }: { deviceId?: string } = {}) {
     this.http.post(
-      '/api/spotify/me/player/queue',
+      `${SPOTIFY_API_URL}/me/player/queue`,
       {
         uri,
         ...(deviceId && { device_id: deviceId }),
@@ -58,146 +57,15 @@ export class SpotifyService {
     );
   }
 
-  /* ----------------- Check if User Follows Artists or Users ----------------- */
-  public checkIfUserFollowsArtistsOrUsers() {
-    // TODO
-  }
-
-  /* --------------------- Check if Users Follow Playlist --------------------- */
-  public checkIfUsersFollowPlaylist() {
-    // TODO
-  }
-
-  /* ------------------------ Check User's Saved Albums ----------------------- */
-  public checkMyAlbums() {
-    // TODO
-  }
-
-  /* ---------------------- Check User's Saved Audiobooks --------------------- */
-  public checkMyAudiobooks() {
-    // TODO
-  }
-
-  /* ----------------------- Check User's Saved Episodes ---------------------- */
-  public checkMyEpisodes() {
-    // TODO
-  }
-
-  /* ------------------------ Check User's Saved Shows ------------------------ */
-  public checkMyShows() {
-    // TODO
-  }
-
-  /* ------------------------ Check User's Saved Tracks ----------------------- */
-  public checkMyTracks() {
-    // TODO
-  }
-
-  /* ----------------------------- Create Playlist ---------------------------- */
-  public createPlaylist() {
-    // TODO
-  }
-
-  /* ------------------------- Follow Artists or Users ------------------------ */
-  public followArtistsOrUsers() {
-    // TODO
-  }
-
-  /* ----------------------------- Follow Playlist ---------------------------- */
-  public followPlaylist() {
-    // TODO
-  }
-
   public getAccessToken() {
-    return this._getAccessToken();
-  }
-
-  /* -------------------------------------------------------------------------- */
-  /*                                   Albums                                   */
-  /* -------------------------------------------------------------------------- */
-
-  /* -------------------------------- Get Album ------------------------------- */
-  public getAlbum() {
-    // TODO
-  }
-
-  /* ---------------------------- Get Album Tracks ---------------------------- */
-  public getAlbumTracks() {
-    // TODO
-  }
-
-  /* -------------------------------------------------------------------------- */
-  /*                                   Artists                                  */
-  /* -------------------------------------------------------------------------- */
-
-  /* ------------------------------- Get Artist ------------------------------- */
-  public getArtist() {
-    // TODO
-  }
-
-  /* --------------------------- Get Artist's Albums -------------------------- */
-  public getArtistAlbums() {
-    // TODO
-  }
-
-  /* ---------------------- Get Artist's Related Artists ---------------------- */
-  public getArtistRelatedArtists() {
-    // TODO
-  }
-
-  /* ------------------------- Get Artist's Top Tracks ------------------------ */
-  public getArtistTopTracks() {
-    // TODO
-  }
-
-  /* ----------------------- Get Track's Audio Analysis ----------------------- */
-  public getAudioAnalysis() {
-    // TODO
-  }
-
-  /* ----------------------- Get Track's Audio Features ----------------------- */
-  public getAudioFeatures() {
-    // TODO
-  }
-
-  /* -------------------------------------------------------------------------- */
-  /*                                 Audiobooks                                 */
-  /* -------------------------------------------------------------------------- */
-
-  /* ---------------------------- Get an Audiobook ---------------------------- */
-  public getAudiobook() {
-    // TODO
-  }
-
-  /* ------------------------- Get Audiobook Chapters ------------------------- */
-  public getAudiobookChapters() {
-    // TODO
+    this._getAccessToken();
   }
 
   /* -------------------------- Get Available Devices ------------------------- */
   public getAvailableDevices() {
-    return this.http.get(`api/spotify/me/player/devices`, {
+    return this.http.get(`${SPOTIFY_API_URL}/me/player/devices`, {
       headers: this.apiHeaders,
     });
-  }
-
-  /* ----------------------- Get Single Browse Category ----------------------- */
-  public getBrowseCategory() {
-    // TODO
-  }
-
-  /* ------------------------ Get Category's Playlists ------------------------ */
-  public getCategoryPlaylists() {
-    // TODO
-  }
-
-  /* -------------------------------------------------------------------------- */
-  /*                                  Chapters                                  */
-  /* -------------------------------------------------------------------------- */
-
-  /* ------------------------------ Get a Chapter ----------------------------- */
-  public getChapter() {
-    // TODO
   }
 
   /* ----------------------- Get Currently Playing Track ---------------------- */
@@ -208,55 +76,13 @@ export class SpotifyService {
     market?: string;
     additionalTypes?: string;
   } = {}) {
-    return this.http.get(`/api/spotify/me/player`, {
+    return this.http.get(`${SPOTIFY_API_URL}/me/player`, {
       headers: this.apiHeaders,
       params: {
         ...(market && { market }),
         ...(additionalTypes && { additional_types: additionalTypes }),
       },
     });
-  }
-
-  /* -------------------------------------------------------------------------- */
-  /*                                  Episodes                                  */
-  /* -------------------------------------------------------------------------- */
-
-  /* ------------------------------- Get Episode ------------------------------ */
-  public getEpisode() {
-    // TODO
-  }
-
-  /* ------------------------- Get Featured Playlists ------------------------- */
-  public getFeaturedPlaylists() {
-    // TODO
-  }
-
-  /* -------------------------- Get Followed Artists -------------------------- */
-  public getFollowedArtists() {
-    // TODO
-  }
-
-  /* -------------------------------------------------------------------------- */
-  /*                                   Genres                                   */
-  /* -------------------------------------------------------------------------- */
-
-  /* ------------------------ Get Available Genre Seeds ----------------------- */
-  public getGenreSeeds() {
-    // TODO
-  }
-
-  /* -------------------------------------------------------------------------- */
-  /*                                   Markets                                  */
-  /* -------------------------------------------------------------------------- */
-
-  /* -------------------------- Get Available Markets ------------------------- */
-  public getMarkets() {
-    // TODO
-  }
-
-  /* ------------------------ Get User's Saved Episodes ----------------------- */
-  public getMyEpisodes() {
-    // TODO
   }
 
   /* ---------------------- Get Current User's Playlists ---------------------- */
@@ -267,7 +93,7 @@ export class SpotifyService {
     limit?: number;
     offset?: number;
   } = {}) {
-    return this.http.get('/api/spotify/me/playlists', {
+    return this.http.get(`${SPOTIFY_API_URL}/me/playlists`, {
       headers: this.apiHeaders,
       params: {
         ...(limit && { limit }),
@@ -276,30 +102,11 @@ export class SpotifyService {
     });
   }
 
-  /* -------------------------------------------------------------------------- */
-  /*                                    Users                                   */
-  /* -------------------------------------------------------------------------- */
-
   /* ----------------------- Get Current User's Profile ----------------------- */
   public getMyProfile() {
-    return this.http.get(`/api/spotify/me`, {
+    return this.http.get(`${SPOTIFY_API_URL}/me`, {
       headers: this.apiHeaders,
     });
-  }
-
-  /* ------------------------- Get User's Saved Albums ------------------------ */
-  public getMySavedAlbums() {
-    // TODO
-  }
-
-  /* ----------------------- Get User's Saved Audiobooks ---------------------- */
-  public getMySavedAudiobooks() {
-    // TODO
-  }
-
-  /* ------------------------- Get User's Saved Shows ------------------------- */
-  public getMyShows() {
-    // TODO
   }
 
   /* -------------------------- Get User's Top Items -------------------------- */
@@ -311,7 +118,7 @@ export class SpotifyService {
       offset,
     }: { timeRange?: number; limit?: number; offset?: number } = {}
   ) {
-    return this.http.get(`/api/spotify/me/top/${type}`, {
+    return this.http.get(`${SPOTIFY_API_URL}/me/top/${type}`, {
       params: {
         ...(timeRange && { time_range: timeRange }),
         ...(limit && { limit }),
@@ -321,20 +128,6 @@ export class SpotifyService {
     });
   }
 
-  /* ------------------------- Get User's Saved Tracks ------------------------ */
-  public getMyTracks() {
-    // TODO
-  }
-
-  /* ---------------------------- Get New Releases ---------------------------- */
-  public getNewReleases() {
-    // TODO
-  }
-
-  /* -------------------------------------------------------------------------- */
-  /*                                   Player                                   */
-  /* -------------------------------------------------------------------------- */
-
   /* --------------------------- Get Playback State --------------------------- */
   public getPlaybackState({
     market,
@@ -343,7 +136,7 @@ export class SpotifyService {
     market?: string;
     additionalTypes?: string;
   } = {}) {
-    return this.http.get(`/api/spotify/me/player`, {
+    return this.http.get(`${SPOTIFY_API_URL}/me/player`, {
       headers: this.apiHeaders,
       params: {
         ...(market && { market }),
@@ -351,10 +144,6 @@ export class SpotifyService {
       },
     });
   }
-
-  /* -------------------------------------------------------------------------- */
-  /*                                  Playlists                                 */
-  /* -------------------------------------------------------------------------- */
 
   /* ------------------------------ Get Playlist ------------------------------ */
   public getPlaylist(
@@ -369,7 +158,7 @@ export class SpotifyService {
       additionalTypes?: string;
     } = {}
   ) {
-    return this.http.get(`/api/spotify/playlists/${id}`, {
+    return this.http.get(`${SPOTIFY_API_URL}/playlists/${id}`, {
       headers: this.apiHeaders,
       params: {
         ...(market && { market }),
@@ -381,24 +170,14 @@ export class SpotifyService {
 
   /* ------------------------ Get Playlist Cover Image ------------------------ */
   public getPlaylistImage(id: string) {
-    return this.http.get(`/api/spotify/playlists/${id}/images`, {
+    return this.http.get(`${SPOTIFY_API_URL}/playlists/${id}/images`, {
       headers: this.apiHeaders,
     });
   }
 
-  /* --------------------------- Get Playlist Items --------------------------- */
-  public getPlaylistItems() {
-    // TODO
-  }
-
-  /* --------------------------- Get User's Profile --------------------------- */
-  public getProfile() {
-    // TODO
-  }
-
   /* -------------------------- Get the User's Queue -------------------------- */
   public getQueue() {
-    return this.http.get('/api/spotify/me/player/queue', {
+    return this.http.get(`${SPOTIFY_API_URL}/me/player/queue`, {
       headers: this.apiHeaders,
     });
   }
@@ -409,7 +188,7 @@ export class SpotifyService {
     after,
     before,
   }: { limit?: number; after?: number; before?: number } = {}) {
-    return this.http.get('/api/spotify/me/player/recently-played', {
+    return this.http.get(`${SPOTIFY_API_URL}/me/player/recently-played`, {
       params: {
         ...(limit && { limit }),
         ...(after && { after }),
@@ -419,88 +198,6 @@ export class SpotifyService {
     });
   }
 
-  /* --------------------------- Get Recommendations -------------------------- */
-  public getRecommendations() {
-    // TODO
-  }
-
-  /* --------------------------- Get Several Albums --------------------------- */
-  public getSeveralAlbums() {
-    // TODO
-  }
-
-  /* --------------------------- Get Several Artists -------------------------- */
-  public getSeveralArtists() {
-    // TODO
-  }
-
-  /* ----------------------- Get Tracks' Audio Features ----------------------- */
-  public getSeveralAudioFeatures() {
-    // TODO
-  }
-
-  /* ------------------------- Get Several Audiobooks ------------------------- */
-  public getSeveralAudiobooks() {
-    // TODO
-  }
-
-  /* -------------------------------------------------------------------------- */
-  /*                                 Categories                                 */
-  /* -------------------------------------------------------------------------- */
-
-  /* ---------------------- Get Several Browse Categories --------------------- */
-  public getSeveralBrowseCategories() {
-    // TODO
-  }
-
-  /* -------------------------- Get Several Chapters -------------------------- */
-  public getSeveralChapters() {
-    // TODO
-  }
-
-  /* -------------------------- Get Several Episodes -------------------------- */
-  public getSeveralEpisodes() {
-    // TODO
-  }
-
-  /* ---------------------------- Get Several Shows --------------------------- */
-  public getSeveralShows() {
-    // TODO
-  }
-
-  /* --------------------------- Get Several Tracks --------------------------- */
-  public getSeveralTracks() {
-    // TODO
-  }
-
-  /* -------------------------------------------------------------------------- */
-  /*                                    Shows                                   */
-  /* -------------------------------------------------------------------------- */
-
-  /* -------------------------------- Get Show -------------------------------- */
-  public getShow() {
-    // TODO
-  }
-
-  /* ---------------------------- Get Show Episodes --------------------------- */
-  public getShowEpisodes() {
-    // TODO
-  }
-
-  /* -------------------------------------------------------------------------- */
-  /*                                   Tracks                                   */
-  /* -------------------------------------------------------------------------- */
-
-  /* -------------------------------- Get Track ------------------------------- */
-  public getTrack() {
-    // TODO
-  }
-
-  /* -------------------------- Get User's Playlists -------------------------- */
-  public getUserPlaylists() {
-    // TODO
-  }
-
   /* ------------------------------ Skip to Next ------------------------------ */
   public nextTrack({
     deviceId,
@@ -508,7 +205,7 @@ export class SpotifyService {
     deviceId?: string;
   } = {}) {
     return this.http.post(
-      '/api/spotify/me/player/next',
+      `${SPOTIFY_API_URL}/me/player/next`,
       {
         ...(deviceId && { device_id: deviceId }),
       },
@@ -525,7 +222,7 @@ export class SpotifyService {
     deviceId?: string;
   } = {}) {
     return this.http.put(
-      '/api/spotify/me/player/pause',
+      `${SPOTIFY_API_URL}/me/player/pause`,
       {
         ...(deviceId && { device_id: deviceId }),
       },
@@ -542,7 +239,7 @@ export class SpotifyService {
     deviceId?: string;
   } = {}) {
     return this.http.post(
-      '/api/spotify/me/player/previous',
+      `${SPOTIFY_API_URL}/me/player/previous`,
       {
         ...(deviceId && { device_id: deviceId }),
       },
@@ -552,77 +249,13 @@ export class SpotifyService {
     );
   }
 
-  /* ----------------------- Remove Users's Saved Albums ---------------------- */
-  public removeMyAlbums() {
-    // TODO
-  }
-
-  /* --------------------- Remove User's Saved Audiobooks --------------------- */
-  public removeMyAudiobooks() {
-    // TODO
-  }
-
-  /* ---------------------- Remove User's Saved Episodes ---------------------- */
-  public removeMyEpisodes() {
-    // TODO
-  }
-
-  /* ------------------------ Remove User's Saved Shows ----------------------- */
-  public removeMyShows() {
-    // TODO
-  }
-
-  /* ----------------------- Remove User's Saved Tracks ----------------------- */
-  public removeMyTracks() {
-    // TODO
-  }
-
-  /* -------------------------- Remove Playlist Items ------------------------- */
-  public removePlaylistItems() {
-    // TODO
-  }
-
-  /* ---------------------- Save Albums for Current User ---------------------- */
-  public saveMyAlbums() {
-    // TODO
-  }
-
-  /* -------------------- Save Audiobooks for Current User -------------------- */
-  public saveMyAudiobooks() {
-    // TODO
-  }
-
-  /* --------------------- Save Episodes for Current User --------------------- */
-  public saveMyEpisodes() {
-    // TODO
-  }
-
-  /* ----------------------- Save Shows for Current User ---------------------- */
-  public saveMyShows() {
-    // TODO
-  }
-
-  /* ---------------------- Save Tracks for Current User ---------------------- */
-  public saveMyTracks() {
-    // TODO
-  }
-
-  /* -------------------------------------------------------------------------- */
-  /*                                   Search                                   */
-  /* -------------------------------------------------------------------------- */
-
-  /* ----------------------------- Search for Item ---------------------------- */
-  public searchForItem() {
-    // TODO
-  }
-
   /* ---------------------------- Seek to Position ---------------------------- */
   public seekToPosition(
     position: number,
     { deviceId }: { deviceId?: string } = {}
   ) {
     return this.http.put(
-      '/api/spotify/me/player/seek',
+      `${SPOTIFY_API_URL}/me/player/seek`,
       {
         position_ms: position,
         ...(deviceId && { device_id: deviceId }),
@@ -639,7 +272,7 @@ export class SpotifyService {
     { deviceId }: { deviceId?: string } = {}
   ) {
     return this.http.put(
-      '/api/spotify/me/player/repeat',
+      `${SPOTIFY_API_URL}/me/player/repeat`,
       {
         state,
         ...(deviceId && { device_id: deviceId }),
@@ -653,7 +286,7 @@ export class SpotifyService {
   /* --------------------------- Set Playback Volume -------------------------- */
   public setVolume(percent: number, { deviceId }: { deviceId?: string } = {}) {
     return this.http.put(
-      '/api/spotify/me/player/volume',
+      `${SPOTIFY_API_URL}/me/player/volume`,
       {
         volume_percent: percent,
         ...(deviceId && { device_id: deviceId }),
@@ -679,7 +312,7 @@ export class SpotifyService {
     position?: number;
   } = {}) {
     return this.http.put(
-      '/api/spotify/me/player/play',
+      `${SPOTIFY_API_URL}/me/player/play`,
       {
         ...(deviceId && { device_id: deviceId }),
         ...(contextUri && { context_uri: contextUri }),
@@ -699,7 +332,7 @@ export class SpotifyService {
     { deviceId }: { deviceId?: string } = {}
   ) {
     return this.http.put(
-      '/api/spotify/me/player/shuffle',
+      `${SPOTIFY_API_URL}/me/player/shuffle`,
       {
         state,
         ...(deviceId && { device_id: deviceId }),
@@ -720,7 +353,7 @@ export class SpotifyService {
     } = {}
   ) {
     return this.http.put(
-      `/api/spotify/me/player`,
+      `${SPOTIFY_API_URL}/me/player`,
       {
         device_ids: deviceIds,
         ...(play && { play }),
@@ -729,26 +362,6 @@ export class SpotifyService {
         headers: this.apiHeaders,
       }
     );
-  }
-
-  /* ------------------------ Unfollow Artists or Users ----------------------- */
-  public unfollowArtistsOrUsers() {
-    // TODO
-  }
-
-  /* ---------------------------- Unfollow Playlist --------------------------- */
-  public unfollowPlaylist() {
-    // TODO
-  }
-
-  /* ------------------------- Change Playlist Details ------------------------ */
-  public updatePlaylistDetails() {
-    // TODO
-  }
-
-  /* -------------------------- Update Playlist Items ------------------------- */
-  public updatePlaylistItems() {
-    // TODO
   }
 
   /* -------------------------------------------------------------------------- */
@@ -764,7 +377,8 @@ export class SpotifyService {
 
     // If there is a valid access token in localStorage, use that
     if (token && token !== 'undefined') {
-      return token;
+      this.accessToken$.next(token);
+      return;
     }
 
     // If there is a token in the URL query params, user is logging in for the first time
@@ -783,13 +397,10 @@ export class SpotifyService {
       );
       localStorage.setItem('spotify_token_timestamp', Date.now().toString());
 
-      return token;
+      this.accessToken$.next(this.queryParams.accessToken);
+      this.apiHeaders.Authorization = `Bearer ${this.queryParams.accessToken}`;
+      return;
     }
-
-    console.log('nothing');
-
-    // We should never get here!
-    return '';
   }
 
   private hasTokenExpired() {

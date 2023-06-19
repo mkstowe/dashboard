@@ -1,7 +1,7 @@
 <div class="music-page">
   <div class="dashboard music-dash">
-    <button type="button" *ngIf="!access_token; else loggedIn">
-      <a href="/api/spotify/login">Spotify</a>
+    <button mat-flat-button color="primary" type="button" *ngIf="!accessToken; else loggedIn">
+      <a href="/api/spotify/login">Spotify Login</a>
     </button>
     <ng-template #loggedIn>
       <app-media-player></app-media-player>

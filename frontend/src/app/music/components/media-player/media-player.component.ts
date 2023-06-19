@@ -10,10 +10,10 @@ import { Track } from '../../models/track';
   encapsulation: ViewEncapsulation.None,
 })
 export class MediaPlayerComponent implements OnInit, OnDestroy {
-  public currProgress: number;
-  public currentTrack: Track;
-  public isPlaying: boolean;
-  public volume: number;
+  public currProgress: number | undefined;
+  public currentTrack: Track | undefined;
+  public isPlaying: boolean | undefined;
+  public volume: number | undefined;
 
   private notifier$ = new Subject<void>();
 
