@@ -1,6 +1,6 @@
-export function onRequestGet(context) {
+export function onRequest(context) {
   return new Response({
-    hassUrl: context.env.get("HASS_URL"),
-    hassToken: context.env.get("HASS_ACCESS_TOKEN")
+    hassUrl: context.env.HASS_URL,
+    hassToken: context.env.HASS_ACCESS_TOKEN
   });
 }
