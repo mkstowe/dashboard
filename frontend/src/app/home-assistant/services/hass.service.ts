@@ -87,10 +87,16 @@ export class HassService {
   }
 
   private async connect() {
+    console.log(process.env.HASS_URL);
+    console.log(process.env.HASS_ACCESS_TOKEN);
+    // const auth = createLongLivedTokenAuth(
+      // environment.hassUrl,
+      // environment.hassAuthToken.access_token
+    // );
     const auth = createLongLivedTokenAuth(
-      environment.hassUrl,
-      environment.hassAuthToken.access_token
-    );
+      process.env.HASS_URL!,
+      process.env.HASS_ACCESS_TOKEN!
+    )
 
     this.connection = await createConnection({ auth });
     subscribeEntities(this.connection, (ent) => this._entities.next(ent));
