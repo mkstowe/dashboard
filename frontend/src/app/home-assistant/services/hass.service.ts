@@ -8,7 +8,7 @@ import {
   Connection,
   MessageBase,
 } from 'home-assistant-js-websocket';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ServiceCall } from '../models/service-call';
 import { StateOptions } from '../models/state-options';
@@ -95,11 +95,11 @@ export class HassService {
       // environment.hassAuthToken.access_token
     // );
 
-    await this.getSecrets();
+    const data: any = await firstValueFrom(this.http.get('/hass/token'));
 
     const auth = createLongLivedTokenAuth(
-      this.hassUrl,
-      this.hassToken
+      data.hassUrl,
+      data.hassToken
     )
 
     console.log("AUTH", auth)
