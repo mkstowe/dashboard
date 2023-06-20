@@ -108,6 +108,7 @@ export class HassService {
 
   private async getSecrets() {
     this.http.get('/hass/token').subscribe((res: any) => {
+      console.log(res);
       this.hassUrl = res.hassUrl,
       this.hassToken = res.hassToken
     })
