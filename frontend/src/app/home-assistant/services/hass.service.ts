@@ -22,10 +22,13 @@ export class HassService {
   private _entities: BehaviorSubject<HassEntities> =
     new BehaviorSubject<HassEntities>({});
   private connection: Connection;
-  private headers: HttpHeaders = new HttpHeaders({
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${environment.hassAuthToken.access_token}`,
-  });
+  // private headers: HttpHeaders = new HttpHeaders({
+    // 'Content-Type': 'application/json',
+    // Authorization: `Bearer ${environment.hassAuthToken.access_token}`,
+  // });
+
+  private hassUrl: string;
+  private hassToken: string;
 
   constructor(private http: HttpClient) {
     this.entities = this._entities.asObservable();
@@ -39,9 +42,9 @@ export class HassService {
   public getEntityHistory(entityId: string) {
     return this.http.get(
       `/api/hass/history/period?filter_entity_id=${entityId}`,
-      {
-        headers: this.headers,
-      }
+      // {
+        // headers: this.headers,
+      // }
     );
   }
 
@@ -87,19 +90,27 @@ export class HassService {
   }
 
   private async connect() {
-    console.log(process.env.HASS_URL);
-    console.log(process.env.HASS_ACCESS_TOKEN);
     // const auth = createLongLivedTokenAuth(
       // environment.hassUrl,
       // environment.hassAuthToken.access_token
     // );
+
+    await this.getSecrets();
+
     const auth = createLongLivedTokenAuth(
-      process.env.HASS_URL!,
-      process.env.HASS_ACCESS_TOKEN!
+      this.hassUrl,
+      this.hassToken
     )
 
     this.connection = await createConnection({ auth });
     subscribeEntities(this.connection, (ent) => this._entities.next(ent));
+  }
+
+  private async getSecrets() {
+    this.http.get('/hass/token').subscribe((res: any) => {
+      this.hassUrl = res.hassUrl,
+      this.hassToken = res.hassToken
+    })
   }
 }
 
