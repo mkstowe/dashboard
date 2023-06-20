@@ -102,6 +102,8 @@ export class HassService {
       this.hassToken
     )
 
+    console.log("AUTH", auth)
+
     this.connection = await createConnection({ auth });
     subscribeEntities(this.connection, (ent) => this._entities.next(ent));
   }
