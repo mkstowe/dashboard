@@ -90,30 +90,14 @@ export class HassService {
   }
 
   private async connect() {
-    // const auth = createLongLivedTokenAuth(
-      // environment.hassUrl,
-      // environment.hassAuthToken.access_token
-    // );
-
     const data: any = await firstValueFrom(this.http.get('/hass/token'));
-
     const auth = createLongLivedTokenAuth(
       data.hassUrl,
       data.hassToken
     )
 
-    console.log("AUTH", auth)
-
     this.connection = await createConnection({ auth });
     subscribeEntities(this.connection, (ent) => this._entities.next(ent));
-  }
-
-  private async getSecrets() {
-    this.http.get('/hass/token').subscribe((res: any) => {
-      console.log(res);
-      this.hassUrl = res.hassUrl,
-      this.hassToken = res.hassToken
-    })
   }
 }
 
