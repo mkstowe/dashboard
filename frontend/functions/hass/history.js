@@ -1,5 +1,8 @@
 export async function onRequest(context) {
-  // const entityId = context.request.body.entityId;
+  const url = new URL(request.url);
+  const queryString = url.get('entity');
+  const entityId = context.request.body.entityId;
+  return new Response('URL: ', url, "query: ", queryString);
   // const response = await fetch(
     // `${context.env.HASS_URL}/api/history/period?filter_entity_id=${entityId}`,
     // {
@@ -11,5 +14,5 @@ export async function onRequest(context) {
   // );
 
   // return new Response(response);
-  return new Response(`BODY: ${context.request.body}, \nJSON: ${context.request.json}, \nURL: ${context.request.url}, \nREQUEST: ${JSON.stringify(context.request)}`);
+  // return new Response(`BODY: ${context.request.body}, \nJSON: ${context.request.json}, \nURL: ${context.request.url}, \nREQUEST: ${JSON.stringify(context.request)}`);
 }
