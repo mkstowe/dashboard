@@ -1,8 +1,7 @@
 export async function onRequest(context) {
-  const url = new URL(request.url);
   // const queryString = url.get('entity');
-  // const entityId = context.request.body.entityId;
-  return new Response('URL: ', url);
+  const entityId = context.request.url.split('=')[1];
+  return new Response(entityId);
   // const response = await fetch(
     // `${context.env.HASS_URL}/api/history/period?filter_entity_id=${entityId}`,
     // {
