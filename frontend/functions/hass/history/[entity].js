@@ -4,5 +4,5 @@ export async function onRequest(context) {
     `${context.env.HASS_URL}/api/history/period?filter_entity_id=${entityId}`
   );
 
-  return new Response(response);
+  return new Response(JSON.stringify(response));
 }
