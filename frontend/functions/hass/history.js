@@ -11,5 +11,5 @@ export async function onRequest(context) {
   // );
 
   // return new Response(response);
-  return new Response(`BODY: ${context.request.body}, \nURL: ${context.request.url}, \nREQUEST: ${context.request}`);
+  return new Response(`BODY: ${context.request.body}, \nJSON: ${context.request.json}, \nURL: ${context.request.url}, \nREQUEST: ${JSON.stringify(context.request)}`);
 }
