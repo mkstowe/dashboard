@@ -27,9 +27,6 @@ export class HassService {
     // Authorization: `Bearer ${environment.hassAuthToken.access_token}`,
   // });
 
-  private hassUrl: string;
-  private hassToken: string;
-
   constructor(private http: HttpClient) {
     this.entities = this._entities.asObservable();
     this.connect();
@@ -40,12 +37,13 @@ export class HassService {
   }
 
   public getEntityHistory(entityId: string) {
-    return this.http.get(
-      `/api/hass/history/period?filter_entity_id=${entityId}`,
+    // return this.http.get(
+      // `/api/hass/history/period?filter_entity_id=${entityId}`,
       // {
         // headers: this.headers,
       // }
-    );
+    // );
+    return this.http.get(`/hass/history/${entityId}`);
   }
 
   public resolveStateOptions(
