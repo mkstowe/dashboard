@@ -43,7 +43,7 @@ export class HassService {
         // headers: this.headers,
       // }
     // );
-    return this.http.get(`/hass/history`);
+    return this.http.get(`/hass/history?entity=${entityId}`);
   }
 
   public resolveStateOptions(
