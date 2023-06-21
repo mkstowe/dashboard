@@ -10,5 +10,5 @@ export async function onRequest(context) {
     }
   );
 
-  return new Response(response);
+  return new Response(JSON.stringify(response));
 }
