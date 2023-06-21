@@ -1,5 +1,5 @@
 export async function onRequest(context) {
-  const entityId = context.request.body.entityId;
+  // const entityId = context.request.body.entityId;
   // const response = await fetch(
     // `${context.env.HASS_URL}/api/history/period?filter_entity_id=${entityId}`,
     // {
