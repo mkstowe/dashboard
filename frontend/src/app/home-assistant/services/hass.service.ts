@@ -8,7 +8,7 @@ import {
   Connection,
   MessageBase,
 } from 'home-assistant-js-websocket';
-import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ServiceCall } from '../models/service-call';
 import { StateOptions } from '../models/state-options';
@@ -22,10 +22,10 @@ export class HassService {
   private _entities: BehaviorSubject<HassEntities> =
     new BehaviorSubject<HassEntities>({});
   private connection: Connection;
-  // private headers: HttpHeaders = new HttpHeaders({
-    // 'Content-Type': 'application/json',
-    // Authorization: `Bearer ${environment.hassAuthToken.access_token}`,
-  // });
+  private headers: HttpHeaders = new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${environment.hassAuthToken.access_token}`,
+  });
 
   constructor(private http: HttpClient) {
     this.entities = this._entities.asObservable();
@@ -37,13 +37,12 @@ export class HassService {
   }
 
   public getEntityHistory(entityId: string) {
-    // return this.http.get(
-      // `/api/hass/history/period?filter_entity_id=${entityId}`,
-      // {
-        // headers: this.headers,
-      // }
-    // );
-    return this.http.get(`/hass/history?entity=${entityId}`);
+    return this.http.get(
+      `/api/hass/history/period?filter_entity_id=${entityId}`,
+      {
+        headers: this.headers,
+      }
+    );
   }
 
   public resolveStateOptions(
@@ -88,11 +87,10 @@ export class HassService {
   }
 
   private async connect() {
-    const data: any = await firstValueFrom(this.http.get('/hass/token'));
     const auth = createLongLivedTokenAuth(
-      data.hassUrl,
-      data.hassToken
-    )
+      environment.hassUrl,
+      environment.hassAuthToken.access_token
+    );
 
     this.connection = await createConnection({ auth });
     subscribeEntities(this.connection, (ent) => this._entities.next(ent));
