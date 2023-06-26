@@ -1,7 +1,7 @@
 services:
   frontend:
     build:
-      context: "https://github.com/mkstowe/dashboard.git#:frontend"
+      context: ./frontend
       dockerfile: Dockerfile
     networks:
       - dashboard_net
@@ -14,7 +14,7 @@ services:
 
   backend:
     build:
-      context: "https://github.com/mkstowe/dashboard.git#:backend"
+      context: "./backend"
       dockerfile: "Dockerfile"
     restart: always
     ports:

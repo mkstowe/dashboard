@@ -24,7 +24,7 @@ export class HassService {
   private connection: Connection;
   private headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${environment.hassAuthToken.access_token}`,
+    Authorization: `Bearer ${environment.hassAccessToken}`,
   });
 
   constructor(private http: HttpClient) {
@@ -89,7 +89,7 @@ export class HassService {
   private async connect() {
     const auth = createLongLivedTokenAuth(
       environment.hassUrl,
-      environment.hassAuthToken.access_token
+      environment.hassAccessToken
     );
 
     this.connection = await createConnection({ auth });

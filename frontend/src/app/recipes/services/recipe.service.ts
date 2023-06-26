@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class RecipeService {
   private headers = {
-    Authorization: `Bearer ${environment.mealieAuthToken.access_token}`,
+    Authorization: `Bearer ${environment.mealieAccessToken}`,
   };
 
   constructor(private http: HttpClient) {}

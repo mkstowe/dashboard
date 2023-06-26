@@ -3,10 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "npm run config && ng serve",
-    "build": "npm run config && ng build",
+    "start": "ng serve",
+    "build": "ng build",
     "watch": "npm run build --watch --configuration development",
-    "config": "ts-node src/environments/set-env.ts",
     "lint": "ng lint",
     "pretty": "prettier --ignore-path ../.gitignore --write \"./**/*.{js,ts,json,html,scss}\""
   },
