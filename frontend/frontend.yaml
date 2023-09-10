@@ -1,0 +1,8 @@
+runtime: nodejs18
+service: default
+handlers:
+  - url: /
+    static_files: dist/dashboard/index.html
+    upload: dist/dashboard/index.html
+  - url: /
+    static_dir: dist/dashboard
