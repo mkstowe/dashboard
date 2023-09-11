@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeService } from '../../services/recipe.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   templateUrl: './recipe-detail.component.html',
@@ -24,7 +25,7 @@ export class RecipeDetailComponent implements OnInit {
 
     this.recipeService.getRecipe(this.slug).subscribe((res) => {
       this.recipe = res;
-      this.imageUrl = `/api/mealie/media/recipes/${this.recipe.id}/images/min-original.webp`;
+      this.imageUrl = `${environment.mealieUrl}/api/media/recipes/${this.recipe.id}/images/min-original.webp`;
     });
   }
 }

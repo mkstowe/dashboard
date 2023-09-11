@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-recipe-card',
@@ -15,6 +16,6 @@ export class RecipeCardComponent implements OnInit {
   public imageUrl: string;
 
   public ngOnInit(): void {
-    this.imageUrl = `/api/mealie/media/recipes/${this.id}/images/min-original.webp`;
+    this.imageUrl = `${environment.mealieUrl}/api/media/recipes/${this.id}/images/min-original.webp`;
   }
 }

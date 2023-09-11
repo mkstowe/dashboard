@@ -24,22 +24,17 @@ export class RecipeService {
   }
 
   public getRecipe(slug: string) {
-    return this.http.get(`/api/mealie/recipes/${slug}`, {
-      headers: this.headers,
-    });
+    return this.http.get(`/api/recipes/${slug}`);
   }
 
   public getRecipes() {
     return this.http
-      .get(`/api/mealie/recipes?orderBy=name&orderDirection=asc`, {
-        headers: this.headers,
-      })
+      .get(`/api/recipes?orderBy=name&orderDirection=asc&perPage=50`)
       .pipe(
         expand((res: any) => {
+          console.log(res.next)
           return res.next
-            ? this.http.get(`/api/mealie/${res.next}`, {
-                headers: this.headers,
-              })
+            ? this.http.get(`/api${res.next}`)
             : EMPTY;
         }),
         reduce((acc, curr: any) => acc.concat(curr.items), [])
