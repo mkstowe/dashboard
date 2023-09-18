@@ -1,3 +1,5 @@
 dispatch:
+  - url: '*/api/hass/*'
+    service: api
   - url: '*/api/*'
     service: api

@@ -1,4 +1,7 @@
 runtime: nodejs18
 service: api
 env_variables:
+  HASS_URL: https://hass.mkstowe.com
   MEALIE_URL: https://recipes.mkstowe.com
+  SPOTIFY_CLIENT_ID: bfcd6bc3b66b4df4aa40e748f7a82fc3
+  SPOTIFY_REDIRECT_URI: https://dash.mkstowe.com/api/spotify/callback

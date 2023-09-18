@@ -1,0 +1,8 @@
+{
+  "name": "dashboard",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "deploy": "cd frontend; ng build; cd ..; gcloud app deploy dispatch.yaml frontend/frontend.yaml backend/backend.yaml"
+  }
+}

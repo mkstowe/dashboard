@@ -1,12 +1,12 @@
 require("dotenv").config();
-const getSecret = require('../secrets');
 
 const express = require("express");
 const router = express.Router();
 
 const axios = require("axios");
+const querystring = require("querystring");
 
-var querystring = require("querystring");
+const getSecret = require('../secrets');
 
 const MEALIE_URL = process.env.MEALIE_URL;
 

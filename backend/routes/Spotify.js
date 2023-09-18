@@ -4,11 +4,11 @@ const express = require("express");
 const router = express.Router();
 
 const axios = require("axios");
+const querystring = require("querystring");
 
-var querystring = require("querystring");
+const getSecret = require("../secrets");
 
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
-const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
 const REDIRECT_URI = process.env.SPOTIFY_REDIRECT_URI;
 
 function generateRandomString(length) {
@@ -44,7 +44,8 @@ router.get("/login", (req, res) => {
   res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
 });
 
-router.get("/callback", (req, res) => {
+router.get("/callback", async (req, res) => {
+  const CLIENT_SECRET = await getSecret('SPOTIFY_CLIENT_SECRET');
   const code = req.query.code || null;
 
   axios
@@ -74,7 +75,7 @@ router.get("/callback", (req, res) => {
           expires_in,
         });
 
-        res.redirect(`http://localhost:4200/music/?${queryParams}`);
+        res.redirect(`https://dash.mkstowe.com/music/?${queryParams}`);
       } else {
         res.redirect(`/?${querystring.stringify({ error: "invalid_token" })}`);
       }
