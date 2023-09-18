@@ -1,0 +1,4 @@
+runtime: nodejs18
+service: api
+env_variables:
+  MEALIE_URL: https://recipes.mkstowe.com

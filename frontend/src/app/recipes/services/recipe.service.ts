@@ -32,7 +32,6 @@ export class RecipeService {
       .get(`/api/recipes?orderBy=name&orderDirection=asc&perPage=50`)
       .pipe(
         expand((res: any) => {
-          console.log(res.next)
           return res.next
             ? this.http.get(`/api${res.next}`)
             : EMPTY;

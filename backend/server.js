@@ -8,9 +8,9 @@ app.use(bodyParser.json());
 const spotifyRoute = require("./routes/Spotify");
 const plantsRoute = require("./routes/Plants");
 const recipesRoute = require("./routes/Recipes");
-app.use("/spotify", spotifyRoute);
-app.use("/plants", plantsRoute);
-app.use("/recipes", recipesRoute);
+app.use("/api/spotify", spotifyRoute);
+app.use("/api/plants", plantsRoute);
+app.use("/api/recipes", recipesRoute);
 
 const ALLOWED_ORIGINS = [
   "http://localhost:4200",

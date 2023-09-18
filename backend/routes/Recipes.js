@@ -1,4 +1,5 @@
 require("dotenv").config();
+const getSecret = require('../secrets');
 
 const express = require("express");
 const router = express.Router();
@@ -8,9 +9,9 @@ const axios = require("axios");
 var querystring = require("querystring");
 
 const MEALIE_URL = process.env.MEALIE_URL;
-const MEALIE_ACCESS_TOKEN = process.env.MEALIE_ACCESS_TOKEN;
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
+  const MEALIE_ACCESS_TOKEN = await getSecret('MEALIE_ACCESS_TOKEN');
 	const queryParams = querystring.stringify(req.query);
 
 	axios
