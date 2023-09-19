@@ -32,7 +32,11 @@ export class StateGraphComponent implements OnInit, OnDestroy {
   constructor(
     private hassService: HassService,
     @Inject(MAT_DIALOG_DATA)
-    data: { entity: HassEntity; entityName: string; stateOptions: StateOptions }
+    data: {
+      entity: HassEntity;
+      entityName: string;
+      stateOptions: StateOptions;
+    },
   ) {
     this.entity = data.entity;
     this.entityName = data.entityName;

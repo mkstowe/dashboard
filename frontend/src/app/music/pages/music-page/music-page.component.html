@@ -1,6 +1,11 @@
 <div class="music-page">
   <div class="dashboard music-dash">
-    <button mat-flat-button color="primary" type="button" *ngIf="!accessToken; else loggedIn">
+    <button
+      mat-flat-button
+      color="primary"
+      type="button"
+      *ngIf="!accessToken; else loggedIn"
+    >
       <a href="/api/spotify/login">Spotify Login</a>
     </button>
     <ng-template #loggedIn>

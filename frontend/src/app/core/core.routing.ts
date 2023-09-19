@@ -13,7 +13,7 @@ const routes: Routes = [
     data: { tab: 1 },
     loadChildren: () =>
       import('../home-assistant/home-assistant.module').then(
-        (m) => m.HomeAssistantModule
+        (m) => m.HomeAssistantModule,
       ),
   },
   {

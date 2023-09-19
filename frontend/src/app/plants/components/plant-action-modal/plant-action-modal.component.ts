@@ -21,7 +21,7 @@ export class PlantActionModalComponent {
       id: number;
       lastWatered: Date | undefined;
       lastFertilized: Date | undefined;
-    }
+    },
   ) {
     this.id = data.id;
     this.lastWatered = data.lastWatered;

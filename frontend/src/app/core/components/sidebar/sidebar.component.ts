@@ -67,7 +67,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       .filter(
         (e) =>
           this.devices.includes(e) &&
-          this.activeStates.includes(entities[e].state)
+          this.activeStates.includes(entities[e].state),
       )
       .map((l) => entities[l].attributes.friendly_name!);
 

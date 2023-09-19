@@ -1,12 +1,12 @@
 export const environment = {
   production: false,
-  environmentName: "development",
-  
-  apiUrl: "http://localhost:3000",
+  environmentName: 'development',
 
-  hassUrl: "",
-  hassAccessToken: "",
+  apiUrl: 'http://localhost:3000',
 
-  mealieUrl: "",
-  mealieAccessToken: "",
+  hassUrl: '',
+  hassAccessToken: '',
+
+  mealieUrl: '',
+  mealieAccessToken: '',
 };

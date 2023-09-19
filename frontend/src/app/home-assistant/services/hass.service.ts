@@ -41,13 +41,13 @@ export class HassService {
       `/api/hass/history/period?filter_entity_id=${entityId}`,
       {
         headers: this.headers,
-      }
+      },
     );
   }
 
   public resolveStateOptions(
     state: string,
-    options: StateOptions | undefined
+    options: StateOptions | undefined,
   ): any {
     if (!state || !options) return state;
 
@@ -89,7 +89,7 @@ export class HassService {
   private async connect() {
     const auth = createLongLivedTokenAuth(
       environment.hassUrl,
-      environment.hassAccessToken
+      environment.hassAccessToken,
     );
 
     this.connection = await createConnection({ auth });

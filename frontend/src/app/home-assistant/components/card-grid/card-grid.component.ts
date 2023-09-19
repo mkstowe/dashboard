@@ -39,7 +39,7 @@ export class CardGridComponent implements OnInit, OnDestroy {
     this._index.pipe(takeUntil(this.notifier$)).subscribe((idx) => {
       this.currCards = this.cards.slice(
         idx * this.cardsPerPage,
-        idx * this.cardsPerPage + this.cardsPerPage
+        idx * this.cardsPerPage + this.cardsPerPage,
       );
     });
   }

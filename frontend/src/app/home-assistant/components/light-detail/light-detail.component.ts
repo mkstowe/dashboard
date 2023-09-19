@@ -38,7 +38,7 @@ export class LightDetailComponent implements OnInit, OnDestroy {
       entityId: string;
       entityName: string;
       isActive: boolean;
-    }
+    },
   ) {
     this.entityId = data.entityId;
     this.entityName = data.entityName;

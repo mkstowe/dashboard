@@ -27,7 +27,7 @@ export class AddPlantModalComponent implements OnInit {
     private plantService: PlantService,
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<AddPlantModalComponent>,
-    @Inject(MAT_DIALOG_DATA) data: { plant: Plant }
+    @Inject(MAT_DIALOG_DATA) data: { plant: Plant },
   ) {
     if (data?.plant) {
       this.plant = data.plant;

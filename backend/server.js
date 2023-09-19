@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const hassRoute = require('./routes/Hass');
+const hassRoute = require("./routes/Hass");
 const spotifyRoute = require("./routes/Spotify");
 const plantsRoute = require("./routes/Plants");
 const recipesRoute = require("./routes/Recipes");
@@ -19,7 +19,7 @@ const ALLOWED_ORIGINS = [
   "http://localhost:3000",
   "http://localhost:3001",
   "https://dash.mkstowe.com",
-  "https://mkstowe.com"
+  "https://mkstowe.com",
 ];
 
 // handling CORS
@@ -31,7 +31,7 @@ app.use((req, res, next) => {
 
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization",
   );
   next();
 });

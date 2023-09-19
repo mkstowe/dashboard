@@ -34,7 +34,7 @@ export class TvDetailComponent implements OnInit, OnDestroy {
     private hassService: HassService,
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA)
-    data: { entityId: string; entityName: string; isActive: boolean }
+    data: { entityId: string; entityName: string; isActive: boolean },
   ) {
     this.entityId = data.entityId;
     this.entityName = data.entityName;
@@ -83,7 +83,6 @@ export class TvDetailComponent implements OnInit, OnDestroy {
   }
 
   public onButtonPress(command: RemoteCommands) {
-    console.log(command);
     const service: ServiceCall = {
       type: 'call_service',
       domain: 'remote',

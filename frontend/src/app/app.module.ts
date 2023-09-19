@@ -47,8 +47,8 @@ export class MyHammerConfig extends HammerGestureConfig {
       domain: 'dev-1fguvr6cw0f84i24.us.auth0.com',
       clientId: 'pR9aUf1ppRpE1hmHhokLwvS0LYiKPTc1',
       authorizationParams: {
-        redirect_uri: window.location.origin
-      }
+        redirect_uri: window.location.origin,
+      },
     }),
   ],
   providers: [

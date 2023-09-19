@@ -1,7 +1,15 @@
 <div class="recipe-page">
   <div class="dashboard recipe-dash">
     <div class="recipe-grid">
-      <ng-container *ngFor="let recipe of (allRecipes | async)?.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize); trackBy: trackRecipe">
+      <ng-container
+        *ngFor="
+          let recipe of (allRecipes | async)?.slice(
+            (page - 1) * pageSize,
+            (page - 1) * pageSize + pageSize
+          );
+          trackBy: trackRecipe
+        "
+      >
         <app-recipe-card
           [id]="recipe.id"
           [name]="recipe.name"

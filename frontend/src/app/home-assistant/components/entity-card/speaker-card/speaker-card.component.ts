@@ -10,7 +10,10 @@ import { SpeakerDetailComponent } from '../../speaker-detail/speaker-detail.comp
   styleUrls: ['./speaker-card.component.scss'],
 })
 export class SpeakerCardComponent extends EntityCardComponent {
-  constructor(hassService: HassService, private dialog: MatDialog) {
+  constructor(
+    hassService: HassService,
+    private dialog: MatDialog,
+  ) {
     super(hassService);
   }
 

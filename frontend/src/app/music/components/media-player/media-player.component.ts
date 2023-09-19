@@ -37,7 +37,7 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
     interval(1000)
       .pipe(
         takeUntil(this.notifier$),
-        switchMap(() => this.getCurrentTrack())
+        switchMap(() => this.getCurrentTrack()),
       )
       .subscribe();
 
@@ -77,7 +77,7 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
         this.currProgress = (+res?.progress_ms / +res?.item.duration_ms) * 100;
         this.volume = res?.device.volume_percent;
         this.isPlaying = res?.is_playing;
-      })
+      }),
     );
   }
 }

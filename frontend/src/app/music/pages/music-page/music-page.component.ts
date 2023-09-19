@@ -28,15 +28,13 @@ export class MusicPageComponent implements OnInit, OnDestroy {
 
   private notifier$ = new Subject<void>();
 
-  constructor(
-    private spotifyService: SpotifyService,
-  ) {}
+  constructor(private spotifyService: SpotifyService) {}
 
   public ngOnInit(): void {
     this.spotifyService.getAccessToken();
     this.spotifyService.accessToken.subscribe((res) => {
       this.accessToken = res;
-    })
+    });
     return;
   }
 
