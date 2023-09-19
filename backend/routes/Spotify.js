@@ -83,8 +83,9 @@ router.get("/callback", async (req, res) => {
     .catch((error) => res.send(error));
 });
 
-router.get("/refresh_token", (req, res) => {
+router.get("/refresh_token", async (req, res) => {
   const { refresh_token } = req.query;
+  const CLIENT_SECRET = await getSecret('SPOTIFY_CLIENT_SECRET');
 
   axios
     .post(
