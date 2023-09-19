@@ -24,7 +24,9 @@ router.get("/", async (req, res) => {
 		.catch((error) => res.send(error));
 });
 
-router.get("/:slug", (req, res) => {
+router.get("/:slug", async (req, res) => {
+  const MEALIE_ACCESS_TOKEN = await getSecret('MEALIE_ACCESS_TOKEN');
+  
 	axios
 		.get(`${MEALIE_URL}/api/recipes/${req.params.slug}`, {
 			headers: {
