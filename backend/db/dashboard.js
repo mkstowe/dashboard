@@ -1,43 +1,43 @@
 const knex = require("./knex");
 
 function getAllGroups() {
-  return knex("group").select("*");
+  return knex("hassGroup").select("*");
 }
 
 function getGroup(id) {
-  return knex("group").select("*").where("id", id).first();
+  return knex("hassGroup").select("*").where("id", id).first();
 }
 
 function createGroup(group) {
-  return knex("group").insert(group).returning("*");
+  return knex("hassGroup").insert(group).returning("*");
 }
 
 function updateGroup(id, group) {
-  return knex("group").where("id", id).update(group).returning("*");
+  return knex("hassGroup").where("id", id).update(group).returning("*");
 }
 
 function deleteGroup(id) {
-  return knex("group").where("id", id).del();
+  return knex("hassGroup").where("id", id).del();
 }
 
 function getAllCards() {
-  return knex("card").select("*");
+  return knex("hassCard").select("*");
 }
 
 function getCard(id) {
-  return knex("card").select("*").where("id", id).first();
+  return knex("hassCard").select("*").where("id", id).first();
 }
 
 function createCard(card) {
-  return knex("card").insert(card).returning("*");
+  return knex("hassCard").insert(card).returning("*");
 }
 
 function updateCard(id, card) {
-  return knex("card").where("id", id).update(card).returning("*");
+  return knex("hassCard").where("id", id).update(card).returning("*");
 }
 
 function deleteCard(id) {
-  return knex("card").where("id", id).del();
+  return knex("hassCard").where("id", id).del();
 }
 
 function getAllPlants() {
@@ -61,6 +61,16 @@ function deletePlant(id) {
 }
 
 module.exports = {
+  getAllGroups,
+  getGroup,
+  createGroup,
+  updateGroup,
+  deleteGroup,
+  getAllCards,
+  getCard,
+  createCard,
+  updateCard,
+  deleteCard,
   getAllPlants,
   getPlant,
   createPlant,
