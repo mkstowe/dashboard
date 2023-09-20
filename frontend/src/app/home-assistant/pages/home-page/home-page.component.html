@@ -6,5 +6,20 @@
         <app-card-grid [cards]="group.cards"></app-card-grid>
       </div>
     </div>
+
+    <div class="edit-actions">
+      <button mat-fab color="primary" *ngIf="!editMode" (click)="toggleEdit()">
+      <mat-icon>edit</mat-icon>
+    </button>
+
+    <button mat-fab color="warn" *ngIf="editMode" (click)="toggleEdit()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <button mat-fab color="primary" *ngIf="editMode" (click)="onAddGroup()">
+        <mat-icon>add</mat-icon>
+      </button>
+
+    </div>
   </div>
 </div>

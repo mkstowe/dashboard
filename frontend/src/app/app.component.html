@@ -1,3 +1,4 @@
+<ng-container *ngIf="loggedIn">
 <div class="app-wrapper" [@routeAnim]="prepareRoute(outlet)">
   <div class="mobile-header"></div>
   <button
@@ -19,3 +20,4 @@
     <router-outlet #outlet="outlet" (activate)="closeSidebar()"></router-outlet>
   </div>
 </div>
+</ng-container>

@@ -48,5 +48,21 @@
         }
       }
     }
+
+    .edit-actions {
+      position: absolute;
+      right: 30px;
+      bottom: 30px;
+
+      button {
+        width: 65px;
+        height: 65px;
+        margin-left: 15px;
+
+        mat-icon {
+          transform: scale(1.2);
+        }
+      }
+    }
   }
 }

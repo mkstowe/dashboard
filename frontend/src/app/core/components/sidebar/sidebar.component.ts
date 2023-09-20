@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatExpansionPanel } from '@angular/material/expansion';
+import { AuthService } from '@auth0/auth0-angular';
 import { HassEntities } from 'home-assistant-js-websocket';
 import { Subject, takeUntil } from 'rxjs';
 import { HassService } from 'src/app/home-assistant/services/hass.service';
@@ -34,7 +35,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
   ];
   private notifier$ = new Subject<void>();
 
-  constructor(private hassService: HassService) {}
+  constructor(
+    private hassService: HassService,
+    private authService: AuthService,
+  ) {}
 
   public ngOnDestroy(): void {
     this.notifier$.next();
@@ -55,6 +59,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   public trackDevice(index: number, device: any) {
     return device.id;
+  }
+
+  public logout() {
+    this.authService.logout();
   }
 
   private updateSidebarContent(entities: HassEntities) {

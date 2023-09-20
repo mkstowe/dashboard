@@ -8,7 +8,7 @@ import {
   Connection,
   MessageBase,
 } from 'home-assistant-js-websocket';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ServiceCall } from '../models/service-call';
 import { StateOptions } from '../models/state-options';
@@ -19,6 +19,8 @@ import { StateOptions } from '../models/state-options';
 export class HassService {
   public readonly entities: Observable<HassEntities>;
 
+  private refetchSubject = new BehaviorSubject(null);
+  private _editMode = new BehaviorSubject<boolean>(false);
   private _entities: BehaviorSubject<HassEntities> =
     new BehaviorSubject<HassEntities>({});
   private connection: Connection;
@@ -27,9 +29,48 @@ export class HassService {
     Authorization: `Bearer ${environment.hassAccessToken}`,
   });
 
+
   constructor(private http: HttpClient) {
     this.entities = this._entities.asObservable();
     this.connect();
+  }
+
+  public get editMode$(): Observable<boolean> {
+    return this._editMode.asObservable();
+  }
+
+  public set editMode$(val: boolean) {
+    this._editMode.next(val);
+  }
+
+  public createGroup(group: any) {
+    return this.http.post(`/api/hass/group`, group)
+    .pipe(tap(() => this.refetchSubject.next(null)));
+
+  }
+
+  public updateGroup(id: number, group: any) {
+    return this.http.patch(`/api/hass/group/${id}`, group)
+    .pipe(tap(() => this.refetchSubject.next(null)));
+  }
+
+  public deleteGroup(id: number) {
+    return this.http.delete(`/api/hass/group/${id}`)
+  }
+
+  public createCard(card: any) {
+    return this.http.post(`/api/hass/card`, card)
+    .pipe(tap(() => this.refetchSubject.next(null)));
+  }
+
+  public updateCard(id: number, card: any) {
+    return this.http.patch(`/api/hass/card/${id}`, card)
+    .pipe(tap(() => this.refetchSubject.next(null)));
+  }
+
+  public deleteCard(id: number) {
+    this.http.delete(`/api/hass/card/${id}`)
+    .pipe(tap(() => this.refetchSubject.next(null)));
   }
 
   public async callService(msg: ServiceCall) {

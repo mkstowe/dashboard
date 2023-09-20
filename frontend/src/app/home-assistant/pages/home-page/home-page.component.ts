@@ -1,12 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CardGroup } from '../../models/card-group';
+import { HassService } from '../../services/hass.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddCardModalComponent } from '../../components/add-card-modal/add-card-modal.component';
+import { AddGroupModalComponent } from '../../components/add-group-modal/add-group-modal.component';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit {
   public data: CardGroup[] = [
     {
       title: 'Quick Toggles',
@@ -532,8 +536,39 @@ export class HomePageComponent {
     },
   ];
   public sidebarActive = false;
+  public editMode = false;
+
+  constructor(private hassService: HassService, private dialog: MatDialog) {}
+
+  ngOnInit(): void {
+      this.hassService.editMode$.subscribe((res) => {
+        this.editMode = res;
+      })
+  }
 
   public toggleSidebar() {
     this.sidebarActive = !this.sidebarActive;
+  }
+
+  public toggleEdit() {
+    this.hassService.editMode$ = !this.editMode;
+  }
+
+  public onAddGroup() {
+    this.dialog.open(AddGroupModalComponent, {
+      width: '700px',
+      // height: '300px',
+      enterAnimationDuration: 100,
+      exitAnimationDuration: 100
+    })
+  }
+
+  public onAddCard() {
+    this.dialog.open(AddCardModalComponent, {
+      width: '700px',
+      height: '90%',
+      enterAnimationDuration: 100,
+      exitAnimationDuration: 100,
+    });
   }
 }

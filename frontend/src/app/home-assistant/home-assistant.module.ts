@@ -16,6 +16,8 @@ import { SpeakerDetailComponent } from './components/speaker-detail/speaker-deta
 import { MusicModule } from '../music/music.module';
 import { FanCardComponent } from './components/entity-card/fan-card/fan-card.component';
 import { FanDetailComponent } from './components/fan-detail/fan-detail.component';
+import { AddCardModalComponent } from './components/add-card-modal/add-card-modal.component';
+import { AddGroupModalComponent } from './components/add-group-modal/add-group-modal.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { FanDetailComponent } from './components/fan-detail/fan-detail.component
     SpeakerDetailComponent,
     FanCardComponent,
     FanDetailComponent,
+    AddCardModalComponent,
+    AddGroupModalComponent,
   ],
   imports: [CommonModule, SharedModule, MusicModule],
   exports: [HomePageComponent],
