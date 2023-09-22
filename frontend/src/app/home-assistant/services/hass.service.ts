@@ -35,6 +35,10 @@ export class HassService {
     this.connect();
   }
 
+  public get refetch() {
+    return this.refetchSubject.asObservable();
+  }
+
   public get editMode$(): Observable<boolean> {
     return this._editMode.asObservable();
   }
@@ -43,10 +47,13 @@ export class HassService {
     this._editMode.next(val);
   }
 
+  public getAllGroups() {
+    return this.http.get(`/api/hass/group`)
+  }
+
   public createGroup(group: any) {
     return this.http.post(`/api/hass/group`, group)
     .pipe(tap(() => this.refetchSubject.next(null)));
-
   }
 
   public updateGroup(id: number, group: any) {
@@ -56,6 +63,15 @@ export class HassService {
 
   public deleteGroup(id: number) {
     return this.http.delete(`/api/hass/group/${id}`)
+    .pipe(tap(() => this.refetchSubject.next(null)));
+  }
+
+  public getAllCards() {
+    return this.http.get(`/api/hass/card`)
+  }
+
+  public getCardsByGroup(groupId: number) {
+    return this.http.get(`/api/hass/card?group=${groupId}`)
   }
 
   public createCard(card: any) {
@@ -69,7 +85,7 @@ export class HassService {
   }
 
   public deleteCard(id: number) {
-    this.http.delete(`/api/hass/card/${id}`)
+    return this.http.delete(`/api/hass/card/${id}`)
     .pipe(tap(() => this.refetchSubject.next(null)));
   }
 

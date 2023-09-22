@@ -11,7 +11,7 @@ export class PlantService {
 
   constructor(private http: HttpClient) {}
 
-  get refetch() {
+  public get refetch() {
     return this.refetchSubject.asObservable();
   }
 

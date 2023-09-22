@@ -24,6 +24,14 @@ function getAllCards() {
   return knex("hassCard").select("*");
 }
 
+function getCards(groupId) {
+  return knex("hassCard").select("*").modify(function(queryBuilder) {
+    if (groupId) {
+      queryBuilder.where("group", groupId);
+    }
+  });
+}
+
 function getCard(id) {
   return knex("hassCard").select("*").where("id", id).first();
 }
@@ -67,6 +75,7 @@ module.exports = {
   updateGroup,
   deleteGroup,
   getAllCards,
+  getCards,
   getCard,
   createCard,
   updateCard,

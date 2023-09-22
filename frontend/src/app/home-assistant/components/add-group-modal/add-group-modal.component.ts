@@ -22,18 +22,18 @@ export class AddGroupModalComponent implements OnInit {
     }
   }
 
-  public get name(): AbstractControl {
-    return this.addGroupForm.get('name')!;
+  public get title(): AbstractControl {
+    return this.addGroupForm.get('title')!;
   }
 
   ngOnInit(): void {
     this.addGroupForm = this.formBuilder.group({
-      name: [''],
+      title: [''],
     });
 
     if (this.group) {
       this.addGroupForm.patchValue({
-        name: this.group.name
+        title: this.group.title
       })
     }
   }

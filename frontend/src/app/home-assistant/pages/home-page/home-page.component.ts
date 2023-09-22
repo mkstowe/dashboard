@@ -4,6 +4,7 @@ import { HassService } from '../../services/hass.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCardModalComponent } from '../../components/add-card-modal/add-card-modal.component';
 import { AddGroupModalComponent } from '../../components/add-group-modal/add-group-modal.component';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-home-page',
@@ -535,6 +536,10 @@ export class HomePageComponent implements OnInit {
       ],
     },
   ];
+
+  public groups: any;
+  public cards: any;
+
   public sidebarActive = false;
   public editMode = false;
 
@@ -543,6 +548,22 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
       this.hassService.editMode$.subscribe((res) => {
         this.editMode = res;
+      });
+
+      this.groups = this.hassService.refetch.pipe(
+        switchMap(() => this.hassService.getAllGroups())
+      );
+
+      console.log(this.groups)
+
+      // this.hassService.getAllGroups().subscribe((res: any) => {
+        // this.groups = res;
+      // }
+      // )
+
+      this.hassService.getCardsByGroup(1).subscribe((res) => {
+        this.cards = res;
+        console.log(res);
       })
   }
 
@@ -554,12 +575,15 @@ export class HomePageComponent implements OnInit {
     this.hassService.editMode$ = !this.editMode;
   }
 
-  public onAddGroup() {
+  public onAddGroup(group?: any) {
     this.dialog.open(AddGroupModalComponent, {
       width: '700px',
       // height: '300px',
       enterAnimationDuration: 100,
-      exitAnimationDuration: 100
+      exitAnimationDuration: 100,
+      data: {
+        group
+      }
     })
   }
 

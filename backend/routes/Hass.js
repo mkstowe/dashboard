@@ -26,7 +26,6 @@ router.get("/group/:id", async (req, res, next) => {
 
 // Create new group
 router.post("/group", async (req, res) => {
-  console.log("HERE")
   const group = await db.createGroup(req.body);
   res.status(201).json({ group });
 });
@@ -43,9 +42,10 @@ router.delete("/group/:id", async (req, res) => {
   res.status(204).json({});
 });
 
-// Get all cards
+// Get cards
 router.get("/card", async (req, res) => {
-  const cards = await db.getAllCards();
+  const { groupId } = req.query;
+  const cards = await db.getCards(groupId);
   res.status(200).json(cards);
 });
 
