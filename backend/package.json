@@ -11,13 +11,16 @@
   },
   "dependencies": {
     "@google-cloud/secret-manager": "^5.0.1",
+    "@typescript-eslint/parser": "^5.0.1",
     "axios": "^1.5.0",
     "body-parser": "^1.20.2",
     "dotenv": "^16.3.1",
+    "eslint": "^8.7.0",
     "express": "^4.18.2",
     "knex": "^2.5.1",
     "nodemon": "^3.0.1",
-    "prettier": "^3.0.3",
-    "sqlite3": "^5.1.6"
+    "prettier": "^2.5.1",
+    "sqlite3": "^5.1.6",
+    "typescript": "^4.4.4"
   }
 }

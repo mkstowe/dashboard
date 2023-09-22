@@ -35,7 +35,7 @@
     "moment": "^2.29.4",
     "ng2-charts": "5.0.3",
     "ngx-color-picker": "^14.0.0",
-    "prettier": "^3.0.3",
+    "prettier": "^2.5.1",
     "rfs": "^10.0.0",
     "rxjs": "~7.8.0",
     "stylelint-prettier": "^4.0.2",
@@ -52,9 +52,9 @@
     "@angular/cli": "~16.2.1",
     "@angular/compiler-cli": "^16.2.4",
     "@typescript-eslint/eslint-plugin": "^6.6.0",
-    "@typescript-eslint/parser": "^6.6.0",
+    "@typescript-eslint/parser": "^5.0.1",
     "dotenv": "^16.0.3",
-    "eslint": "^8.39.0",
+    "eslint": "^8.7.0",
     "eslint-config-standard-with-typescript": "^39.0.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-n": "^16.0.2",
@@ -72,6 +72,6 @@
     "stylelint-order": "^6.0.3",
     "stylelint-use-nesting": "^4.1.0",
     "ts-node": "^10.9.1",
-    "typescript": "5.1"
+    "typescript": "^4.4.4"
   }
 }
