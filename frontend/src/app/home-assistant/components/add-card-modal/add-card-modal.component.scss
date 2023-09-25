@@ -60,13 +60,17 @@
         }
 
         mat-form-field {
-          ::placeholder {
+          ::placeholder,
+          .mat-mdc-select-placeholder {
             color: rgba($foreground, 0.4) !important;
           }
 
           input,
-          textarea {
-            color: $foreground !important;
+          textarea,
+          mat-select,
+          .mat-mdc-select-arrow
+          {  
+          color: $foreground !important;
           }
 
           mat-datepicker-toggle {

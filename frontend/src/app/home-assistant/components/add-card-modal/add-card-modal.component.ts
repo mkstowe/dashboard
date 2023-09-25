@@ -9,6 +9,9 @@ import {
 import { HassService } from "../../services/hass.service";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { Card } from "../../models/card";
+import { CardType } from "../../models/card-types";
+
+import { MatIconRegistry } from "@angular/material/icon"; 
 
 @Component({
   selector: "app-add-card-modal",
@@ -20,6 +23,8 @@ export class AddCardModalComponent implements OnInit {
   public addCardForm: FormGroup;
   public cardExists: boolean;
   public confirmDelete: boolean;
+  public cardTypes: any;
+  public iconList: string[] = [];
   private card: Card;
   private group: number;
 
@@ -28,7 +33,8 @@ export class AddCardModalComponent implements OnInit {
     private hassService: HassService,
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<AddCardModalComponent>,
-    @Inject(MAT_DIALOG_DATA) data: { group: number, card: Card }
+    @Inject(MAT_DIALOG_DATA) data: { group: number, card: Card },
+    private iconRegistry: MatIconRegistry
   ) {
     if (data?.card) {
       this.card = data.card;
@@ -103,6 +109,16 @@ export class AddCardModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.cardTypes = Object.keys(CardType).map((key, idx) => {
+      return {
+        key,
+        value: Object.values(CardType)[idx]
+      }
+    })
+    this.iconRegistry['_svgIconConfigs'].forEach((value: any, key: string) => {
+      this.iconList.push(key.slice(1))
+    })
+
     this.addCardForm = this.formBuilder.group({
       entityId: ["", Validators.required],
       icon: [""],

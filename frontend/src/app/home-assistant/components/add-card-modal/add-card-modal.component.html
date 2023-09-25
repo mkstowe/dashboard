@@ -10,9 +10,13 @@
   <mat-dialog-content>
     <form [formGroup]="addCardForm" (ngSubmit)="onSubmit()">
       <div class="row">
-        <mat-label>Type</mat-label>
+        <mat-label>Card Type</mat-label>
         <mat-form-field appearance="outline">
-          <input matInput placeholder="lightCard" formControlName="type" />
+          <mat-select formControlName="type" placeholder="Types">
+            <mat-option *ngFor="let type of cardTypes" [value]="type.key">
+              {{ type.value }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
       <div class="row">
@@ -30,18 +34,22 @@
       <div class="row">
         <mat-label>Icon</mat-label>
         <mat-form-field appearance="outline">
-          <input matInput placeholder="floor-lamp" formControlName="icon" />
+          <mat-select formControlName="icon" placeholder="Icon">
+            <mat-option *ngFor="let icon of iconList" [value]="icon">
+              <mat-icon [svgIcon]="icon"></mat-icon> {{ icon }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
 
       <div class="row">
         <mat-label>Active Icon</mat-label>
         <mat-form-field appearance="outline">
-          <input
-            matInput
-            placeholder="floor-lamp-active"
-            formControlName="iconActive"
-          />
+          <mat-select formControlName="iconActive" placeholder="Active Icon">
+            <mat-option *ngFor="let icon of iconList" [value]="icon">
+              <mat-icon [svgIcon]="icon"></mat-icon> {{ icon }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
 
@@ -104,7 +112,7 @@
             </mat-form-field>
           </div>
 
-          <div class="row">
+          <div class="row inline checkbox-field">
             <mat-label>Round</mat-label>
             <mat-checkbox
               color="primary"

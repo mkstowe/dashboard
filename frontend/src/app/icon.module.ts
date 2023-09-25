@@ -47,7 +47,7 @@ export class IconModule {
         'floor-lamp-active',
         this.setPath(`${this.path}/floor_lamp_active.svg`),
       )
-      .addSvgIcon('gas-pump', this.setPath(`${this.path}/gas-pump.svg`))
+      .addSvgIcon('gas-pump', this.setPath(`${this.path}/gas_pump.svg`))
       .addSvgIcon('house', this.setPath(`${this.path}/house.svg`))
       .addSvgIcon('leaf', this.setPath(`${this.path}/leaf.svg`))
       .addSvgIcon('light-bulb', this.setPath(`${this.path}/light_bulb.svg`))
