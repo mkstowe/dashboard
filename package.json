@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
+    "frontend": "cd frontend; ng serve",
+    "backend": "cd backend; npx nodemon index.js",
+    "dev": "concurrently \"yarn frontend\" \"yarn backend\"",
     "deploy": "cd frontend; ng build; cd ..; gcloud app deploy dispatch.yaml frontend/frontend.yaml backend/backend.yaml"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.1"
   }
 }
