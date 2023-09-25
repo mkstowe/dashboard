@@ -33,6 +33,26 @@
         width: 100%;
         margin-top: 15px;
 
+        &.inline {
+          flex-direction: row;
+          gap: 15px;
+          justify-content: space-between;
+          width: 50%;
+          min-width: 320px;
+          margin-bottom: 20px;
+          margin-top: 0;
+
+          &.checkbox-field {
+            gap: 5px;
+            justify-content: flex-start;
+            align-items: center;
+
+            mat-label {
+              margin-bottom: 0 !important;
+            }
+          }
+        }
+
         mat-label {
           margin-bottom: 10px;
           font-size: 20px;
@@ -91,6 +111,10 @@
         .mat-expansion-indicator::after {
           color: $foreground !important;
         }
+      }
+
+      .service-target {
+        padding-left: 30px;
       }
     }
   }

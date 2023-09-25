@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS hassGroup (
 CREATE TABLE IF NOT EXISTS hassCard (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   'group' INTEGER NOT NULL,
+  'type' STRING,
   entityId TEXT NOT NULL,
   icon TEXT,
   iconActive TEXT,

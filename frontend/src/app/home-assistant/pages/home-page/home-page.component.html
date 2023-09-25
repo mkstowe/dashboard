@@ -8,12 +8,12 @@
           <button class="edit-btn" mat-icon-button color="primary" *ngIf="editMode" (click)="onAddGroup(group)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button class="add-btn" mat-icon-button color="primary" *ngIf="editMode" (click)="onAddCard()">
+          <button class="add-btn" mat-icon-button color="primary" *ngIf="editMode" (click)="onAddCard(group.id)">
             <mat-icon>add</mat-icon>
           </button>
           </div>
         </div>
-        <!-- <app-card-grid [cards]="group.cards"></app-card-grid> -->
+        <app-card-grid [cards]="group.cards"></app-card-grid>
       </div>
     </div>
 

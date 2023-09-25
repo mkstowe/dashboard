@@ -44,8 +44,8 @@ router.delete("/group/:id", async (req, res) => {
 
 // Get cards
 router.get("/card", async (req, res) => {
-  const { groupId } = req.query;
-  const cards = await db.getCards(groupId);
+  const { group } = req.query;
+  const cards = await db.getCards(group);
   res.status(200).json(cards);
 });
 

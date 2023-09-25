@@ -10,7 +10,7 @@ import { HassEntity } from 'home-assistant-js-websocket';
   styleUrls: ['./entity-card.component.scss'],
 })
 export class EntityCardComponent implements OnInit, OnDestroy {
-  @Input() public cardOptions: CardOptions | undefined;
+  @Input() public cardOptions: any;
 
   public entity: HassEntity | undefined;
   public entityName: string;
@@ -56,15 +56,16 @@ export class EntityCardComponent implements OnInit, OnDestroy {
   }
 
   public onButtonClick($event: Event) {
+    const service = JSON.parse(this.cardOptions?.service);
     if (!this.cardOptions?.lock || this.unlocked) {
       const msg = {
-        type: this.cardOptions?.service?.type || 'call_service',
+        type: service.type || 'call_service',
         domain:
-          this.cardOptions?.service?.domain ||
-          this.cardOptions?.entityId?.split('.')[0],
-        service: this.cardOptions?.service?.service || '',
-        service_data: this.cardOptions?.service?.service_data,
-        target: this.cardOptions?.service?.target || {
+          service.domain ||
+          service.entityId?.split('.')[0],
+        service: service.service || '',
+        service_data: service.service_data,
+        target: service.target || {
           entity_id: this.cardOptions?.entityId,
         },
       };

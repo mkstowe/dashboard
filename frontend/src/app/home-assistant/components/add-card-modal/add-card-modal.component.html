@@ -45,7 +45,7 @@
         </mat-form-field>
       </div>
 
-      <div class="row">
+      <div class="row inline checkbox-field">
         <mat-label>Lock</mat-label>
         <mat-checkbox
           color="primary"
@@ -74,31 +74,33 @@
             <mat-panel-title>State Options</mat-panel-title>
           </mat-expansion-panel-header>
 
+          <div formGroupName="stateOptions">
+
           <div class="row">
             <mat-label>Before String</mat-label>
             <mat-form-field appearance="outline">
-              <input matInput formControlName="stateBeforeString" />
+              <input matInput formControlName="beforeString" />
             </mat-form-field>
           </div>
 
           <div class="row">
             <mat-label>After String</mat-label>
             <mat-form-field appearance="outline">
-              <input matInput formControlName="stateAfterString" />
+              <input matInput formControlName="afterString" />
             </mat-form-field>
           </div>
 
           <div class="row">
             <mat-label>Warning Expression</mat-label>
             <mat-form-field appearance="outline">
-              <input matInput formControlName="stateWarningExpression" />
+              <input matInput formControlName="warningExpression" />
             </mat-form-field>
           </div>
 
           <div class="row">
             <mat-label>Danger Expression</mat-label>
             <mat-form-field appearance="outline">
-              <input matInput formControlName="stateDangerExpression" />
+              <input matInput formControlName="dangerExpression" />
             </mat-form-field>
           </div>
 
@@ -107,8 +109,9 @@
             <mat-checkbox
               color="primary"
               labelPosition="before"
-              formControlName="stateRound"
+              formControlName="round"
             ></mat-checkbox>
+          </div>
           </div>
         </mat-expansion-panel>
       </mat-accordion>
@@ -118,40 +121,72 @@
             <mat-panel-title>Service</mat-panel-title>
           </mat-expansion-panel-header>
 
-          <div class="row">
-            <mat-label>Domain</mat-label>
-            <mat-form-field appearance="outline">
-              <input
+          <div formGroupName="service">
+
+            <div class="row">
+              <mat-label>Domain</mat-label>
+              <mat-form-field appearance="outline">
+                <input
                 matInput
                 placeholder="light"
-                formControlName="serviceDomain"
-              />
-            </mat-form-field>
-          </div>
-
-          <div class="row">
-            <mat-label>Service</mat-label>
-            <mat-form-field appearance="outline">
-              <input matInput placeholder="toggle" formControlName="service" />
-            </mat-form-field>
-          </div>
-
-          <!-- <div class="row"> -->
-          <!-- <mat-label>Service Data</mat-label> -->
-          <!-- <mat-form-field appearance="outline"> -->
+                formControlName="domain"
+                />
+              </mat-form-field>
+            </div>
+            
+            <div class="row">
+              <mat-label>Service</mat-label>
+              <mat-form-field appearance="outline">
+                <input matInput placeholder="toggle" formControlName="service" />
+              </mat-form-field>
+            </div>
+            
+            <!-- <div class="row"> -->
+              <!-- <mat-label>Service Data</mat-label> -->
+              <!-- <mat-form-field appearance="outline"> -->
           <!-- <input matInput placeholder="toggle" formControlName="serviceData"> -->
           <!-- </mat-form-field> -->
           <!-- </div> -->
-
+          
           <div class="row">
             <mat-label>Target</mat-label>
+            <div formGroupName="target">
+            
+              <div class="service-target">
+                <div class="row inline">
+              <h4>Entity Id</h4>
             <mat-form-field appearance="outline">
               <input
-                matInput
-                placeholder="light.office"
-                formControlName="serviceTarget"
+              matInput
+              placeholder="light.office"
+              formControlName="entity_id"
               />
             </mat-form-field>
+            </div>
+
+            <div class="row inline">
+            <h4>Area Id</h4>
+            <mat-form-field appearance="outline">
+              <input
+              matInput
+              placeholder="office"
+              formControlName="area_id"
+              />
+            </mat-form-field>
+</div>
+<div class="row inline">
+            <h4>Device Id</h4>
+            <mat-form-field appearance="outline">
+              <input
+              matInput
+              placeholder="light.office"
+              formControlName="device_id"
+              />
+            </mat-form-field>
+            </div>
+          </div>
+          </div>
+          </div>
           </div>
         </mat-expansion-panel>
       </mat-accordion>

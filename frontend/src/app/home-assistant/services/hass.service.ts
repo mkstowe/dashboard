@@ -12,6 +12,8 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ServiceCall } from '../models/service-call';
 import { StateOptions } from '../models/state-options';
+import { CardGroup } from '../models/card-group';
+import { Card } from '../models/card';
 
 @Injectable({
   providedIn: 'root',
@@ -43,7 +45,7 @@ export class HassService {
     return this._editMode.asObservable();
   }
 
-  public set editMode$(val: boolean) {
+  public setEditMode(val: boolean) {
     this._editMode.next(val);
   }
 
@@ -51,13 +53,13 @@ export class HassService {
     return this.http.get(`/api/hass/group`)
   }
 
-  public createGroup(group: any) {
-    return this.http.post(`/api/hass/group`, group)
+  public createGroup(group: CardGroup) {
+    return this.http.post<CardGroup>(`/api/hass/group`, group)
     .pipe(tap(() => this.refetchSubject.next(null)));
   }
 
-  public updateGroup(id: number, group: any) {
-    return this.http.patch(`/api/hass/group/${id}`, group)
+  public updateGroup(id: number, group: Partial<CardGroup>) {
+    return this.http.patch<Partial<CardGroup>>(`/api/hass/group/${id}`, group)
     .pipe(tap(() => this.refetchSubject.next(null)));
   }
 
@@ -67,20 +69,20 @@ export class HassService {
   }
 
   public getAllCards() {
-    return this.http.get(`/api/hass/card`)
+    return this.http.get<Card[]>(`/api/hass/card`)
   }
 
   public getCardsByGroup(groupId: number) {
-    return this.http.get(`/api/hass/card?group=${groupId}`)
+    return this.http.get<Card[]>(`/api/hass/card?group=${groupId}`)
   }
 
-  public createCard(card: any) {
-    return this.http.post(`/api/hass/card`, card)
+  public createCard(card: Card) {
+    return this.http.post<Card>(`/api/hass/card`, card)
     .pipe(tap(() => this.refetchSubject.next(null)));
   }
 
-  public updateCard(id: number, card: any) {
-    return this.http.patch(`/api/hass/card/${id}`, card)
+  public updateCard(id: number, card: Partial<Card>) {
+    return this.http.patch<Partial<Card>>(`/api/hass/card/${id}`, card)
     .pipe(tap(() => this.refetchSubject.next(null)));
   }
 

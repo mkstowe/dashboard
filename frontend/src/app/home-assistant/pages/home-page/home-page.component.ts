@@ -4,7 +4,7 @@ import { HassService } from '../../services/hass.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCardModalComponent } from '../../components/add-card-modal/add-card-modal.component';
 import { AddGroupModalComponent } from '../../components/add-group-modal/add-group-modal.component';
-import { switchMap } from 'rxjs';
+import { Observable, combineLatest, concatMap, forkJoin, map, mergeMap, of, switchMap, tap, toArray, withLatestFrom } from 'rxjs';
 
 @Component({
   selector: 'app-home-page',
@@ -12,531 +12,532 @@ import { switchMap } from 'rxjs';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  public data: CardGroup[] = [
-    {
-      title: 'Quick Toggles',
-      cards: [
-        {
-          type: 'entityCard',
-          cardOptions: {
-            entityId: 'script.sleepy_time',
-            icon: 'zzz',
-            name: 'Sleepy Time',
-            state: ' ',
-            lock: true,
-            service: {
-              type: 'call_service',
-              domain: 'script',
-              service: 'turn_on',
-              target: {
-                entity_id: 'script.sleepy_time',
-              },
-            },
-          },
-        },
-        {
-          type: 'entityCard',
-          cardOptions: {
-            entityId: 'script.shower_time',
-            icon: 'shower',
-            name: 'Shower Time',
-            state: ' ',
-            service: {
-              type: 'call_service',
-              domain: 'script',
-              service: 'turn_on',
-              target: {
-                entity_id: 'script.shower_time',
-              },
-            },
-          },
-        },
-        {
-          type: 'entityCard',
-          cardOptions: {
-            entityId: 'input_boolean.air_conditioner_toggle',
-            icon: 'fan',
-            iconActive: 'fan-active',
-            service: {
-              type: 'call_service',
-              domain: 'input_boolean',
-              service: 'toggle',
-              target: {
-                entity_id: 'input_boolean.air_conditioner_toggle',
-              },
-            },
-          },
-        },
-        {
-          type: 'entityCard',
-          cardOptions: {
-            entityId: 'light.grow_lights',
-            icon: 'light-bulb',
-            iconActive: 'light-bulb-active',
-            name: 'Grow Lights',
-            service: {
-              type: 'call_service',
-              domain: 'light',
-              service: 'toggle',
-              target: {
-                entity_id: 'light.grow_lights',
-              },
-            },
-          },
-        },
-      ],
-    },
-    {
-      title: 'Overview',
-      cards: [
-        {
-          type: 'sensorGroup',
-          sensors: [
-            {
-              entityId: 'sensor.broadlink_temperature',
-              icon: 'thermometer',
-              name: 'Temperature',
-              stateOptions: {
-                round: true,
-                afterString: '°',
-              },
-              enableGraph: true,
-            },
-            {
-              entityId: 'sensor.broadlink_humidity',
-              icon: 'water-drops',
-              name: 'Humidity',
-              stateOptions: {
-                round: true,
-                afterString: '%',
-              },
-              enableGraph: true,
-            },
-          ],
-        },
-        {
-          type: 'sensorGroup',
-          sensors: [
-            {
-              name: 'Network Speeds',
-              entityId: 'sensor.speedtest_download',
-              icon: 'speedometer',
-              stateOptions: {
-                round: true,
-                afterString: ' Mbps',
-              },
-              enableGraph: true,
-            },
-          ],
-        },
-      ],
-    },
-    {
-      title: 'Office',
-      cards: [
-        {
-          type: 'lightCard',
-          cardOptions: {
-            entityId: 'light.office',
-            icon: 'floor-lamp',
-            iconActive: 'floor-lamp-active',
-            service: {
-              type: 'call_service',
-              domain: 'light',
-              service: 'toggle',
-              target: {
-                entity_id: 'light.office',
-              },
-            },
-          },
-        },
-        {
-          type: 'fanCard',
-          cardOptions: {
-            entityId: 'fan.office_fan',
-            icon: 'fan',
-            iconActive: 'fan-active',
-            service: {
-              type: 'call_service',
-              domain: 'fan',
-              service: 'toggle',
-              target: {
-                entity_id: 'fan.office_fan',
-              },
-            },
-          },
-        },
-        {
-          type: 'entityCard',
-          cardOptions: {
-            entityId: 'script.desktop_sleep',
-            icon: 'zzz',
-            state: ' ',
-            lock: true,
-            service: {
-              type: 'call_service',
-              domain: 'script',
-              service: 'turn_on',
-              target: {
-                entity_id: 'script.desktop_sleep',
-              },
-            },
-          },
-        },
-      ],
-    },
-    {
-      title: 'Bedroom',
-      cards: [
-        {
-          type: 'lightCard',
-          cardOptions: {
-            entityId: 'light.bedroom',
-            icon: 'table-lamp',
-            iconActive: 'table-lamp-active',
-            service: {
-              type: 'call_service',
-              domain: 'light',
-              service: 'toggle',
-              target: {
-                entity_id: 'light.bedroom',
-              },
-            },
-          },
-        },
-        {
-          type: 'speakerCard',
-          cardOptions: {
-            entityId: 'media_player.bedroom_speaker',
-            icon: 'speaker',
-            iconActive: 'speaker-active',
-            service: {
-              type: 'call_service',
-              domain: 'media_player',
-              service: 'toggle',
-              target: {
-                entity_id: 'media_player.bedroom_speaker',
-              },
-            },
-          },
-        },
-      ],
-    },
-    {
-      title: 'Living Room',
-      cards: [
-        {
-          type: 'lightCard',
-          cardOptions: {
-            entityId: 'light.living_room',
-            icon: 'floor-lamp',
-            iconActive: 'floor-lamp-active',
-            service: {
-              type: 'call_service',
-              domain: 'light',
-              service: 'toggle',
-              target: {
-                entity_id: 'light.living_room',
-              },
-            },
-          },
-        },
-        {
-          type: 'tvCard',
-          cardOptions: {
-            entityId: 'remote.living_room_tv',
-            icon: 'tv',
-            iconActive: 'tv-active',
-            service: {
-              type: 'call_service',
-              domain: 'remote',
-              service: 'toggle',
-              target: {
-                entity_id: 'remote.living_room_tv',
-              },
-            },
-          },
-        },
-        {
-          type: 'lightCard',
-          cardOptions: {
-            entityId: 'light.candle_lamp',
-            icon: 'candle',
-            iconActive: 'candle-active',
-            service: {
-              type: 'call_service',
-              domain: 'light',
-              service: 'toggle',
-              target: {
-                entity_id: 'light.candle_lamp',
-              },
-            },
-          },
-        },
-        {
-          type: 'lightCard',
-          cardOptions: {
-            entityId: 'light.grow_light_1',
-            icon: 'light-bulb',
-            iconActive: 'light-bulb-active',
-            service: {
-              type: 'call_service',
-              domain: 'light',
-              service: 'toggle',
-              target: {
-                entity_id: 'light.grow_light_1',
-              },
-            },
-          },
-        },
-        {
-          type: 'lightCard',
-          cardOptions: {
-            entityId: 'light.loft_lights',
-            icon: 'ceiling-light',
-            iconActive: 'ceiling-light-active',
-            service: {
-              type: 'call_service',
-              domain: 'light',
-              service: 'toggle',
-              target: {
-                entity_id: 'light.loft_lights',
-              },
-            },
-          },
-        },
-      ],
-    },
-    {
-      title: 'Reading Nook',
-      cards: [
-        {
-          type: 'lightCard',
-          cardOptions: {
-            entityId: 'light.reading_nook',
-            icon: 'floor-lamp',
-            iconActive: 'floor-lamp-active',
-            service: {
-              type: 'call_service',
-              domain: 'light',
-              service: 'toggle',
-              target: {
-                entity_id: 'light.reading_nook',
-              },
-            },
-          },
-        },
-        {
-          type: 'lightCard',
-          cardOptions: {
-            entityId: 'light.grow_light_2',
-            icon: 'light-bulb',
-            iconActive: 'light-bulb-active',
-            service: {
-              type: 'call_service',
-              domain: 'light',
-              service: 'toggle',
-              target: {
-                entity_id: 'light.grow_light_2',
-              },
-            },
-          },
-        },
-      ],
-    },
-    {
-      title: 'Craft Nook',
-      cards: [
-        {
-          type: 'lightCard',
-          cardOptions: {
-            entityId: 'light.grow_light_3',
-            icon: 'light-bulb',
-            iconActive: 'light-bulb-active',
-            service: {
-              type: 'call_service',
-              domain: 'light',
-              service: 'toggle',
-              target: {
-                entity_id: 'light.grow_light_3',
-              },
-            },
-          },
-        },
-      ],
-    },
-    {
-      title: 'Kitchen',
-      cards: [
-        {
-          type: 'entityCard',
-          cardOptions: {
-            entityId: 'light.kitchen_light_1',
-            icon: 'ceiling-light',
-            iconActive: 'ceiling-light-active',
-            service: {
-              type: 'call_service',
-              domain: 'light',
-              service: 'toggle',
-              target: {
-                entity_id: 'light.kitchen_light_1',
-              },
-            },
-          },
-        },
-        {
-          type: 'entityCard',
-          cardOptions: {
-            entityId: 'light.kitchen_light_2',
-            icon: 'ceiling-light',
-            iconActive: 'ceiling-light-active',
-            service: {
-              type: 'call_service',
-              domain: 'light',
-              service: 'toggle',
-              target: {
-                entity_id: 'light.kitchen_light_2',
-              },
-            },
-          },
-        },
-        {
-          type: 'speakerCard',
-          cardOptions: {
-            entityId: 'media_player.kitchen_display',
-            icon: 'speaker',
-            iconActive: 'speaker-active',
-            service: {
-              type: 'call_service',
-              domain: 'media_player',
-              service: 'toggle',
-              target: {
-                entity_id: 'media_player.kitchen_display',
-              },
-            },
-          },
-        },
-      ],
-    },
-    {
-      title: 'Bathroom',
-      cards: [
-        {
-          type: 'entityCard',
-          cardOptions: {
-            entityId: 'light.bathroom_light',
-            icon: 'ceiling-light',
-            iconActive: 'ceiling-light-active',
-            service: {
-              type: 'call_service',
-              domain: 'light',
-              service: 'toggle',
-              target: {
-                entity_id: 'light.bathroom_light',
-              },
-            },
-          },
-        },
-        {
-          type: 'entityCard',
-          cardOptions: {
-            entityId: 'switch.bathroom_fan',
-            icon: 'fan',
-            iconActive: 'fan-active',
-            service: {
-              type: 'call_service',
-              domain: 'switch',
-              service: 'toggle',
-              target: {
-                entity_id: 'switch.bathroom_fan',
-              },
-            },
-          },
-        },
-        {
-          type: 'speakerCard',
-          cardOptions: {
-            entityId: 'media_player.bathroom_speaker',
-            icon: 'speaker',
-            iconActive: 'speaker-active',
-            service: {
-              type: 'call_service',
-              domain: 'media_player',
-              service: 'toggle',
-              target: {
-                entity_id: 'media_player.bathroom_speaker',
-              },
-            },
-          },
-        },
-      ],
-    },
-    {
-      title: 'Cats',
-      cards: [
-        {
-          type: 'entityCard',
-          cardOptions: {
-            entityId: 'vacuum.litter_robot_litter_box',
-            icon: 'toilet',
-            name: 'Litter Robot',
-            service: {
-              type: 'call_service',
-              domain: 'vacuum',
-              service: 'start',
-              target: {
-                entity_id: 'vacuum.litter_robot_litter_box',
-              },
-            },
-          },
-        },
-        {
-          type: 'sensorGroup',
-          sensors: [
-            {
-              entityId: 'sensor.litter_robot_litter_level',
-              icon: 'litter',
-              name: 'Litter Level',
-              stateOptions: {
-                round: true,
-                afterString: '%',
-                warningExpression: '<= 70',
-                dangerExpression: '<= 40',
-              },
-              enableGraph: true,
-            },
-            {
-              entityId: 'sensor.litter_robot_waste_drawer',
-              icon: 'poop',
-              name: 'Waste Level',
-              stateOptions: {
-                round: true,
-                afterString: '%',
-                warningExpression: '>= 50',
-                dangerExpression: '>= 80',
-              },
-              enableGraph: true,
-            },
-          ],
-        },
-        {
-          type: 'sensorGroup',
-          sensors: [
-            {
-              entityId: 'sensor.food_level',
-              icon: 'chicken-leg',
-              name: 'Food Level',
-              stateOptions: {
-                dangerExpression: '=== "empty"',
-              },
-              enableGraph: false,
-            },
-          ],
-        },
-      ],
-    },
-  ];
+  // public data: CardGroup[] = [
+  //   {
+  //     title: 'Quick Toggles',
+  //     cards: [
+  //       {
+  //         type: 'entityCard',
+  //         cardOptions: {
+  //           entityId: 'script.sleepy_time',
+  //           icon: 'zzz',
+  //           name: 'Sleepy Time',
+  //           state: ' ',
+  //           lock: true,
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'script',
+  //             service: 'turn_on',
+  //             target: {
+  //               entity_id: 'script.sleepy_time',
+  //             },
+  //           },
+  //         },
+  //       },
+  //       {
+  //         type: 'entityCard',
+  //         cardOptions: {
+  //           entityId: 'script.shower_time',
+  //           icon: 'shower',
+  //           name: 'Shower Time',
+  //           state: ' ',
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'script',
+  //             service: 'turn_on',
+  //             target: {
+  //               entity_id: 'script.shower_time',
+  //             },
+  //           },
+  //         },
+  //       },
+  //       {
+  //         type: 'entityCard',
+  //         cardOptions: {
+  //           entityId: 'input_boolean.air_conditioner_toggle',
+  //           icon: 'fan',
+  //           iconActive: 'fan-active',
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'input_boolean',
+  //             service: 'toggle',
+  //             target: {
+  //               entity_id: 'input_boolean.air_conditioner_toggle',
+  //             },
+  //           },
+  //         },
+  //       },
+  //       {
+  //         type: 'entityCard',
+  //         cardOptions: {
+  //           entityId: 'light.grow_lights',
+  //           icon: 'light-bulb',
+  //           iconActive: 'light-bulb-active',
+  //           name: 'Grow Lights',
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'light',
+  //             service: 'toggle',
+  //             target: {
+  //               entity_id: 'light.grow_lights',
+  //             },
+  //           },
+  //         },
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     title: 'Overview',
+  //     cards: [
+  //       {
+  //         type: 'sensorGroup',
+  //         sensors: [
+  //           {
+  //             entityId: 'sensor.broadlink_temperature',
+  //             icon: 'thermometer',
+  //             name: 'Temperature',
+  //             stateOptions: {
+  //               round: true,
+  //               afterString: '°',
+  //             },
+  //             enableGraph: true,
+  //           },
+  //           {
+  //             entityId: 'sensor.broadlink_humidity',
+  //             icon: 'water-drops',
+  //             name: 'Humidity',
+  //             stateOptions: {
+  //               round: true,
+  //               afterString: '%',
+  //             },
+  //             enableGraph: true,
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         type: 'sensorGroup',
+  //         sensors: [
+  //           {
+  //             name: 'Network Speeds',
+  //             entityId: 'sensor.speedtest_download',
+  //             icon: 'speedometer',
+  //             stateOptions: {
+  //               round: true,
+  //               afterString: ' Mbps',
+  //             },
+  //             enableGraph: true,
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     title: 'Office',
+  //     cards: [
+  //       {
+  //         type: 'lightCard',
+  //         cardOptions: {
+  //           entityId: 'light.office',
+  //           icon: 'floor-lamp',
+  //           iconActive: 'floor-lamp-active',
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'light',
+  //             service: 'toggle',
+  //             target: {
+  //               entity_id: 'light.office',
+  //             },
+  //           },
+  //         },
+  //       },
+  //       {
+  //         type: 'fanCard',
+  //         cardOptions: {
+  //           entityId: 'fan.office_fan',
+  //           icon: 'fan',
+  //           iconActive: 'fan-active',
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'fan',
+  //             service: 'toggle',
+  //             target: {
+  //               entity_id: 'fan.office_fan',
+  //             },
+  //           },
+  //         },
+  //       },
+  //       {
+  //         type: 'entityCard',
+  //         cardOptions: {
+  //           entityId: 'script.desktop_sleep',
+  //           icon: 'zzz',
+  //           state: ' ',
+  //           lock: true,
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'script',
+  //             service: 'turn_on',
+  //             target: {
+  //               entity_id: 'script.desktop_sleep',
+  //             },
+  //           },
+  //         },
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     title: 'Bedroom',
+  //     cards: [
+  //       {
+  //         type: 'lightCard',
+  //         cardOptions: {
+  //           entityId: 'light.bedroom',
+  //           icon: 'table-lamp',
+  //           iconActive: 'table-lamp-active',
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'light',
+  //             service: 'toggle',
+  //             target: {
+  //               entity_id: 'light.bedroom',
+  //             },
+  //           },
+  //         },
+  //       },
+  //       {
+  //         type: 'speakerCard',
+  //         cardOptions: {
+  //           entityId: 'media_player.bedroom_speaker',
+  //           icon: 'speaker',
+  //           iconActive: 'speaker-active',
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'media_player',
+  //             service: 'toggle',
+  //             target: {
+  //               entity_id: 'media_player.bedroom_speaker',
+  //             },
+  //           },
+  //         },
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     title: 'Living Room',
+  //     cards: [
+  //       {
+  //         type: 'lightCard',
+  //         cardOptions: {
+  //           entityId: 'light.living_room',
+  //           icon: 'floor-lamp',
+  //           iconActive: 'floor-lamp-active',
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'light',
+  //             service: 'toggle',
+  //             target: {
+  //               entity_id: 'light.living_room',
+  //             },
+  //           },
+  //         },
+  //       },
+  //       {
+  //         type: 'tvCard',
+  //         cardOptions: {
+  //           entityId: 'remote.living_room_tv',
+  //           icon: 'tv',
+  //           iconActive: 'tv-active',
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'remote',
+  //             service: 'toggle',
+  //             target: {
+  //               entity_id: 'remote.living_room_tv',
+  //             },
+  //           },
+  //         },
+  //       },
+  //       {
+  //         type: 'lightCard',
+  //         cardOptions: {
+  //           entityId: 'light.candle_lamp',
+  //           icon: 'candle',
+  //           iconActive: 'candle-active',
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'light',
+  //             service: 'toggle',
+  //             target: {
+  //               entity_id: 'light.candle_lamp',
+  //             },
+  //           },
+  //         },
+  //       },
+  //       {
+  //         type: 'lightCard',
+  //         cardOptions: {
+  //           entityId: 'light.grow_light_1',
+  //           icon: 'light-bulb',
+  //           iconActive: 'light-bulb-active',
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'light',
+  //             service: 'toggle',
+  //             target: {
+  //               entity_id: 'light.grow_light_1',
+  //             },
+  //           },
+  //         },
+  //       },
+  //       {
+  //         type: 'lightCard',
+  //         cardOptions: {
+  //           entityId: 'light.loft_lights',
+  //           icon: 'ceiling-light',
+  //           iconActive: 'ceiling-light-active',
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'light',
+  //             service: 'toggle',
+  //             target: {
+  //               entity_id: 'light.loft_lights',
+  //             },
+  //           },
+  //         },
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     title: 'Reading Nook',
+  //     cards: [
+  //       {
+  //         type: 'lightCard',
+  //         cardOptions: {
+  //           entityId: 'light.reading_nook',
+  //           icon: 'floor-lamp',
+  //           iconActive: 'floor-lamp-active',
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'light',
+  //             service: 'toggle',
+  //             target: {
+  //               entity_id: 'light.reading_nook',
+  //             },
+  //           },
+  //         },
+  //       },
+  //       {
+  //         type: 'lightCard',
+  //         cardOptions: {
+  //           entityId: 'light.grow_light_2',
+  //           icon: 'light-bulb',
+  //           iconActive: 'light-bulb-active',
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'light',
+  //             service: 'toggle',
+  //             target: {
+  //               entity_id: 'light.grow_light_2',
+  //             },
+  //           },
+  //         },
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     title: 'Craft Nook',
+  //     cards: [
+  //       {
+  //         type: 'lightCard',
+  //         cardOptions: {
+  //           entityId: 'light.grow_light_3',
+  //           icon: 'light-bulb',
+  //           iconActive: 'light-bulb-active',
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'light',
+  //             service: 'toggle',
+  //             target: {
+  //               entity_id: 'light.grow_light_3',
+  //             },
+  //           },
+  //         },
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     title: 'Kitchen',
+  //     cards: [
+  //       {
+  //         type: 'entityCard',
+  //         cardOptions: {
+  //           entityId: 'light.kitchen_light_1',
+  //           icon: 'ceiling-light',
+  //           iconActive: 'ceiling-light-active',
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'light',
+  //             service: 'toggle',
+  //             target: {
+  //               entity_id: 'light.kitchen_light_1',
+  //             },
+  //           },
+  //         },
+  //       },
+  //       {
+  //         type: 'entityCard',
+  //         cardOptions: {
+  //           entityId: 'light.kitchen_light_2',
+  //           icon: 'ceiling-light',
+  //           iconActive: 'ceiling-light-active',
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'light',
+  //             service: 'toggle',
+  //             target: {
+  //               entity_id: 'light.kitchen_light_2',
+  //             },
+  //           },
+  //         },
+  //       },
+  //       {
+  //         type: 'speakerCard',
+  //         cardOptions: {
+  //           entityId: 'media_player.kitchen_display',
+  //           icon: 'speaker',
+  //           iconActive: 'speaker-active',
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'media_player',
+  //             service: 'toggle',
+  //             target: {
+  //               entity_id: 'media_player.kitchen_display',
+  //             },
+  //           },
+  //         },
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     title: 'Bathroom',
+  //     cards: [
+  //       {
+  //         type: 'entityCard',
+  //         cardOptions: {
+  //           entityId: 'light.bathroom_light',
+  //           icon: 'ceiling-light',
+  //           iconActive: 'ceiling-light-active',
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'light',
+  //             service: 'toggle',
+  //             target: {
+  //               entity_id: 'light.bathroom_light',
+  //             },
+  //           },
+  //         },
+  //       },
+  //       {
+  //         type: 'entityCard',
+  //         cardOptions: {
+  //           entityId: 'switch.bathroom_fan',
+  //           icon: 'fan',
+  //           iconActive: 'fan-active',
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'switch',
+  //             service: 'toggle',
+  //             target: {
+  //               entity_id: 'switch.bathroom_fan',
+  //             },
+  //           },
+  //         },
+  //       },
+  //       {
+  //         type: 'speakerCard',
+  //         cardOptions: {
+  //           entityId: 'media_player.bathroom_speaker',
+  //           icon: 'speaker',
+  //           iconActive: 'speaker-active',
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'media_player',
+  //             service: 'toggle',
+  //             target: {
+  //               entity_id: 'media_player.bathroom_speaker',
+  //             },
+  //           },
+  //         },
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     title: 'Cats',
+  //     cards: [
+  //       {
+  //         type: 'entityCard',
+  //         cardOptions: {
+  //           entityId: 'vacuum.litter_robot_litter_box',
+  //           icon: 'toilet',
+  //           name: 'Litter Robot',
+  //           service: {
+  //             type: 'call_service',
+  //             domain: 'vacuum',
+  //             service: 'start',
+  //             target: {
+  //               entity_id: 'vacuum.litter_robot_litter_box',
+  //             },
+  //           },
+  //         },
+  //       },
+  //       {
+  //         type: 'sensorGroup',
+  //         sensors: [
+  //           {
+  //             entityId: 'sensor.litter_robot_litter_level',
+  //             icon: 'litter',
+  //             name: 'Litter Level',
+  //             stateOptions: {
+  //               round: true,
+  //               afterString: '%',
+  //               warningExpression: '<= 70',
+  //               dangerExpression: '<= 40',
+  //             },
+  //             enableGraph: true,
+  //           },
+  //           {
+  //             entityId: 'sensor.litter_robot_waste_drawer',
+  //             icon: 'poop',
+  //             name: 'Waste Level',
+  //             stateOptions: {
+  //               round: true,
+  //               afterString: '%',
+  //               warningExpression: '>= 50',
+  //               dangerExpression: '>= 80',
+  //             },
+  //             enableGraph: true,
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         type: 'sensorGroup',
+  //         sensors: [
+  //           {
+  //             entityId: 'sensor.food_level',
+  //             icon: 'chicken-leg',
+  //             name: 'Food Level',
+  //             stateOptions: {
+  //               dangerExpression: '=== "empty"',
+  //             },
+  //             enableGraph: false,
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //   },
+  // ];
 
+  // public groups: Observable<CardGroup[]>;
   public groups: any;
   public cards: any;
 
@@ -550,21 +551,24 @@ export class HomePageComponent implements OnInit {
         this.editMode = res;
       });
 
-      this.groups = this.hassService.refetch.pipe(
-        switchMap(() => this.hassService.getAllGroups())
+      const groups$ = this.hassService.getAllGroups();
+      const groupsWithCards$ = groups$.pipe(
+        switchMap((groups: any) => {
+          const cardObservables = groups.map((group: any) => {
+            return this.hassService.getCardsByGroup(group.id).pipe(
+              map(cards => ({ ...group, cards}))
+            )
+          })
+
+          return forkJoin(cardObservables);
+        })
       );
 
-      console.log(this.groups)
+      this.groups = this.hassService.refetch.pipe(
+        switchMap(() => groupsWithCards$)
+      )
 
-      // this.hassService.getAllGroups().subscribe((res: any) => {
-        // this.groups = res;
-      // }
-      // )
-
-      this.hassService.getCardsByGroup(1).subscribe((res) => {
-        this.cards = res;
-        console.log(res);
-      })
+     
   }
 
   public toggleSidebar() {
@@ -572,7 +576,7 @@ export class HomePageComponent implements OnInit {
   }
 
   public toggleEdit() {
-    this.hassService.editMode$ = !this.editMode;
+    this.hassService.setEditMode(!this.editMode);
   }
 
   public onAddGroup(group?: any) {
@@ -587,12 +591,15 @@ export class HomePageComponent implements OnInit {
     })
   }
 
-  public onAddCard() {
+  public onAddCard(group: number) {
     this.dialog.open(AddCardModalComponent, {
       width: '700px',
       height: '90%',
       enterAnimationDuration: 100,
       exitAnimationDuration: 100,
+      data: {
+        group
+      }
     });
   }
 }
