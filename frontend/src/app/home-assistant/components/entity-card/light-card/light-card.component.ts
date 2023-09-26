@@ -12,9 +12,9 @@ import { LightDetailComponent } from '../../light-detail/light-detail.component'
 export class LightCardComponent extends EntityCardComponent {
   constructor(
     hassService: HassService,
-    private dialog: MatDialog,
+    dialog: MatDialog,
   ) {
-    super(hassService);
+    super(hassService, dialog);
   }
 
   public onRightMouseClick() {

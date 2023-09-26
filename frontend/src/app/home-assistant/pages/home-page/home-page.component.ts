@@ -4,7 +4,8 @@ import { HassService } from '../../services/hass.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCardModalComponent } from '../../components/add-card-modal/add-card-modal.component';
 import { AddGroupModalComponent } from '../../components/add-group-modal/add-group-modal.component';
-import { Observable, combineLatest, concatMap, forkJoin, map, mergeMap, of, switchMap, tap, toArray, withLatestFrom } from 'rxjs';
+import { Observable, defaultIfEmpty, forkJoin, map, switchMap } from 'rxjs';
+import { Card } from '../../models/card';
 
 @Component({
   selector: 'app-home-page',
@@ -538,8 +539,8 @@ export class HomePageComponent implements OnInit {
   // ];
 
   // public groups: Observable<CardGroup[]>;
-  public groups: any;
-  public cards: any;
+  public groups: Observable<CardGroup[]>;
+  public cards: Card[];
 
   public sidebarActive = false;
   public editMode = false;
@@ -561,14 +562,15 @@ export class HomePageComponent implements OnInit {
           })
 
           return forkJoin(cardObservables);
-        })
+        }),
+        defaultIfEmpty([])
       );
 
       this.groups = this.hassService.refetch.pipe(
-        switchMap(() => groupsWithCards$)
-      )
-
-     
+        switchMap(() => {
+          return groupsWithCards$
+        })
+      ) as Observable<CardGroup[]>;
   }
 
   public toggleSidebar() {
@@ -582,7 +584,6 @@ export class HomePageComponent implements OnInit {
   public onAddGroup(group?: any) {
     this.dialog.open(AddGroupModalComponent, {
       width: '700px',
-      // height: '300px',
       enterAnimationDuration: 100,
       exitAnimationDuration: 100,
       data: {

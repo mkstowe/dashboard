@@ -6,23 +6,23 @@
     <ng-container [ngSwitch]="card.type">
       <app-entity-card
         *ngSwitchCase="'entityCard'"
-        [cardOptions]="card.cardOptions"
+        [card]="card"
       ></app-entity-card>
       <app-light-card
         *ngSwitchCase="'lightCard'"
-        [cardOptions]="card"
+        [card]="card"
       ></app-light-card>
       <app-tv-card
         *ngSwitchCase="'tvCard'"
-        [cardOptions]="card.cardOptions"
+        [card]="card"
       ></app-tv-card>
       <app-speaker-card
         *ngSwitchCase="'speakerCard'"
-        [cardOptions]="card.cardOptions"
+        [card]="card"
       ></app-speaker-card>
       <app-fan-card
         *ngSwitchCase="'fanCard'"
-        [cardOptions]="card.cardOptions"
+        [card]="card"
       ></app-fan-card>
       <app-sensor-group *ngSwitchCase="'sensorGroup'">
         <ng-container *ngFor="let sensor of card.sensors">

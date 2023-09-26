@@ -79,12 +79,28 @@
   }
 
   &.has-action {
-    &:hover {
+    &:hover:not(.edit-mode) {
       cursor: pointer;
       background-color: rgba($foreground, 0.05);
 
       &.active {
         background-color: rgba($foreground, 0.9);
+      }
+    }
+  }
+
+  .edit-actions {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+
+    button {
+      width: 35px;
+      height: 35px;
+      margin-left: 15px;
+
+      mat-icon {
+        transform: scale(0.8);
       }
     }
   }

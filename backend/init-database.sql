@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS hassCard (
   state TEXT,
   service TEXT,
   stateOptions TEXT,
+  CONSTRAINT fk_group
   FOREIGN KEY ('group')
   REFERENCES hassGroup (id)
     ON DELETE CASCADE
@@ -39,3 +40,5 @@ CREATE TABLE IF NOT EXISTS plant (
     lastFertilized TEXT,
     notes TEXT
 );
+
+PRAGMA foreign_keys=on;

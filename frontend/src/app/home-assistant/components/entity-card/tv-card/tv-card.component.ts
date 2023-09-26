@@ -12,9 +12,9 @@ import { TvDetailComponent } from '../../tv-detail/tv-detail.component';
 export class TvCardComponent extends EntityCardComponent {
   constructor(
     hassService: HassService,
-    private dialog: MatDialog,
+    dialog: MatDialog,
   ) {
-    super(hassService);
+    super(hassService, dialog);
   }
 
   public onRightMouseClick() {

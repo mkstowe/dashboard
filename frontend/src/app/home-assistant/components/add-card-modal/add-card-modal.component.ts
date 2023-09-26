@@ -133,8 +133,8 @@ export class AddCardModalComponent implements OnInit {
           entity_id: [""],
           area_id: [""],
           device_id: [""]
-        })
-      }),
+        }) 
+      }), 
       type: [""],
       state: [""],
       stateOptions: this.formBuilder.group({
@@ -147,8 +147,34 @@ export class AddCardModalComponent implements OnInit {
     });
 
     if (this.card) {
+      const service = JSON.parse(this.card.service as string);
+      const stateOptions = JSON.parse(this.card.stateOptions as string);
+
       this.addCardForm.patchValue({
-        // name: this.card.name,
+        entityId: this.card.entityId,
+        icon: this.card.icon,
+        iconActive: this.card.iconActive,
+        lock: this.card.lock,
+        name: this.card.name,
+        service: {
+          domain: service.domain,
+          service: service.service,
+          // data: service.data,
+          target: {
+            entity_id: service.target.entity_id,
+            area_id: service.target.area_id,
+            device_id: service.target.device_id
+          }
+        },
+        type: this.card.type,
+        state: this.card.state,
+        stateOptions: {
+          beforeString: stateOptions.beforeString,
+          afterString: stateOptions.afterString,
+          warningExpression: stateOptions.warningExpression,
+          dangerExpression: stateOptions.dangerExpression,
+          round: stateOptions.round
+        }
       });
     }
   }
@@ -156,12 +182,24 @@ export class AddCardModalComponent implements OnInit {
   public onSubmit() {
     if (this.addCardForm.pristine || this.addCardForm.invalid) return;
 
+    const value = {
+      entityId: this.addCardForm.value.entityId,
+      icon: this.addCardForm.value.icon,
+      iconActive: this.addCardForm.value.iconActive,
+      lock: this.addCardForm.value.lock,
+      name: this.addCardForm.value.name,
+      service: JSON.stringify(this.addCardForm.value.service),
+      type: this.addCardForm.value.type,
+      state: this.addCardForm.value.state,
+      stateOptions: JSON.stringify(this.addCardForm.value.stateOptions)
+    }
+
     if (this.card) {
       this.hassService
-        .updateCard(this.card.id, this.addCardForm.value)
+        .updateCard(this.card.id, value as Partial<Card>)
         .subscribe();
     } else {
-      this.hassService.createCard({...this.addCardForm.value, group: this.group}).subscribe();
+      this.hassService.createCard({...value as Card, group: this.group}).subscribe();
     }
 
     this.close();

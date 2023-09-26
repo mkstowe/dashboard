@@ -12,9 +12,9 @@ import { EntityCardComponent } from '../entity-card.component';
 export class FanCardComponent extends EntityCardComponent {
   constructor(
     hassService: HassService,
-    private dialog: MatDialog,
+    dialog: MatDialog,
   ) {
-    super(hassService);
+    super(hassService, dialog);
   }
 
   public onRightMouseClick() {

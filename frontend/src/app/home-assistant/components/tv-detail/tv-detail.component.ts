@@ -8,7 +8,7 @@ import {
 import { HassService } from '../../services/hass.service';
 import { ServiceCall } from '../../models/service-call';
 import { Subject, takeUntil } from 'rxjs';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { HassEntity } from 'home-assistant-js-websocket';
 
@@ -33,6 +33,7 @@ export class TvDetailComponent implements OnInit, OnDestroy {
   constructor(
     private hassService: HassService,
     private formBuilder: FormBuilder,
+    private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA)
     data: { entityId: string; entityName: string; isActive: boolean },
   ) {

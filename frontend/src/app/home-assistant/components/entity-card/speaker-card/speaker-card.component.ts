@@ -12,9 +12,9 @@ import { SpeakerDetailComponent } from '../../speaker-detail/speaker-detail.comp
 export class SpeakerCardComponent extends EntityCardComponent {
   constructor(
     hassService: HassService,
-    private dialog: MatDialog,
+    dialog: MatDialog,
   ) {
-    super(hassService);
+    super(hassService, dialog);
   }
 
   public onRightMouseClick() {

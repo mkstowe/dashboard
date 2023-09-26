@@ -1,8 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { HassService } from '../../services/hass.service';
-import { CardOptions } from '../../models/card-options';
 import { Subject, takeUntil } from 'rxjs';
 import { HassEntity } from 'home-assistant-js-websocket';
+import { MatDialog } from '@angular/material/dialog';
+import { AddCardModalComponent } from '../add-card-modal/add-card-modal.component';
 
 @Component({
   selector: 'app-entity-card',
@@ -10,7 +11,7 @@ import { HassEntity } from 'home-assistant-js-websocket';
   styleUrls: ['./entity-card.component.scss'],
 })
 export class EntityCardComponent implements OnInit, OnDestroy {
-  @Input() public cardOptions: any;
+  @Input() public card: any;
 
   public entity: HassEntity | undefined;
   public entityName: string;
@@ -20,12 +21,13 @@ export class EntityCardComponent implements OnInit, OnDestroy {
   public iconActive: string;
   public isActive: boolean;
   public unlocked: boolean;
+  public editMode = false;
 
   private lockTimer: number;
   private notifier$ = new Subject<void>();
   private onStates = ['on', 'playing'];
 
-  constructor(private hassService: HassService) {}
+  constructor(private hassService: HassService, public dialog: MatDialog) {}
 
   public ngOnDestroy(): void {
     this.notifier$.next();
@@ -35,12 +37,12 @@ export class EntityCardComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.hassService.entities.pipe(takeUntil(this.notifier$)).subscribe({
       next: (result) => {
-        this.entity = this.cardOptions && result[this.cardOptions.entityId];
+        this.entity = this.card && result[this.card.entityId];
         this.entityName =
-          this.cardOptions?.name || this.entity?.attributes.friendly_name || '';
-        this.entityState = this.cardOptions?.state || this.entity?.state || '';
-        this.icon = this.cardOptions?.icon || '';
-        this.iconActive = this.cardOptions?.iconActive || '';
+          this.card?.name || this.entity?.attributes.friendly_name || '';
+        this.entityState = this.card?.state || this.entity?.state || '';
+        this.icon = this.card?.icon || '';
+        this.iconActive = this.card?.iconActive || '';
 
         if (this.onStates.includes(this.entityState)) {
           this.isActive = true;
@@ -50,14 +52,20 @@ export class EntityCardComponent implements OnInit, OnDestroy {
       },
     });
 
-    if (this.cardOptions?.service) {
+    this.hassService.editMode$.subscribe((res) => {
+      this.editMode = res;
+    })
+
+    if (this.card?.service) {
       this.hasAction = true;
     }
   }
 
   public onButtonClick($event: Event) {
-    const service = JSON.parse(this.cardOptions?.service);
-    if (!this.cardOptions?.lock || this.unlocked) {
+    if (this.editMode) return;
+
+    const service = JSON.parse(this.card?.service);
+    if (!this.card?.lock || this.unlocked) {
       const msg = {
         type: service.type || 'call_service',
         domain:
@@ -66,14 +74,14 @@ export class EntityCardComponent implements OnInit, OnDestroy {
         service: service.service || '',
         service_data: service.service_data,
         target: service.target || {
-          entity_id: this.cardOptions?.entityId,
+          entity_id: this.card?.entityId,
         },
       };
 
       this.hassService.callService(msg);
     }
 
-    if (this.cardOptions?.lock && !this.unlocked) {
+    if (this.card?.lock && !this.unlocked) {
       $event.stopPropagation();
       this.unlocked = true;
     }
@@ -82,7 +90,21 @@ export class EntityCardComponent implements OnInit, OnDestroy {
     this.startLockTimer();
   }
 
+  public editCard() {
+    this.dialog.open(AddCardModalComponent, {
+      width: '700px',
+      height: '90%',
+      enterAnimationDuration: 100,
+      exitAnimationDuration: 100,
+      data: {
+        card: this.card
+      }
+    })
+  }
+
   private startLockTimer() {
+    if (this.editMode) return;
+
     this.lockTimer = window.setTimeout(() => (this.unlocked = false), 5000);
   }
 }

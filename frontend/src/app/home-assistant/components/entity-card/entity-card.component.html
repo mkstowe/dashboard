@@ -2,6 +2,7 @@
   class="card-wrapper"
   [class.active]="isActive"
   [class.has-action]="hasAction"
+  [class.edit-mode]="editMode"
   (click)="onButtonClick($event)"
 >
   <div class="entity-icon">
@@ -12,11 +13,17 @@
       svgIcon="{{ iconActive }}"
     ></mat-icon>
   </div>
-  <div class="lock-icon" *ngIf="cardOptions?.lock" [class.unlocked]="unlocked">
+  <div class="lock-icon" *ngIf="card?.lock" [class.unlocked]="unlocked">
     <mat-icon svgIcon="lock"></mat-icon>
   </div>
   <div class="name-state">
     <div class="entity-name">{{ entityName }}</div>
     <div class="entity-state">{{ entityState }}</div>
+  </div>
+
+  <div class="edit-actions">
+    <button mat-fab color="primary" *ngIf="editMode" (click)="editCard()">
+      <mat-icon>edit</mat-icon>
+    </button>
   </div>
 </div>
