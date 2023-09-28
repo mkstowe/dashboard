@@ -3,7 +3,7 @@
     <h2 mat-dialog-header>
       {{ this.cardExists ? "Edit Entity" : "Add Entity" }}
     </h2>
-    <button class="close-btn" mat-icon-button mat-dialog-close tabindex="-1">
+    <button class="close-btn" mat-icon-button tabindex="-1" (click)="close()">
       <mat-icon>close</mat-icon>
     </button>
   </div>
@@ -27,6 +27,7 @@
             placeholder="light.office"
             formControlName="entityId"
             autofocus
+            required
           />
         </mat-form-field>
       </div>
@@ -34,22 +35,24 @@
       <div class="row">
         <mat-label>Icon</mat-label>
         <mat-form-field appearance="outline">
-          <mat-select formControlName="icon" placeholder="Icon">
-            <mat-option *ngFor="let icon of iconList" [value]="icon">
+          <input type="text" placeholder="Icon" matInput formControlName="icon" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let icon of filteredIcons | async" [value]="icon">
               <mat-icon [svgIcon]="icon"></mat-icon> {{ icon }}
             </mat-option>
-          </mat-select>
+          </mat-autocomplete>
         </mat-form-field>
       </div>
 
       <div class="row">
         <mat-label>Active Icon</mat-label>
         <mat-form-field appearance="outline">
-          <mat-select formControlName="iconActive" placeholder="Active Icon">
-            <mat-option *ngFor="let icon of iconList" [value]="icon">
+          <input type="text" placeholder="Icon Active" matInput formControlName="iconActive" [matAutocomplete]="autoActive">
+          <mat-autocomplete #autoActive="matAutocomplete">
+            <mat-option *ngFor="let icon of filteredActiveIcons | async" [value]="icon">
               <mat-icon [svgIcon]="icon"></mat-icon> {{ icon }}
             </mat-option>
-          </mat-select>
+          </mat-autocomplete>
         </mat-form-field>
       </div>
 
@@ -205,6 +208,7 @@
     <button
       [disabled]="confirmDelete"
       class="delete-btn"
+      color="warn"
       mat-flat-button
       (click)="onDelete()"
       *ngIf="cardExists"
@@ -212,7 +216,7 @@
       Delete
     </button>
     <p class="confirm-delete" *ngIf="confirmDelete">
-      Are you sure? <button mat-button (click)="close()">No</button> /
+      Are you sure? <button mat-button (click)="confirmDelete = false">No</button> /
       <button mat-button (click)="onDelete()">Yes</button>
     </p>
     <button
@@ -223,5 +227,7 @@
     >
       {{ this.cardExists ? "Update Entity" : "Create Entity" }}
     </button>
+
+    <p class="invalid" *ngIf="formInvalid">Enter all required fields</p>
   </mat-dialog-actions>
 </div>

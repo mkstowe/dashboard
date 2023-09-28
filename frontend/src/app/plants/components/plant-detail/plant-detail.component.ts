@@ -34,8 +34,10 @@ export class PlantDetailComponent implements OnInit {
     this.dialog.open(AddPlantModalComponent, {
       width: '700px',
       height: '90%',
+      maxHeight: '1200px',
       enterAnimationDuration: 100,
       exitAnimationDuration: 100,
+      disableClose: true,
       data: {
         plant: this.plant,
       },

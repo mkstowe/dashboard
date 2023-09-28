@@ -7,7 +7,7 @@
 
   width: 100%;
   height: 100%;
-  padding: 25px 50px;
+  padding: 25px 50px 50px 50px;
 
   color: $foreground;
 
@@ -23,6 +23,7 @@
 
   mat-dialog-content {
     margin-bottom: 35px;
+    flex-grow: 1;
 
     form {
       color: $foreground;
@@ -101,9 +102,9 @@
 
   mat-dialog-actions {
     display: flex;
-    flex-grow: 1;
     justify-content: space-between;
     margin-top: 30px;
+    height: 80px;
 
     button {
       padding: 25px 30px;
@@ -127,6 +128,14 @@
         color: $danger;
       }
     }
+  }
+
+  .invalid {
+    position: absolute;
+    right: 0;
+    bottom: -15px;
+    color: $danger;
+    margin: 0;
   }
 }
 

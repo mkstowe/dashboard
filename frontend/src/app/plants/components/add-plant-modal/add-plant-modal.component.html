@@ -3,7 +3,7 @@
     <h2 mat-dialog-header>
       {{ this.plantExists ? "Edit Plant" : "Add Plant" }}
     </h2>
-    <button class="close-btn" mat-icon-button mat-dialog-close tabindex="-1">
+    <button class="close-btn" mat-icon-button tabindex="-1" (click)="close()">
       <mat-icon>close</mat-icon>
     </button>
   </div>
@@ -209,6 +209,7 @@
     <button
       [disabled]="confirmDelete"
       class="delete-btn"
+      color="warn"
       mat-flat-button
       (click)="onDelete()"
       *ngIf="plantExists"
@@ -216,7 +217,7 @@
       Delete
     </button>
     <p class="confirm-delete" *ngIf="confirmDelete">
-      Are you sure? <button mat-button (click)="close()">No</button> /
+      Are you sure? <button mat-button (click)="confirmDelete = false">No</button> /
       <button mat-button (click)="onDelete()">Yes</button>
     </p>
     <button
@@ -227,5 +228,7 @@
     >
       {{ this.plantExists ? "Update Plant" : "Create Plant" }}
     </button>
+
+    <p class="invalid" *ngIf="formInvalid">Fix errors</p>
   </mat-dialog-actions>
 </div>

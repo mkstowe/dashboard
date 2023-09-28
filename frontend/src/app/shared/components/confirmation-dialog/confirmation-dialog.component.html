@@ -1,0 +1,11 @@
+<div class="confirmation-wrapper">
+    <div class="header">
+        <h2 mat-dialog-header>
+            Discard Changes?
+        </h2>
+    </div>
+    <mat-dialog-actions>
+        <button class="cancel-btn" mat-flat-button color="primary" mat-dialog-close>Cancel</button>
+        <button class="discard-btn" mat-flat-button color="warn" [mat-dialog-close]="true">Discard</button>
+    </mat-dialog-actions>
+</div>

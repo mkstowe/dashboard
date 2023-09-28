@@ -5,9 +5,10 @@ import {
   FormBuilder,
   FormGroup,
 } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Plant } from '../../models/plant';
 import { Router } from '@angular/router';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-add-plant-modal',
@@ -18,10 +19,13 @@ import { Router } from '@angular/router';
 export class AddPlantModalComponent implements OnInit {
   public addPlantForm: FormGroup;
   public plantExists: boolean;
+  public confirmClose: boolean;
   public confirmDelete: boolean;
+  public formInvalid: boolean;
   private plant: Plant;
 
   constructor(
+    private dialog: MatDialog,
     private router: Router,
     private plantService: PlantService,
     private formBuilder: FormBuilder,
@@ -143,6 +147,10 @@ export class AddPlantModalComponent implements OnInit {
         lastFertilized: this.plant.lastFertilized,
       });
     }
+
+    this.addPlantForm.valueChanges.subscribe(() => {
+      this.formInvalid = this.addPlantForm.invalid;
+    });
   }
 
   // public onFileUpload(event: any) {
@@ -150,7 +158,11 @@ export class AddPlantModalComponent implements OnInit {
   // }
 
   public onSubmit() {
-    if (this.addPlantForm.pristine || this.addPlantForm.invalid) return;
+    if (this.formInvalid || this.addPlantForm.invalid) {
+      this.formInvalid = true;
+      return;
+    }
+    if (this.addPlantForm.pristine) this.dialogRef.close();
 
     if (this.plant) {
       this.plantService
@@ -167,13 +179,22 @@ export class AddPlantModalComponent implements OnInit {
     if (this.confirmDelete) {
       this.plantService.deletePlant(this.plant.id).subscribe();
       this.router.navigate(['/plants']);
-      this.close();
+      this.dialogRef.close();
     } else {
       this.confirmDelete = true;
     }
   }
 
   public close() {
-    this.dialogRef.close();
+    if (this.addPlantForm.pristine) {
+      this.dialogRef.close();
+    } else {
+      this.dialog.open(ConfirmationDialogComponent, {
+        width: '400px',
+        height: '220px',
+        enterAnimationDuration: 100,
+        exitAnimationDuration: 100,
+      }).afterClosed().subscribe(result => result ? this.dialogRef.close() : null);
+    }
   }
 }

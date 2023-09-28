@@ -94,8 +94,10 @@ export class EntityCardComponent implements OnInit, OnDestroy {
     this.dialog.open(AddCardModalComponent, {
       width: '700px',
       height: '90%',
+      maxHeight: '1200px',
       enterAnimationDuration: 100,
       exitAnimationDuration: 100,
+      disableClose: true,
       data: {
         card: this.card
       }

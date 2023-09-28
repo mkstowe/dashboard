@@ -6,9 +6,10 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { IconModule } from '../icon.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
-  declarations: [DateAgoPipe],
+  declarations: [DateAgoPipe, ConfirmationDialogComponent],
   imports: [
     CommonModule,
     MaterialModule,

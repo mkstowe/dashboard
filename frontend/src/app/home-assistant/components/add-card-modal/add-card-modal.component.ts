@@ -1,4 +1,3 @@
-import { Router } from "@angular/router";
 import { Component, Inject, OnInit, ViewEncapsulation } from "@angular/core";
 import {
   AbstractControl,
@@ -7,11 +6,13 @@ import {
   Validators,
 } from "@angular/forms";
 import { HassService } from "../../services/hass.service";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { Card } from "../../models/card";
 import { CardType } from "../../models/card-types";
 
 import { MatIconRegistry } from "@angular/material/icon"; 
+import { Observable, map, startWith } from "rxjs";
+import { ConfirmationDialogComponent } from "src/app/shared/components/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
   selector: "app-add-card-modal",
@@ -23,13 +24,17 @@ export class AddCardModalComponent implements OnInit {
   public addCardForm: FormGroup;
   public cardExists: boolean;
   public confirmDelete: boolean;
-  public cardTypes: any;
+  public confirmClose: boolean;
+  public cardTypes: {key: string, value: CardType}[];
   public iconList: string[] = [];
+  public filteredIcons: Observable<string[]>;
+  public filteredActiveIcons: Observable<string[]>;
+  public formInvalid: boolean;
   private card: Card;
   private group: number;
 
   constructor(
-    private router: Router,
+    private dialog: MatDialog,
     private hassService: HassService,
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<AddCardModalComponent>,
@@ -116,10 +121,11 @@ export class AddCardModalComponent implements OnInit {
       }
     })
     this.iconRegistry['_svgIconConfigs'].forEach((value: any, key: string) => {
-      this.iconList.push(key.slice(1))
+      this.iconList.push(key.slice(1));
     })
 
     this.addCardForm = this.formBuilder.group({
+      type: ['entityCard', Validators.required],
       entityId: ["", Validators.required],
       icon: [""],
       iconActive: [""],
@@ -135,7 +141,6 @@ export class AddCardModalComponent implements OnInit {
           device_id: [""]
         }) 
       }), 
-      type: [""],
       state: [""],
       stateOptions: this.formBuilder.group({
         beforeString: [""],
@@ -151,6 +156,7 @@ export class AddCardModalComponent implements OnInit {
       const stateOptions = JSON.parse(this.card.stateOptions as string);
 
       this.addCardForm.patchValue({
+        type: this.card.type,
         entityId: this.card.entityId,
         icon: this.card.icon,
         iconActive: this.card.iconActive,
@@ -166,7 +172,6 @@ export class AddCardModalComponent implements OnInit {
             device_id: service.target.device_id
           }
         },
-        type: this.card.type,
         state: this.card.state,
         stateOptions: {
           beforeString: stateOptions.beforeString,
@@ -177,10 +182,28 @@ export class AddCardModalComponent implements OnInit {
         }
       });
     }
+
+    this.filteredIcons = this.icon.valueChanges.pipe(
+      startWith(""),
+      map((value) => this._filter(value || ''))
+    )
+
+    this.filteredActiveIcons = this.iconActive.valueChanges.pipe(
+      startWith(""),
+      map((value) => this._filter(value || ''))
+    )
+
+    this.addCardForm.valueChanges.subscribe(() => {
+      this.formInvalid = this.addCardForm.invalid;
+    });
   }
 
   public onSubmit() {
-    if (this.addCardForm.pristine || this.addCardForm.invalid) return;
+    if (this.formInvalid || this.addCardForm.invalid) {
+      this.formInvalid = true;
+      return
+    }
+    if (this.addCardForm.pristine) this.dialogRef.close();
 
     const value = {
       entityId: this.addCardForm.value.entityId,
@@ -202,19 +225,35 @@ export class AddCardModalComponent implements OnInit {
       this.hassService.createCard({...value as Card, group: this.group}).subscribe();
     }
 
-    this.close();
+    this.dialogRef.close();
   }
 
   public onDelete() {
     if (this.confirmDelete) {
       this.hassService.deleteCard(this.card.id).subscribe();
-      this.close();
+      this.dialogRef.close();
     } else {
       this.confirmDelete = true;
     }
   }
 
   public close() {
-    this.dialogRef.close();
+    if (this.addCardForm.pristine) {
+      this.dialogRef.close();
+    } else {
+      this.dialog.open(ConfirmationDialogComponent, {
+        width: '400px',
+        height: '220px',
+        enterAnimationDuration: 100,
+        exitAnimationDuration: 100
+      }
+      ).afterClosed().subscribe(result => result ? this.dialogRef.close() : null);
+    }
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.iconList.filter((option) => option.toLowerCase().includes(filterValue));
   }
 }
