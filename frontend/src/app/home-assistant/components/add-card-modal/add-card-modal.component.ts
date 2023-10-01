@@ -30,6 +30,7 @@ export class AddCardModalComponent implements OnInit {
   public filteredIcons: Observable<string[]>;
   public filteredActiveIcons: Observable<string[]>;
   public formInvalid: boolean;
+  public isSensorCard: boolean;
   private card: Card;
   private group: number;
 
@@ -49,11 +50,23 @@ export class AddCardModalComponent implements OnInit {
       this.group = data.group!;
   }
 
+  public get entityType(): AbstractControl {
+    return this.addCardForm.get("entityType")!;
+  }
+
   public get entityId(): AbstractControl {
     return this.addCardForm.get("entityId")!;
   }
 
+  public get entityId2(): AbstractControl {
+    return this.addCardForm.get("entityId2")!;
+  }
+
   public get icon(): AbstractControl {
+    return this.addCardForm.get("icon")!;
+  }
+
+  public get icon2(): AbstractControl {
     return this.addCardForm.get("icon")!;
   }
 
@@ -66,6 +79,10 @@ export class AddCardModalComponent implements OnInit {
   }
 
   public get name(): AbstractControl {
+    return this.addCardForm.get("name")!;
+  }
+
+  public get name2(): AbstractControl {
     return this.addCardForm.get("name")!;
   }
 
@@ -85,11 +102,11 @@ export class AddCardModalComponent implements OnInit {
     return this.addCardForm.get("serviceTarget")!;
   }
 
-  public get entityType(): AbstractControl {
-    return this.addCardForm.get("entityType")!;
+  public get state(): AbstractControl {
+    return this.addCardForm.get("state")!;
   }
 
-  public get state(): AbstractControl {
+  public get state2(): AbstractControl {
     return this.addCardForm.get("state")!;
   }
 
@@ -97,7 +114,15 @@ export class AddCardModalComponent implements OnInit {
     return this.addCardForm.get("stateBeforeString")!;
   }
 
+  public get stateBeforeString2(): AbstractControl {
+    return this.addCardForm.get("stateBeforeString")!;
+  }
+
   public get stateAfterString(): AbstractControl {
+    return this.addCardForm.get("stateAfterString")!;
+  }
+
+  public get stateAfterString2(): AbstractControl {
     return this.addCardForm.get("stateAfterString")!;
   }
 
@@ -105,11 +130,23 @@ export class AddCardModalComponent implements OnInit {
     return this.addCardForm.get("stateWarningExpression")!;
   }
 
+  public get stateWarningExpression2(): AbstractControl {
+    return this.addCardForm.get("stateWarningExpression")!;
+  }
+
   public get stateDangerExpression(): AbstractControl {
     return this.addCardForm.get("stateDangerExpression")!;
   }
 
+  public get stateDangerExpression2(): AbstractControl {
+    return this.addCardForm.get("stateDangerExpression")!;
+  }
+
   public get stateRound(): AbstractControl {
+    return this.addCardForm.get("stateRound")!;
+  }
+
+  public get stateRound2(): AbstractControl {
     return this.addCardForm.get("stateRound")!;
   }
 
@@ -195,6 +232,7 @@ export class AddCardModalComponent implements OnInit {
 
     this.addCardForm.valueChanges.subscribe(() => {
       this.formInvalid = this.addCardForm.invalid;
+      this.isSensorCard = this.addCardForm.get("type")!.value === "sensorCard";
     });
   }
 

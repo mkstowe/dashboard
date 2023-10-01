@@ -15,6 +15,7 @@ import {
   HAMMER_GESTURE_CONFIG,
 } from '@angular/platform-browser';
 import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 import { MusicModule } from './music/music.module';
 import { HomeAssistantModule } from './home-assistant/home-assistant.module';
 import { RecipesModule } from './recipes/recipes.module';
@@ -38,6 +39,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     IconModule,
     HammerModule,
     CoreModule,
+    SharedModule,
     MusicModule,
     HomeAssistantModule,
     RecipesModule,
