@@ -266,6 +266,10 @@ export class AddCardModalComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  public submitEntityForm(event: Event) {
+    return event;
+  }
+
   public onDelete() {
     if (this.confirmDelete) {
       this.hassService.deleteCard(this.card.id).subscribe();
