@@ -50,6 +50,17 @@ export class EntityCardComponent implements OnInit, OnDestroy {
         } else {
           this.isActive = false;
         }
+
+        if (this.card.stateOptions) {
+          const state = this.hassService.resolveStateOptions(
+            this.entityState,
+            JSON.parse(this.card.stateOptions as string)
+          );
+
+          if (state) {
+            this.entityState = state.state;
+          }
+        }
       },
     });
 

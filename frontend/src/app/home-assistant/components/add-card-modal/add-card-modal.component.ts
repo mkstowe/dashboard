@@ -107,6 +107,7 @@ export class AddCardModalComponent implements OnInit {
           dangerExpression: [''],
           round: [false],
         }),
+        enableGraph: [true],
       }),
       sensor2: this.formBuilder.group({
         entityId: [''],
@@ -120,6 +121,7 @@ export class AddCardModalComponent implements OnInit {
           dangerExpression: [''],
           round: [false],
         }),
+        enableGraph: [true],
       }),
     });
 
@@ -135,8 +137,6 @@ export class AddCardModalComponent implements OnInit {
       });
 
       if (this.card.type !== 'sensorCard') {
-        const service = JSON.parse(this.card.service as string);
-        const stateOptions = JSON.parse(this.card.stateOptions as string);
 
         this.entityForm.patchValue({
           entityId: this.card.entityId,
@@ -144,23 +144,9 @@ export class AddCardModalComponent implements OnInit {
           iconActive: this.card.iconActive,
           lock: this.card.lock,
           name: this.card.name,
-          service: {
-            domain: service.domain,
-            service: service.service,
-            target: {
-              entity_id: service.target.entity_id,
-              area_id: service.target.area_id,
-              device_id: service.target.device_id,
-            },
-          },
+          service: JSON.parse(this.card.service as string),
           state: this.card.state,
-          stateOptions: {
-            beforeString: stateOptions.beforeString,
-            afterString: stateOptions.afterString,
-            warningExpression: stateOptions.warningExpression,
-            dangerExpression: stateOptions.dangerExpression,
-            round: stateOptions.round,
-          },
+          stateOptions: JSON.parse(this.card.stateOptions as string)
         });
       } else {
         this.isSensorCard = true;
@@ -173,13 +159,8 @@ export class AddCardModalComponent implements OnInit {
                 icon: sensors[0].icon,
                 name: sensors[0].name,
                 state: sensors[0].state,
-                stateOptions: this.formBuilder.group({
-                  beforeString: '',
-                  afterString: '',
-                  warningExpression: '',
-                  dangerExpression: '',
-                  round: false,
-                }),
+                stateOptions: JSON.parse(sensors[0].stateOptions as string),
+                enableGraph: sensors[0].enableGraph
               },
             });
 
@@ -190,13 +171,8 @@ export class AddCardModalComponent implements OnInit {
                   icon: sensors[1].icon,
                   name: sensors[1].name,
                   state: sensors[1].state,
-                  stateOptions: this.formBuilder.group({
-                    beforeString: '',
-                    afterString: '',
-                    warningExpression: '',
-                    dangerExpression: '',
-                    round: false,
-                  }),
+                  stateOptions: JSON.parse(sensors[1].stateOptions as string), 
+                enableGraph: sensors[1].enableGraph
                 },
               });
             }
@@ -278,6 +254,7 @@ export class AddCardModalComponent implements OnInit {
         stateOptions: JSON.stringify(
           this.sensorForm.value.sensor1.stateOptions
         ),
+        enableGraph: this.sensorForm.value.sensor1.enableGraph
       };
 
       const sensor2Value = {
@@ -288,6 +265,7 @@ export class AddCardModalComponent implements OnInit {
         stateOptions: JSON.stringify(
           this.sensorForm.value.sensor2.stateOptions
         ),
+        enableGraph: this.sensorForm.value.sensor2.enableGraph
       };
 
       if (this.card) {

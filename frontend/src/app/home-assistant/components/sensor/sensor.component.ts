@@ -21,6 +21,7 @@ export class SensorComponent implements OnInit, OnDestroy {
   public entityName: string;
   public entityState: string;
   public icon: string;
+  private editMode: boolean = false;
 
   private notifier$ = new Subject<void>();
 
@@ -44,7 +45,7 @@ export class SensorComponent implements OnInit, OnDestroy {
         if (this.sensorOptions.stateOptions) {
           const state = this.hassService.resolveStateOptions(
             this.entityState,
-            this.sensorOptions?.stateOptions
+            JSON.parse(this.sensorOptions?.stateOptions as string)
           );
 
           if (state) {
@@ -56,10 +57,14 @@ export class SensorComponent implements OnInit, OnDestroy {
         this.icon = this.sensorOptions.icon || '';
       },
     });
+
+    this.hassService.editMode$.subscribe((res) => {
+      this.editMode = res;
+    })
   }
 
   public onRightMouseClick() {
-    if (!this.sensorOptions.enableGraph) return;
+    if (!this.sensorOptions.enableGraph || this.editMode) return;
 
     this.dialog.open(StateGraphComponent, {
       width: '70%',

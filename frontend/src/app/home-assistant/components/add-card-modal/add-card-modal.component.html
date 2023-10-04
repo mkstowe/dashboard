@@ -26,7 +26,7 @@
       (ngSubmit)="onSubmit()"
     >
       <div class="row">
-        <mat-label>Entity Id</mat-label>
+        <mat-label>Entity Id <span class="required-symbol">*</span></mat-label>
         <mat-form-field appearance="outline">
           <input
             matInput
@@ -223,7 +223,7 @@
         <div formGroupName="sensor1">
           <h3>Sensor 1</h3>
           <div class="row">
-            <mat-label>Entity Id</mat-label>
+            <mat-label>Entity Id <span class="required-symbol">*</span></mat-label>
             <mat-form-field appearance="outline">
               <input
                 matInput
@@ -255,6 +255,15 @@
               </mat-autocomplete>
             </mat-form-field>
           </div>
+          
+          <div class="row inline checkbox-field">
+        <mat-label>Enable Graph</mat-label>
+        <mat-checkbox
+          color="primary"
+          labelPosition="before"
+          formControlName="enableGraph"
+        ></mat-checkbox>
+      </div>
 
           <div class="row">
             <mat-label>Name</mat-label>
@@ -320,67 +329,76 @@
               </div>
             </mat-expansion-panel>
           </mat-accordion>
-        </div>
+         </div> 
 
         <mat-divider></mat-divider>
-
+        
         <div formGroupName="sensor2">
           <h3>Sensor 2</h3>
           <div class="row">
             <mat-label>Entity Id</mat-label>
             <mat-form-field appearance="outline">
               <input
-                matInput
-                placeholder="light.office"
-                formControlName="entityId"
-                autofocus
+              matInput
+              placeholder="light.office"
+              formControlName="entityId"
+              autofocus
               />
             </mat-form-field>
           </div>
-
+          
           <div class="row">
             <mat-label>Icon</mat-label>
             <mat-form-field appearance="outline">
               <input
-                type="text"
-                placeholder="Icon"
-                matInput
-                formControlName="icon"
-                [matAutocomplete]="auto2"
+              type="text"
+              placeholder="Icon"
+              matInput
+              formControlName="icon"
+              [matAutocomplete]="auto2"
               />
               <mat-autocomplete #auto2="matAutocomplete">
                 <mat-option
-                  *ngFor="let icon of filteredIcons3 | async"
-                  [value]="icon"
+                *ngFor="let icon of filteredIcons3 | async"
+                [value]="icon"
                 >
-                  <mat-icon [svgIcon]="icon"></mat-icon> {{ icon }}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-          </div>
+                <mat-icon [svgIcon]="icon"></mat-icon> {{ icon }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+        
+        <div class="row inline checkbox-field">
+          <mat-label>Enable Graph</mat-label>
+          <mat-checkbox
+            color="primary"
+            labelPosition="before"
+            formControlName="enableGraph"
+          ></mat-checkbox>
+        </div>
 
-          <div class="row">
-            <mat-label>Name</mat-label>
-            <mat-form-field appearance="outline">
-              <input
-                matInput
-                placeholder="Office Light"
-                formControlName="name"
-              />
-            </mat-form-field>
-          </div>
-
-          <div class="row">
-            <mat-label>State</mat-label>
-            <mat-form-field appearance="outline">
-              <input matInput placeholder="on" formControlName="state" />
-            </mat-form-field>
-          </div>
-
-          <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>State Options</mat-panel-title>
+        <div class="row">
+          <mat-label>Name</mat-label>
+          <mat-form-field appearance="outline">
+            <input
+            matInput
+            placeholder="Office Light"
+            formControlName="name"
+            />
+          </mat-form-field>
+        </div>
+        
+        <div class="row">
+          <mat-label>State</mat-label>
+          <mat-form-field appearance="outline">
+            <input matInput placeholder="on" formControlName="state" />
+          </mat-form-field>
+        </div>
+        
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>State Options</mat-panel-title>
               </mat-expansion-panel-header>
 
               <div formGroupName="stateOptions">

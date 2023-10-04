@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS hassSensor (
   card INTEGER NOT NULL,
   entityId TEXT NOT NULL,
   icon TEXT,
+  enableGraph BOOLEAN,
   name TEXT,
   state TEXT,
   stateOptions TEXT,
