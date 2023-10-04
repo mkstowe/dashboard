@@ -1,16 +1,28 @@
 <div class="home-page">
   <div class="dashboard home-dash">
     <div class="group-grid">
-      <div class="group" *ngFor="let group of (groups | async)">
+      <div class="group" *ngFor="let group of groups | async">
         <div class="group-header">
           <div class="title">{{ group.title }}</div>
           <div class="actions">
-          <button class="edit-btn" mat-icon-button color="primary" *ngIf="editMode" (click)="onAddGroup(group)">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button class="add-btn" mat-icon-button color="primary" *ngIf="editMode" (click)="onAddCard(group.id)">
-            <mat-icon>add</mat-icon>
-          </button>
+            <button
+              class="edit-btn"
+              mat-icon-button
+              color="primary"
+              *ngIf="editMode"
+              (click)="onAddGroup(group)"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              class="add-btn"
+              mat-icon-button
+              color="primary"
+              *ngIf="editMode"
+              (click)="onAddCard(group.id)"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
           </div>
         </div>
         <app-card-grid [cards]="group.cards"></app-card-grid>
@@ -19,17 +31,16 @@
 
     <div class="edit-actions">
       <button mat-fab color="primary" *ngIf="!editMode" (click)="toggleEdit()">
-      <mat-icon>edit</mat-icon>
-    </button>
-
-    <button mat-fab color="warn" *ngIf="editMode" (click)="toggleEdit()">
-      <mat-icon>close</mat-icon>
-    </button>
-
-    <button mat-fab color="primary" *ngIf="editMode" (click)="onAddGroup()">
-        <mat-icon>add</mat-icon>
+        <mat-icon>edit</mat-icon>
       </button>
 
+      <button mat-fab color="warn" *ngIf="editMode" (click)="toggleEdit()">
+        <mat-icon>close</mat-icon>
+      </button>
+
+      <button mat-fab color="primary" *ngIf="editMode" (click)="onAddGroup()">
+        <mat-icon>add</mat-icon>
+      </button>
     </div>
   </div>
 </div>

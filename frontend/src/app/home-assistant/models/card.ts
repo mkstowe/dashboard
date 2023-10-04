@@ -4,7 +4,7 @@ import { StateOptions } from './state-options';
 
 export interface Card {
   id: number;
-  group: number,
+  group: number;
   type: string;
   entityId: string;
   icon?: string;

@@ -35,7 +35,7 @@ export class TvDetailComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA)
-    data: { entityId: string; entityName: string; isActive: boolean },
+    data: { entityId: string; entityName: string; isActive: boolean }
   ) {
     this.entityId = data.entityId;
     this.entityName = data.entityName;

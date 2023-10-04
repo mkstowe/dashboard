@@ -12,18 +12,37 @@
       <div class="row">
         <mat-label>Title</mat-label>
         <mat-form-field appearance="outline">
-          <input matInput placeholder="Lights" formControlName="title" autofocus>
+          <input
+            matInput
+            placeholder="Lights"
+            formControlName="title"
+            autofocus
+          />
         </mat-form-field>
       </div>
     </form>
   </mat-dialog-content>
   <mat-divider></mat-divider>
   <mat-dialog-actions>
-    <button [disabled]="confirmDelete" class="delete-btn" mat-flat-button (click)="onDelete()" *ngIf="groupExists">Delete</button>
+    <button
+      [disabled]="confirmDelete"
+      class="delete-btn"
+      mat-flat-button
+      (click)="onDelete()"
+      *ngIf="groupExists"
+    >
+      Delete
+    </button>
     <p class="confirm-delete" *ngIf="confirmDelete">
-      Are you sure? <button mat-button (click)="close()">No</button> / <button mat-button (click)="onDelete()">Yes</button>
+      Are you sure? <button mat-button (click)="close()">No</button> /
+      <button mat-button (click)="onDelete()">Yes</button>
     </p>
-    <button class="create-btn" mat-flat-button color="primary" (click)="onSubmit()">
+    <button
+      class="create-btn"
+      mat-flat-button
+      color="primary"
+      (click)="onSubmit()"
+    >
       {{ this.groupExists ? "Update Group" : "Create Group" }}
     </button>
   </mat-dialog-actions>

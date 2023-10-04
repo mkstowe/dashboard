@@ -10,10 +10,7 @@ import { EntityCardComponent } from '../entity-card.component';
   styleUrls: ['./fan-card.component.scss'],
 })
 export class FanCardComponent extends EntityCardComponent {
-  constructor(
-    hassService: HassService,
-    dialog: MatDialog,
-  ) {
+  constructor(hassService: HassService, dialog: MatDialog) {
     super(hassService, dialog);
   }
 

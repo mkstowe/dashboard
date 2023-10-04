@@ -34,7 +34,7 @@ export class RecipeService {
         expand((res: any) => {
           return res.next ? this.http.get(`/api${res.next}`) : EMPTY;
         }),
-        reduce((acc, curr: any) => acc.concat(curr.items), []),
+        reduce((acc, curr: any) => acc.concat(curr.items), [])
       );
   }
 }

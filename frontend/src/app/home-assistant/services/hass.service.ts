@@ -31,7 +31,6 @@ export class HassService {
     Authorization: `Bearer ${environment.hassAccessToken}`,
   });
 
-
   constructor(private http: HttpClient) {
     this.entities = this._entities.asObservable();
     this.connect();
@@ -50,45 +49,73 @@ export class HassService {
   }
 
   public getAllGroups() {
-    return this.http.get(`/api/hass/group`)
+    return this.http.get(`/api/hass/group`);
   }
 
   public createGroup(group: CardGroup) {
-    return this.http.post<CardGroup>(`/api/hass/group`, group)
-    .pipe(tap(() => this.refetchSubject.next(null)));
+    return this.http
+      .post<CardGroup>(`/api/hass/group`, group)
+      .pipe(tap(() => this.refetchSubject.next(null)));
   }
 
   public updateGroup(id: number, group: Partial<CardGroup>) {
-    return this.http.patch<Partial<CardGroup>>(`/api/hass/group/${id}`, group)
-    .pipe(tap(() => this.refetchSubject.next(null)));
+    return this.http
+      .patch<Partial<CardGroup>>(`/api/hass/group/${id}`, group)
+      .pipe(tap(() => this.refetchSubject.next(null)));
   }
 
   public deleteGroup(id: number) {
-    return this.http.delete(`/api/hass/group/${id}`)
-    .pipe(tap(() => this.refetchSubject.next(null)));
+    return this.http
+      .delete(`/api/hass/group/${id}`)
+      .pipe(tap(() => this.refetchSubject.next(null)));
   }
 
   public getAllCards() {
-    return this.http.get<Card[]>(`/api/hass/card`)
+    return this.http.get<Card[]>(`/api/hass/card`);
   }
 
   public getCardsByGroup(groupId: number) {
-    return this.http.get<Card[]>(`/api/hass/card?group=${groupId}`)
+    return this.http.get<Card[]>(`/api/hass/card?group=${groupId}`);
   }
 
   public createCard(card: Card) {
-    return this.http.post<Card>(`/api/hass/card`, card)
-    .pipe(tap(() => this.refetchSubject.next(null)));
+    return this.http
+      .post<Card>(`/api/hass/card`, card)
+      .pipe(tap(() => this.refetchSubject.next(null)));
   }
 
   public updateCard(id: number, card: Partial<Card>) {
-    return this.http.patch<Partial<Card>>(`/api/hass/card/${id}`, card)
-    .pipe(tap(() => this.refetchSubject.next(null)));
+    return this.http
+      .patch<Partial<Card>>(`/api/hass/card/${id}`, card)
+      .pipe(tap(() => this.refetchSubject.next(null)));
   }
 
   public deleteCard(id: number) {
-    return this.http.delete(`/api/hass/card/${id}`)
-    .pipe(tap(() => this.refetchSubject.next(null)));
+    return this.http
+      .delete(`/api/hass/card/${id}`)
+      .pipe(tap(() => this.refetchSubject.next(null)));
+  }
+
+  public getSensorsByCard(cardId: number) {
+    return this.http.get(`/api/hass/sensor?card=${cardId}`);
+  }
+
+  public createSensor(sensor: any) {
+    return this.http
+      .post(`/api/hass/sensor`, sensor)
+      .pipe(tap(() => this.refetchSubject.next(null)));
+  }
+
+  public updateSensor(id: number, sensor: any) {
+    return this.http
+      .patch(`/api/hass/sensor/${id}`, sensor)
+      .pipe(tap(() => this.refetchSubject.next(null)));
+  }
+
+  public deleteSensor(id: number) {
+    return this.http
+      .delete(`/api/hass/sensor/${id}`)
+      .pipe(tap(() => this.refetchSubject.next(null)));
   }
 
   public async callService(msg: ServiceCall) {
@@ -100,13 +127,13 @@ export class HassService {
       `/api/hass/history/period?filter_entity_id=${entityId}`,
       {
         headers: this.headers,
-      },
+      }
     );
   }
 
   public resolveStateOptions(
     state: string,
-    options: StateOptions | undefined,
+    options: StateOptions | undefined
   ): any {
     if (!state || !options) return state;
 
@@ -148,7 +175,7 @@ export class HassService {
   private async connect() {
     const auth = createLongLivedTokenAuth(
       environment.hassUrl,
-      environment.hassAccessToken,
+      environment.hassAccessToken
     );
 
     this.connection = await createConnection({ auth });

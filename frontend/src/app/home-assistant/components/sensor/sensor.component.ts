@@ -24,10 +24,7 @@ export class SensorComponent implements OnInit, OnDestroy {
 
   private notifier$ = new Subject<void>();
 
-  constructor(
-    private hassService: HassService,
-    private dialog: MatDialog,
-  ) {}
+  constructor(private hassService: HassService, private dialog: MatDialog) {}
 
   public ngOnDestroy(): void {
     this.notifier$.next();
@@ -47,7 +44,7 @@ export class SensorComponent implements OnInit, OnDestroy {
         if (this.sensorOptions.stateOptions) {
           const state = this.hassService.resolveStateOptions(
             this.entityState,
-            this.sensorOptions?.stateOptions,
+            this.sensorOptions?.stateOptions
           );
 
           if (state) {

@@ -31,7 +31,7 @@ export class FanDetailComponent implements OnInit {
       entityId: string;
       entityName: string;
       isActive: boolean;
-    },
+    }
   ) {
     this.entityId = data.entityId;
     this.entityName = data.entityName;

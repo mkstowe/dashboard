@@ -1,11 +1,11 @@
 import { PlantService } from './../../services/plant.service';
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-} from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { Plant } from '../../models/plant';
 import { Router } from '@angular/router';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
@@ -30,7 +30,7 @@ export class AddPlantModalComponent implements OnInit {
     private plantService: PlantService,
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<AddPlantModalComponent>,
-    @Inject(MAT_DIALOG_DATA) data: { plant: Plant },
+    @Inject(MAT_DIALOG_DATA) data: { plant: Plant }
   ) {
     if (data?.plant) {
       this.plant = data.plant;
@@ -189,12 +189,15 @@ export class AddPlantModalComponent implements OnInit {
     if (this.addPlantForm.pristine) {
       this.dialogRef.close();
     } else {
-      this.dialog.open(ConfirmationDialogComponent, {
-        width: '400px',
-        height: '220px',
-        enterAnimationDuration: 100,
-        exitAnimationDuration: 100,
-      }).afterClosed().subscribe(result => result ? this.dialogRef.close() : null);
+      this.dialog
+        .open(ConfirmationDialogComponent, {
+          width: '400px',
+          height: '220px',
+          enterAnimationDuration: 100,
+          exitAnimationDuration: 100,
+        })
+        .afterClosed()
+        .subscribe((result) => (result ? this.dialogRef.close() : null));
     }
   }
 }

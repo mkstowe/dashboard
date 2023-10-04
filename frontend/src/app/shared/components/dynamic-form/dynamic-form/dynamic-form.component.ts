@@ -6,7 +6,7 @@ import { FieldConfig } from 'src/app/shared/models/field';
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
-  styleUrls: ['./dynamic-form.component.scss']
+  styleUrls: ['./dynamic-form.component.scss'],
 })
 export class DynamicFormComponent implements OnInit {
   @Input() fields: FieldConfig[] = [];
@@ -38,7 +38,7 @@ export class DynamicFormComponent implements OnInit {
   public createControl() {
     const group = this.formBuilder.group({});
     this.fields.forEach((field) => {
-      if (field.type === "button") return;
+      if (field.type === 'button') return;
       const control = this.formBuilder.control(
         field.value,
         this.bindValidations(field.validations || [])

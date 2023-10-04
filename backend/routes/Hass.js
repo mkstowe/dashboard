@@ -73,6 +73,37 @@ router.delete("/card/:id", async (req, res) => {
   res.status(204).json({});
 });
 
+// Get sensors
+router.get("/sensor", async (req, res) => {
+  const { card } = req.query;
+  const sensors = await db.getSensors(card);
+  res.status(200).json(sensors);
+});
+
+// Get sensor by id
+router.get("/sensor/:id", async (req, res) => {
+  const sensor = await db.getSensor(req.params.id);
+  res.status(200).json({ sensor });
+});
+
+// Create new sensor
+router.post("/sensor", async (req, res) => {
+  const sensor = await db.createSensor(req.body);
+  res.status(201).json({ sensor });
+});
+
+// Update sensor
+router.patch("/sensor/:id", async (req, res) => {
+  const sensor = await db.updateSensor(req.params.id, req.body);
+  res.status(200).json({ sensor });
+});
+
+// Delete sensor
+router.delete("/sensor/:id", async (req, res) => {
+  await db.deleteSensor(req.params.id);
+  res.status(204).json({});
+});
+
 // Get entity history
 router.get("/history/period", async (req, res) => {
   const HASS_ACCESS_TOKEN = await getSecret("HASS_ACCESS_TOKEN");

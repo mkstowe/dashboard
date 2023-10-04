@@ -10,10 +10,7 @@ import { TvDetailComponent } from '../../tv-detail/tv-detail.component';
   styleUrls: ['./tv-card.component.scss'],
 })
 export class TvCardComponent extends EntityCardComponent {
-  constructor(
-    hassService: HassService,
-    dialog: MatDialog,
-  ) {
+  constructor(hassService: HassService, dialog: MatDialog) {
     super(hassService, dialog);
   }
 

@@ -7,7 +7,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   selector: 'app-add-group-modal',
   templateUrl: './add-group-modal.component.html',
   styleUrls: ['./add-group-modal.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class AddGroupModalComponent implements OnInit {
   public addGroupForm: FormGroup;
@@ -15,7 +15,12 @@ export class AddGroupModalComponent implements OnInit {
   public confirmDelete: boolean;
   private group: any;
 
-  constructor(private hassService: HassService, private formBuilder: FormBuilder, private dialogRef: MatDialogRef<AddGroupModalComponent>, @Inject(MAT_DIALOG_DATA) data: { group: any }) {
+  constructor(
+    private hassService: HassService,
+    private formBuilder: FormBuilder,
+    private dialogRef: MatDialogRef<AddGroupModalComponent>,
+    @Inject(MAT_DIALOG_DATA) data: { group: any }
+  ) {
     if (data?.group) {
       this.group = data.group;
       this.groupExists = true;
@@ -33,8 +38,8 @@ export class AddGroupModalComponent implements OnInit {
 
     if (this.group) {
       this.addGroupForm.patchValue({
-        title: this.group.title
-      })
+        title: this.group.title,
+      });
     }
   }
 
@@ -42,7 +47,9 @@ export class AddGroupModalComponent implements OnInit {
     if (this.addGroupForm.pristine || this.addGroupForm.invalid) return;
 
     if (this.group) {
-      this.hassService.updateGroup(this.group.id, this.addGroupForm.value).subscribe();
+      this.hassService
+        .updateGroup(this.group.id, this.addGroupForm.value)
+        .subscribe();
     } else {
       this.hassService.createGroup(this.addGroupForm.value).subscribe();
     }

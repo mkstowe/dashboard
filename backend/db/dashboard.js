@@ -25,11 +25,13 @@ function getAllCards() {
 }
 
 function getCards(groupId) {
-  return knex("hassCard").select("*").modify(function(queryBuilder) {
-    if (groupId) {
-      queryBuilder.where("group", groupId);
-    }
-  });
+  return knex("hassCard")
+    .select("*")
+    .modify(function (queryBuilder) {
+      if (groupId) {
+        queryBuilder.where("group", groupId);
+      }
+    });
 }
 
 function getCard(id) {
@@ -46,6 +48,32 @@ function updateCard(id, card) {
 
 function deleteCard(id) {
   return knex("hassCard").where("id", id).del();
+}
+
+function getSensors(cardId) {
+  return knex("hassSensor")
+    .select("*")
+    .modify(function (queryBuilder) {
+      if (cardId) {
+        queryBuilder.where("card", cardId);
+      }
+    });
+}
+
+function getSensor(id) {
+  return knex("hassSensor").select("*").where("id", id).first();
+}
+
+function createSensor(sensor) {
+  return knex("hassSensor").insert(sensor).returning("*");
+}
+
+function updateSensor(id, sensor) {
+  return knex("hassSensor").where("id", id).update(sensor).returning("*");
+}
+
+function deleteSensor(id) {
+  return knex("hassSensor").where("id", id).del();
 }
 
 function getAllPlants() {
@@ -80,6 +108,11 @@ module.exports = {
   createCard,
   updateCard,
   deleteCard,
+  getSensors,
+  getSensor,
+  createSensor,
+  updateSensor,
+  deleteSensor,
   getAllPlants,
   getPlant,
   createPlant,

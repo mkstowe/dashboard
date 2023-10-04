@@ -10,10 +10,7 @@ import { LightDetailComponent } from '../../light-detail/light-detail.component'
   styleUrls: ['./light-card.component.scss'],
 })
 export class LightCardComponent extends EntityCardComponent {
-  constructor(
-    hassService: HassService,
-    dialog: MatDialog,
-  ) {
+  constructor(hassService: HassService, dialog: MatDialog) {
     super(hassService, dialog);
   }
 

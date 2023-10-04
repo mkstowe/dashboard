@@ -18,7 +18,19 @@ import { SelectComponent } from './components/dynamic-form/select/select.compone
 import { DynamicFieldDirective } from './directives/dynamic-field.directive';
 
 @NgModule({
-  declarations: [DateAgoPipe, SidebarComponent, ConfirmationDialogComponent, ButtonComponent, CheckboxComponent, DateComponent, DynamicFormComponent, InputComponent, RadioButtonComponent, SelectComponent, DynamicFieldDirective],
+  declarations: [
+    DateAgoPipe,
+    SidebarComponent,
+    ConfirmationDialogComponent,
+    ButtonComponent,
+    CheckboxComponent,
+    DateComponent,
+    DynamicFormComponent,
+    InputComponent,
+    RadioButtonComponent,
+    SelectComponent,
+    DynamicFieldDirective,
+  ],
   imports: [
     CommonModule,
     MaterialModule,
@@ -37,7 +49,7 @@ import { DynamicFieldDirective } from './directives/dynamic-field.directive';
     SidebarComponent,
     ConfirmationDialogComponent,
     DynamicFieldDirective,
-    DynamicFormComponent
+    DynamicFormComponent,
   ],
 })
 export class SharedModule {}

@@ -21,6 +21,11 @@
     margin-bottom: 10px;
   }
 
+  h3 {
+    font-size: 24px;
+    padding-top: 20px;
+  }
+
   mat-dialog-content {
     margin-bottom: 35px;
     flex-grow: 1;
@@ -69,9 +74,8 @@
           input,
           textarea,
           mat-select,
-          .mat-mdc-select-arrow
-          {  
-          color: $foreground !important;
+          .mat-mdc-select-arrow {
+            color: $foreground !important;
           }
 
           mat-datepicker-toggle {
@@ -156,9 +160,8 @@
         color: $danger;
       }
     }
-
   }
-  
+
   .invalid {
     position: absolute;
     right: 0;

@@ -548,29 +548,29 @@ export class HomePageComponent implements OnInit {
   constructor(private hassService: HassService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
-      this.hassService.editMode$.subscribe((res) => {
-        this.editMode = res;
-      });
+    this.hassService.editMode$.subscribe((res) => {
+      this.editMode = res;
+    });
 
-      const groups$ = this.hassService.getAllGroups();
-      const groupsWithCards$ = groups$.pipe(
-        switchMap((groups: any) => {
-          const cardObservables = groups.map((group: any) => {
-            return this.hassService.getCardsByGroup(group.id).pipe(
-              map(cards => ({ ...group, cards}))
-            )
-          })
+    const groups$ = this.hassService.getAllGroups();
+    const groupsWithCards$ = groups$.pipe(
+      switchMap((groups: any) => {
+        const cardObservables = groups.map((group: any) => {
+          return this.hassService
+            .getCardsByGroup(group.id)
+            .pipe(map((cards) => ({ ...group, cards })));
+        });
 
-          return forkJoin(cardObservables);
-        }),
-        defaultIfEmpty([])
-      );
+        return forkJoin(cardObservables);
+      }),
+      defaultIfEmpty([])
+    );
 
-      this.groups = this.hassService.refetch.pipe(
-        switchMap(() => {
-          return groupsWithCards$
-        })
-      ) as Observable<CardGroup[]>;
+    this.groups = this.hassService.refetch.pipe(
+      switchMap(() => {
+        return groupsWithCards$;
+      })
+    ) as Observable<CardGroup[]>;
   }
 
   public toggleSidebar() {
@@ -587,9 +587,9 @@ export class HomePageComponent implements OnInit {
       enterAnimationDuration: 100,
       exitAnimationDuration: 100,
       data: {
-        group
-      }
-    })
+        group,
+      },
+    });
   }
 
   public onAddCard(group: number) {
@@ -601,8 +601,8 @@ export class HomePageComponent implements OnInit {
       exitAnimationDuration: 100,
       disableClose: true,
       data: {
-        group
-      }
+        group,
+      },
     });
   }
 }

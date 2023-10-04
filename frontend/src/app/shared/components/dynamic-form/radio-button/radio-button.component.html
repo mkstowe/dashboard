@@ -1,4 +1,6 @@
 <div [formGroup]="group">
-    <label>{{ field.label }}:</label>
-    <mat-radio-button *ngFor="let item of field.options" [value]="item">{{ item }}</mat-radio-button>
+  <label>{{ field.label }}:</label>
+  <mat-radio-button *ngFor="let item of field.options" [value]="item">{{
+    item
+  }}</mat-radio-button>
 </div>

@@ -21,6 +21,7 @@ export class EntityCardComponent implements OnInit, OnDestroy {
   public iconActive: string;
   public isActive: boolean;
   public unlocked: boolean;
+  public sensors: any[];
   public editMode = false;
 
   private lockTimer: number;
@@ -54,11 +55,13 @@ export class EntityCardComponent implements OnInit, OnDestroy {
 
     this.hassService.editMode$.subscribe((res) => {
       this.editMode = res;
-    })
+    });
 
     if (this.card?.service) {
       this.hasAction = true;
     }
+
+    this.sensors = this.card?.sensors;
   }
 
   public onButtonClick($event: Event) {
@@ -68,9 +71,7 @@ export class EntityCardComponent implements OnInit, OnDestroy {
     if (!this.card?.lock || this.unlocked) {
       const msg = {
         type: service.type || 'call_service',
-        domain:
-          service.domain ||
-          service.entityId?.split('.')[0],
+        domain: service.domain || service.entityId?.split('.')[0],
         service: service.service || '',
         service_data: service.service_data,
         target: service.target || {
@@ -99,9 +100,9 @@ export class EntityCardComponent implements OnInit, OnDestroy {
       exitAnimationDuration: 100,
       disableClose: true,
       data: {
-        card: this.card
-      }
-    })
+        card: this.card,
+      },
+    });
   }
 
   private startLockTimer() {

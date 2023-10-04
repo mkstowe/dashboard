@@ -15,13 +15,15 @@ export class AppComponent implements OnInit {
   public sidebarActive = false;
   public loggedIn: boolean;
 
-  constructor(private spotifyService: SpotifyService, private authService: AuthService) {
-  }
+  constructor(
+    private spotifyService: SpotifyService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.authService.isLoggedIn$.subscribe((res) => {
       this.loggedIn = res;
-    })
+    });
   }
 
   public closeSidebar() {

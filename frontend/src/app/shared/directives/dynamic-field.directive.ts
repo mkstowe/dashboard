@@ -18,32 +18,29 @@ import { FormGroup } from '@angular/forms';
 // };
 
 const componentMapper = new Map<string, any>([
-  ["input", InputComponent],
-  ["button", ButtonComponent],
-  ["select", SelectComponent],
-  ["date", DateComponent],
-  ["radioButton", RadioButtonComponent],
-  ["checkbox", CheckboxComponent]
-])
+  ['input', InputComponent],
+  ['button', ButtonComponent],
+  ['select', SelectComponent],
+  ['date', DateComponent],
+  ['radioButton', RadioButtonComponent],
+  ['checkbox', CheckboxComponent],
+]);
 
 @Directive({
-  selector: '[appDynamicField]'
+  selector: '[appDynamicField]',
 })
 export class DynamicFieldDirective implements OnInit {
   @Input() field: FieldConfig;
   @Input() group: FormGroup;
   componentRef: any;
 
-  constructor(private container: ViewContainerRef) { }
+  constructor(private container: ViewContainerRef) {}
 
   ngOnInit(): void {
-    // const factory = this.resolver.resolveComponentFactory(
-      // componentMapper[this.field.type]
-    // );
-    console.log("HERE");
-    this.componentRef = this.container.createComponent(componentMapper.get(this.field.type));
+    this.componentRef = this.container.createComponent(
+      componentMapper.get(this.field.type)
+    );
     this.componentRef.instance.field = this.field;
     this.componentRef.instance.group = this.group;
   }
-
 }

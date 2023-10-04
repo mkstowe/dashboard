@@ -34,7 +34,7 @@ export class SpotifyService {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router,
+    private router: Router
   ) {
     this.initialize();
   }
@@ -53,7 +53,7 @@ export class SpotifyService {
       },
       {
         headers: this.apiHeaders,
-      },
+      }
     );
   }
 
@@ -116,7 +116,7 @@ export class SpotifyService {
       timeRange,
       limit,
       offset,
-    }: { timeRange?: number; limit?: number; offset?: number } = {},
+    }: { timeRange?: number; limit?: number; offset?: number } = {}
   ) {
     return this.http.get(`${SPOTIFY_API_URL}/me/top/${type}`, {
       params: {
@@ -156,7 +156,7 @@ export class SpotifyService {
       market?: string;
       fields?: string;
       additionalTypes?: string;
-    } = {},
+    } = {}
   ) {
     return this.http.get(`${SPOTIFY_API_URL}/playlists/${id}`, {
       headers: this.apiHeaders,
@@ -211,7 +211,7 @@ export class SpotifyService {
       },
       {
         headers: this.apiHeaders,
-      },
+      }
     );
   }
 
@@ -228,7 +228,7 @@ export class SpotifyService {
       },
       {
         headers: this.apiHeaders,
-      },
+      }
     );
   }
 
@@ -245,14 +245,14 @@ export class SpotifyService {
       },
       {
         headers: this.apiHeaders,
-      },
+      }
     );
   }
 
   /* ---------------------------- Seek to Position ---------------------------- */
   public seekToPosition(
     position: number,
-    { deviceId }: { deviceId?: string } = {},
+    { deviceId }: { deviceId?: string } = {}
   ) {
     return this.http.put(
       `${SPOTIFY_API_URL}/me/player/seek`,
@@ -262,14 +262,14 @@ export class SpotifyService {
       },
       {
         headers: this.apiHeaders,
-      },
+      }
     );
   }
 
   /* ----------------------------- Set Repeat Mode ---------------------------- */
   public setRepeatMode(
     state: string,
-    { deviceId }: { deviceId?: string } = {},
+    { deviceId }: { deviceId?: string } = {}
   ) {
     return this.http.put(
       `${SPOTIFY_API_URL}/me/player/repeat`,
@@ -279,7 +279,7 @@ export class SpotifyService {
       },
       {
         headers: this.apiHeaders,
-      },
+      }
     );
   }
 
@@ -293,7 +293,7 @@ export class SpotifyService {
       },
       {
         headers: this.apiHeaders,
-      },
+      }
     );
   }
 
@@ -322,14 +322,14 @@ export class SpotifyService {
       },
       {
         headers: this.apiHeaders,
-      },
+      }
     );
   }
 
   /* ------------------------- Toggle Playback Shuffle ------------------------ */
   public toggleShuffle(
     state: boolean,
-    { deviceId }: { deviceId?: string } = {},
+    { deviceId }: { deviceId?: string } = {}
   ) {
     return this.http.put(
       `${SPOTIFY_API_URL}/me/player/shuffle`,
@@ -339,7 +339,7 @@ export class SpotifyService {
       },
       {
         headers: this.apiHeaders,
-      },
+      }
     );
   }
 
@@ -350,7 +350,7 @@ export class SpotifyService {
       play,
     }: {
       play?: boolean;
-    } = {},
+    } = {}
   ) {
     return this.http.put(
       `${SPOTIFY_API_URL}/me/player`,
@@ -360,7 +360,7 @@ export class SpotifyService {
       },
       {
         headers: this.apiHeaders,
-      },
+      }
     );
   }
 
@@ -385,15 +385,15 @@ export class SpotifyService {
     if (this.queryParams.accessToken) {
       localStorage.setItem(
         'spotify_access_token',
-        this.queryParams.accessToken,
+        this.queryParams.accessToken
       );
       localStorage.setItem(
         'spotify_refresh_token',
-        this.queryParams.refreshToken!,
+        this.queryParams.refreshToken!
       );
       localStorage.setItem(
         'spotify_token_expire_time',
-        this.queryParams.expiresIn!,
+        this.queryParams.expiresIn!
       );
       localStorage.setItem('spotify_token_timestamp', Date.now().toString());
 
@@ -457,14 +457,14 @@ export class SpotifyService {
     // Use `/refresh_token` endpoint from our Node app
     this.http
       .get(
-        `/api/spotify/refresh_token?refresh_token=${localStorageItems.spotifyRefreshToken}`,
+        `/api/spotify/refresh_token?refresh_token=${localStorageItems.spotifyRefreshToken}`
       )
       .subscribe({
         next: (res: any) => {
           localStorage.setItem('spotify_access_token', res.access_token);
           localStorage.setItem(
             'spotify_token_timestamp',
-            Date.now().toString(),
+            Date.now().toString()
           );
           window.location.reload();
         },

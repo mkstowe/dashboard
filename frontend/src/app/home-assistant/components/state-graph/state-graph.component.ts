@@ -36,7 +36,7 @@ export class StateGraphComponent implements OnInit, OnDestroy {
       entity: HassEntity;
       entityName: string;
       stateOptions: StateOptions;
-    },
+    }
   ) {
     this.entity = data.entity;
     this.entityName = data.entityName;

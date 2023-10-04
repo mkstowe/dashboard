@@ -37,7 +37,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatRadioModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
   ],
   exports: [
     MatButtonModule,
@@ -57,7 +57,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatRadioModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
   ],
   providers: [MatIconRegistry],
 })

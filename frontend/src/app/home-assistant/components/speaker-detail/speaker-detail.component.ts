@@ -28,7 +28,7 @@ export class SpeakerDetailComponent implements OnInit, OnDestroy {
   constructor(
     private hassService: HassService,
     @Inject(MAT_DIALOG_DATA)
-    data: { entityId: string; entityName: string; isActive: boolean },
+    data: { entityId: string; entityName: string; isActive: boolean }
   ) {
     this.entityId = data.entityId;
     this.entityName = data.entityName;

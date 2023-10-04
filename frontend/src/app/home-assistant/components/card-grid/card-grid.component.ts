@@ -11,6 +11,7 @@ import {
 import { MatPaginator } from '@angular/material/paginator';
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { Card } from '../../models/card';
+import { HassService } from '../../services/hass.service';
 
 @Component({
   selector: 'app-card-grid',
@@ -30,16 +31,26 @@ export class CardGridComponent implements OnInit, OnDestroy {
   private index = 0;
   private notifier$ = new Subject<void>();
 
+  constructor(private hassService: HassService) {}
+
   public ngOnDestroy(): void {
     this.notifier$.next();
     this.notifier$.complete();
   }
 
   public ngOnInit(): void {
+    for (const card of this.cards) {
+      if (card.type === 'sensorCard') {
+        this.hassService.getSensorsByCard(card.id).subscribe((sensors: any) => {
+          card.sensors = sensors;
+        });
+      }
+    }
+
     this._index.pipe(takeUntil(this.notifier$)).subscribe((idx) => {
       this.currCards = this.cards.slice(
         idx * this.cardsPerPage,
-        idx * this.cardsPerPage + this.cardsPerPage,
+        idx * this.cardsPerPage + this.cardsPerPage
       );
     });
   }
@@ -56,5 +67,9 @@ export class CardGridComponent implements OnInit, OnDestroy {
         this._index.next(this.index);
       }
     }
+  }
+
+  public isSensor(card: Card): boolean {
+    return card.type === 'sensorCard';
   }
 }

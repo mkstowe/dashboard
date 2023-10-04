@@ -1,25 +1,36 @@
-<div
-  class="card-wrapper"
-  [class.active]="isActive"
-  [class.has-action]="hasAction"
-  [class.edit-mode]="editMode"
-  (click)="onButtonClick($event)"
->
-  <div class="entity-icon">
-    <mat-icon class="icon" svgIcon="{{ icon }}"></mat-icon>
-    <mat-icon
-      class="icon-active"
-      *ngIf="isActive"
-      svgIcon="{{ iconActive }}"
-    ></mat-icon>
+<div class="card-wrapper">
+  <div
+    class="card"
+    [class.active]="isActive"
+    [class.has-action]="hasAction"
+    [class.edit-mode]="editMode"
+    (click)="onButtonClick($event)"
+    *ngIf="card.type !== 'sensorCard'; else sensorCard"
+  >
+    <div class="entity-icon">
+      <mat-icon class="icon" svgIcon="{{ icon }}"></mat-icon>
+      <mat-icon
+        class="icon-active"
+        *ngIf="isActive"
+        svgIcon="{{ iconActive }}"
+      ></mat-icon>
+    </div>
+    <div class="lock-icon" *ngIf="card?.lock" [class.unlocked]="unlocked">
+      <mat-icon svgIcon="lock"></mat-icon>
+    </div>
+    <div class="name-state">
+      <div class="entity-name">{{ entityName }}</div>
+      <div class="entity-state">{{ entityState }}</div>
+    </div>
   </div>
-  <div class="lock-icon" *ngIf="card?.lock" [class.unlocked]="unlocked">
-    <mat-icon svgIcon="lock"></mat-icon>
-  </div>
-  <div class="name-state">
-    <div class="entity-name">{{ entityName }}</div>
-    <div class="entity-state">{{ entityState }}</div>
-  </div>
+
+  <ng-template #sensorCard>
+    <div class="sensor-group" [class.edit-mode]="editMode">
+      <ng-container *ngFor="let sensor of card.sensors">
+        <app-sensor [sensorOptions]="sensor"></app-sensor>
+      </ng-container>
+    </div>
+  </ng-template>
 
   <div class="edit-actions">
     <button mat-fab color="primary" *ngIf="editMode" (click)="editCard()">

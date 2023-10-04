@@ -6,8 +6,8 @@ CREATE TABLE IF NOT EXISTS hassGroup (
 CREATE TABLE IF NOT EXISTS hassCard (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   'group' INTEGER NOT NULL,
-  'type' STRING,
-  entityId TEXT NOT NULL,
+  'type' TEXT NOT NULL,
+  entityId TEXT,
   icon TEXT,
   iconActive TEXT,
   lock BOOLEAN,
@@ -18,6 +18,20 @@ CREATE TABLE IF NOT EXISTS hassCard (
   CONSTRAINT fk_group
   FOREIGN KEY ('group')
   REFERENCES hassGroup (id)
+    ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS hassSensor (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  card INTEGER NOT NULL,
+  entityId TEXT NOT NULL,
+  icon TEXT,
+  name TEXT,
+  state TEXT,
+  stateOptions TEXT,
+  CONSTRAINT fk_card
+  FOREIGN KEY ('card')
+  REFERENCES hassCard (id)
     ON DELETE CASCADE
 );
 

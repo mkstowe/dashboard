@@ -1,23 +1,26 @@
 <ng-container *ngIf="loggedIn">
-<div class="app-wrapper" [@routeAnim]="prepareRoute(outlet)">
-  <div class="mobile-header"></div>
-  <button
-    class="hamburger hamburger--squeeze"
-    type="button"
-    [class.is-active]="sidebarActive"
-    (click)="toggleSidebar()"
-  >
-    <span class="hamburger-box">
-      <span class="hamburger-inner"></span>
-    </span>
-  </button>
+  <div class="app-wrapper" [@routeAnim]="prepareRoute(outlet)">
+    <div class="mobile-header"></div>
+    <button
+      class="hamburger hamburger--squeeze"
+      type="button"
+      [class.is-active]="sidebarActive"
+      (click)="toggleSidebar()"
+    >
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+    </button>
 
-  <div class="sidebar-wrapper" [class.is-active]="sidebarActive">
-    <app-sidebar></app-sidebar>
-  </div>
+    <div class="sidebar-wrapper" [class.is-active]="sidebarActive">
+      <app-sidebar></app-sidebar>
+    </div>
 
-  <div class="dashboard" [class.disable-scroll]="sidebarActive">
-    <router-outlet #outlet="outlet" (activate)="closeSidebar()"></router-outlet>
+    <div class="dashboard" [class.disable-scroll]="sidebarActive">
+      <router-outlet
+        #outlet="outlet"
+        (activate)="closeSidebar()"
+      ></router-outlet>
+    </div>
   </div>
-</div>
 </ng-container>

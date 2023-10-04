@@ -217,7 +217,8 @@
       Delete
     </button>
     <p class="confirm-delete" *ngIf="confirmDelete">
-      Are you sure? <button mat-button (click)="confirmDelete = false">No</button> /
+      Are you sure?
+      <button mat-button (click)="confirmDelete = false">No</button> /
       <button mat-button (click)="onDelete()">Yes</button>
     </p>
     <button

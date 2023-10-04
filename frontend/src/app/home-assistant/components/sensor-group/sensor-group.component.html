@@ -1,3 +1,8 @@
 <div class="sensor-group-wrapper">
   <ng-content></ng-content>
+  <div class="edit-actions">
+    <button mat-fab color="primary" *ngIf="editMode" (click)="editCard()">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
 </div>

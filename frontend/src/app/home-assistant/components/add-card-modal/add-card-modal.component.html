@@ -19,6 +19,12 @@
           </mat-select>
         </mat-form-field>
       </div>
+    </form>
+    <form
+      [formGroup]="entityForm"
+      *ngIf="!isSensorCard; else sensorFormContainer"
+      (ngSubmit)="onSubmit()"
+    >
       <div class="row">
         <mat-label>Entity Id</mat-label>
         <mat-form-field appearance="outline">
@@ -35,28 +41,46 @@
       <div class="row">
         <mat-label>Icon</mat-label>
         <mat-form-field appearance="outline">
-          <input type="text" placeholder="Icon" matInput formControlName="icon" [matAutocomplete]="auto">
+          <input
+            type="text"
+            placeholder="Icon"
+            matInput
+            formControlName="icon"
+            [matAutocomplete]="auto"
+          />
           <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let icon of filteredIcons | async" [value]="icon">
+            <mat-option
+              *ngFor="let icon of filteredIcons | async"
+              [value]="icon"
+            >
               <mat-icon [svgIcon]="icon"></mat-icon> {{ icon }}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
       </div>
 
-      <div class="row" *ngIf="!isSensorCard">
+      <div class="row">
         <mat-label>Active Icon</mat-label>
         <mat-form-field appearance="outline">
-          <input type="text" placeholder="Icon Active" matInput formControlName="iconActive" [matAutocomplete]="autoActive">
+          <input
+            type="text"
+            placeholder="Icon Active"
+            matInput
+            formControlName="iconActive"
+            [matAutocomplete]="autoActive"
+          />
           <mat-autocomplete #autoActive="matAutocomplete">
-            <mat-option *ngFor="let icon of filteredActiveIcons | async" [value]="icon">
+            <mat-option
+              *ngFor="let icon of filteredActiveIcons | async"
+              [value]="icon"
+            >
               <mat-icon [svgIcon]="icon"></mat-icon> {{ icon }}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
       </div>
 
-      <div class="row inline checkbox-field" *ngIf="!isSensorCard">
+      <div class="row inline checkbox-field">
         <mat-label>Lock</mat-label>
         <mat-checkbox
           color="primary"
@@ -86,43 +110,42 @@
           </mat-expansion-panel-header>
 
           <div formGroupName="stateOptions">
+            <div class="row">
+              <mat-label>Before String</mat-label>
+              <mat-form-field appearance="outline">
+                <input matInput formControlName="beforeString" />
+              </mat-form-field>
+            </div>
 
-          <div class="row">
-            <mat-label>Before String</mat-label>
-            <mat-form-field appearance="outline">
-              <input matInput formControlName="beforeString" />
-            </mat-form-field>
-          </div>
+            <div class="row">
+              <mat-label>After String</mat-label>
+              <mat-form-field appearance="outline">
+                <input matInput formControlName="afterString" />
+              </mat-form-field>
+            </div>
 
-          <div class="row">
-            <mat-label>After String</mat-label>
-            <mat-form-field appearance="outline">
-              <input matInput formControlName="afterString" />
-            </mat-form-field>
-          </div>
+            <div class="row">
+              <mat-label>Warning Expression</mat-label>
+              <mat-form-field appearance="outline">
+                <input matInput formControlName="warningExpression" />
+              </mat-form-field>
+            </div>
 
-          <div class="row">
-            <mat-label>Warning Expression</mat-label>
-            <mat-form-field appearance="outline">
-              <input matInput formControlName="warningExpression" />
-            </mat-form-field>
-          </div>
+            <div class="row">
+              <mat-label>Danger Expression</mat-label>
+              <mat-form-field appearance="outline">
+                <input matInput formControlName="dangerExpression" />
+              </mat-form-field>
+            </div>
 
-          <div class="row">
-            <mat-label>Danger Expression</mat-label>
-            <mat-form-field appearance="outline">
-              <input matInput formControlName="dangerExpression" />
-            </mat-form-field>
-          </div>
-
-          <div class="row inline checkbox-field">
-            <mat-label>Round</mat-label>
-            <mat-checkbox
-              color="primary"
-              labelPosition="before"
-              formControlName="round"
-            ></mat-checkbox>
-          </div>
+            <div class="row inline checkbox-field">
+              <mat-label>Round</mat-label>
+              <mat-checkbox
+                color="primary"
+                labelPosition="before"
+                formControlName="round"
+              ></mat-checkbox>
+            </div>
           </div>
         </mat-expansion-panel>
       </mat-accordion>
@@ -133,75 +156,276 @@
           </mat-expansion-panel-header>
 
           <div formGroupName="service">
-
             <div class="row">
               <mat-label>Domain</mat-label>
               <mat-form-field appearance="outline">
-                <input
-                matInput
-                placeholder="light"
-                formControlName="domain"
-                />
+                <input matInput placeholder="light" formControlName="domain" />
               </mat-form-field>
             </div>
-            
+
             <div class="row">
               <mat-label>Service</mat-label>
               <mat-form-field appearance="outline">
-                <input matInput placeholder="toggle" formControlName="service" />
+                <input
+                  matInput
+                  placeholder="toggle"
+                  formControlName="service"
+                />
               </mat-form-field>
             </div>
-            
-            <!-- <div class="row"> -->
-              <!-- <mat-label>Service Data</mat-label> -->
-              <!-- <mat-form-field appearance="outline"> -->
-          <!-- <input matInput placeholder="toggle" formControlName="serviceData"> -->
-          <!-- </mat-form-field> -->
-          <!-- </div> -->
-          
-          <div class="row">
-            <mat-label>Target</mat-label>
-            <div formGroupName="target">
-            
-              <div class="service-target">
-                <div class="row inline">
-              <h4>Entity Id</h4>
-            <mat-form-field appearance="outline">
-              <input
-              matInput
-              placeholder="light.office"
-              formControlName="entity_id"
-              />
-            </mat-form-field>
-            </div>
 
-            <div class="row inline">
-            <h4>Area Id</h4>
-            <mat-form-field appearance="outline">
-              <input
-              matInput
-              placeholder="office"
-              formControlName="area_id"
-              />
-            </mat-form-field>
-</div>
-<div class="row inline">
-            <h4>Device Id</h4>
-            <mat-form-field appearance="outline">
-              <input
-              matInput
-              placeholder="light.office"
-              formControlName="device_id"
-              />
-            </mat-form-field>
+            <div class="row">
+              <mat-label>Target</mat-label>
+              <div formGroupName="target">
+                <div class="service-target">
+                  <div class="row inline">
+                    <h4>Entity Id</h4>
+                    <mat-form-field appearance="outline">
+                      <input
+                        matInput
+                        placeholder="light.office"
+                        formControlName="entity_id"
+                      />
+                    </mat-form-field>
+                  </div>
+
+                  <div class="row inline">
+                    <h4>Area Id</h4>
+                    <mat-form-field appearance="outline">
+                      <input
+                        matInput
+                        placeholder="office"
+                        formControlName="area_id"
+                      />
+                    </mat-form-field>
+                  </div>
+                  <div class="row inline">
+                    <h4>Device Id</h4>
+                    <mat-form-field appearance="outline">
+                      <input
+                        matInput
+                        placeholder="light.office"
+                        formControlName="device_id"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          </div>
-          </div>
           </div>
         </mat-expansion-panel>
       </mat-accordion>
     </form>
+
+    <ng-template #sensorFormContainer>
+      <mat-divider></mat-divider>
+      <form [formGroup]="sensorForm" (ngSubmit)="onSubmit()">
+        <div formGroupName="sensor1">
+          <h3>Sensor 1</h3>
+          <div class="row">
+            <mat-label>Entity Id</mat-label>
+            <mat-form-field appearance="outline">
+              <input
+                matInput
+                placeholder="light.office"
+                formControlName="entityId"
+                autofocus
+                required
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <mat-label>Icon</mat-label>
+            <mat-form-field appearance="outline">
+              <input
+                type="text"
+                placeholder="Icon"
+                matInput
+                formControlName="icon"
+                [matAutocomplete]="auto"
+              />
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option
+                  *ngFor="let icon of filteredIcons2 | async"
+                  [value]="icon"
+                >
+                  <mat-icon [svgIcon]="icon"></mat-icon> {{ icon }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <mat-label>Name</mat-label>
+            <mat-form-field appearance="outline">
+              <input
+                matInput
+                placeholder="Office Light"
+                formControlName="name"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <mat-label>State</mat-label>
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="on" formControlName="state" />
+            </mat-form-field>
+          </div>
+
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>State Options</mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <div formGroupName="stateOptions">
+                <div class="row">
+                  <mat-label>Before String</mat-label>
+                  <mat-form-field appearance="outline">
+                    <input matInput formControlName="beforeString" />
+                  </mat-form-field>
+                </div>
+
+                <div class="row">
+                  <mat-label>After String</mat-label>
+                  <mat-form-field appearance="outline">
+                    <input matInput formControlName="afterString" />
+                  </mat-form-field>
+                </div>
+
+                <div class="row">
+                  <mat-label>Warning Expression</mat-label>
+                  <mat-form-field appearance="outline">
+                    <input matInput formControlName="warningExpression" />
+                  </mat-form-field>
+                </div>
+
+                <div class="row">
+                  <mat-label>Danger Expression</mat-label>
+                  <mat-form-field appearance="outline">
+                    <input matInput formControlName="dangerExpression" />
+                  </mat-form-field>
+                </div>
+
+                <div class="row inline checkbox-field">
+                  <mat-label>Round</mat-label>
+                  <mat-checkbox
+                    color="primary"
+                    labelPosition="before"
+                    formControlName="round"
+                  ></mat-checkbox>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div formGroupName="sensor2">
+          <h3>Sensor 2</h3>
+          <div class="row">
+            <mat-label>Entity Id</mat-label>
+            <mat-form-field appearance="outline">
+              <input
+                matInput
+                placeholder="light.office"
+                formControlName="entityId"
+                autofocus
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <mat-label>Icon</mat-label>
+            <mat-form-field appearance="outline">
+              <input
+                type="text"
+                placeholder="Icon"
+                matInput
+                formControlName="icon"
+                [matAutocomplete]="auto2"
+              />
+              <mat-autocomplete #auto2="matAutocomplete">
+                <mat-option
+                  *ngFor="let icon of filteredIcons3 | async"
+                  [value]="icon"
+                >
+                  <mat-icon [svgIcon]="icon"></mat-icon> {{ icon }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <mat-label>Name</mat-label>
+            <mat-form-field appearance="outline">
+              <input
+                matInput
+                placeholder="Office Light"
+                formControlName="name"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <mat-label>State</mat-label>
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="on" formControlName="state" />
+            </mat-form-field>
+          </div>
+
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>State Options</mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <div formGroupName="stateOptions">
+                <div class="row">
+                  <mat-label>Before String</mat-label>
+                  <mat-form-field appearance="outline">
+                    <input matInput formControlName="beforeString" />
+                  </mat-form-field>
+                </div>
+
+                <div class="row">
+                  <mat-label>After String</mat-label>
+                  <mat-form-field appearance="outline">
+                    <input matInput formControlName="afterString" />
+                  </mat-form-field>
+                </div>
+
+                <div class="row">
+                  <mat-label>Warning Expression</mat-label>
+                  <mat-form-field appearance="outline">
+                    <input matInput formControlName="warningExpression" />
+                  </mat-form-field>
+                </div>
+
+                <div class="row">
+                  <mat-label>Danger Expression</mat-label>
+                  <mat-form-field appearance="outline">
+                    <input matInput formControlName="dangerExpression" />
+                  </mat-form-field>
+                </div>
+
+                <div class="row inline checkbox-field">
+                  <mat-label>Round</mat-label>
+                  <mat-checkbox
+                    color="primary"
+                    labelPosition="before"
+                    formControlName="round"
+                  ></mat-checkbox>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </form>
+    </ng-template>
   </mat-dialog-content>
 
   <mat-divider></mat-divider>
@@ -218,7 +442,8 @@
       Delete
     </button>
     <p class="confirm-delete" *ngIf="confirmDelete">
-      Are you sure? <button mat-button (click)="confirmDelete = false">No</button> /
+      Are you sure?
+      <button mat-button (click)="confirmDelete = false">No</button> /
       <button mat-button (click)="onDelete()">Yes</button>
     </p>
     <button

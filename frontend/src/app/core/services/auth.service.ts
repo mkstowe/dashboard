@@ -12,7 +12,7 @@ export class AuthService {
   constructor(private auth: Auth0Service) {
     auth.user$.subscribe((res) => {
       // this._user = res;
-      this._isDemo.next(res?.nickname === "demo");
+      this._isDemo.next(res?.nickname === 'demo');
     });
   }
 

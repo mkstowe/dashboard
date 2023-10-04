@@ -60,10 +60,10 @@ router.get("/callback", async (req, res) => {
         headers: {
           "content-type": "application/x-www-form-urlencoded",
           Authorization: `Basic ${new Buffer.from(
-            `${CLIENT_ID}:${CLIENT_SECRET}`,
+            `${CLIENT_ID}:${CLIENT_SECRET}`
           ).toString("base64")}`,
         },
-      },
+      }
     )
     .then((response) => {
       if (response.status === 200) {
@@ -98,10 +98,10 @@ router.get("/refresh_token", async (req, res) => {
         headers: {
           "content-type": "application/x-www-form-urlencoded",
           Authorization: `Basic ${new Buffer.from(
-            `${CLIENT_ID}:${CLIENT_SECRET}`,
+            `${CLIENT_ID}:${CLIENT_SECRET}`
           ).toString("base64")}`,
         },
-      },
+      }
     )
     .then((response) => res.send(response.data))
     .catch((error) => res.send(error));

@@ -18,6 +18,7 @@ import { FanCardComponent } from './components/entity-card/fan-card/fan-card.com
 import { FanDetailComponent } from './components/fan-detail/fan-detail.component';
 import { AddCardModalComponent } from './components/add-card-modal/add-card-modal.component';
 import { AddGroupModalComponent } from './components/add-group-modal/add-group-modal.component';
+import { SensorCardComponent } from './components/entity-card/sensor-card/sensor-card.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { AddGroupModalComponent } from './components/add-group-modal/add-group-m
     FanDetailComponent,
     AddCardModalComponent,
     AddGroupModalComponent,
+    SensorCardComponent,
   ],
   imports: [CommonModule, SharedModule, MusicModule],
   exports: [HomePageComponent],

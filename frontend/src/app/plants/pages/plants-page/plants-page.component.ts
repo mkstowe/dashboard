@@ -12,14 +12,11 @@ import { Observable, switchMap } from 'rxjs';
 export class PlantsPageComponent implements OnInit {
   public plants: Observable<Plant[]>;
 
-  constructor(
-    private plantService: PlantService,
-    private dialog: MatDialog,
-  ) {}
+  constructor(private plantService: PlantService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.plants = this.plantService.refetch.pipe(
-      switchMap(() => this.plantService.getAllPlants()),
+      switchMap(() => this.plantService.getAllPlants())
     );
   }
 
@@ -30,7 +27,7 @@ export class PlantsPageComponent implements OnInit {
       maxHeight: '1200px',
       enterAnimationDuration: 100,
       exitAnimationDuration: 100,
-      disableClose: true
+      disableClose: true,
     });
   }
 }

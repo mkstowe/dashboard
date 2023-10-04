@@ -37,7 +37,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   constructor(
     private hassService: HassService,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
   public ngOnDestroy(): void {
@@ -75,7 +75,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       .filter(
         (e) =>
           this.devices.includes(e) &&
-          this.activeStates.includes(entities[e].state),
+          this.activeStates.includes(entities[e].state)
       )
       .map((l) => entities[l].attributes.friendly_name!);
 

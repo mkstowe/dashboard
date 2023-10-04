@@ -3,7 +3,6 @@
 
 .card-wrapper {
   position: relative;
-
   container-name: card;
   container-type: inline-size;
   display: flex;
@@ -12,80 +11,105 @@
   justify-content: flex-end;
 
   aspect-ratio: 1/1;
-  padding: 20px;
 
   color: $foreground;
 
-  border: 2px solid rgba($foreground, 0.2);
-  border-radius: 15px;
-
   transition: $transition;
 
-  .entity-icon {
-    position: absolute;
-    top: 12%;
-    left: 12%;
+  .card {
+    border: 2px solid rgba($foreground, 0.2);
+    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+    position: relative;
 
-    container-name: entity-icon;
-    container-type: inline-size;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
 
-    width: 125px;
-    height: 125px;
+    padding: 20px;
 
-    .icon,
-    .icon-active {
+    .entity-icon {
       position: absolute;
-      z-index: 899;
-      width: 100%;
-      height: 100%;
-    }
+      top: 12%;
+      left: 12%;
 
-    .icon-active {
-      z-index: 888;
-      color: $accent;
-    }
-  }
+      container-name: entity-icon;
+      container-type: inline-size;
 
-  .lock-icon {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+      width: 125px;
+      height: 125px;
 
-    color: $color-3;
-
-    transition: opacity 0.3s ease-in;
-
-    &.unlocked {
-      opacity: 0;
-    }
-  }
-
-  .name-state {
-    .entity-name {
-      margin-bottom: 5px;
-      font-size: 36px;
-      font-weight: 600;
-    }
-
-    .entity-state {
-      font-size: 32px;
-      font-weight: 500;
-    }
-  }
-
-  &.active {
-    color: $background;
-    background-color: $foreground;
-  }
-
-  &.has-action {
-    &:hover:not(.edit-mode) {
-      cursor: pointer;
-      background-color: rgba($foreground, 0.05);
-
-      &.active {
-        background-color: rgba($foreground, 0.9);
+      .icon,
+      .icon-active {
+        position: absolute;
+        z-index: 899;
+        width: 100%;
+        height: 100%;
       }
+
+      .icon-active {
+        z-index: 888;
+        color: $accent;
+      }
+    }
+
+    .lock-icon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+
+      color: $color-3;
+
+      transition: opacity 0.3s ease-in;
+
+      &.unlocked {
+        opacity: 0;
+      }
+    }
+
+    .name-state {
+      .entity-name {
+        margin-bottom: 5px;
+        font-size: 36px;
+        font-weight: 600;
+      }
+
+      .entity-state {
+        font-size: 32px;
+        font-weight: 500;
+      }
+    }
+
+    &.active {
+      color: $background;
+      background-color: $foreground;
+    }
+
+    &.has-action {
+      &:hover:not(.edit-mode) {
+        cursor: pointer;
+        background-color: rgba($foreground, 0.05);
+
+        &.active {
+          background-color: rgba($foreground, 0.9);
+        }
+      }
+    }
+  }
+
+  .sensor-group {
+    $gap: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    gap: $gap;
+
+    app-sensor {
+      width: 100%;
+      height: calc(50% - $gap/2);
     }
   }
 

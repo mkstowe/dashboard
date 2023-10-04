@@ -10,7 +10,7 @@ export function tapOnce<T>(fn: (value: any) => void) {
             fn(payload);
           }
           first = false;
-        }),
+        })
       );
     });
 }

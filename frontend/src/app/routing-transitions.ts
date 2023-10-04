@@ -33,10 +33,10 @@ export const translateTransition = trigger('routeAnim', [
             style({
               opacity: 0,
               transform: 'translateY(-50px)',
-            }),
+            })
           ),
         ],
-        { optional: true },
+        { optional: true }
       ),
 
       query(
@@ -51,10 +51,10 @@ export const translateTransition = trigger('routeAnim', [
             style({
               opacity: 1,
               transform: 'translateY(0)',
-            }),
+            })
           ),
         ],
-        { optional: true },
+        { optional: true }
       ),
     ]),
   ]),
@@ -76,10 +76,10 @@ export const translateTransition = trigger('routeAnim', [
             style({
               opacity: 0,
               transform: 'translateY(50px)',
-            }),
+            })
           ),
         ],
-        { optional: true },
+        { optional: true }
       ),
 
       query(
@@ -94,10 +94,10 @@ export const translateTransition = trigger('routeAnim', [
             style({
               opacity: 1,
               transform: 'translateY(0)',
-            }),
+            })
           ),
         ],
-        { optional: true },
+        { optional: true }
       ),
     ]),
   ]),

@@ -17,7 +17,7 @@ export class PlantDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    private plantService: PlantService,
+    private plantService: PlantService
   ) {}
 
   ngOnInit(): void {
