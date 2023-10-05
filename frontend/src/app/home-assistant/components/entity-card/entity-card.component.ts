@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { HassService } from '../../services/hass.service';
+import { DangerLevel, HassService } from '../../services/hass.service';
 import { Subject, takeUntil } from 'rxjs';
 import { HassEntity } from 'home-assistant-js-websocket';
 import { MatDialog } from '@angular/material/dialog';
@@ -23,6 +23,8 @@ export class EntityCardComponent implements OnInit, OnDestroy {
   public unlocked: boolean;
   public sensors: any[];
   public editMode = false;
+  public dangerLevel: DangerLevel = DangerLevel.Normal;
+  public dangerLevels = DangerLevel;
 
   private lockTimer: number;
   private notifier$ = new Subject<void>();
@@ -59,6 +61,7 @@ export class EntityCardComponent implements OnInit, OnDestroy {
 
           if (state) {
             this.entityState = state.state;
+            this.dangerLevel = state.dangerLevel;
           }
         }
       },

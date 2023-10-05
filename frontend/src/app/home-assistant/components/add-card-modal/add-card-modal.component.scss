@@ -64,8 +64,16 @@
           font-size: 20px;
           font-weight: 600;
 
+          display: flex;
+          align-items: center;
+
           .required-symbol {
             color: $danger;
+          }
+
+          .info-symbol {
+            transform: scale(0.7);
+            margin-left: 5px;
           }
         }
 
@@ -192,3 +200,7 @@ mat-dialog-container .mat-mdc-dialog-surface {
     border-color: $danger !important;
   }
 }
+
+.info-tooltip {
+            font-size: 12px;
+          }
