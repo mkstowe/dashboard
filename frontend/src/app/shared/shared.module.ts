@@ -16,6 +16,7 @@ import { InputComponent } from './components/dynamic-form/input/input.component'
 import { RadioButtonComponent } from './components/dynamic-form/radio-button/radio-button.component';
 import { SelectComponent } from './components/dynamic-form/select/select.component';
 import { DynamicFieldDirective } from './directives/dynamic-field.directive';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { DynamicFieldDirective } from './directives/dynamic-field.directive';
     ColorPickerModule,
     NgChartsModule,
     ReactiveFormsModule,
+    RouterModule
   ],
   exports: [
     MaterialModule,

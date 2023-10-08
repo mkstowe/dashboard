@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatExpansionPanel } from '@angular/material/expansion';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { HassEntities } from 'home-assistant-js-websocket';
 import { Subject, takeUntil } from 'rxjs';
@@ -37,7 +38,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   constructor(
     private hassService: HassService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   public ngOnDestroy(): void {
@@ -63,6 +66,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   public logout() {
     this.authService.logout();
+  }
+
+  public routeTo(route: string) {
+    this.router.navigate([route], {
+      relativeTo: this.activatedRoute
+    })
   }
 
   private updateSidebarContent(entities: HassEntities) {
