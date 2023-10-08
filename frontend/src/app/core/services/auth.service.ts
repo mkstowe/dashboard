@@ -6,17 +6,15 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  // private _user: User | null | undefined;
   private _isDemo = new BehaviorSubject<boolean>(true);
 
   constructor(private auth: Auth0Service) {
     auth.user$.subscribe((res) => {
-      // this._user = res;
       this._isDemo.next(res?.nickname === 'demo');
     });
   }
 
-  public get user() {
+  public get user$() {
     return this.auth.user$;
   }
 

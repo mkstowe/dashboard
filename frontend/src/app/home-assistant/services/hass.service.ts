@@ -20,16 +20,11 @@ import { Card } from '../models/card';
 })
 export class HassService {
   public readonly entities: Observable<HassEntities>;
-
   private refetchSubject = new BehaviorSubject(null);
   private _editMode = new BehaviorSubject<boolean>(false);
   private _entities: BehaviorSubject<HassEntities> =
     new BehaviorSubject<HassEntities>({});
   private connection: Connection;
-  private headers: HttpHeaders = new HttpHeaders({
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${environment.hassAccessToken}`,
-  });
 
   constructor(private http: HttpClient) {
     this.entities = this._entities.asObservable();
@@ -126,7 +121,10 @@ export class HassService {
     return this.http.get(
       `/api/hass/history/period?filter_entity_id=${entityId}`,
       {
-        headers: this.headers,
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${environment.hassAccessToken}`,
+        })
       }
     );
   }

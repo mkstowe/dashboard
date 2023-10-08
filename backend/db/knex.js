@@ -11,6 +11,7 @@ const connectedKnex = knex({
       done();
     },
   },
+  useNullAsDefault: true
 });
 
 module.exports = connectedKnex;

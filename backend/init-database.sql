@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS hassGroup (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  title TEXT
+  title TEXT,
+  userId TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS hassCard (
@@ -15,6 +16,7 @@ CREATE TABLE IF NOT EXISTS hassCard (
   state TEXT,
   service TEXT,
   stateOptions TEXT,
+  userId TEXT NOT NULL,
   CONSTRAINT fk_group
   FOREIGN KEY ('group')
   REFERENCES hassGroup (id)
@@ -30,6 +32,7 @@ CREATE TABLE IF NOT EXISTS hassSensor (
   name TEXT,
   state TEXT,
   stateOptions TEXT,
+  userId TEXT NOT NULL,
   CONSTRAINT fk_card
   FOREIGN KEY ('card')
   REFERENCES hassCard (id)
@@ -53,7 +56,8 @@ CREATE TABLE IF NOT EXISTS plant (
     repotting TEXT,
     lastWatered TEXT,
     lastFertilized TEXT,
-    notes TEXT
+    notes TEXT,
+    userId TEXT NOT NULL
 );
 
 PRAGMA foreign_keys=on;
