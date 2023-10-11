@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { translateTransition } from './routing-transitions';
-import { RouterOutlet } from '@angular/router';
-import { SpotifyService } from './music/services/spotify.service';
-// import { AuthService } from '@auth0/auth0-angular';
+import { ChildrenOutletContexts } from '@angular/router';
 import { AuthService } from './core/services/auth.service';
 
 @Component({
@@ -16,8 +14,8 @@ export class AppComponent implements OnInit {
   public loggedIn: boolean;
 
   constructor(
-    private spotifyService: SpotifyService,
-    private authService: AuthService
+    private authService: AuthService,
+    private contexts: ChildrenOutletContexts
   ) {}
 
   ngOnInit(): void {
@@ -30,12 +28,8 @@ export class AppComponent implements OnInit {
     this.sidebarActive = false;
   }
 
-  public prepareRoute(outlet: RouterOutlet) {
-    if (outlet.isActivated) {
-      const tab = outlet.activatedRouteData['tab'];
-      if (!tab) return 'secondary';
-      return tab;
-    }
+  public prepareRoute() {
+    return this.contexts.getContext('primary')?.route?.snapshot?.data?.['tab'];
   }
 
   public toggleSidebar() {
