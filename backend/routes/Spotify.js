@@ -75,7 +75,7 @@ router.get("/callback", async (req, res) => {
           expires_in,
         });
 
-        res.redirect(`https://dash.mkstowe.com/music/?${queryParams}`);
+        res.redirect(`${process.env.CLIENT_ORIGIN}/music/?${queryParams}`);
       } else {
         res.redirect(`/?${querystring.stringify({ error: "invalid_token" })}`);
       }
