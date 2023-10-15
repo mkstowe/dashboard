@@ -14,21 +14,30 @@ import { ServiceCall } from '../models/service-call';
 import { StateOptions } from '../models/state-options';
 import { CardGroup } from '../models/card-group';
 import { Card } from '../models/card';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HassService {
   public readonly entities: Observable<HassEntities>;
+  public isDemo: boolean;
   private refetchSubject = new BehaviorSubject(null);
   private _editMode = new BehaviorSubject<boolean>(false);
   private _entities: BehaviorSubject<HassEntities> =
     new BehaviorSubject<HassEntities>({});
   private connection: Connection;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private auth: AuthService) {
     this.entities = this._entities.asObservable();
-    this.connect();
+
+    this.auth.isDemo$.subscribe((isDemo) => {
+      this.isDemo = isDemo;
+
+      if (!this.isDemo) {
+        this.connect();
+      }
+    })
   }
 
   public get refetch() {
@@ -44,7 +53,7 @@ export class HassService {
   }
 
   public getAllGroups() {
-    return this.http.get(`/api/hass/group`);
+    return this.http.get(`/api/hass/groups`);
   }
 
   public createGroup(group: CardGroup) {
@@ -66,11 +75,15 @@ export class HassService {
   }
 
   public getAllCards() {
-    return this.http.get<Card[]>(`/api/hass/card`);
+    return this.http.get<Card[]>(`/api/hass/cards`);
   }
 
   public getCardsByGroup(groupId: number) {
-    return this.http.get<Card[]>(`/api/hass/card?group=${groupId}`);
+    return this.http.get<Card[]>(`/api/hass/cards?group=${groupId}`);
+  }
+
+  public getCardByEntityId(entityId: string) {
+    return this.http.get<Card>(`/api/hass/card?entityId=${entityId}`)
   }
 
   public createCard(card: Card) {
@@ -92,7 +105,7 @@ export class HassService {
   }
 
   public getSensorsByCard(cardId: number) {
-    return this.http.get(`/api/hass/sensor?card=${cardId}`);
+    return this.http.get(`/api/hass/sensors?card=${cardId}`);
   }
 
   public createSensor(sensor: any) {

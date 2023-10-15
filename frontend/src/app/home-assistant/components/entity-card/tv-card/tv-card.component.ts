@@ -3,6 +3,8 @@ import { EntityCardComponent } from '../entity-card.component';
 import { HassService } from 'src/app/home-assistant/services/hass.service';
 import { MatDialog } from '@angular/material/dialog';
 import { TvDetailComponent } from '../../tv-detail/tv-detail.component';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { DemoHassService } from 'src/app/home-assistant/services/demo-hass.service';
 
 @Component({
   selector: 'app-tv-card',
@@ -10,8 +12,8 @@ import { TvDetailComponent } from '../../tv-detail/tv-detail.component';
   styleUrls: ['./tv-card.component.scss'],
 })
 export class TvCardComponent extends EntityCardComponent {
-  constructor(hassService: HassService, dialog: MatDialog) {
-    super(hassService, dialog);
+  constructor(hassService: HassService, auth: AuthService, demoService: DemoHassService, dialog: MatDialog) {
+    super(hassService, auth, demoService, dialog);
   }
 
   public onRightMouseClick() {

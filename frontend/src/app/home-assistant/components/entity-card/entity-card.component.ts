@@ -1,9 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DangerLevel, HassService } from '../../services/hass.service';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
 import { HassEntity } from 'home-assistant-js-websocket';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCardModalComponent } from '../add-card-modal/add-card-modal.component';
+import { DemoHassService } from '../../services/demo-hass.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-entity-card',
@@ -30,7 +32,7 @@ export class EntityCardComponent implements OnInit, OnDestroy {
   private notifier$ = new Subject<void>();
   private onStates = ['on', 'playing'];
 
-  constructor(private hassService: HassService, public dialog: MatDialog) {}
+  constructor(private hassService: HassService, private auth: AuthService, private demoService: DemoHassService, public dialog: MatDialog) {}
 
   public ngOnDestroy(): void {
     this.notifier$.next();
@@ -93,7 +95,15 @@ export class EntityCardComponent implements OnInit, OnDestroy {
         },
       };
 
-      this.hassService.callService(msg);
+      this.auth.isDemo$.pipe(
+        take(1)
+      ).subscribe((isDemo) => {
+        if (isDemo) {
+          this.demoService.callService(msg);
+        } else {
+          this.hassService.callService(msg);
+        }
+      })
     }
 
     if (this.card?.lock && !this.unlocked) {

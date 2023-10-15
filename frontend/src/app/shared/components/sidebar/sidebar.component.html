@@ -4,7 +4,7 @@
     <div class="date">{{ date | date : "EEEE MMMM d" }}</div>
   </div>
   <div class="weather">
-    {{ weather }}
+    {{ (isDemo$ | async) ? '75° and Sunny' : weather }}
   </div>
   <nav>
     <a routerLink="/home" routerLinkActive="active" (click)="routeTo('/home')">Home</a>
@@ -17,6 +17,7 @@
     #deviceList
     class="active-devices"
     [disabled]="numActiveDevices < 2"
+    *ngIf="(isDemo$ | async) !== true"
   >
     <mat-expansion-panel-header class="specific-class">
       <mat-panel-title>

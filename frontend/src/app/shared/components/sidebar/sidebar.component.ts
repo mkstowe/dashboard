@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
+import { AuthService as auth } from 'src/app/core/services/auth.service';
 import { HassEntities } from 'home-assistant-js-websocket';
 import { Subject, takeUntil } from 'rxjs';
 import { HassService } from 'src/app/home-assistant/services/hass.service';
@@ -19,6 +20,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
   public date: Date = new Date();
   public numActiveDevices: number;
   public weather: string;
+  public isDemo: boolean;
+  public isDemo$: any;
 
   private activeStates = ['on', 'playing'];
   private devices = [
@@ -38,6 +41,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   constructor(
     private hassService: HassService,
+    private auth: auth,
     private authService: AuthService,
     private router: Router,
     private activatedRoute: ActivatedRoute
@@ -54,6 +58,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.updateSidebarContent(res);
       },
     });
+
+    this.isDemo$ = this.auth.isDemo$;
 
     setInterval(() => {
       this.date = new Date();

@@ -12,7 +12,7 @@ const getSecret = require("../secrets");
 const HASS_URL = process.env.HASS_URL;
 
 // Get all groups
-router.get("/group", async (req, res) => {
+router.get("/groups", async (req, res) => {
   const userId = req.auth.payload.sub;
 
   knex('hassGroup').where({ userId }).select('*').then((groups => {
@@ -75,7 +75,7 @@ router.delete("/group/:id", async (req, res) => {
 });
 
 // Get cards
-router.get("/card", async (req, res) => {
+router.get("/cards", async (req, res) => {
   const userId = req.auth.payload.sub;
   const group = req.query.group;
 
@@ -85,6 +85,18 @@ router.get("/card", async (req, res) => {
     res.status(500).json({error: error.message});
   })
 });
+
+// Get card 
+router.get("/card", async (req, res) => {
+  const userId = req.auth.payload.sub;
+  const entityId = req.query.entityId;
+
+  knex('hassCard').where({ userId, entityId }).select('*').first().then((card) => {
+    res.status(200).json({ card });
+  }).catch((error) => {
+    res.status(500).json({ error: error.message });
+  });
+})
 
 // Get card by id
 router.get("/card/:id", async (req, res) => {
@@ -97,6 +109,7 @@ router.get("/card/:id", async (req, res) => {
     res.status(500).json({ error: error.message })
   })
 });
+
 
 // Create new card
 router.post("/card", async (req, res) => {
@@ -137,7 +150,7 @@ router.delete("/card/:id", async (req, res) => {
 });
 
 // Get sensors
-router.get("/sensor", async (req, res) => {
+router.get("/sensors", async (req, res) => {
   const userId = req.auth.payload.sub;
   const card = req.query.card;
 
