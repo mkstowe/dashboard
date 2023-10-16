@@ -45,8 +45,7 @@ export class SensorComponent implements OnInit, OnDestroy {
         if (this.sensorOptions.stateOptions) {
           const state = this.hassService.resolveStateOptions(
             this.entityState,
-            JSON.parse(this.sensorOptions?.stateOptions as string)
-          );
+            this.sensorOptions?.stateOptions);
 
           if (state) {
             this.entityState = state.state;

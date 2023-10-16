@@ -23,9 +23,6 @@ app.use("/api/spotify", spotifyRoute);
 app.use("/api/plants", plantsRoute);
 app.use("/api/recipes", recipesRoute);
 
-const demo = require("./db/init_demo");
-demo.initDemoData();
-
 const ALLOWED_ORIGINS = [
   "http://localhost:4200",
   "http://localhost:3000",

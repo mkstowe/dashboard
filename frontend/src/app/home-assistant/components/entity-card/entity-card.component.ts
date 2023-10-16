@@ -58,7 +58,7 @@ export class EntityCardComponent implements OnInit, OnDestroy {
         if (this.card.stateOptions) {
           const state = this.hassService.resolveStateOptions(
             this.entityState,
-            JSON.parse(this.card.stateOptions as string)
+            this.card.stateOptions
           );
 
           if (state) {
@@ -83,7 +83,7 @@ export class EntityCardComponent implements OnInit, OnDestroy {
   public onButtonClick($event: Event) {
     if (this.editMode) return;
 
-    const service = JSON.parse(this.card?.service);
+    const service = this.card?.service;
     if (!this.card?.lock || this.unlocked) {
       const msg = {
         type: service.type || 'call_service',

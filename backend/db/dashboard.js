@@ -1,4 +1,4 @@
-const knex = require("./knex");
+const knex = require("./knexfile");
 
 function getAllGroups() {
   return knex("hassGroup").select("*");

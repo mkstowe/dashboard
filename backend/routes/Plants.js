@@ -1,9 +1,7 @@
-const knex = require('../db/knex');
+const knex = require('../db/client');
 
 const express = require("express");
 const router = express.Router();
-
-const db = require("../db/dashboard");
 
 // Get all plants
 router.get("/", async (req, res) => {

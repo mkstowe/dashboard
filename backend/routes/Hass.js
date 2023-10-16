@@ -1,5 +1,5 @@
 require("dotenv").config();
-const knex = require('../db/knex');
+const knex = require('../db/client');
 
 const express = require("express");
 const router = express.Router();

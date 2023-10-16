@@ -144,9 +144,9 @@ export class AddCardModalComponent implements OnInit {
           iconActive: this.card.iconActive,
           lock: this.card.lock,
           name: this.card.name,
-          service: JSON.parse(this.card.service as string),
+          service: this.card.service,
           state: this.card.state,
-          stateOptions: JSON.parse(this.card.stateOptions as string)
+          stateOptions: this.card.stateOptions as string
         });
       } else {
         this.isSensorCard = true;
@@ -159,7 +159,7 @@ export class AddCardModalComponent implements OnInit {
                 icon: sensors[0].icon,
                 name: sensors[0].name,
                 state: sensors[0].state,
-                stateOptions: JSON.parse(sensors[0].stateOptions as string),
+                stateOptions: sensors[0].stateOptions,
                 enableGraph: sensors[0].enableGraph
               },
             });
@@ -171,7 +171,7 @@ export class AddCardModalComponent implements OnInit {
                   icon: sensors[1].icon,
                   name: sensors[1].name,
                   state: sensors[1].state,
-                  stateOptions: JSON.parse(sensors[1].stateOptions as string), 
+                  stateOptions: sensors[1].stateOptions, 
                 enableGraph: sensors[1].enableGraph
                 },
               });
@@ -230,10 +230,10 @@ export class AddCardModalComponent implements OnInit {
         iconActive: this.entityForm.value.iconActive,
         lock: this.entityForm.value.lock,
         name: this.entityForm.value.name,
-        service: JSON.stringify(this.entityForm.value.service),
+        service: this.entityForm.value.service,
         type: this.addCardForm.value.type,
         state: this.entityForm.value.state,
-        stateOptions: JSON.stringify(this.entityForm.value.stateOptions),
+        stateOptions: this.entityForm.value.stateOptions,
       };
 
       if (this.card) {
@@ -251,9 +251,7 @@ export class AddCardModalComponent implements OnInit {
         icon: this.sensorForm.value.sensor1.icon,
         name: this.sensorForm.value.sensor1.name,
         state: this.sensorForm.value.sensor1.state,
-        stateOptions: JSON.stringify(
-          this.sensorForm.value.sensor1.stateOptions
-        ),
+        stateOptions: this.sensorForm.value.sensor1.stateOptions,
         enableGraph: this.sensorForm.value.sensor1.enableGraph
       };
 
@@ -262,9 +260,7 @@ export class AddCardModalComponent implements OnInit {
         icon: this.sensorForm.value.sensor2.icon,
         name: this.sensorForm.value.sensor2.name,
         state: this.sensorForm.value.sensor2.state,
-        stateOptions: JSON.stringify(
-          this.sensorForm.value.sensor2.stateOptions
-        ),
+        stateOptions: this.sensorForm.value.sensor2.stateOptions,
         enableGraph: this.sensorForm.value.sensor2.enableGraph
       };
 
