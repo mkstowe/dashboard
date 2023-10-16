@@ -30,5 +30,5 @@
       </p>
     </div>
   </mat-expansion-panel>
-  <p class="logout" (click)="logout()">Logout</p>
+  <p class="logout" (click)="authService.logout({ logoutParams: { returnTo: document.location.origin } })">Logout</p>
 </div>
