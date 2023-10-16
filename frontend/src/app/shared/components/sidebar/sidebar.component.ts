@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
@@ -6,6 +6,7 @@ import { AuthService as auth } from 'src/app/core/services/auth.service';
 import { HassEntities } from 'home-assistant-js-websocket';
 import { Subject, takeUntil } from 'rxjs';
 import { HassService } from 'src/app/home-assistant/services/hass.service';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
@@ -42,9 +43,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
   constructor(
     private hassService: HassService,
     private auth: auth,
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    @Inject(DOCUMENT) public document: Document
   ) {}
 
   public ngOnDestroy(): void {
@@ -68,10 +70,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   public trackDevice(index: number, device: any) {
     return device.id;
-  }
-
-  public logout() {
-    this.authService.logout();
   }
 
   public routeTo(route: string) {
