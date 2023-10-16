@@ -9,7 +9,7 @@
     "pretty": "prettier --write \"./**/*.{js,json}\"",
     "db:migration": "knex migrate:make $migration --knexfile ./db/knexfile.js",
     "db:seed": "knex seed:make $seed --knexfile ./db/knexfile.js",
-    "db:run": "cd db; knex migrate:down; knex migrate:up; knex seed:run"
+    "db:reset": "cd db; knex migrate:down; knex migrate:up; knex seed:run"
   },
   "dependencies": {
     "@google-cloud/secret-manager": "^5.0.1",

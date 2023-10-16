@@ -54,7 +54,7 @@ exports.up = async function (knex) {
     table.date("dateAdded");
     table.text("temperature");
     table.text("humidity");
-    table.integer("isToxic").unsigned();
+    table.boolean("isToxic");
     table.text("light");
     table.text("water");
     table.text("soil");
