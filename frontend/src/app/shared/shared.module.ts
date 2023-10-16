@@ -39,7 +39,7 @@ import { RouterModule } from '@angular/router';
     ColorPickerModule,
     NgChartsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
   ],
   exports: [
     MaterialModule,

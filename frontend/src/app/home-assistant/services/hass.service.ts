@@ -37,7 +37,7 @@ export class HassService {
       if (!this.isDemo) {
         this.connect();
       }
-    })
+    });
   }
 
   public get refetch() {
@@ -83,7 +83,7 @@ export class HassService {
   }
 
   public getCardByEntityId(entityId: string) {
-    return this.http.get<Card>(`/api/hass/card?entityId=${entityId}`)
+    return this.http.get<Card>(`/api/hass/card?entityId=${entityId}`);
   }
 
   public createCard(card: Card) {
@@ -137,7 +137,7 @@ export class HassService {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
           Authorization: `Bearer ${environment.hassAccessToken}`,
-        })
+        }),
       }
     );
   }

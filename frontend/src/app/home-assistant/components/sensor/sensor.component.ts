@@ -45,7 +45,8 @@ export class SensorComponent implements OnInit, OnDestroy {
         if (this.sensorOptions.stateOptions) {
           const state = this.hassService.resolveStateOptions(
             this.entityState,
-            this.sensorOptions?.stateOptions);
+            this.sensorOptions?.stateOptions
+          );
 
           if (state) {
             this.entityState = state.state;
@@ -59,7 +60,7 @@ export class SensorComponent implements OnInit, OnDestroy {
 
     this.hassService.editMode$.subscribe((res) => {
       this.editMode = res;
-    })
+    });
   }
 
   public onRightMouseClick() {

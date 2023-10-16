@@ -74,8 +74,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   public routeTo(route: string) {
     this.router.navigate([route], {
-      relativeTo: this.activatedRoute
-    })
+      relativeTo: this.activatedRoute,
+    });
   }
 
   private updateSidebarContent(entities: HassEntities) {

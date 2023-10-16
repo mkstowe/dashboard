@@ -12,7 +12,12 @@ import { DemoHassService } from 'src/app/home-assistant/services/demo-hass.servi
   styleUrls: ['./fan-card.component.scss'],
 })
 export class FanCardComponent extends EntityCardComponent {
-  constructor(hassService: HassService, auth: AuthService, demoService: DemoHassService, dialog: MatDialog) {
+  constructor(
+    hassService: HassService,
+    auth: AuthService,
+    demoService: DemoHassService,
+    dialog: MatDialog
+  ) {
     super(hassService, auth, demoService, dialog);
   }
 

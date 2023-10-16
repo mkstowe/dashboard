@@ -90,14 +90,34 @@
       </div>
 
       <div class="row">
-        <mat-label>Name <mat-icon class="info-symbol" matTooltipClass="info-tooltip" fontSet="material-icons-outlined" matTooltip="Override default entity name" matTooltipPosition="right">info</mat-icon></mat-label>
+        <mat-label
+          >Name
+          <mat-icon
+            class="info-symbol"
+            matTooltipClass="info-tooltip"
+            fontSet="material-icons-outlined"
+            matTooltip="Override default entity name"
+            matTooltipPosition="right"
+            >info</mat-icon
+          ></mat-label
+        >
         <mat-form-field appearance="outline">
           <input matInput placeholder="Office Light" formControlName="name" />
         </mat-form-field>
       </div>
 
       <div class="row">
-        <mat-label>State <mat-icon class="info-symbol" matTooltipClass="info-tooltip" fontSet="material-icons-outlined" matTooltip="Override default entity state" matTooltipPosition="right">info</mat-icon></mat-label>
+        <mat-label
+          >State
+          <mat-icon
+            class="info-symbol"
+            matTooltipClass="info-tooltip"
+            fontSet="material-icons-outlined"
+            matTooltip="Override default entity state"
+            matTooltipPosition="right"
+            >info</mat-icon
+          ></mat-label
+        >
         <mat-form-field appearance="outline">
           <input matInput placeholder="on" formControlName="state" />
         </mat-form-field>
@@ -111,35 +131,97 @@
 
           <div formGroupName="stateOptions">
             <div class="row">
-              <mat-label>Before String <mat-icon class="info-symbol" matTooltipClass="info-tooltip" fontSet="material-icons-outlined" matTooltip="Prepend to state string" matTooltipPosition="right">info</mat-icon></mat-label>
+              <mat-label
+                >Before String
+                <mat-icon
+                  class="info-symbol"
+                  matTooltipClass="info-tooltip"
+                  fontSet="material-icons-outlined"
+                  matTooltip="Prepend to state string"
+                  matTooltipPosition="right"
+                  >info</mat-icon
+                ></mat-label
+              >
               <mat-form-field appearance="outline">
-                <input matInput formControlName="beforeString" placeholder="Office light is " />
+                <input
+                  matInput
+                  formControlName="beforeString"
+                  placeholder="Office light is "
+                />
               </mat-form-field>
             </div>
 
             <div class="row">
-              <mat-label>After String <mat-icon class="info-symbol" matTooltipClass="info-tooltip" fontSet="material-icons-outlined" matTooltip="Append to state string" matTooltipPosition="right">info</mat-icon></mat-label>
+              <mat-label
+                >After String
+                <mat-icon
+                  class="info-symbol"
+                  matTooltipClass="info-tooltip"
+                  fontSet="material-icons-outlined"
+                  matTooltip="Append to state string"
+                  matTooltipPosition="right"
+                  >info</mat-icon
+                ></mat-label
+              >
               <mat-form-field appearance="outline">
                 <input matInput formControlName="afterString" placeholder="!" />
               </mat-form-field>
             </div>
 
             <div class="row">
-              <mat-label>Warning Expression <mat-icon class="info-symbol" matTooltipClass="info-tooltip" fontSet="material-icons-outlined" matTooltip="Displays as warning if condition is true" matTooltipPosition="right">info</mat-icon></mat-label>
+              <mat-label
+                >Warning Expression
+                <mat-icon
+                  class="info-symbol"
+                  matTooltipClass="info-tooltip"
+                  fontSet="material-icons-outlined"
+                  matTooltip="Displays as warning if condition is true"
+                  matTooltipPosition="right"
+                  >info</mat-icon
+                ></mat-label
+              >
               <mat-form-field appearance="outline">
-                <input matInput formControlName="warningExpression" placeholder="!= 'on'" />
+                <input
+                  matInput
+                  formControlName="warningExpression"
+                  placeholder="!= 'on'"
+                />
               </mat-form-field>
             </div>
 
             <div class="row">
-              <mat-label>Danger Expression <mat-icon class="info-symbol" matTooltipClass="info-tooltip" fontSet="material-icons-outlined" matTooltip="Displays as danger if condition is true" matTooltipPosition="right">info</mat-icon></mat-label>
+              <mat-label
+                >Danger Expression
+                <mat-icon
+                  class="info-symbol"
+                  matTooltipClass="info-tooltip"
+                  fontSet="material-icons-outlined"
+                  matTooltip="Displays as danger if condition is true"
+                  matTooltipPosition="right"
+                  >info</mat-icon
+                ></mat-label
+              >
               <mat-form-field appearance="outline">
-                <input matInput formControlName="dangerExpression" placeholder="== 'off'" />
+                <input
+                  matInput
+                  formControlName="dangerExpression"
+                  placeholder="== 'off'"
+                />
               </mat-form-field>
             </div>
 
             <div class="row inline checkbox-field">
-              <mat-label>Round <mat-icon class="info-symbol" matTooltipClass="info-tooltip" fontSet="material-icons-outlined" matTooltip="Round state to nearest whole number if applicable" matTooltipPosition="right">info</mat-icon></mat-label>
+              <mat-label
+                >Round
+                <mat-icon
+                  class="info-symbol"
+                  matTooltipClass="info-tooltip"
+                  fontSet="material-icons-outlined"
+                  matTooltip="Round state to nearest whole number if applicable"
+                  matTooltipPosition="right"
+                  >info</mat-icon
+                ></mat-label
+              >
               <mat-checkbox
                 color="primary"
                 labelPosition="before"
@@ -223,7 +305,9 @@
         <div formGroupName="sensor1">
           <h3>Sensor 1</h3>
           <div class="row">
-            <mat-label>Entity Id <span class="required-symbol">*</span></mat-label>
+            <mat-label
+              >Entity Id <span class="required-symbol">*</span></mat-label
+            >
             <mat-form-field appearance="outline">
               <input
                 matInput
@@ -255,18 +339,38 @@
               </mat-autocomplete>
             </mat-form-field>
           </div>
-          
+
           <div class="row inline checkbox-field">
-        <mat-label>Enable Graph <mat-icon class="info-symbol" matTooltipClass="info-tooltip" fontSet="material-icons-outlined" matTooltip="Show entity history on right click" matTooltipPosition="right">info</mat-icon></mat-label>
-        <mat-checkbox
-          color="primary"
-          labelPosition="before"
-          formControlName="enableGraph"
-        ></mat-checkbox>
-      </div>
+            <mat-label
+              >Enable Graph
+              <mat-icon
+                class="info-symbol"
+                matTooltipClass="info-tooltip"
+                fontSet="material-icons-outlined"
+                matTooltip="Show entity history on right click"
+                matTooltipPosition="right"
+                >info</mat-icon
+              ></mat-label
+            >
+            <mat-checkbox
+              color="primary"
+              labelPosition="before"
+              formControlName="enableGraph"
+            ></mat-checkbox>
+          </div>
 
           <div class="row">
-            <mat-label>Name <mat-icon class="info-symbol" matTooltipClass="info-tooltip" fontSet="material-icons-outlined" matTooltip="Override default entity name" matTooltipPosition="right">info</mat-icon></mat-label>
+            <mat-label
+              >Name
+              <mat-icon
+                class="info-symbol"
+                matTooltipClass="info-tooltip"
+                fontSet="material-icons-outlined"
+                matTooltip="Override default entity name"
+                matTooltipPosition="right"
+                >info</mat-icon
+              ></mat-label
+            >
             <mat-form-field appearance="outline">
               <input
                 matInput
@@ -277,7 +381,17 @@
           </div>
 
           <div class="row">
-            <mat-label>State <mat-icon class="info-symbol" matTooltipClass="info-tooltip" fontSet="material-icons-outlined" matTooltip="Override default entity state" matTooltipPosition="right">info</mat-icon></mat-label>
+            <mat-label
+              >State
+              <mat-icon
+                class="info-symbol"
+                matTooltipClass="info-tooltip"
+                fontSet="material-icons-outlined"
+                matTooltip="Override default entity state"
+                matTooltipPosition="right"
+                >info</mat-icon
+              ></mat-label
+            >
             <mat-form-field appearance="outline">
               <input matInput formControlName="state" />
             </mat-form-field>
@@ -291,35 +405,101 @@
 
               <div formGroupName="stateOptions">
                 <div class="row">
-                  <mat-label>Before String <mat-icon class="info-symbol" matTooltipClass="info-tooltip" fontSet="material-icons-outlined" matTooltip="Prepend to state string" matTooltipPosition="right">info</mat-icon></mat-label>
+                  <mat-label
+                    >Before String
+                    <mat-icon
+                      class="info-symbol"
+                      matTooltipClass="info-tooltip"
+                      fontSet="material-icons-outlined"
+                      matTooltip="Prepend to state string"
+                      matTooltipPosition="right"
+                      >info</mat-icon
+                    ></mat-label
+                  >
                   <mat-form-field appearance="outline">
-                    <input matInput formControlName="beforeString" placeholder="Temperature is " />
+                    <input
+                      matInput
+                      formControlName="beforeString"
+                      placeholder="Temperature is "
+                    />
                   </mat-form-field>
                 </div>
 
                 <div class="row">
-                  <mat-label>After String <mat-icon class="info-symbol" matTooltipClass="info-tooltip" fontSet="material-icons-outlined" matTooltip="Append to state string" matTooltipPosition="right">info</mat-icon></mat-label>
+                  <mat-label
+                    >After String
+                    <mat-icon
+                      class="info-symbol"
+                      matTooltipClass="info-tooltip"
+                      fontSet="material-icons-outlined"
+                      matTooltip="Append to state string"
+                      matTooltipPosition="right"
+                      >info</mat-icon
+                    ></mat-label
+                  >
                   <mat-form-field appearance="outline">
-                    <input matInput formControlName="afterString" placeholder="°F" />
+                    <input
+                      matInput
+                      formControlName="afterString"
+                      placeholder="°F"
+                    />
                   </mat-form-field>
                 </div>
 
                 <div class="row">
-                  <mat-label>Warning Expression <mat-icon class="info-symbol" matTooltipClass="info-tooltip" fontSet="material-icons-outlined" matTooltip="Displays as warning if condition is true" matTooltipPosition="right">info</mat-icon></mat-label>
+                  <mat-label
+                    >Warning Expression
+                    <mat-icon
+                      class="info-symbol"
+                      matTooltipClass="info-tooltip"
+                      fontSet="material-icons-outlined"
+                      matTooltip="Displays as warning if condition is true"
+                      matTooltipPosition="right"
+                      >info</mat-icon
+                    ></mat-label
+                  >
                   <mat-form-field appearance="outline">
-                    <input matInput formControlName="warningExpression" placeholder="< 55" />
+                    <input
+                      matInput
+                      formControlName="warningExpression"
+                      placeholder="< 55"
+                    />
                   </mat-form-field>
                 </div>
 
                 <div class="row">
-                  <mat-label>Danger Expression <mat-icon class="info-symbol" matTooltipClass="info-tooltip" fontSet="material-icons-outlined" matTooltip="Displays as danger if condition is true" matTooltipPosition="right">info</mat-icon></mat-label>
+                  <mat-label
+                    >Danger Expression
+                    <mat-icon
+                      class="info-symbol"
+                      matTooltipClass="info-tooltip"
+                      fontSet="material-icons-outlined"
+                      matTooltip="Displays as danger if condition is true"
+                      matTooltipPosition="right"
+                      >info</mat-icon
+                    ></mat-label
+                  >
                   <mat-form-field appearance="outline">
-                    <input matInput formControlName="dangerExpression" placeholder="== 80" />
+                    <input
+                      matInput
+                      formControlName="dangerExpression"
+                      placeholder="== 80"
+                    />
                   </mat-form-field>
                 </div>
 
                 <div class="row inline checkbox-field">
-                  <mat-label>Round <mat-icon class="info-symbol" matTooltipClass="info-tooltip" fontSet="material-icons-outlined" matTooltip="Round state to nearest whole number if applicable" matTooltipPosition="right">info</mat-icon></mat-label>
+                  <mat-label
+                    >Round
+                    <mat-icon
+                      class="info-symbol"
+                      matTooltipClass="info-tooltip"
+                      fontSet="material-icons-outlined"
+                      matTooltip="Round state to nearest whole number if applicable"
+                      matTooltipPosition="right"
+                      >info</mat-icon
+                    ></mat-label
+                  >
                   <mat-checkbox
                     color="primary"
                     labelPosition="before"
@@ -329,109 +509,201 @@
               </div>
             </mat-expansion-panel>
           </mat-accordion>
-         </div> 
+        </div>
 
         <mat-divider></mat-divider>
-        
+
         <div formGroupName="sensor2">
           <h3>Sensor 2</h3>
           <div class="row">
             <mat-label>Entity Id</mat-label>
             <mat-form-field appearance="outline">
               <input
-              matInput
-              placeholder="sensor.humidity"
-              formControlName="entityId"
-              autofocus
+                matInput
+                placeholder="sensor.humidity"
+                formControlName="entityId"
+                autofocus
               />
             </mat-form-field>
           </div>
-          
+
           <div class="row">
             <mat-label>Icon</mat-label>
             <mat-form-field appearance="outline">
               <input
-              type="text"
-              placeholder="Icon"
-              matInput
-              formControlName="icon"
-              [matAutocomplete]="auto2"
+                type="text"
+                placeholder="Icon"
+                matInput
+                formControlName="icon"
+                [matAutocomplete]="auto2"
               />
               <mat-autocomplete #auto2="matAutocomplete">
                 <mat-option
-                *ngFor="let icon of filteredIcons3 | async"
-                [value]="icon"
+                  *ngFor="let icon of filteredIcons3 | async"
+                  [value]="icon"
                 >
-                <mat-icon [svgIcon]="icon"></mat-icon> {{ icon }}
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
-        </div>
-        
-        <div class="row inline checkbox-field">
-          <mat-label>Enable Graph <mat-icon class="info-symbol" matTooltipClass="info-tooltip" fontSet="material-icons-outlined" matTooltip="Show entity history on right click" matTooltipPosition="right">info</mat-icon></mat-label>
-          <mat-checkbox
-            color="primary"
-            labelPosition="before"
-            formControlName="enableGraph"
-          ></mat-checkbox>
-        </div>
+                  <mat-icon [svgIcon]="icon"></mat-icon> {{ icon }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
 
-        <div class="row">
-          <mat-label>Name <mat-icon class="info-symbol" matTooltipClass="info-tooltip" fontSet="material-icons-outlined" matTooltip="Override default entity name" matTooltipPosition="right">info</mat-icon></mat-label>
-          <mat-form-field appearance="outline">
-            <input
-            matInput
-            placeholder="Humidity"
-            formControlName="name"
-            />
-          </mat-form-field>
-        </div>
-        
-        <div class="row">
-          <mat-label>State <mat-icon class="info-symbol" matTooltipClass="info-tooltip" fontSet="material-icons-outlined" matTooltip="Override default entity state" matTooltipPosition="right">info</mat-icon></mat-label>
-          <mat-form-field appearance="outline">
-            <input matInput formControlName="state" />
-          </mat-form-field>
-        </div>
-        
-        <mat-accordion>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>State Options</mat-panel-title>
+          <div class="row inline checkbox-field">
+            <mat-label
+              >Enable Graph
+              <mat-icon
+                class="info-symbol"
+                matTooltipClass="info-tooltip"
+                fontSet="material-icons-outlined"
+                matTooltip="Show entity history on right click"
+                matTooltipPosition="right"
+                >info</mat-icon
+              ></mat-label
+            >
+            <mat-checkbox
+              color="primary"
+              labelPosition="before"
+              formControlName="enableGraph"
+            ></mat-checkbox>
+          </div>
+
+          <div class="row">
+            <mat-label
+              >Name
+              <mat-icon
+                class="info-symbol"
+                matTooltipClass="info-tooltip"
+                fontSet="material-icons-outlined"
+                matTooltip="Override default entity name"
+                matTooltipPosition="right"
+                >info</mat-icon
+              ></mat-label
+            >
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="Humidity" formControlName="name" />
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <mat-label
+              >State
+              <mat-icon
+                class="info-symbol"
+                matTooltipClass="info-tooltip"
+                fontSet="material-icons-outlined"
+                matTooltip="Override default entity state"
+                matTooltipPosition="right"
+                >info</mat-icon
+              ></mat-label
+            >
+            <mat-form-field appearance="outline">
+              <input matInput formControlName="state" />
+            </mat-form-field>
+          </div>
+
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>State Options</mat-panel-title>
               </mat-expansion-panel-header>
 
               <div formGroupName="stateOptions">
                 <div class="row">
-                  <mat-label>Before String <mat-icon class="info-symbol" matTooltipClass="info-tooltip" fontSet="material-icons-outlined" matTooltip="Prepend to state string" matTooltipPosition="right">info</mat-icon></mat-label>
+                  <mat-label
+                    >Before String
+                    <mat-icon
+                      class="info-symbol"
+                      matTooltipClass="info-tooltip"
+                      fontSet="material-icons-outlined"
+                      matTooltip="Prepend to state string"
+                      matTooltipPosition="right"
+                      >info</mat-icon
+                    ></mat-label
+                  >
                   <mat-form-field appearance="outline">
-                    <input matInput formControlName="beforeString" placeholder="Humidity is " />
+                    <input
+                      matInput
+                      formControlName="beforeString"
+                      placeholder="Humidity is "
+                    />
                   </mat-form-field>
                 </div>
 
                 <div class="row">
-                  <mat-label>After String <mat-icon class="info-symbol" matTooltipClass="info-tooltip" fontSet="material-icons-outlined" matTooltip="Append to state string" matTooltipPosition="right">info</mat-icon></mat-label>
+                  <mat-label
+                    >After String
+                    <mat-icon
+                      class="info-symbol"
+                      matTooltipClass="info-tooltip"
+                      fontSet="material-icons-outlined"
+                      matTooltip="Append to state string"
+                      matTooltipPosition="right"
+                      >info</mat-icon
+                    ></mat-label
+                  >
                   <mat-form-field appearance="outline">
-                    <input matInput formControlName="afterString" placeholder="%" />
+                    <input
+                      matInput
+                      formControlName="afterString"
+                      placeholder="%"
+                    />
                   </mat-form-field>
                 </div>
 
                 <div class="row">
-                  <mat-label>Warning Expression <mat-icon class="info-symbol" matTooltipClass="info-tooltip" fontSet="material-icons-outlined" matTooltip="Displays as warning if condition is true" matTooltipPosition="right">info</mat-icon></mat-label>
+                  <mat-label
+                    >Warning Expression
+                    <mat-icon
+                      class="info-symbol"
+                      matTooltipClass="info-tooltip"
+                      fontSet="material-icons-outlined"
+                      matTooltip="Displays as warning if condition is true"
+                      matTooltipPosition="right"
+                      >info</mat-icon
+                    ></mat-label
+                  >
                   <mat-form-field appearance="outline">
-                    <input matInput formControlName="warningExpression" placeholder="!= 50" />
+                    <input
+                      matInput
+                      formControlName="warningExpression"
+                      placeholder="!= 50"
+                    />
                   </mat-form-field>
                 </div>
 
                 <div class="row">
-                  <mat-label>Danger Expression <mat-icon class="info-symbol" matTooltipClass="info-tooltip" fontSet="material-icons-outlined" matTooltip="Displays as danger if condition is true" matTooltipPosition="right">info</mat-icon></mat-label>
+                  <mat-label
+                    >Danger Expression
+                    <mat-icon
+                      class="info-symbol"
+                      matTooltipClass="info-tooltip"
+                      fontSet="material-icons-outlined"
+                      matTooltip="Displays as danger if condition is true"
+                      matTooltipPosition="right"
+                      >info</mat-icon
+                    ></mat-label
+                  >
                   <mat-form-field appearance="outline">
-                    <input matInput formControlName="dangerExpression" placeholder=">= 80" />
+                    <input
+                      matInput
+                      formControlName="dangerExpression"
+                      placeholder=">= 80"
+                    />
                   </mat-form-field>
                 </div>
 
                 <div class="row inline checkbox-field">
-                  <mat-label>Round <mat-icon class="info-symbol" matTooltipClass="info-tooltip" fontSet="material-icons-outlined" matTooltip="Round state to nearest whole number if applicable" matTooltipPosition="right">info</mat-icon></mat-label>
+                  <mat-label
+                    >Round
+                    <mat-icon
+                      class="info-symbol"
+                      matTooltipClass="info-tooltip"
+                      fontSet="material-icons-outlined"
+                      matTooltip="Round state to nearest whole number if applicable"
+                      matTooltipPosition="right"
+                      >info</mat-icon
+                    ></mat-label
+                  >
                   <mat-checkbox
                     color="primary"
                     labelPosition="before"

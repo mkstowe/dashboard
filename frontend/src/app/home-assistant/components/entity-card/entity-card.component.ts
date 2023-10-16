@@ -32,7 +32,12 @@ export class EntityCardComponent implements OnInit, OnDestroy {
   private notifier$ = new Subject<void>();
   private onStates = ['on', 'playing'];
 
-  constructor(private hassService: HassService, private auth: AuthService, private demoService: DemoHassService, public dialog: MatDialog) {}
+  constructor(
+    private hassService: HassService,
+    private auth: AuthService,
+    private demoService: DemoHassService,
+    public dialog: MatDialog
+  ) {}
 
   public ngOnDestroy(): void {
     this.notifier$.next();
@@ -95,15 +100,13 @@ export class EntityCardComponent implements OnInit, OnDestroy {
         },
       };
 
-      this.auth.isDemo$.pipe(
-        take(1)
-      ).subscribe((isDemo) => {
+      this.auth.isDemo$.pipe(take(1)).subscribe((isDemo) => {
         if (isDemo) {
           this.demoService.callService(msg);
         } else {
           this.hassService.callService(msg);
         }
-      })
+      });
     }
 
     if (this.card?.lock && !this.unlocked) {

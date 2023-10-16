@@ -7,7 +7,10 @@ app.use(bodyParser.json());
 
 const checkJwt = require("./jwt");
 app.use((req, res, next) => {
-  if (req.originalUrl.includes('/api/spotify/login') || req.originalUrl.includes('/api/spotify/callback')) {
+  if (
+    req.originalUrl.includes("/api/spotify/login") ||
+    req.originalUrl.includes("/api/spotify/callback")
+  ) {
     next();
   } else {
     checkJwt(req, res, next);

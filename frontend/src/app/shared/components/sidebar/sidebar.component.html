@@ -4,13 +4,27 @@
     <div class="date">{{ date | date : "EEEE MMMM d" }}</div>
   </div>
   <div class="weather">
-    {{ (isDemo$ | async) ? '75° and Sunny' : weather }}
+    {{ (isDemo$ | async) ? "75° and Sunny" : weather }}
   </div>
   <nav>
-    <a routerLink="/home" routerLinkActive="active" (click)="routeTo('/home')">Home</a>
-    <a routerLink="/music" routerLinkActive="active" (click)="routeTo('/music')">Music</a>
-    <a routerLink="/recipes" routerLinkActive="active" (click)="routeTo('/recipes')">Recipes</a>
-    <a routerLink="/plants" routerLinkActive="active" (click)="routeTo('/plants')">Plants</a>
+    <a routerLink="/home" routerLinkActive="active" (click)="routeTo('/home')"
+      >Home</a
+    >
+    <a routerLink="/music" routerLinkActive="active" (click)="routeTo('/music')"
+      >Music</a
+    >
+    <a
+      routerLink="/recipes"
+      routerLinkActive="active"
+      (click)="routeTo('/recipes')"
+      >Recipes</a
+    >
+    <a
+      routerLink="/plants"
+      routerLinkActive="active"
+      (click)="routeTo('/plants')"
+      >Plants</a
+    >
   </nav>
 
   <mat-expansion-panel
@@ -30,5 +44,14 @@
       </p>
     </div>
   </mat-expansion-panel>
-  <p class="logout" (click)="authService.logout({ logoutParams: { returnTo: document.location.origin } })">Logout</p>
+  <p
+    class="logout"
+    (click)="
+      authService.logout({
+        logoutParams: { returnTo: document.location.origin }
+      })
+    "
+  >
+    Logout
+  </p>
 </div>

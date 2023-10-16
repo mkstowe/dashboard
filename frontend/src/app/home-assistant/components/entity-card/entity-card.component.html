@@ -8,14 +8,16 @@
     *ngIf="card.type !== 'sensorCard'; else sensorCard"
   >
     <div class="entity-icon">
-      <mat-icon class="icon" 
-      [class.warn]="dangerLevel === dangerLevels.Warning"
-      [class.danger]="dangerLevel === dangerLevels.Danger"
-      svgIcon="{{ icon }}"></mat-icon>
+      <mat-icon
+        class="icon"
+        [class.warn]="dangerLevel === dangerLevels.Warning"
+        [class.danger]="dangerLevel === dangerLevels.Danger"
+        svgIcon="{{ icon }}"
+      ></mat-icon>
       <mat-icon
         class="icon-active"
         [class.warn]="dangerLevel === dangerLevels.Warning"
-      [class.danger]="dangerLevel === dangerLevels.Danger"
+        [class.danger]="dangerLevel === dangerLevels.Danger"
         *ngIf="isActive"
         svgIcon="{{ iconActive }}"
       ></mat-icon>

@@ -137,7 +137,6 @@ export class AddCardModalComponent implements OnInit {
       });
 
       if (this.card.type !== 'sensorCard') {
-
         this.entityForm.patchValue({
           entityId: this.card.entityId,
           icon: this.card.icon,
@@ -146,7 +145,7 @@ export class AddCardModalComponent implements OnInit {
           name: this.card.name,
           service: this.card.service,
           state: this.card.state,
-          stateOptions: this.card.stateOptions as string
+          stateOptions: this.card.stateOptions as string,
         });
       } else {
         this.isSensorCard = true;
@@ -160,7 +159,7 @@ export class AddCardModalComponent implements OnInit {
                 name: sensors[0].name,
                 state: sensors[0].state,
                 stateOptions: sensors[0].stateOptions,
-                enableGraph: sensors[0].enableGraph
+                enableGraph: sensors[0].enableGraph,
               },
             });
 
@@ -171,8 +170,8 @@ export class AddCardModalComponent implements OnInit {
                   icon: sensors[1].icon,
                   name: sensors[1].name,
                   state: sensors[1].state,
-                  stateOptions: sensors[1].stateOptions, 
-                enableGraph: sensors[1].enableGraph
+                  stateOptions: sensors[1].stateOptions,
+                  enableGraph: sensors[1].enableGraph,
                 },
               });
             }
@@ -252,7 +251,7 @@ export class AddCardModalComponent implements OnInit {
         name: this.sensorForm.value.sensor1.name,
         state: this.sensorForm.value.sensor1.state,
         stateOptions: this.sensorForm.value.sensor1.stateOptions,
-        enableGraph: this.sensorForm.value.sensor1.enableGraph
+        enableGraph: this.sensorForm.value.sensor1.enableGraph,
       };
 
       const sensor2Value = {
@@ -261,7 +260,7 @@ export class AddCardModalComponent implements OnInit {
         name: this.sensorForm.value.sensor2.name,
         state: this.sensorForm.value.sensor2.state,
         stateOptions: this.sensorForm.value.sensor2.stateOptions,
-        enableGraph: this.sensorForm.value.sensor2.enableGraph
+        enableGraph: this.sensorForm.value.sensor2.enableGraph,
       };
 
       if (this.card) {
