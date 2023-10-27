@@ -2,53 +2,62 @@
 
 .home-page {
   display: flex;
+
   width: 100%;
   height: 100%;
+
   background-color: $background;
 
   .home-dash {
     overflow: scroll;
     flex-grow: 1;
+
     padding: 50px;
 
     .group-grid {
-      $group-gap: 50px;
-
       display: flex;
-      flex-wrap: wrap;
-      gap: $group-gap;
       align-content: flex-start;
+      flex-wrap: wrap;
 
       width: 100%;
       height: 100%;
 
+      $group-gap: 50px;
+      gap: $group-gap;
+
       .group-header {
         display: flex;
         align-items: center;
+
         height: 50px;
         margin-bottom: 25px;
 
         .title {
+          text-align: center;
+
+          color: $foreground;
+
           font-size: 34px;
           font-weight: 600;
           line-height: 34px;
-          color: $foreground;
-          text-align: center;
         }
 
         .actions {
           display: flex;
           flex-grow: 1;
           justify-content: space-between;
+
           padding: 0 15px;
         }
       }
 
       .group {
         position: relative;
-        aspect-ratio: 1/1;
+
         width: calc(25% - ($group-gap * 3 / 4));
         padding: 25px;
+
+        aspect-ratio: 1/1;
 
         @media screen and (max-width: $three-col-break) {
           width: calc(33% - ($group-gap * 2 / 3));
@@ -80,4 +89,13 @@
       }
     }
   }
+}
+
+.spinner-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
 }

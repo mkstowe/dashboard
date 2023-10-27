@@ -7,9 +7,8 @@
   padding-bottom: 50px;
 
   color: $foreground;
-
-  background-color: $background;
   border-radius: 15px;
+  background-color: $background;
 
   .header {
     display: flex;
@@ -25,8 +24,6 @@
     }
 
     .power-btn {
-      cursor: pointer;
-
       position: relative;
 
       display: flex;
@@ -36,9 +33,10 @@
       width: 50px;
       height: 50px;
 
-      border-radius: 50%;
-
+      cursor: pointer;
       transition: $transition;
+
+      border-radius: 50%;
 
       &.active {
         color: $accent;
@@ -53,8 +51,8 @@
 
   .brightness {
     display: flex;
-    flex-direction: column;
     align-items: flex-start;
+    flex-direction: column;
 
     width: 100%;
     margin-top: 20px;
@@ -66,34 +64,38 @@
 
     .mat-mdc-slider {
       align-self: center;
+
       width: 100%;
+
       color: $accent;
     }
   }
 
   .color {
     display: flex;
-    gap: 25px;
     align-items: center;
 
     width: 100%;
     margin-top: 20px;
     padding: 0 20px;
 
+    gap: 25px;
+
     h3 {
       margin: 0;
     }
 
     input {
-      cursor: pointer;
-
-      aspect-ratio: 1/1;
       width: 30px;
 
-      font-size: 0;
+      cursor: pointer;
 
       border: 0;
       border-radius: 50%;
+
+      font-size: 0;
+
+      aspect-ratio: 1/1;
     }
 
     ::ng-deep color-picker {
@@ -117,12 +119,12 @@
             margin: 0;
             padding: 5px;
 
-            font-size: 14px;
             color: $background;
-
-            background-color: $foreground;
             border: 1px solid rgba($background, 0.5);
             border-radius: 8px;
+            background-color: $foreground;
+
+            font-size: 14px;
           }
         }
       }
@@ -131,6 +133,6 @@
 }
 
 mat-dialog-container .mat-mdc-dialog-surface {
-  background-color: $background !important;
   border-radius: 15px !important;
+  background-color: $background !important;
 }

@@ -2,13 +2,16 @@
 
 .playlist-wrapper {
   position: relative;
+
   width: 200px;
 
   .playlist-img img {
-    aspect-ratio: 1/1;
     width: 100%;
-    object-fit: cover;
+
     border-radius: 10px;
+
+    aspect-ratio: 1/1;
+    object-fit: cover;
   }
 
   .playlist-name {
@@ -18,14 +21,16 @@
     width: 100%;
     padding: 15px;
 
-    font-size: 20px;
-    color: $foreground;
     text-align: center;
 
-    background-color: rgba($background, 0.75);
-    backdrop-filter: blur(4px);
+    color: $foreground;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
+    background-color: rgba($background, 0.75);
+
+    font-size: 20px;
+
+    backdrop-filter: blur(4px);
   }
 
   &:hover {

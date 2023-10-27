@@ -9,13 +9,14 @@
   padding: 25px 50px;
 
   color: $foreground;
-  background-color: $background;
   border-radius: 15px;
+  background-color: $background;
 
   .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     margin-bottom: 10px;
   }
 
@@ -35,8 +36,8 @@
 }
 
 mat-dialog-container .mat-mdc-dialog-surface {
-  background-color: $background !important;
   border-radius: 15px !important;
+  background-color: $background !important;
 }
 
 .mdc-notched-outline__leading,

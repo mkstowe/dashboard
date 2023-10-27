@@ -17,6 +17,7 @@ import { RadioButtonComponent } from './components/dynamic-form/radio-button/rad
 import { SelectComponent } from './components/dynamic-form/select/select.component';
 import { DynamicFieldDirective } from './directives/dynamic-field.directive';
 import { RouterModule } from '@angular/router';
+import { LoadingPipe } from './pipes/loading.pipe';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { RouterModule } from '@angular/router';
     RadioButtonComponent,
     SelectComponent,
     DynamicFieldDirective,
+    LoadingPipe,
   ],
   imports: [
     CommonModule,
@@ -48,6 +50,7 @@ import { RouterModule } from '@angular/router';
     ColorPickerModule,
     ReactiveFormsModule,
     DateAgoPipe,
+    LoadingPipe,
     SidebarComponent,
     ConfirmationDialogComponent,
     DynamicFieldDirective,

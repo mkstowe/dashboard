@@ -1,22 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, EMPTY, expand, reduce } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { BehaviorSubject, EMPTY, expand, reduce, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService {
   private _recipesSource = new BehaviorSubject<any>(null);
+  private refetchSubject = new BehaviorSubject(null);
 
-  private headers = {
-    Authorization: `Bearer ${environment.mealieAccessToken}`,
-  };
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) {
-    this.getRecipes().subscribe((res) => {
-      this._recipesSource.next(res);
-    });
+  public get refetch() {
+    return this.refetchSubject.asObservable();
   }
 
   public get recipes() {
@@ -24,7 +20,9 @@ export class RecipeService {
   }
 
   public getRecipe(slug: string) {
-    return this.http.get(`/api/recipes/${slug}`);
+    return this.http
+      .get(`/api/recipes/${slug}`)
+      .pipe(tap(() => this.refetchSubject.next(null)));
   }
 
   public getRecipes() {

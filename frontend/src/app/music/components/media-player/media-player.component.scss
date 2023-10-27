@@ -2,15 +2,20 @@
 
 .player-wrapper {
   position: relative;
-  aspect-ratio: 1/1;
+
   width: 100%;
+
   border-radius: 25px;
 
+  aspect-ratio: 1/1;
+
   .cover-img img {
-    aspect-ratio: 1/1;
     width: 100%;
-    object-fit: cover;
+
     border-radius: 25px;
+
+    aspect-ratio: 1/1;
+    object-fit: cover;
   }
 
   .player-footer {
@@ -24,43 +29,49 @@
     padding: 20px;
 
     color: $foreground;
-
-    background-color: rgba($background, 0.75);
-    backdrop-filter: blur(4px);
     border-bottom-right-radius: 25px;
     border-bottom-left-radius: 25px;
+    background-color: rgba($background, 0.75);
+
+    backdrop-filter: blur(4px);
 
     .song-info {
       width: 100%;
       padding: 10px 0;
 
+      white-space: nowrap;
+
       font-size: 20px;
       font-weight: 500;
-      white-space: nowrap;
 
       p {
         overflow: hidden;
+
         margin: 0;
+
         text-overflow: ellipsis;
       }
     }
 
     .actions {
       display: flex;
-      gap: 50px;
       align-items: center;
       justify-content: space-between;
 
       margin-bottom: 20px;
 
+      gap: 50px;
+
       .controls {
         display: flex;
         flex-grow: 1;
-        gap: 30px;
         justify-content: center;
+
+        gap: 30px;
 
         mat-icon {
           cursor: pointer;
+
           font-size: 32px;
         }
       }
@@ -82,6 +93,7 @@
 
 .mat-mdc-progress-bar {
   height: 6px !important;
+
   border-radius: 10px;
 }
 

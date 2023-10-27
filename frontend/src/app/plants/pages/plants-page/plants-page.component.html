@@ -1,20 +1,28 @@
 <div class="plants-page">
-  <div class="dashboard plants-dash">
-    <div class="plant-grid">
-      <ng-container *ngFor="let plant of plants | async">
-        <app-plant-card
-          [id]="plant.id"
-          [name]="plant.name"
-          [scientificName]="plant.scientificName"
-          [lastWatered]="plant.lastWatered"
-          [lastFertilized]="plant.lastFertilized"
-          routerLink="{{ plant.id }}"
-        ></app-plant-card>
-      </ng-container>
-    </div>
+  <div class="dashboard plants-dash" *ngIf="plants | loading | async as obs">
+    <ng-template [ngIf]="obs.value">
+      <div class="plant-grid">
+        <ng-container *ngFor="let plant of obs.value">
+          <app-plant-card
+            [id]="plant.id"
+            [name]="plant.name"
+            [scientificName]="plant.scientificName"
+            [lastWatered]="plant.lastWatered"
+            [lastFertilized]="plant.lastFertilized"
+            routerLink="{{ plant.id }}"
+          ></app-plant-card>
+        </ng-container>
+      </div>
 
-    <button mat-fab color="primary" (click)="onAddPlant()">
-      <mat-icon>add</mat-icon>
-    </button>
+      <button mat-fab color="primary" (click)="onAddPlant()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </ng-template>
+
+    <ng-template [ngIf]="obs.loading">
+      <div class="spinner-wrapper">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+    </ng-template>
   </div>
 </div>

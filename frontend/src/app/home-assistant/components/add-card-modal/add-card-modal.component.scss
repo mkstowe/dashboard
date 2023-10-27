@@ -10,25 +10,27 @@
   padding: 25px 50px 50px 50px;
 
   color: $foreground;
-
-  background-color: $background;
   border-radius: 15px;
+  background-color: $background;
 
   .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     margin-bottom: 10px;
   }
 
   h3 {
-    font-size: 24px;
     padding-top: 20px;
+
+    font-size: 24px;
   }
 
   mat-dialog-content {
-    margin-bottom: 35px;
     flex-grow: 1;
+
+    margin-bottom: 35px;
 
     form {
       color: $foreground;
@@ -36,22 +38,26 @@
       .row {
         display: flex;
         flex-direction: column;
+
         width: 100%;
         margin-top: 15px;
 
         &.inline {
           flex-direction: row;
-          gap: 15px;
           justify-content: space-between;
+
           width: 50%;
           min-width: 320px;
-          margin-bottom: 20px;
           margin-top: 0;
+          margin-bottom: 20px;
+
+          gap: 15px;
 
           &.checkbox-field {
-            gap: 5px;
-            justify-content: flex-start;
             align-items: center;
+            justify-content: flex-start;
+
+            gap: 5px;
 
             mat-label {
               margin-bottom: 0 !important;
@@ -60,20 +66,22 @@
         }
 
         mat-label {
-          margin-bottom: 10px;
-          font-size: 20px;
-          font-weight: 600;
-
           display: flex;
           align-items: center;
+
+          margin-bottom: 10px;
+
+          font-size: 20px;
+          font-weight: 600;
 
           .required-symbol {
             color: $danger;
           }
 
           .info-symbol {
-            transform: scale(0.7);
             margin-left: 5px;
+
+            transform: scale(0.7);
           }
         }
 
@@ -124,9 +132,12 @@
 
         mat-panel-title {
           display: inline;
+
           margin-right: 0;
-          font-size: 18px;
+
           color: $foreground;
+
+          font-size: 18px;
         }
 
         .mat-expansion-indicator::after {
@@ -147,8 +158,9 @@
   mat-dialog-actions {
     display: flex;
     justify-content: space-between;
-    margin-top: 30px;
+
     height: 80px;
+    margin-top: 30px;
 
     button {
       padding: 25px 30px;
@@ -165,10 +177,12 @@
     .confirm-delete {
       margin: 0;
       margin-left: 20px;
+
       color: $danger;
 
       button {
         padding: 0;
+
         color: $danger;
       }
     }
@@ -178,14 +192,16 @@
     position: absolute;
     right: 0;
     bottom: -15px;
-    color: $danger;
+
     margin: 0;
+
+    color: $danger;
   }
 }
 
 mat-dialog-container .mat-mdc-dialog-surface {
-  background-color: $background !important;
   border-radius: 15px !important;
+  background-color: $background !important;
 }
 
 .mdc-notched-outline__leading,

@@ -18,6 +18,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSelectModule,
     MatAutocompleteModule,
     MatTooltipModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     MatButtonModule,
@@ -61,6 +63,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSelectModule,
     MatAutocompleteModule,
     MatTooltipModule,
+    MatProgressSpinnerModule,
   ],
   providers: [MatIconRegistry],
 })

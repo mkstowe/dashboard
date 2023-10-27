@@ -3,8 +3,6 @@
 .sensor-wrapper {
   position: relative;
 
-  container-name: card;
-  container-type: inline-size;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -14,15 +12,18 @@
   padding: 15px;
 
   color: $foreground;
-
   border: 2px solid rgba($foreground, 0.2);
   border-radius: 15px;
 
+  container-name: card;
+  container-type: inline-size;
+
   .entity-icon {
-    aspect-ratio: 1/1;
     width: 100px;
     height: 100px;
     margin: 0 5% 0 3%;
+
+    aspect-ratio: 1/1;
 
     .mat-icon {
       width: 100%;
@@ -40,15 +41,16 @@
 
   .info-wrapper {
     display: flex;
+    align-items: flex-end;
     flex-direction: column;
     flex-grow: 1;
-    align-items: flex-end;
     justify-content: center;
 
     text-align: right;
 
     .entity-name {
       margin-bottom: 5px;
+
       font-size: 24px;
       font-weight: 600;
     }

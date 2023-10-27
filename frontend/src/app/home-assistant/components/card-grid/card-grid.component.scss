@@ -1,26 +1,30 @@
 .card-grid {
-  $card-gap: 15px;
-
   display: flex;
-  flex-wrap: wrap;
-  gap: $card-gap;
   align-items: flex-start;
+  flex-wrap: wrap;
 
-  aspect-ratio: 1/1;
   width: 100%;
+
+  $card-gap: 15px;
+  gap: $card-gap;
+  aspect-ratio: 1/1;
 
   app-entity-card,
   app-light-card,
   app-sensor-group {
     display: block;
-    aspect-ratio: 1/1;
+
     width: calc(50% - $card-gap/2);
+
+    aspect-ratio: 1/1;
   }
 
   .card {
     display: block;
-    aspect-ratio: 1/1;
+
     width: calc(50% - $card-gap/2);
+
+    aspect-ratio: 1/1;
 
     app-light-card,
     app-entity-card,

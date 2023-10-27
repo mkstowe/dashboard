@@ -1,31 +1,42 @@
 <div class="recipe-page">
-  <div class="dashboard recipe-dash">
-    <div class="recipe-grid">
-      <ng-container
-        *ngFor="
-          let recipe of (allRecipes | async)?.slice(
-            (page - 1) * pageSize,
-            (page - 1) * pageSize + pageSize
-          );
-          trackBy: trackRecipe
-        "
-      >
-        <app-recipe-card
-          [id]="recipe.id"
-          [name]="recipe.name"
-          [summary]="recipe.description"
-          [slug]="recipe.slug"
-          [hasImage]="recipe.image && recipe.image !== 'no image'"
-          [routerLink]="[recipe.slug]"
-        ></app-recipe-card>
-      </ng-container>
-      <mat-paginator
-        [length]="(allRecipes | async)?.length"
-        [pageSizeOptions]="pageSizeOptions"
-        [pageSize]="pageSize"
-        (page)="onPage($event)"
-        [showFirstLastButtons]="true"
-      ></mat-paginator>
-    </div>
+  <div
+    class="dashboard recipe-dash"
+    *ngIf="allRecipes | loading | async as obs"
+  >
+    <ng-template [ngIf]="obs.value">
+      <div class="recipe-grid">
+        <ng-container
+          *ngFor="
+            let recipe of obs.value?.slice(
+              (page - 1) * pageSize,
+              (page - 1) * pageSize + pageSize
+            );
+            trackBy: trackRecipe
+          "
+        >
+          <app-recipe-card
+            [id]="recipe.id"
+            [name]="recipe.name"
+            [summary]="recipe.description"
+            [slug]="recipe.slug"
+            [hasImage]="recipe.image && recipe.image !== 'no image'"
+            [routerLink]="[recipe.slug]"
+          ></app-recipe-card>
+        </ng-container>
+        <mat-paginator
+          [length]="(allRecipes | async)?.length"
+          [pageSizeOptions]="pageSizeOptions"
+          [pageSize]="pageSize"
+          (page)="onPage($event)"
+          [showFirstLastButtons]="true"
+        ></mat-paginator>
+      </div>
+    </ng-template>
+
+    <ng-template [ngIf]="obs.loading">
+      <div class="spinner-wrapper">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+    </ng-template>
   </div>
 </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
-import { BehaviorSubject, Observable, take } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
@@ -20,7 +20,11 @@ export class RecipePageComponent implements OnInit {
   constructor(private recipeService: RecipeService) {}
 
   public ngOnInit(): void {
-    this.allRecipes = this.recipeService.recipes;
+    this.allRecipes = this.recipeService.refetch.pipe(
+      switchMap(() => {
+        return this.recipeService.getRecipes();
+      })
+    ) as Observable<any[]>;
   }
 
   public onPage($event: PageEvent) {

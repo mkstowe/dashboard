@@ -7,9 +7,8 @@
   padding-bottom: 50px;
 
   color: $foreground;
-
-  background-color: $background;
   border-radius: 15px;
+  background-color: $background;
 
   .header {
     display: flex;
@@ -25,8 +24,6 @@
     }
 
     .power-btn {
-      cursor: pointer;
-
       position: relative;
 
       display: flex;
@@ -36,9 +33,10 @@
       width: 50px;
       height: 50px;
 
-      border-radius: 50%;
-
+      cursor: pointer;
       transition: $transition;
+
+      border-radius: 50%;
 
       &.active {
         color: $accent;
@@ -53,16 +51,16 @@
 
   .fan-controls {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    flex-direction: column;
     justify-content: center;
 
     width: 100%;
 
     .speed {
       display: flex;
-      flex-direction: column;
       align-items: flex-start;
+      flex-direction: column;
 
       width: 100%;
       margin-top: 20px;
@@ -75,15 +73,14 @@
 
       .speed-buttons {
         display: flex;
-        gap: 50px;
         align-items: center;
         justify-content: center;
 
         width: 100%;
 
-        .speed-btn {
-          cursor: pointer;
+        gap: 50px;
 
+        .speed-btn {
           display: flex;
           align-items: center;
           justify-content: center;
@@ -91,9 +88,10 @@
           width: 40px;
           height: 40px;
 
-          border-radius: 50%;
-
+          cursor: pointer;
           transition: $transition;
+
+          border-radius: 50%;
 
           &:hover {
             color: $accent;
@@ -104,33 +102,37 @@
 
       .mat-mdc-slider {
         align-self: center;
+
         width: 100%;
+
         color: $accent;
       }
     }
 
     .oscillation {
       display: flex;
+
       width: 100%;
       padding: 0 20px;
       padding-top: 30px;
 
       .row {
         display: flex;
-        gap: 40px;
         align-items: center;
+
         width: 100%;
+
+        gap: 40px;
 
         .direction-controls {
           display: flex;
-          flex-grow: 1;
-          gap: 25px;
           align-items: center;
+          flex-grow: 1;
           justify-content: flex-end;
 
-          .direction-btn {
-            cursor: pointer;
+          gap: 25px;
 
+          .direction-btn {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -138,9 +140,10 @@
             width: 40px;
             height: 40px;
 
-            border-radius: 50%;
-
+            cursor: pointer;
             transition: transition;
+
+            border-radius: 50%;
 
             &:hover {
               color: $accent;
@@ -153,16 +156,15 @@
 
     .modes {
       display: flex;
-      gap: 50px;
       align-items: center;
       justify-content: center;
 
       width: 100%;
       margin-top: 50px;
 
-      .mode-btn {
-        cursor: pointer;
+      gap: 50px;
 
+      .mode-btn {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -171,9 +173,10 @@
         height: 75px;
         padding: 15px;
 
-        border-radius: 50%;
-
+        cursor: pointer;
         transition: $transition;
+
+        border-radius: 50%;
 
         mat-icon {
           width: 100%;
@@ -191,6 +194,7 @@
     .separator {
       width: 90%;
       height: 2px;
+
       border-bottom: 2px solid rgba($foreground, 0.2);
     }
   }
@@ -198,6 +202,7 @@
 
 mat-dialog-container .mat-mdc-dialog-surface {
   max-width: 1300px !important;
-  background-color: $background !important;
+
   border-radius: 15px !important;
+  background-color: $background !important;
 }

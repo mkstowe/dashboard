@@ -1,13 +1,13 @@
 .sensor-group-wrapper {
-  $group-gap: 10px;
-
   display: flex;
-  flex-direction: column;
-  gap: $group-gap;
   align-items: flex-start;
+  flex-direction: column;
 
   width: 100%;
   height: 100%;
+
+  $group-gap: 10px;
+  gap: $group-gap;
 
   app-sensor {
     width: 100%;

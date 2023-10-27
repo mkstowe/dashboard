@@ -2,29 +2,35 @@
 
 .plants-page {
   display: flex;
+
   width: 100%;
   height: 100%;
+
   background-color: $background;
 
   .plants-dash {
     flex-grow: 1;
 
     .plant-grid {
-      overflow: scroll;
       display: flex;
-      flex-wrap: wrap;
-      gap: 50px;
+      overflow: scroll;
       align-content: flex-start;
+      flex-wrap: wrap;
 
       width: 100%;
       height: 100%;
       padding: 50px;
 
+      gap: 50px;
+
       app-plant-card {
-        cursor: pointer;
         display: block;
-        aspect-ratio: 1/1;
+
         width: 300px;
+
+        cursor: pointer;
+
+        aspect-ratio: 1/1;
       }
     }
 
@@ -41,4 +47,13 @@
       }
     }
   }
+}
+
+.spinner-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
 }
