@@ -74,6 +74,11 @@ export class HassService {
       .pipe(tap(() => this.refetchSubject.next(null)));
   }
 
+  public reorderGroups(groups: any) {
+    return this.http.post(`/api/hass/groups/reorder`, groups)
+    .pipe(tap(() => this.refetchSubject.next(null)));
+  }
+
   public getAllCards() {
     return this.http.get<Card[]>(`/api/hass/cards`);
   }

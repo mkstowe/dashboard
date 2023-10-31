@@ -4,8 +4,9 @@ import { HassService } from '../../services/hass.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCardModalComponent } from '../../components/add-card-modal/add-card-modal.component';
 import { AddGroupModalComponent } from '../../components/add-group-modal/add-group-modal.component';
-import { Observable, defaultIfEmpty, forkJoin, map, switchMap } from 'rxjs';
+import { Observable, defaultIfEmpty, forkJoin, map, switchMap, take } from 'rxjs';
 import { Card } from '../../models/card';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-home-page',
@@ -78,5 +79,19 @@ export class HomePageComponent implements OnInit {
         group,
       },
     });
+  }
+
+  public onDrop(event: any) {
+    if (event.previousContainer === event.container) {
+      if (event.previousIndex === event.currentIndex) return;
+      moveItemInArray(event.container.data,
+        event.previousIndex, event.currentIndex);
+
+        const groups = event.container.data.map((item: any, idx: number) => {
+          return { id: item.id, index: idx };
+        })
+
+        this.hassService.reorderGroups(groups).pipe(take(1)).subscribe();
+    }
   }
 }

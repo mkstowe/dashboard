@@ -19,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatAutocompleteModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
+    DragDropModule
   ],
   exports: [
     MatButtonModule,
@@ -64,6 +66,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatAutocompleteModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
+    DragDropModule
   ],
   providers: [MatIconRegistry],
 })

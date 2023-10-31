@@ -18,6 +18,7 @@ router.get("/groups", async (req, res) => {
   knex("hassGroup")
     .where({ userId })
     .select("*")
+    .orderBy('index', 'asc')
     .then((groups) => {
       res.status(200).json(groups);
     })
@@ -47,6 +48,9 @@ router.get("/group/:id", async (req, res, next) => {
 router.post("/group", async (req, res) => {
   const userId = req.auth.payload.sub;
   const group = req.body;
+
+  const maxIdx = await knex('hassGroup').max('index').where({ userId }).first();
+  group.index = maxIdx.max !== null ? Number(maxIdx.max) + 1 : 0;
 
   knex("hassGroup")
     .insert({ ...group, userId })
@@ -93,6 +97,22 @@ router.delete("/group/:id", async (req, res) => {
     });
 });
 
+// Reorder groups
+router.post("/groups/reorder", async (req, res) => {
+  const userId = req.auth.payload.sub;
+  const groups = req.body;
+
+  knex.transaction((transaction) => {
+    const queries = [];
+    groups.forEach((group) => {
+      const query = knex("hassGroup").where({ userId, id: group.id }).update({ index: group.index }).transacting(transaction);
+      queries.push(query);
+    });
+
+    Promise.all(queries).then(transaction.commit).catch(transaction.rollback);
+  })
+})
+
 // Get cards
 router.get("/cards", async (req, res) => {
   const userId = req.auth.payload.sub;
@@ -101,6 +121,7 @@ router.get("/cards", async (req, res) => {
   knex("hassCard")
     .where({ userId, group })
     .select("*")
+    .orderBy('index', 'asc')
     .then((cards) => {
       res.status(200).json(cards);
     })
@@ -200,6 +221,7 @@ router.get("/sensors", async (req, res) => {
   knex("hassSensor")
     .where({ userId, card })
     .select("*")
+    .orderBy('index', 'asc')
     .then((sensors) => {
       res.status(200).json(sensors);
     })
