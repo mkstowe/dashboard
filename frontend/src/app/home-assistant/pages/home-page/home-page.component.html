@@ -1,15 +1,8 @@
 <div class="home-page">
   <div class="dashboard home-dash" *ngIf="groups | loading | async as obs">
     <ng-template [ngIf]="obs.value">
-      <div class="group-grid" cdkDropList #groupList="cdkDropList" [cdkDropListData]="obs.value" (cdkDropListDropped)="onDrop($event)">
-        <div class="group" [class.edit]="editMode" *ngFor="let group of obs.value" cdkDrag cdkDragBoundary=".group-grid" [cdkDragDisabled]="!editMode">
-          <div class="drag-drop-placeholder" *cdkDragPlaceholder></div>
-          <div class="drag-drop-preview" *cdkDragPreview="">
-            {{ group.title }}
-          </div>
-          <div class="drag-drop-handle" cdkDragHandle *ngIf="editMode">
-            <mat-icon>drag_handle</mat-icon>
-          </div>
+      <div class="group-grid">
+        <div class="group" [class.edit]="editMode" *ngFor="let group of obs.value">
           <div class="group-header">
             <div class="title">{{ group.title }}</div>
             <div class="actions">
