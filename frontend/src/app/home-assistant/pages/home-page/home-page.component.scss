@@ -64,6 +64,10 @@
           border: 2px dotted rgba($foreground, 0.25);
         }
 
+        &.placeholder {
+          background-color: rgba($foreground, 0.1);
+        }
+
         @media screen and (max-width: $three-col-break) {
           width: calc(33% - ($group-gap * 2 / 3));
         }
@@ -74,6 +78,10 @@
 
         @media screen and (max-width: $one-col-break) {
           width: 100%;
+
+          &.placeholder {
+            height: 100px;
+          }
         }
       }
     }
@@ -94,6 +102,15 @@
       }
     }
   }
+}
+
+.dndDragging {
+  background-color: rgba($foreground, 0.2);
+  height: 100px;
+}
+
+.dndDraggingSource {
+  display: none;
 }
 
 .spinner-wrapper {

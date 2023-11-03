@@ -1,8 +1,20 @@
 <div class="home-page">
   <div class="dashboard home-dash" *ngIf="groups | loading | async as obs">
     <ng-template [ngIf]="obs.value">
-      <div class="group-grid">
-        <div class="group" [class.edit]="editMode" *ngFor="let group of obs.value">
+      <div class="group-grid" (dndDrop)="onDrop($event, obs.value)" dndDropzone>
+        <div class="group placeholder" dndPlaceholderRef></div>
+        <div
+          class="group"
+          [class.edit]="editMode"
+          *ngFor="let group of obs.value"
+          [dndDraggable]="group"
+          (dndCanceled)="onDragged(group, obs.value, 'none')"
+          (dndCopied)="onDragged(group, obs.value, 'copy')"
+          (dndLinked)="onDragged(group, obs.value, 'link')"
+          (dndMoved)="onDragged(group, obs.value, 'move')"
+          (dndStart)="onDragStart($event, group, obs.value)"
+          dndEffectAllowed="move"
+        >
           <div class="group-header">
             <div class="title">{{ group.title }}</div>
             <div class="actions">

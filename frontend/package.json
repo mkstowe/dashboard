@@ -35,6 +35,7 @@
     "moment": "^2.29.4",
     "ng2-charts": "5.0.3",
     "ngx-color-picker": "^14.0.0",
+    "ngx-drag-drop": "^16.1.0",
     "prettier": "^2.5.1",
     "rfs": "^10.0.0",
     "rxjs": "~7.8.0",

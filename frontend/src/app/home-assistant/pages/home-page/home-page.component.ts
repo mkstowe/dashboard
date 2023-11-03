@@ -6,6 +6,7 @@ import { AddCardModalComponent } from '../../components/add-card-modal/add-card-
 import { AddGroupModalComponent } from '../../components/add-group-modal/add-group-modal.component';
 import { Observable, defaultIfEmpty, forkJoin, map, switchMap, take } from 'rxjs';
 import { Card } from '../../models/card';
+import { DndDropEvent, DropEffect } from 'ngx-drag-drop';
 
 @Component({
   selector: 'app-home-page',
@@ -78,5 +79,35 @@ export class HomePageComponent implements OnInit {
         group,
       },
     });
+  }
+
+  onDragStart(event: any, item: any, list: any[]) {
+    // console.log("start")
+    // const index = list.indexOf(item);
+    // console.log(ind /ex)
+    // list.splice(index, 1);
+  }
+
+  onDragged(item: any, list: any[], effect: DropEffect) {
+    if (effect === 'move') {
+      const index = list.indexOf(item);
+      list.splice(index, 1);
+    }
+  }
+
+  onDrop(event: DndDropEvent, list: any[]) {
+    if (list && (event.dropEffect === 'copy' || event.dropEffect === 'move')) {
+      let index = event.index;
+      if (typeof index === 'undefined') {
+        index = list.length;
+      }
+
+      list.splice(index, 0, event.data);
+      
+      const groups = list.map((item: any, idx: number) => {
+        return { id: item.id, index: idx }
+      });
+      this.hassService.reorderGroups(groups).pipe(take(1)).subscribe();
+    }
   }
 }

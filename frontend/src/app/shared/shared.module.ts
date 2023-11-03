@@ -18,6 +18,7 @@ import { SelectComponent } from './components/dynamic-form/select/select.compone
 import { DynamicFieldDirective } from './directives/dynamic-field.directive';
 import { RouterModule } from '@angular/router';
 import { LoadingPipe } from './pipes/loading.pipe';
+import { DndModule } from 'ngx-drag-drop';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { LoadingPipe } from './pipes/loading.pipe';
     NgChartsModule,
     ReactiveFormsModule,
     RouterModule,
+    DndModule
   ],
   exports: [
     MaterialModule,
@@ -55,6 +57,7 @@ import { LoadingPipe } from './pipes/loading.pipe';
     ConfirmationDialogComponent,
     DynamicFieldDirective,
     DynamicFormComponent,
+    DndModule
   ],
 })
 export class SharedModule {}
