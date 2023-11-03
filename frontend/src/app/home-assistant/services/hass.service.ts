@@ -109,6 +109,11 @@ export class HassService {
       .pipe(tap(() => this.refetchSubject.next(null)));
   }
 
+  public reorderCards(cards: any) {
+    return this.http.post(`/api/hass/cards/reorder`, cards)
+    .pipe(tap(() => this.refetchSubject.next(null)));
+  }
+
   public getSensorsByCard(cardId: number) {
     return this.http.get(`/api/hass/sensors?card=${cardId}`);
   }

@@ -107,6 +107,7 @@ export class HomePageComponent implements OnInit {
       const groups = list.map((item: any, idx: number) => {
         return { id: item.id, index: idx }
       });
+      
       this.hassService.reorderGroups(groups).pipe(take(1)).subscribe();
     }
   }

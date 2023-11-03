@@ -81,6 +81,15 @@
       }
     }
 
+    .drag-handle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      transform: scale(1.2);
+    }
+
     .name-state {
       .entity-name {
         margin-bottom: 5px;

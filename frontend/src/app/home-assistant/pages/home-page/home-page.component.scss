@@ -32,6 +32,17 @@
         height: 50px;
         margin-bottom: 25px;
 
+        .drag-handle {
+          display: flex;
+          align-items: center;
+
+          margin-right: 20px;
+
+          transform: scale(1.2);
+
+          color: $foreground;
+        }
+
         .title {
           text-align: center;
 
@@ -45,7 +56,6 @@
         .actions {
           display: flex;
           flex-grow: 1;
-          // justify-content: space-between;
 
           padding: 0 15px;
         }
@@ -58,8 +68,9 @@
         padding: 25px;
 
         border-radius: 10px;
+
         aspect-ratio: 1/1;
-        
+
         &.edit {
           border: 2px dotted rgba($foreground, 0.25);
         }
@@ -105,8 +116,11 @@
 }
 
 .dndDragging {
-  background-color: rgba($foreground, 0.2);
+  overflow: hidden;
+
   height: 100px;
+
+  background-color: rgba($foreground, 0.2);
 }
 
 .dndDraggingSource {

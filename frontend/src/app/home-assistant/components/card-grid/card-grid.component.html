@@ -1,8 +1,26 @@
 <!-- <ng-content></ng-content> -->
 
 <!-- <mat-paginator [length]="10" [pageSize]="4" (page)="onPage()"></mat-paginator> -->
-<div class="card-grid" (swipe)="onSwipe($event)">
-  <div class="card" *ngFor="let card of currCards">
+<div
+  class="card-grid"
+  (swipe)="onSwipe($event)"
+  (dndDrop)="onDrop($event, currCards)"
+  [dndDropzone]="['card']"
+>
+  <div class="card placeholder" dndPlaceholderRef></div>
+  <div
+    class="card"
+    *ngFor="let card of currCards"
+    [dndDraggable]="card"
+    dndType="card"
+    (dndCanceled)="onDragged(card, currCards, 'none')"
+    (dndCopied)="onDragged(card, currCards, 'copy')"
+    (dndLinked)="onDragged(card, currCards, 'link')"
+    (dndMoved)="onDragged(card, currCards, 'move')"
+    (dndStart)="onDragStart($event, card, currCards)"
+    [dndDisableDragIf]="!editMode"
+    dndEffectAllowed="move"
+  >
     <ng-container [ngSwitch]="card.type">
       <app-entity-card
         *ngSwitchCase="'entityCard'"
