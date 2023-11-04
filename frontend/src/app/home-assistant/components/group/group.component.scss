@@ -33,6 +33,8 @@
         transform: scale(1.2);
         color: $foreground;
         margin-right: 20px;
+        z-index: 999;
+        cursor: move;
       }
     }
 

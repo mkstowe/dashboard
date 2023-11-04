@@ -1,0 +1,8 @@
+@import "../../../../../assets/scss/variables";
+
+.sensor-card-wrapper {
+    &.edit {
+        border: 2px dotted rgba($foreground, 0.25);
+        border-radius: 10px;
+    }
+}

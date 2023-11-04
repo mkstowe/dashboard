@@ -65,6 +65,10 @@
 
         color: $accent;
       }
+
+      &.edit {
+        top: 50px;
+      }
     }
 
     .lock-icon {
@@ -79,15 +83,6 @@
       &.unlocked {
         opacity: 0;
       }
-    }
-
-    .drag-handle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      display: flex;
-      align-items: center;
-      transform: scale(1.2);
     }
 
     .name-state {
@@ -132,6 +127,10 @@
     $gap: 10px;
     gap: $gap;
 
+    &.edit {
+      padding: 50px 10px 10px;
+    }
+
     app-sensor {
       width: 100%;
       height: calc(50% - $gap/2);
@@ -140,17 +139,31 @@
 
   .edit-actions {
     position: absolute;
-    right: 10px;
-    bottom: 10px;
-
+    top: 0;
+    width: 100%;
+    padding: 10px 10px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 999;
+    
     button {
       width: 35px;
       height: 35px;
-      margin-left: 15px;
+      cursor: pointer;
+      padding: 0px;
 
       mat-icon {
         transform: scale(0.8);
       }
+    }
+
+    .drag-handle {
+      display: flex;
+      align-items: center;
+      transform: scale(1.2);
+      cursor: move;
+      margin-left: 5px;
     }
   }
 }

@@ -115,7 +115,7 @@ export class HassService {
   }
 
   public getSensorsByCard(cardId: number) {
-    return this.http.get(`/api/hass/sensors?card=${cardId}`);
+    return this.http.get<any[]>(`/api/hass/sensors?card=${cardId}`);
   }
 
   public createSensor(sensor: any) {

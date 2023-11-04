@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DangerLevel, HassService } from '../../services/hass.service';
-import { Subject, take, takeUntil } from 'rxjs';
+import { Observable, Subject, switchMap, take, takeUntil } from 'rxjs';
 import { HassEntity } from 'home-assistant-js-websocket';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCardModalComponent } from '../add-card-modal/add-card-modal.component';
@@ -23,7 +23,7 @@ export class EntityCardComponent implements OnInit, OnDestroy {
   public iconActive: string;
   public isActive: boolean;
   public unlocked: boolean;
-  public sensors: any[];
+  public sensors: Observable<any[]>;
   public editMode = false;
   public dangerLevel: DangerLevel = DangerLevel.Normal;
   public dangerLevels = DangerLevel;
@@ -82,7 +82,9 @@ export class EntityCardComponent implements OnInit, OnDestroy {
       this.hasAction = true;
     }
 
-    this.sensors = this.card?.sensors;
+    this.sensors = this.hassService.refetch.pipe(switchMap(() => {
+      return this.hassService.getSensorsByCard(this.card.id);
+    }))
   }
 
   public onButtonClick($event: Event) {

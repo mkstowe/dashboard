@@ -1,13 +1,22 @@
 <div class="card-wrapper">
+  <div class="edit-actions" *ngIf="editMode">
+    <div class="drag-handle" dndHandle>
+      <mat-icon>drag_handle</mat-icon>
+    </div>
+    <button mat-icon-button color="primary" (click)="editCard()">
+      <mat-icon>edit</mat-icon>
+    </button>
+
+  </div>
   <div
-    class="card"
-    [class.active]="isActive"
-    [class.has-action]="hasAction"
-    [class.edit-mode]="editMode"
-    (click)="onButtonClick($event)"
-    *ngIf="card.type !== 'sensorCard'; else sensorCard"
+  class="card"
+  [class.active]="isActive"
+  [class.has-action]="hasAction"
+  [class.edit-mode]="editMode"
+  (click)="onButtonClick($event)"
+  *ngIf="card.type !== 'sensorCard'; else sensorCard"
   >
-  <div class="entity-icon">
+  <div class="entity-icon" [class.edit]="editMode">
     <mat-icon
     class="icon"
     [class.warn]="dangerLevel === dangerLevels.Warning"
@@ -25,9 +34,6 @@
   <div class="lock-icon" *ngIf="card?.lock && !editMode" [class.unlocked]="unlocked">
     <mat-icon svgIcon="lock"></mat-icon>
   </div>
-  <div class="drag-handle" *ngIf="editMode" dndHandle>
-    <mat-icon>drag_handle</mat-icon>
-  </div>
   <div class="name-state">
     <div class="entity-name">{{ entityName }}</div>
     <div class="entity-state">{{ entityState }}</div>
@@ -35,16 +41,10 @@
   </div>
 
   <ng-template #sensorCard>
-    <div class="sensor-group" [class.edit-mode]="editMode">
-      <ng-container *ngFor="let sensor of card.sensors">
+    <div class="sensor-group" [class.edit]="editMode">
+      <ng-container *ngFor="let sensor of sensors | async">
         <app-sensor [sensorOptions]="sensor"></app-sensor>
       </ng-container>
     </div>
   </ng-template>
-
-  <div class="edit-actions">
-    <button mat-fab color="primary" *ngIf="editMode" (click)="editCard()">
-      <mat-icon>edit</mat-icon>
-    </button>
-  </div>
 </div>
