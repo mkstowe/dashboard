@@ -1,0 +1,77 @@
+@import "../../../../assets/scss/variables";
+
+.group-wrapper {
+  width: 100%;
+  height: 100%;
+
+  .group {
+    .group-header {
+      display: flex;
+      align-items: center;
+
+      height: 50px;
+      margin-bottom: 25px;
+
+      .title {
+        text-align: center;
+        color: $foreground;
+
+        font-size: 34px;
+        font-weight: 600;
+        line-height: 34px;
+      }
+
+      .actions {
+        display: flex;
+        flex-grow: 1;
+        padding: 0 15px;
+      }
+
+      .drag-handle {
+        display: flex;
+        align-items: center;
+        transform: scale(1.2);
+        color: $foreground;
+        margin-right: 20px;
+      }
+    }
+
+    $card-gap: 15px;
+    position: relative;
+
+    width: 100%;
+    padding: 25px;
+
+    border-radius: 10px;
+
+    .card-grid {
+      gap: $card-gap;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    &.edit {
+      border: 2px dotted rgba($foreground, 0.25);
+    }
+
+    .card {
+      display: block;
+      width: calc(50% - $card-gap / 2);
+      border-radius: 10px;
+
+      aspect-ratio: 1/1;
+
+      &.placeholder {
+        background-color: rgba($foreground, 0.1);
+      }
+    }
+  }
+}
+
+.dndDragging {
+  background-color: rgba($foreground, 0.2);
+}
+
+.dndDraggingSource {
+  display: none !important;
+}

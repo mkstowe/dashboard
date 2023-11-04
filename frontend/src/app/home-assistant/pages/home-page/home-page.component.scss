@@ -25,51 +25,13 @@
       $group-gap: 50px;
       gap: $group-gap;
 
-      .group-header {
-        display: flex;
-        align-items: center;
-
-        height: 50px;
-        margin-bottom: 25px;
-
-        .drag-handle {
-          display: flex;
-          align-items: center;
-
-          margin-right: 20px;
-
-          transform: scale(1.2);
-
-          color: $foreground;
-        }
-
-        .title {
-          text-align: center;
-
-          color: $foreground;
-
-          font-size: 34px;
-          font-weight: 600;
-          line-height: 34px;
-        }
-
-        .actions {
-          display: flex;
-          flex-grow: 1;
-
-          padding: 0 15px;
-        }
-      }
 
       .group {
         position: relative;
 
         width: calc(25% - ($group-gap * 3 / 4));
-        padding: 25px;
 
         border-radius: 10px;
-
-        aspect-ratio: 1/1;
 
         &.edit {
           border: 2px dotted rgba($foreground, 0.25);

@@ -14,10 +14,8 @@ const defaultError = 'Something went wrong';
 })
 export class LoadingPipe implements PipeTransform {
   transform<T = any>(val: Observable<T>): Observable<ObsWithStatusResult<T>> {
-    console.log(val);
     return val.pipe(
       map((value: any) => {
-        console.log(value);
         return {
           loading: value.type === 'start',
           error: value.type === 'error' ? defaultError : '',

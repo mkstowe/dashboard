@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardGridComponent } from './components/card-grid/card-grid.component';
 import { EntityCardComponent } from './components/entity-card/entity-card.component';
 import { LightDetailComponent } from './components/light-detail/light-detail.component';
 import { SensorComponent } from './components/sensor/sensor.component';
@@ -19,10 +18,10 @@ import { FanDetailComponent } from './components/fan-detail/fan-detail.component
 import { AddCardModalComponent } from './components/add-card-modal/add-card-modal.component';
 import { AddGroupModalComponent } from './components/add-group-modal/add-group-modal.component';
 import { SensorCardComponent } from './components/entity-card/sensor-card/sensor-card.component';
+import { GroupComponent } from './components/group/group.component';
 
 @NgModule({
   declarations: [
-    CardGridComponent,
     EntityCardComponent,
     LightCardComponent,
     LightDetailComponent,
@@ -39,6 +38,7 @@ import { SensorCardComponent } from './components/entity-card/sensor-card/sensor
     AddCardModalComponent,
     AddGroupModalComponent,
     SensorCardComponent,
+    GroupComponent,
   ],
   imports: [CommonModule, SharedModule, MusicModule],
   exports: [HomePageComponent],

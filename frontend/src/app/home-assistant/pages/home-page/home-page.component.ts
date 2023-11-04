@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CardGroup } from '../../models/card-group';
 import { HassService } from '../../services/hass.service';
 import { MatDialog } from '@angular/material/dialog';
-import { AddCardModalComponent } from '../../components/add-card-modal/add-card-modal.component';
 import { AddGroupModalComponent } from '../../components/add-group-modal/add-group-modal.component';
-import { Observable, defaultIfEmpty, forkJoin, map, switchMap, take } from 'rxjs';
+import { Observable, switchMap, take } from 'rxjs';
 import { Card } from '../../models/card';
 import { DndDropEvent, DropEffect } from 'ngx-drag-drop';
 
@@ -27,25 +26,11 @@ export class HomePageComponent implements OnInit {
       this.editMode = res;
     });
 
-    const groups$ = this.hassService.getAllGroups();
-    const groupsWithCards$ = groups$.pipe(
-      switchMap((groups: any) => {
-        const cardObservables = groups.map((group: any) => {
-          return this.hassService
-            .getCardsByGroup(group.id)
-            .pipe(map((cards) => ({ ...group, cards })));
-        });
-
-        return forkJoin(cardObservables);
-      }),
-      defaultIfEmpty([])
-    );
-
     this.groups = this.hassService.refetch.pipe(
       switchMap(() => {
-        return groupsWithCards$;
+        return this.hassService.getAllGroups();
       })
-    ) as Observable<CardGroup[]>;
+    );
   }
 
   public toggleSidebar() {
@@ -56,43 +41,29 @@ export class HomePageComponent implements OnInit {
     this.hassService.setEditMode(!this.editMode);
   }
 
-  public onAddGroup(group?: any) {
+  public onAddGroup() {
     this.dialog.open(AddGroupModalComponent, {
       width: '700px',
       enterAnimationDuration: 100,
       exitAnimationDuration: 100,
-      data: {
-        group,
-      },
-    });
-  }
-
-  public onAddCard(group: number) {
-    this.dialog.open(AddCardModalComponent, {
-      width: '700px',
-      height: '90%',
-      maxHeight: '1200px',
-      enterAnimationDuration: 100,
-      exitAnimationDuration: 100,
-      disableClose: true,
-      data: {
-        group,
-      },
     });
   }
 
   onDragStart(event: any, item: any, list: any[]) {
-    // console.log("start")
-    // const index = list.indexOf(item);
-    // console.log(ind /ex)
-    // list.splice(index, 1);
   }
 
   onDragged(item: any, list: any[], effect: DropEffect) {
     if (effect === 'move') {
       const index = list.indexOf(item);
       list.splice(index, 1);
+
+      const groups = list.map((item: any, idx: number) => {
+        return { id: item.id, index: idx }
+      });
+
+      this.hassService.reorderGroups(groups).pipe(take(1)).subscribe();
     }
+
   }
 
   onDrop(event: DndDropEvent, list: any[]) {
@@ -103,12 +74,6 @@ export class HomePageComponent implements OnInit {
       }
 
       list.splice(index, 0, event.data);
-      
-      const groups = list.map((item: any, idx: number) => {
-        return { id: item.id, index: idx }
-      });
-      
-      this.hassService.reorderGroups(groups).pipe(take(1)).subscribe();
     }
   }
 }

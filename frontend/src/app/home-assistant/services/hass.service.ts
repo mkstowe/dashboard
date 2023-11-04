@@ -53,7 +53,7 @@ export class HassService {
   }
 
   public getAllGroups() {
-    return this.http.get(`/api/hass/groups`);
+    return this.http.get<CardGroup[]>(`/api/hass/groups`);
   }
 
   public createGroup(group: CardGroup) {
