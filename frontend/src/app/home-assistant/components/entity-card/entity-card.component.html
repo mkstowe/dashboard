@@ -1,18 +1,17 @@
 <div class="card-wrapper">
-  <div class="edit-actions" *ngIf="editMode">
+  <div class="edit-actions" [class.active]="isActive" *ngIf="editMode">
     <div class="drag-handle" dndHandle>
       <mat-icon>drag_handle</mat-icon>
     </div>
     <button mat-icon-button color="primary" (click)="editCard()">
       <mat-icon>edit</mat-icon>
     </button>
-
   </div>
   <div
   class="card"
   [class.active]="isActive"
   [class.has-action]="hasAction"
-  [class.edit-mode]="editMode"
+    [class.edit]="editMode"
   (click)="onButtonClick($event)"
   *ngIf="card.type !== 'sensorCard'; else sensorCard"
   >

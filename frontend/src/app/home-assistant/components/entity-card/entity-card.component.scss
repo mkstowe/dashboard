@@ -165,6 +165,12 @@
       cursor: move;
       margin-left: 5px;
     }
+
+    &.active {
+      .drag-handle {
+        color: rgba($background, 0.8);
+      }
+    }
   }
 }
 
