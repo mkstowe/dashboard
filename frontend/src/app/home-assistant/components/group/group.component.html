@@ -31,7 +31,7 @@
       <div
         class="card-grid"
         (swipe)="onSwipe($event, obs.value.length || 0)"
-        [dndDropzone]="['card']"
+        [dndDropzone]="[ toString(group.id) ]"
         (dndDrop)="onDrop($event, obs.value)"
         dndEffectAllowed="move"
       >
@@ -40,7 +40,7 @@
           class="card"
           *ngFor="let card of obs.value?.slice(start, end) as currCards"
           [dndDraggable]="card"
-          dndType="card"
+          [dndType]="toString(card.group)"
           (dndCanceled)="onDragged(group, currCards, 'none')"
           (dndCopied)="onDragged(group, currCards, 'copy')"
           (dndLinked)="onDragged(group, currCards, 'link')"

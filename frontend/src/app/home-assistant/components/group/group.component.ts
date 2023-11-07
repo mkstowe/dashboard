@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { Card } from '../../models/card';
-import { BehaviorSubject, Observable, Subject, switchMap, take, takeUntil } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, concat, first, switchMap, take, takeUntil } from 'rxjs';
 import { HassService } from '../../services/hass.service';
 import { CardGroup } from '../../models/card-group';
 import { MatDialog } from '@angular/material/dialog';
@@ -120,5 +120,9 @@ export class GroupComponent implements OnInit, OnDestroy {
 
       list.splice(index, 0, event.data);
     }
+  }
+
+  public toString(group: string | number): string {
+    return group as string;
   }
 }
