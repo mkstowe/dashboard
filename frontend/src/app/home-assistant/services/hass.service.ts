@@ -136,6 +136,10 @@ export class HassService {
       .pipe(tap(() => this.refetchSubject.next(null)));
   }
 
+  public getSidebarEntities() {
+    return this.http.get(`/api/hass/sidebar`);
+  }
+
   public async callService(msg: ServiceCall) {
     this.connection.sendMessage(msg as MessageBase);
   }

@@ -15,4 +15,5 @@ export interface Card {
   state?: string;
   stateOptions?: StateOptions | string;
   sensors?: SensorOptions[];
+  trackInSidebar?: boolean;
 }

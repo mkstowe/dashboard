@@ -4,4 +4,6 @@ export interface StateOptions {
   dangerExpression?: string;
   round?: boolean;
   warningExpression?: string;
+  active?: boolean;
+  sidebar?: boolean;
 }

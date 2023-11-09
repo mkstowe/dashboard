@@ -86,11 +86,13 @@ export class AddCardModalComponent implements OnInit {
       }),
       state: [''],
       stateOptions: this.formBuilder.group({
+        active: [true],
         beforeString: [''],
         afterString: [''],
         warningExpression: [''],
         dangerExpression: [''],
         round: [false],
+        sidebar: [false]
       }),
     });
 
@@ -101,11 +103,13 @@ export class AddCardModalComponent implements OnInit {
         name: [''],
         state: [''],
         stateOptions: this.formBuilder.group({
+          active: [true],
           beforeString: [''],
           afterString: [''],
           warningExpression: [''],
           dangerExpression: [''],
           round: [false],
+          sidebar: [false]
         }),
         enableGraph: [true],
       }),
@@ -115,11 +119,13 @@ export class AddCardModalComponent implements OnInit {
         name: [''],
         state: [''],
         stateOptions: this.formBuilder.group({
+          active: [true],
           beforeString: [''],
           afterString: [''],
           warningExpression: [''],
           dangerExpression: [''],
           round: [false],
+          sidebar: [false]
         }),
         enableGraph: [true],
       }),

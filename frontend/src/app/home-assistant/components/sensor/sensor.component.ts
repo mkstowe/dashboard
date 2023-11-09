@@ -21,8 +21,9 @@ export class SensorComponent implements OnInit, OnDestroy {
   public entityName: string;
   public entityState: string;
   public icon: string;
-  private editMode: boolean = false;
+  public stateActive: boolean;
 
+  private editMode: boolean = false;
   private notifier$ = new Subject<void>();
 
   constructor(private hassService: HassService, private dialog: MatDialog) {}
@@ -43,10 +44,15 @@ export class SensorComponent implements OnInit, OnDestroy {
         this.entityState = this.sensorOptions?.state || this.entity?.state;
 
         if (this.sensorOptions.stateOptions) {
-          const state = this.hassService.resolveStateOptions(
+          this.stateActive = this.sensorOptions.stateOptions.active ?? true;
+
+          let state;
+          if (this.stateActive) {
+          state = this.hassService.resolveStateOptions(
             this.entityState,
             this.sensorOptions?.stateOptions
           );
+          }
 
           if (state) {
             this.entityState = state.state;

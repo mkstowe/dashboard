@@ -27,6 +27,7 @@ export class EntityCardComponent implements OnInit, OnDestroy {
   public editMode = false;
   public dangerLevel: DangerLevel = DangerLevel.Normal;
   public dangerLevels = DangerLevel;
+  public stateActive: boolean;
 
   private lockTimer: number;
   private notifier$ = new Subject<void>();
@@ -61,10 +62,15 @@ export class EntityCardComponent implements OnInit, OnDestroy {
         }
 
         if (this.card.stateOptions) {
-          const state = this.hassService.resolveStateOptions(
-            this.entityState,
-            this.card.stateOptions
-          );
+          this.stateActive = this.card.stateOptions.active;
+
+          let state;
+          if (this.stateActive) {
+            state = this.hassService.resolveStateOptions(
+              this.entityState,
+              this.card.stateOptions
+            );
+          }
 
           if (state) {
             this.entityState = state.state;

@@ -29,6 +29,7 @@ exports.up = async function (knex) {
     table.jsonb("stateOptions");
     table.text("userId", 128).notNullable();
     table.integer('index').unsigned().notNullable();
+    table.boolean("trackInSidebar").defaultTo(false);
   });
 
   await knex.schema.createTable("hassSensor", (table) => {
@@ -47,6 +48,7 @@ exports.up = async function (knex) {
     table.jsonb("stateOptions");
     table.text("userId", 128).notNullable();
     table.integer('index').unsigned().notNullable();
+    table.boolean("trackInSidebar").defaultTo(false);
   });
 
   await knex.schema.createTable("plant", (table) => {

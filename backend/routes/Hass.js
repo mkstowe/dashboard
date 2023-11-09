@@ -171,6 +171,7 @@ router.get("/card/:id", async (req, res) => {
 router.post("/card", async (req, res) => {
   const userId = req.auth.payload.sub;
   const card = req.body;
+  card.trackInSidebar = card.stateOptions?.sidebar ?? false;
 
   const maxIdx = await knex("hassCard")
     .max("index")
@@ -194,6 +195,7 @@ router.patch("/card/:id", async (req, res) => {
   const userId = req.auth.payload.sub;
   const id = req.params.id;
   const card = req.body;
+  card.trackInSidebar = card.stateOptions?.sidebar ?? false;
 
   knex("hassCard")
     .where({ userId, id })
@@ -279,6 +281,7 @@ router.get("/sensor/:id", async (req, res) => {
 router.post("/sensor", async (req, res) => {
   const userId = req.auth.payload.sub;
   const sensor = req.body;
+  sensor.trackInSidebar = sensor.stateOptions?.sidebar ?? false;
 
   const maxIdx = await knex("hassSensor")
     .max("index")
@@ -302,6 +305,7 @@ router.patch("/sensor/:id", async (req, res) => {
   const userId = req.auth.payload.sub;
   const id = req.params.id;
   const sensor = req.body;
+  sensor.trackInSidebar = sensor.stateOptions?.sidebar ?? false;
 
   knex("hassSensor")
     .where({ userId, id })
@@ -348,6 +352,20 @@ router.post("/sensors/reorder", async (req, res) => {
     Promise.all(queries).then(transaction.commit).catch(transaction.rollback);
   });
 });
+
+router.get("/sidebar", async (req, res) => {
+  const userId = req.auth.payload.sub;
+
+  knex.union([
+    knex('hassCard').select('entityId').where({ userId, trackInSidebar: true }),
+    knex('hassSensor').select('entityId').where({ userId, trackInSidebar: true })
+  ])
+  .then((entities) => {
+    res.status(200).json(entities);
+  }).catch((error) => {
+    res.status(500).json({ error: error.message });
+  })
+})
 
 // Get entity history
 router.get("/history/period", async (req, res) => {
