@@ -313,6 +313,22 @@ export class AddCardModalComponent implements OnInit {
     }
   }
 
+  public onEntityIdChanged() {
+    const serviceForm = this.entityForm.get('service')!;
+    if (serviceForm.value.domain || serviceForm.value.service || serviceForm.value.target.entity_id || serviceForm.value.target.device_id || serviceForm.value.area_id) {
+      return;
+    }
+
+    const entityId = this.entityForm.get('entityId')!.value;
+    serviceForm.patchValue({
+      domain: entityId.split('.')[0],
+      service: 'toggle',
+      target: {
+        entity_id: entityId
+      }
+    })
+  }
+
   public close() {
     if (
       this.addCardForm.pristine &&
