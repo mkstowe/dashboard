@@ -220,3 +220,10 @@ mat-dialog-container .mat-mdc-dialog-surface {
 .info-tooltip {
   font-size: 12px;
 }
+
+mat-icon svg {
+  path.active,
+  rect.active {
+    opacity: 0;
+  }
+}

@@ -58,6 +58,13 @@
         &.danger {
           color: $danger;
         }
+
+        svg {
+          path.active,
+          rect.active {
+            opacity: 0;
+          }
+        }
       }
 
       .icon-active {
@@ -102,6 +109,14 @@
     &.active {
       color: $background;
       background-color: $foreground;
+
+      .icon svg {
+        path.active,
+        rect.active {
+          fill: $accent !important;
+          opacity: 1 !important;
+        }
+      }
     }
 
     &.has-action {
@@ -146,7 +161,7 @@
     align-items: center;
     justify-content: space-between;
     z-index: 999;
-    
+
     button {
       width: 35px;
       height: 35px;

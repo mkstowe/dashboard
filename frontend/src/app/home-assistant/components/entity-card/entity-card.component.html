@@ -26,7 +26,7 @@
     class="icon-active"
     [class.warn]="dangerLevel === dangerLevels.Warning"
     [class.danger]="dangerLevel === dangerLevels.Danger"
-    *ngIf="isActive"
+    *ngIf="isActive && iconActive"
     svgIcon="{{ iconActive }}"
     ></mat-icon>
   </div>
