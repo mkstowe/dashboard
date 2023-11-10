@@ -75,8 +75,9 @@ export class HassService {
   }
 
   public reorderGroups(groups: any) {
-    return this.http.post(`/api/hass/groups/reorder`, groups)
-    .pipe(tap(() => this.refetchSubject.next(null)));
+    return this.http
+      .post(`/api/hass/groups/reorder`, groups)
+      .pipe(tap(() => this.refetchSubject.next(null)));
   }
 
   public getAllCards() {
@@ -110,8 +111,9 @@ export class HassService {
   }
 
   public reorderCards(cards: any) {
-    return this.http.post(`/api/hass/cards/reorder`, cards)
-    .pipe(tap(() => this.refetchSubject.next(null)));
+    return this.http
+      .post(`/api/hass/cards/reorder`, cards)
+      .pipe(tap(() => this.refetchSubject.next(null)));
   }
 
   public getSensorsByCard(cardId: number) {

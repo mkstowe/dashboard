@@ -43,7 +43,7 @@ import { DndModule } from 'ngx-drag-drop';
     NgChartsModule,
     ReactiveFormsModule,
     RouterModule,
-    DndModule
+    DndModule,
   ],
   exports: [
     MaterialModule,
@@ -57,7 +57,7 @@ import { DndModule } from 'ngx-drag-drop';
     ConfirmationDialogComponent,
     DynamicFieldDirective,
     DynamicFormComponent,
-    DndModule
+    DndModule,
   ],
 })
 export class SharedModule {}

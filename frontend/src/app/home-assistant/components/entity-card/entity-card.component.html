@@ -8,35 +8,39 @@
     </button>
   </div>
   <div
-  class="card"
-  [class.active]="isActive"
-  [class.has-action]="hasAction"
+    class="card"
+    [class.active]="isActive"
+    [class.has-action]="hasAction"
     [class.edit]="editMode"
-  (click)="onButtonClick($event)"
-  *ngIf="card.type !== 'sensorCard'; else sensorCard"
+    (click)="onButtonClick($event)"
+    *ngIf="card.type !== 'sensorCard'; else sensorCard"
   >
-  <div class="entity-icon" [class.edit]="editMode">
-    <mat-icon
-    class="icon"
-    [class.warn]="dangerLevel === dangerLevels.Warning"
-    [class.danger]="dangerLevel === dangerLevels.Danger"
-    svgIcon="{{ icon }}"
-    ></mat-icon>
-    <mat-icon
-    class="icon-active"
-    [class.warn]="dangerLevel === dangerLevels.Warning"
-    [class.danger]="dangerLevel === dangerLevels.Danger"
-    *ngIf="isActive && iconActive"
-    svgIcon="{{ iconActive }}"
-    ></mat-icon>
-  </div>
-  <div class="lock-icon" *ngIf="card?.lock && !editMode" [class.unlocked]="unlocked">
-    <mat-icon svgIcon="lock"></mat-icon>
-  </div>
-  <div class="name-state">
-    <div class="entity-name">{{ entityName }}</div>
-    <div class="entity-state" *ngIf="stateActive">{{ entityState }}</div>
-  </div>
+    <div class="entity-icon" [class.edit]="editMode">
+      <mat-icon
+        class="icon"
+        [class.warn]="dangerLevel === dangerLevels.Warning"
+        [class.danger]="dangerLevel === dangerLevels.Danger"
+        svgIcon="{{ icon }}"
+      ></mat-icon>
+      <mat-icon
+        class="icon-active"
+        [class.warn]="dangerLevel === dangerLevels.Warning"
+        [class.danger]="dangerLevel === dangerLevels.Danger"
+        *ngIf="isActive && iconActive"
+        svgIcon="{{ iconActive }}"
+      ></mat-icon>
+    </div>
+    <div
+      class="lock-icon"
+      *ngIf="card?.lock && !editMode"
+      [class.unlocked]="unlocked"
+    >
+      <mat-icon svgIcon="lock"></mat-icon>
+    </div>
+    <div class="name-state">
+      <div class="entity-name">{{ entityName }}</div>
+      <div class="entity-state" *ngIf="stateActive">{{ entityState }}</div>
+    </div>
   </div>
 
   <ng-template #sensorCard>

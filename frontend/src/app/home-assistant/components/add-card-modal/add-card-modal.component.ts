@@ -92,7 +92,7 @@ export class AddCardModalComponent implements OnInit {
         warningExpression: [''],
         dangerExpression: [''],
         round: [false],
-        sidebar: [false]
+        sidebar: [false],
       }),
     });
 
@@ -109,7 +109,7 @@ export class AddCardModalComponent implements OnInit {
           warningExpression: [''],
           dangerExpression: [''],
           round: [false],
-          sidebar: [false]
+          sidebar: [false],
         }),
         enableGraph: [true],
       }),
@@ -125,7 +125,7 @@ export class AddCardModalComponent implements OnInit {
           warningExpression: [''],
           dangerExpression: [''],
           round: [false],
-          sidebar: [false]
+          sidebar: [false],
         }),
         enableGraph: [true],
       }),
@@ -315,7 +315,13 @@ export class AddCardModalComponent implements OnInit {
 
   public onEntityIdChanged() {
     const serviceForm = this.entityForm.get('service')!;
-    if (serviceForm.value.domain || serviceForm.value.service || serviceForm.value.target.entity_id || serviceForm.value.target.device_id || serviceForm.value.area_id) {
+    if (
+      serviceForm.value.domain ||
+      serviceForm.value.service ||
+      serviceForm.value.target.entity_id ||
+      serviceForm.value.target.device_id ||
+      serviceForm.value.area_id
+    ) {
       return;
     }
 
@@ -324,9 +330,9 @@ export class AddCardModalComponent implements OnInit {
       domain: entityId.split('.')[0],
       service: 'toggle',
       target: {
-        entity_id: entityId
-      }
-    })
+        entity_id: entityId,
+      },
+    });
   }
 
   public close() {

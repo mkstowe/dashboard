@@ -1,17 +1,17 @@
-import { Component, Inject, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { MatExpansionPanel } from "@angular/material/expansion";
-import { ActivatedRoute, Router } from "@angular/router";
-import { AuthService } from "@auth0/auth0-angular";
-import { AuthService as auth } from "src/app/core/services/auth.service";
-import { HassEntities } from "home-assistant-js-websocket";
-import { Subject, switchMap, takeUntil } from "rxjs";
-import { HassService } from "src/app/home-assistant/services/hass.service";
-import { DOCUMENT } from "@angular/common";
+import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatExpansionPanel } from '@angular/material/expansion';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '@auth0/auth0-angular';
+import { AuthService as auth } from 'src/app/core/services/auth.service';
+import { HassEntities } from 'home-assistant-js-websocket';
+import { Subject, switchMap, takeUntil } from 'rxjs';
+import { HassService } from 'src/app/home-assistant/services/hass.service';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
-  selector: "app-sidebar",
-  templateUrl: "./sidebar.component.html",
-  styleUrls: ["./sidebar.component.scss"],
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit, OnDestroy {
   @ViewChild(MatExpansionPanel) public deviceList: MatExpansionPanel;
@@ -24,11 +24,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
   public isDemo: boolean;
   public isDemo$: any;
 
-  private activeStates = ["on", "playing"];
+  private activeStates = ['on', 'playing'];
   private sidebarEntities: string[];
-  private extraSidebarEntities: string[] = [
-    'light.kitchen_lights',
-  ];
+  private extraSidebarEntities: string[] = ['light.kitchen_lights'];
   private notifier$ = new Subject<void>();
 
   constructor(
@@ -53,7 +51,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe((res: any) => {
-        this.sidebarEntities = res.map((entity: any) => entity.entityId).concat(this.extraSidebarEntities);
+        this.sidebarEntities = res
+          .map((entity: any) => entity.entityId)
+          .concat(this.extraSidebarEntities);
       });
 
     this.hassService.entities.pipe(takeUntil(this.notifier$)).subscribe({
@@ -81,8 +81,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   private updateSidebarContent(entities: HassEntities) {
     const weatherTemp =
-      entities["sensor.pirateweather_temperature"]?.state.split(".")[0];
-    const weatherSummary = entities["sensor.pirateweather_summary"]?.state;
+      entities['sensor.pirateweather_temperature']?.state.split('.')[0];
+    const weatherSummary = entities['sensor.pirateweather_summary']?.state;
     this.weather = `${weatherTemp}° and ${weatherSummary}`;
 
     this.activeDevices = Object.keys(entities)

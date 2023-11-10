@@ -356,16 +356,22 @@ router.post("/sensors/reorder", async (req, res) => {
 router.get("/sidebar", async (req, res) => {
   const userId = req.auth.payload.sub;
 
-  knex.union([
-    knex('hassCard').select('entityId').where({ userId, trackInSidebar: true }),
-    knex('hassSensor').select('entityId').where({ userId, trackInSidebar: true })
-  ])
-  .then((entities) => {
-    res.status(200).json(entities);
-  }).catch((error) => {
-    res.status(500).json({ error: error.message });
-  })
-})
+  knex
+    .union([
+      knex("hassCard")
+        .select("entityId")
+        .where({ userId, trackInSidebar: true }),
+      knex("hassSensor")
+        .select("entityId")
+        .where({ userId, trackInSidebar: true }),
+    ])
+    .then((entities) => {
+      res.status(200).json(entities);
+    })
+    .catch((error) => {
+      res.status(500).json({ error: error.message });
+    });
+});
 
 // Get entity history
 router.get("/history/period", async (req, res) => {

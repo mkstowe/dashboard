@@ -1,4 +1,10 @@
-import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { DangerLevel, HassService } from '../../services/hass.service';
 import { Observable, Subject, switchMap, take, takeUntil } from 'rxjs';
 import { HassEntity } from 'home-assistant-js-websocket';
@@ -11,7 +17,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
   selector: 'app-entity-card',
   templateUrl: './entity-card.component.html',
   styleUrls: ['./entity-card.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class EntityCardComponent implements OnInit, OnDestroy {
   @Input() public card: any;
@@ -55,7 +61,7 @@ export class EntityCardComponent implements OnInit, OnDestroy {
         this.entityState = this.card?.state || this.entity?.state || '';
         this.icon = this.card?.icon || '';
         this.iconActive = this.card?.iconActive || '';
-        
+
         if (this.onStates.includes(this.entityState)) {
           this.isActive = true;
         } else {
@@ -89,9 +95,11 @@ export class EntityCardComponent implements OnInit, OnDestroy {
       this.hasAction = true;
     }
 
-    this.sensors = this.hassService.refetch.pipe(switchMap(() => {
-      return this.hassService.getSensorsByCard(this.card.id);
-    }))
+    this.sensors = this.hassService.refetch.pipe(
+      switchMap(() => {
+        return this.hassService.getSensorsByCard(this.card.id);
+      })
+    );
   }
 
   public onButtonClick($event: Event) {

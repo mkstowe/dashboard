@@ -7,7 +7,7 @@ exports.up = async function (knex) {
     table.increments("id");
     table.text("title", 128).notNullable();
     table.text("userId", 128).notNullable();
-    table.integer('index').unsigned().notNullable();
+    table.integer("index").unsigned().notNullable();
   });
 
   await knex.schema.createTable("hassCard", (table) => {
@@ -28,7 +28,7 @@ exports.up = async function (knex) {
     table.jsonb("service");
     table.jsonb("stateOptions");
     table.text("userId", 128).notNullable();
-    table.integer('index').unsigned().notNullable();
+    table.integer("index").unsigned().notNullable();
     table.boolean("trackInSidebar").defaultTo(false);
   });
 
@@ -47,7 +47,7 @@ exports.up = async function (knex) {
     table.text("state", 128);
     table.jsonb("stateOptions");
     table.text("userId", 128).notNullable();
-    table.integer('index').unsigned().notNullable();
+    table.integer("index").unsigned().notNullable();
     table.boolean("trackInSidebar").defaultTo(false);
   });
 

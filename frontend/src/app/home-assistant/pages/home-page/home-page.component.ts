@@ -49,8 +49,7 @@ export class HomePageComponent implements OnInit {
     });
   }
 
-  onDragStart(event: any, item: any, list: any[]) {
-  }
+  onDragStart(event: any, item: any, list: any[]) {}
 
   onDragged(item: any, list: any[], effect: DropEffect) {
     if (effect === 'move') {
@@ -58,12 +57,11 @@ export class HomePageComponent implements OnInit {
       list.splice(index, 1);
 
       const groups = list.map((item: any, idx: number) => {
-        return { id: item.id, index: idx }
+        return { id: item.id, index: idx };
       });
 
       this.hassService.reorderGroups(groups).pipe(take(1)).subscribe();
     }
-
   }
 
   onDrop(event: DndDropEvent, list: any[]) {

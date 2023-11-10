@@ -31,7 +31,7 @@
       <div
         class="card-grid"
         (swipe)="onSwipe($event, obs.value.length || 0)"
-        [dndDropzone]="[ toString(group.id) ]"
+        [dndDropzone]="[toString(group.id)]"
         (dndDrop)="onDrop($event, obs.value)"
         dndEffectAllowed="move"
       >

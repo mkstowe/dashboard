@@ -43,7 +43,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatAutocompleteModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
-    DragDropModule
+    DragDropModule,
   ],
   exports: [
     MatButtonModule,
@@ -66,7 +66,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatAutocompleteModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
-    DragDropModule
+    DragDropModule,
   ],
   providers: [MatIconRegistry],
 })
