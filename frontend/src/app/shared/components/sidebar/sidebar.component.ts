@@ -80,9 +80,28 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   private updateSidebarContent(entities: HassEntities) {
+    const weatherStrings = new Map<string, string>([
+      ['clear-night', 'clear'],
+      ['cloudy', 'cloudy'],
+      ['fog', 'foggy'],
+      ['hail', 'hail'],
+      ['lightning', 'storms'],
+      ['lightning-rainy', 'storms'],
+      ['partlycloudy', 'partly cloudy'],
+      ['pouring', 'pouring rain'],
+      ['rainy', 'rain'],
+      ['snowy', 'snow'],
+      ['snowy-rainy', 'sleet'],
+      ['sunny', 'sunny'],
+      ['windy', 'windy'],
+      ['windy-variant', 'windy'],
+      ['exceptional', 'clear'],
+    ]);
+
     const weatherTemp =
-      entities['sensor.pirateweather_temperature']?.state.split('.')[0];
-    const weatherSummary = entities['sensor.pirateweather_summary']?.state;
+      entities['weather.forecast_home']?.attributes.temperature;
+    const weatherState = entities['weather.forecast_home']?.state;
+    const weatherSummary = weatherStrings.get(weatherState) || weatherState;
     this.weather = `${weatherTemp}° and ${weatherSummary}`;
 
     this.activeDevices = Object.keys(entities)
