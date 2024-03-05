@@ -359,10 +359,10 @@ router.get("/sidebar", async (req, res) => {
   knex
     .union([
       knex("hassCard")
-        .select("entityId")
+        .select("entityId", "name")
         .where({ userId, trackInSidebar: true }),
       knex("hassSensor")
-        .select("entityId")
+        .select("entityId", "name")
         .where({ userId, trackInSidebar: true }),
     ])
     .then((entities) => {

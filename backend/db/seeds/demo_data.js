@@ -48,7 +48,6 @@ exports.seed = async function (knex) {
     type: "lightCard",
     entityId: "light.all_lights",
     icon: "light-bulb",
-    iconActive: "light-bulb-active",
     name: "All Lights",
     state: "on",
     service: {
@@ -63,7 +62,6 @@ exports.seed = async function (knex) {
     type: "entityCard",
     entityId: "input_boolean.air_conditioner_toggle",
     icon: "fan",
-    iconActive: "fan-active",
     name: "Air Conditioner",
     state: "off",
     service: {
@@ -83,7 +81,6 @@ exports.seed = async function (knex) {
     type: "entityCard",
     entityId: "input_boolean.desktop_toggle",
     icon: "computer",
-    iconActive: "computer-active",
     name: "Desktop",
     state: "on",
     service: {
@@ -98,7 +95,6 @@ exports.seed = async function (knex) {
     type: "lightCard",
     entityId: "light.office",
     icon: "floor-lamp",
-    iconActive: "floor-lamp-active",
     name: "Office Lamp",
     state: "on",
     service: {
@@ -113,7 +109,6 @@ exports.seed = async function (knex) {
     type: "fanCard",
     entityId: "fan.office",
     icon: "fan",
-    iconActive: "fan-active",
     name: "Office Fan",
     state: "off",
     service: {
@@ -134,7 +129,6 @@ exports.seed = async function (knex) {
     type: "tvCard",
     entityId: "tv.living_room_tv",
     icon: "tv",
-    iconActive: "tv-active",
     name: "Living Room TV",
     state: "off",
     service: {
@@ -149,7 +143,6 @@ exports.seed = async function (knex) {
     type: "lightCard",
     entityId: "light.living_room",
     icon: "floor-lamp",
-    iconActive: "floor-lamp-active",
     name: "Living Room Lamp",
     state: "off",
     service: {
@@ -164,7 +157,6 @@ exports.seed = async function (knex) {
     type: "lightCard",
     entityId: "light.loft",
     icon: "ceiling-light",
-    iconActive: "ceiling-light-active",
     name: "Loft Lights",
     state: "off",
     service: {
@@ -179,7 +171,6 @@ exports.seed = async function (knex) {
     type: "speakerCard",
     entityId: "media_player.living_room",
     icon: "speaker",
-    iconActive: "speaker-active",
     name: "Living Room Speaker",
     state: "off",
     service: {
@@ -210,7 +201,6 @@ exports.seed = async function (knex) {
     type: "lightCard",
     entityId: "light.bedroom",
     icon: "table-lamp",
-    iconActive: "table-lamp-active",
     name: "Bedroom Lamp",
     state: "on",
     service: {
@@ -225,7 +215,6 @@ exports.seed = async function (knex) {
     type: "speakerCard",
     entityId: "media_player.bedroom",
     icon: "speaker",
-    iconActive: "speaker-active",
     name: "Bedroom Speaker",
     state: "off",
     service: {

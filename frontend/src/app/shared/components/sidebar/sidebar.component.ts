@@ -17,16 +17,16 @@ export class SidebarComponent implements OnInit, OnDestroy {
   @ViewChild(MatExpansionPanel) public deviceList: MatExpansionPanel;
 
   public activeDeviceString: string;
-  public activeDevices: string[];
+  public activeDevices: string[] = [];
   public date: Date = new Date();
   public numActiveDevices: number;
   public weather: string;
   public isDemo: boolean;
   public isDemo$: any;
 
+  private entities: HassEntities;
   private activeStates = ['on', 'playing'];
-  private sidebarEntities: string[];
-  private extraSidebarEntities: string[] = ['light.kitchen_lights'];
+  private sidebarEntities: any[] = [];
   private notifier$ = new Subject<void>();
 
   constructor(
@@ -45,22 +45,18 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.hassService.refetch
-      .pipe(
-        switchMap(() => {
-          return this.hassService.getSidebarEntities();
-        })
-      )
+      .pipe(switchMap(() => this.hassService.getSidebarEntities()))
       .subscribe((res: any) => {
-        this.sidebarEntities = res
-          .map((entity: any) => entity.entityId)
-          .concat(this.extraSidebarEntities);
+        this.sidebarEntities = res;
+        this.updateSidebarContent();
       });
 
-    this.hassService.entities.pipe(takeUntil(this.notifier$)).subscribe({
-      next: (res) => {
-        this.updateSidebarContent(res);
-      },
-    });
+    this.hassService.entities
+      .pipe(takeUntil(this.notifier$))
+      .subscribe((res) => {
+        this.entities = res;
+        this.updateSidebarContent();
+      });
 
     this.isDemo$ = this.auth.isDemo$;
 
@@ -79,7 +75,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     });
   }
 
-  private updateSidebarContent(entities: HassEntities) {
+  private updateSidebarContent() {
     const weatherStrings = new Map<string, string>([
       ['clear-night', 'clear'],
       ['cloudy', 'cloudy'],
@@ -99,18 +95,24 @@ export class SidebarComponent implements OnInit, OnDestroy {
     ]);
 
     const weatherTemp =
-      entities['weather.forecast_home']?.attributes.temperature;
-    const weatherState = entities['weather.forecast_home']?.state;
+      this.entities['weather.forecast_home']?.attributes.temperature;
+    const weatherState = this.entities['weather.forecast_home']?.state;
     const weatherSummary = weatherStrings.get(weatherState) || weatherState;
     this.weather = `${weatherTemp}° and ${weatherSummary}`;
 
-    this.activeDevices = Object.keys(entities)
-      .filter(
-        (e) =>
-          this.sidebarEntities.includes(e) &&
-          this.activeStates.includes(entities[e].state)
-      )
-      .map((l) => entities[l].attributes.friendly_name!);
+    this.activeDevices = [];
+    Object.keys(this.entities).forEach((e) => {
+      this.sidebarEntities.forEach((s) => {
+        if (
+          s.entityId == e &&
+          this.activeStates.includes(this.entities[e].state)
+        ) {
+          this.activeDevices.push(
+            s.name || this.entities[e].attributes.friendly_name!
+          );
+        }
+      });
+    });
 
     this.numActiveDevices = this.activeDevices.length;
 
