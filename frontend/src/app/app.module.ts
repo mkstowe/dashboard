@@ -53,7 +53,9 @@ export class MyHammerConfig extends HammerGestureConfig {
         audience: 'https://dash.mkstowe.com/api',
       },
       httpInterceptor: {
-        allowedList: ['*'],
+        allowedList: [
+          '/api/*',
+        ],
       },
     }),
   ],
