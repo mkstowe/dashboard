@@ -60,27 +60,6 @@
         </mat-form-field>
       </div>
 
-      <!-- <div class="row">
-        <mat-label>Active Icon</mat-label>
-        <mat-form-field appearance="outline">
-          <input
-            type="text"
-            placeholder="Icon Active"
-            matInput
-            formControlName="iconActive"
-            [matAutocomplete]="autoActive"
-          />
-          <mat-autocomplete #autoActive="matAutocomplete">
-            <mat-option
-              *ngFor="let icon of filteredActiveIcons | async"
-              [value]="icon"
-            >
-              <mat-icon [svgIcon]="icon"></mat-icon> {{ icon }}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-      </div> -->
-
       <div class="row inline checkbox-field">
         <mat-label>Lock</mat-label>
         <mat-checkbox

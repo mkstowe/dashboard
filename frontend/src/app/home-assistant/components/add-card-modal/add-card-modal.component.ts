@@ -198,13 +198,6 @@ export class AddCardModalComponent implements OnInit {
       map((value: any) => this._filter(value.icon || ''))
     );
 
-    this.filteredActiveIcons = this.entityForm
-      .get('iconActive')!
-      .valueChanges.pipe(
-        startWith(''),
-        map((value) => this._filter(value || ''))
-      );
-
     this.addCardForm.valueChanges.subscribe(() => {
       this.isSensorCard = this.addCardForm.get('type')!.value === 'sensorCard';
     });
@@ -229,7 +222,7 @@ export class AddCardModalComponent implements OnInit {
     }
 
     if (this.addCardForm.value.type !== 'sensorCard') {
-      const value = {
+      const value: Partial<Card> = {
         entityId: this.entityForm.value.entityId,
         icon: this.entityForm.value.icon,
         iconActive: this.entityForm.value.iconActive,

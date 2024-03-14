@@ -36,6 +36,13 @@
       &.danger {
         color: $danger;
       }
+
+      svg {
+        path.active,
+        rect.active {
+          opacity: 0;
+        }
+      }
     }
   }
 

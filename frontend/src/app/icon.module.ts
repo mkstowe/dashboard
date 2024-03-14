@@ -27,6 +27,7 @@ export class IconModule {
       .addSvgIcon('clock', this.setPath(`${this.path}/clock.svg`))
       .addSvgIcon('computer', this.setPath(`${this.path}/computer.svg`))
       .addSvgIcon('couch', this.setPath(`${this.path}/couch.svg`))
+      .addSvgIcon('door', this.setPath(`${this.path}/door.svg`))
       .addSvgIcon('engine', this.setPath(`${this.path}/engine.svg`))
       .addSvgIcon('fan', this.setPath(`${this.path}/fan.svg`))
       .addSvgIcon('floor-lamp', this.setPath(`${this.path}/floor_lamp.svg`))

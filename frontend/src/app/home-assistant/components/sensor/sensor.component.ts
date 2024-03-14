@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { DangerLevel, HassService } from '../../services/hass.service';
 import { MatDialog } from '@angular/material/dialog';
 import { StateGraphComponent } from '../state-graph/state-graph.component';
@@ -10,6 +10,7 @@ import { HassEntity } from 'home-assistant-js-websocket';
   selector: 'app-sensor',
   templateUrl: './sensor.component.html',
   styleUrls: ['./sensor.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class SensorComponent implements OnInit, OnDestroy {
   @Input() public sensorOptions: SensorOptions;
