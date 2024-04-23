@@ -19,7 +19,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - run: cd backend
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -41,7 +40,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - run: cd frontend
       - run: ls
       - run: cat package.json
       - name: Setup Node
