@@ -23,6 +23,11 @@ jobs:
         run: yarn install
       - name: Generate frontend environment
         run: yarn env-prod
+      - name: Upload artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: frontend-env
+          path: frontend/src/environments/environment.production.ts
 
   build-backend:
     name: Build and deploy backend
@@ -70,6 +75,11 @@ jobs:
           node-version: 20
       - name: Install dependencies
         run: yarn install
+      - name: Download artifact
+        uses: actions/download-artifact@master
+        with:
+          name: frontend-env
+          path: src/environments/environment.production.ts
       - name: Build app
         run: yarn build-prod
     
