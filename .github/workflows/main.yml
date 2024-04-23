@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: 20
       - name: Set up gcloud CLI with Workload Identity
-        uses: GoogleCloudPlatform/github-actions/setup-gcloud@v2
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@latest
         with:
           workload_identity_pool: github-actions
           workload_identity_account: github-actions
