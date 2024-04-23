@@ -2,8 +2,7 @@ name: Build app and create a release in App Engine
 
 on:
   push:
-    branches:
-      - $default_branch
+    branches: [main]
 
 jobs:
   build:
