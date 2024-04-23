@@ -14,9 +14,9 @@ jobs:
         node-version: [20.x]
 
     steps:
+      - uses: actions/checkout@v4
       - run: ls
       - run: cd backend
-      - uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -33,9 +33,9 @@ jobs:
         node-version: [20.x]
 
     steps:
+      - uses: actions/checkout@v4
       - run: ls
       - run: cd frontend
-      - uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
