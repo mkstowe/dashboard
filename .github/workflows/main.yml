@@ -22,8 +22,8 @@ jobs:
       - name: Set up gcloud CLI with Workload Identity
         uses: 'google-github-actions/auth@v2'
         with:
-          workload_identity_pool: github-actions
-          workload_identity_account: github-actions
+          workload_identity_provider: github-actions
+          # workload_identity_account: github-actions
         env:
           ACTIONS_STEP_DEBUG: true
     
