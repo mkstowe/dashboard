@@ -2,7 +2,7 @@ name: Build app and deploy to App Engine
 
 on:
   push:
-    branches: [main]
+    # branches: [main]
 
 jobs:
   prepare:
