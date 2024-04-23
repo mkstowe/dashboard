@@ -1,4 +1,4 @@
-name: Build app and deploy to App Engine
+name: Build app and create a release in App Engine
 
 on:
   push:
@@ -81,7 +81,7 @@ jobs:
           name: frontend-env
           path: src/environments/environment.production.ts
       - name: Build app
-        run: yarn build-prod
+        run: yarn build
     
       
   
