@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  init:
+  prepare:
     name: Prepare for builds
     runs-on: ubuntu-latest
 
