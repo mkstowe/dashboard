@@ -1,4 +1,4 @@
-const getSecret = require("../secrets");
+const getSecret = require("../../utils/secrets");
 
 const config = {
   client: "cockroachdb",

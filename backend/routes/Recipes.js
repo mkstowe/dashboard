@@ -6,7 +6,7 @@ const router = express.Router();
 const axios = require("axios");
 const querystring = require("querystring");
 
-const getSecret = require("../secrets");
+const getSecret = require("../../utils/secrets");
 
 const MEALIE_URL = process.env.MEALIE_URL;
 

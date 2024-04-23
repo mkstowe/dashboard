@@ -6,7 +6,7 @@ const router = express.Router();
 const axios = require("axios");
 const querystring = require("querystring");
 
-const getSecret = require("../secrets");
+const getSecret = require("../../utils/secrets");
 
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 const REDIRECT_URI = process.env.SPOTIFY_REDIRECT_URI;

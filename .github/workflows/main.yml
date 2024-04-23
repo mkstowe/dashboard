@@ -5,9 +5,30 @@ on:
     branches: [main]
 
 jobs:
+  init:
+    name: Prepare for builds
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+    
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: yarn install
+      - name: Generate frontend environment
+        run: yarn env-prod
+
   build-backend:
     name: Build and deploy backend
     runs-on: ubuntu-latest
+
+    needs: [prepare]
 
     defaults:
       run:
@@ -29,6 +50,8 @@ jobs:
   build-frontend:
     name: Build and deploy frontend
     runs-on: ubuntu-latest
+
+    needs: [prepare]
     
     defaults:
       run:
@@ -40,7 +63,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - run: ls
       - run: cat package.json
       - name: Setup Node
         uses: actions/setup-node@v4
