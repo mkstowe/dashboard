@@ -8,6 +8,10 @@ jobs:
   prepare:
     name: Initial setup
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
     
     strategy:
       matrix:
