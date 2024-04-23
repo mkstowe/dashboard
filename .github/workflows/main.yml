@@ -19,19 +19,22 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Install dependencies
-        run: yarn install
-      - name: Google Cloud authentication
-        uses: google-github-actions/auth@v2
+      # - name: Install dependencies
+        # run: yarn install
+      - name: Google Auth
+        uses: 'google-github-actions/auth@v0'
         with:
-          workload_identity_provider: projects/144883645371/locations/global/workloadIdentityPools/my-pool/providers/my-provider
-          service_account: github-actions@my-project.iam.gserviceaccount.com
+          workload_identity_provider: '${{ secrets.WIF_PROVIDER }}'
+          service_account: '${{ secrets.SA_EMAIL }}'
+      - name: Set env variables
+        uses: 'google-github-actions/get-secretmanager-secrets@v2'
+        with:
+          secrets: |-
+            test:mkstowe-dash/test
     
   build-backend:
-    name: Build backend
+    name: Build and deploy backend
     runs-on: ubuntu-latest
-
-    needs: [prepare]
 
     defaults:
       run:
@@ -43,6 +46,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - run: echo '${{ steps.secrets.outputs.test }}'
       # - name: Setup Node
       #   uses: actions/setup-node@v4
       #   with:
@@ -51,7 +55,7 @@ jobs:
       #   run: yarn install
 
   # build-frontend:
-  #   name: Build frontend
+  #   name: Build and deploy frontend
   #   runs-on: ubuntu-latest
     
   #   defaults:
