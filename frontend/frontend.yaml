@@ -1,5 +1,4 @@
 runtime: nodejs18
-service: default
 
 handlers:
   - url: /(.*\.(js|css|svg|png)(|\.map))$
