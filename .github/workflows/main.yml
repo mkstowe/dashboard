@@ -41,7 +41,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Build app
-        run: yarn run build
+        run: ng build
     
       
   
