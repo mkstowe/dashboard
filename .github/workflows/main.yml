@@ -1,4 +1,4 @@
-name: Build app and create a release in App Engine
+name: Build app and deploy to App Engine
 
 on:
   push:
@@ -49,7 +49,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Build app
-        run: yarn build
+        run: yarn build-prod
     
       
   
