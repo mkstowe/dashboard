@@ -19,13 +19,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Set up gcloud CLI with Workload Identity
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          workload_identity_pool: github-actions
+          workload_identity_account: github-actions
       # - name: Install dependencies
         # run: yarn install
-      - name: Google Auth
-        uses: 'google-github-actions/auth@v2'
-        with:
-          workload_identity_provider: projects/144883645371/locations/global/workloadIdentityPools/github-actions
-          service_account: github-actions@mkstowe-dash.iam.gserviceaccount.com
+      # - name: Google Auth
+      #   uses: 'google-github-actions/auth@v2'
+      #   with:
+      #     workload_identity_provider: projects/144883645371/locations/global/workloadIdentityPools/github-actions
+      #     service_account: github-actions@mkstowe-dash.iam.gserviceaccount.com
       - name: Set env variables
         uses: 'google-github-actions/get-secretmanager-secrets@v2'
         with:
