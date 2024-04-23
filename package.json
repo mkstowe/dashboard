@@ -6,15 +6,9 @@
     "frontend": "cd frontend; ng serve",
     "backend": "cd backend; npx nodemon index.js",
     "dev": "concurrently \"yarn frontend\" \"yarn backend\"",
-    "deploy": "cd frontend; ng build; cd ..; gcloud app deploy dispatch.yaml frontend/frontend.yaml backend/backend.yaml",
-    "env": "ts-node ./utils/set-env.ts --environment=development",
-    "env-prod": "ts-node ./utils/set-env.ts --environment=production"
+    "deploy": "cd frontend; ng build; cd ..; gcloud app deploy dispatch.yaml frontend/frontend.yaml backend/backend.yaml"
   },
   "devDependencies": {
-    "@google-cloud/secret-manager": "^5.3.0",
-    "concurrently": "^8.2.1",
-    "dotenv": "^16.4.5",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "concurrently": "^8.2.1"
   }
 }
