@@ -9,11 +9,15 @@ jobs:
   tmp:
     name: tmp
     runs-on: ubuntu-latest
+    permissions:
+     contents: 'read'
+     id-token: 'write'
+      
     steps:
         - name: Set up gcloud CLI with Workload Identity
           uses: 'google-github-actions/auth@v2'
           with:
-            workload_identity_provider: projects/144883645371/locations/global/workloadIdentityPools/github-actions/providers/github 
+            workload_identity_provider: projects/144883645371/locations/global/workloadIdentityPools/github-actions/providers/github
 
   build-frontend:
     name: Build frontend
