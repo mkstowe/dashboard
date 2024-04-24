@@ -34,8 +34,6 @@
 **/Thumbs.db
 
 **/.env
-**/environment*.ts
-!environment.example.ts
 **/proxy.conf.json
 **/api-testing.http
 
