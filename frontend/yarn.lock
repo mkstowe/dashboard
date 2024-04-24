@@ -5543,10 +5543,10 @@ hdr-histogram-percentiles-obj@^3.0.0:
   resolved "https://registry.yarnpkg.com/hdr-histogram-percentiles-obj/-/hdr-histogram-percentiles-obj-3.0.0.tgz#9409f4de0c2dda78e61de2d9d78b1e9f3cba283c"
   integrity sha512-7kIufnBqdsBGcSZLPJwqHT3yhk1QTsSlFsVD3kx5ixH/AlgBs9yM1q6DPhXZ8f8gtdqgh7N7/5btRLpQsS2gHw==
 
-home-assistant-js-websocket@^8.0.1:
-  version "8.2.0"
-  resolved "https://registry.yarnpkg.com/home-assistant-js-websocket/-/home-assistant-js-websocket-8.2.0.tgz#3505bf004cc3026c5d0cfdae5c031a44b0fcb01b"
-  integrity sha512-B163iuvC1hsObkbSXm89JfjjOguyQXSQeQsGf6KQblUj9QwMgFkQt13TiCYjeFFTMzhQ8Qj3/gKx/6MnSeYUqA==
+home-assistant-js-websocket@^9.2.1:
+  version "9.2.1"
+  resolved "https://registry.yarnpkg.com/home-assistant-js-websocket/-/home-assistant-js-websocket-9.2.1.tgz#9ea1931737a8db76bfc445b58163de1ae17ceaa5"
+  integrity sha512-Ss9FqqHpONTNGHne/1SHv5B41dnou4ZQV9z+O9s4++l9xue5Qz4ci3IxYQhdc0zF4wu0Dhs+wYKnxun+xsHS7g==
 
 hosted-git-info@^4.0.1:
   version "4.1.0"

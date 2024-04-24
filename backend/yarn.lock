@@ -1267,6 +1267,11 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+home-assistant-js-websocket@^9.2.1:
+  version "9.2.1"
+  resolved "https://registry.yarnpkg.com/home-assistant-js-websocket/-/home-assistant-js-websocket-9.2.1.tgz#9ea1931737a8db76bfc445b58163de1ae17ceaa5"
+  integrity sha512-Ss9FqqHpONTNGHne/1SHv5B41dnou4ZQV9z+O9s4++l9xue5Qz4ci3IxYQhdc0zF4wu0Dhs+wYKnxun+xsHS7g==
+
 http-cache-semantics@^4.1.0:
   version "4.1.1"
   resolved "https://registry.npmjs.org/http-cache-semantics/-/http-cache-semantics-4.1.1.tgz"

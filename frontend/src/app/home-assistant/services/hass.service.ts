@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import {
   createConnection,
   subscribeEntities,
-  createLongLivedTokenAuth,
   HassEntities,
   Connection,
   MessageBase,
+  Auth,
 } from 'home-assistant-js-websocket';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, EMPTY, iif, Observable, switchMap, tap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ServiceCall } from '../models/service-call';
 import { StateOptions } from '../models/state-options';
@@ -27,17 +26,26 @@ export class HassService {
   private _entities: BehaviorSubject<HassEntities> =
     new BehaviorSubject<HassEntities>({});
   private connection: Connection;
+  private hassToken: string;
 
   constructor(private http: HttpClient, private auth: AuthService) {
     this.entities = this._entities.asObservable();
 
-    this.auth.isDemo$.subscribe((isDemo) => {
-      this.isDemo = isDemo;
-
-      if (!this.isDemo) {
-        this.connect();
-      }
-    });
+    this.auth.isDemo$
+      .pipe(
+        switchMap((isDemo) => {
+          return iif(() => isDemo, EMPTY, this.http.get('/api/hass/token'));
+        })
+      )
+      .subscribe(async (res: any) => {
+        if (res) {
+          this.hassToken = res.data.access_token;
+          this.connection = await createConnection({
+            auth: new Auth(res.data),
+          });
+          subscribeEntities(this.connection, (ent) => this._entities.next(ent));
+        }
+      });
   }
 
   public get refetch() {
@@ -152,7 +160,7 @@ export class HassService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${environment.hassAccessToken}`,
+          Authorization: `Bearer ${this.hassToken}`,
         }),
       }
     );
@@ -197,16 +205,6 @@ export class HassService {
       state: newState,
       dangerLevel,
     };
-  }
-
-  private async connect() {
-    const auth = createLongLivedTokenAuth(
-      environment.hassUrl,
-      environment.hassAccessToken
-    );
-
-    this.connection = await createConnection({ auth });
-    subscribeEntities(this.connection, (ent) => this._entities.next(ent));
   }
 }
 

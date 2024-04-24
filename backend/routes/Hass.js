@@ -3,6 +3,7 @@ const knex = require("../db/client");
 
 const express = require("express");
 const router = express.Router();
+const hassWebsocket = require("home-assistant-js-websocket");
 
 const axios = require("axios");
 const querystring = require("querystring");
@@ -10,6 +11,16 @@ const querystring = require("querystring");
 const getSecret = require("../secrets");
 
 const HASS_URL = process.env.HASS_URL;
+
+// Get access token
+router.get("/token", async (req, res) => {
+  const auth = hassWebsocket.createLongLivedTokenAuth(
+    process.env.HASS_URL,
+    process.env.HASS_ACCESS_TOKEN
+  )
+  
+  res.status(200).json(auth);
+})
 
 // Get all groups
 router.get("/groups", async (req, res) => {
