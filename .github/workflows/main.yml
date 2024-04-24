@@ -52,13 +52,11 @@ jobs:
         run: yarn install
       - name: Build app
         run: yarn build-prod
-      - run: pwd
-      - run: ls
       - name: Upload dist
         uses: actions/upload-artifact@master
         with:
           name: dist
-          path: ./dist/
+          path: ./frontend/dist/
     
   build-backend-and-deploy:
     name: Build backend and deploy to Google Cloud
