@@ -69,6 +69,7 @@ jobs:
         uses: 'google-github-actions/auth@v2'
         with:
           workload_identity_provider: projects/144883645371/locations/global/workloadIdentityPools/github-actions/providers/github      
+          service_account: github-actions@mkstowe-dash.iam.gserviceaccount.com 
       # - name: Deploy
         # run: yarn deploy
       - name: Deploy
