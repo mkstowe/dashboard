@@ -1,9 +1,9 @@
 name: Build app and deploy to App Engine
 
-# on:
-#   push:
-#     branches: [main]
-on: workflow_dispatch
+on:
+  push:
+    branches: [main]
+# on: workflow_dispatch
 
 jobs:
   prepare:
@@ -24,17 +24,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Set up gcloud CLI with Workload Identity
-        uses: 'google-github-actions/auth@v2'
-        with:
-          workload_identity_provider: projects/144883645371/locations/global/workloadIdentityPools/github-actions/providers/github
-      - id: 'secrets'
-        uses: 'google-github-actions/get-secretmanager-secrets@v2'
-        with:
-          secrets: |-
-            test:mkstowe-dash/TEST
-      - name: "Echo secret"
-        run: echo '${{ steps.secrets.outputs.test }}'
+      # - name: Set up gcloud CLI with Workload Identity
+        # uses: 'google-github-actions/auth@v2'
+        # with:
+          # workload_identity_provider: projects/144883645371/locations/global/workloadIdentityPools/github-actions/providers/github
           
   build-backend:
     name: Build and deploy backend
@@ -52,38 +45,35 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - run: echo '${{ steps.secrets.outputs.test }}'
-      # - name: Setup Node
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: 20
-      # - name: Install dependencies
-      #   run: yarn install
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: yarn install
 
-  # build-frontend:
-  #   name: Build and deploy frontend
-  #   runs-on: ubuntu-latest
+  build-frontend:
+    name: Build and deploy frontend
+    runs-on: ubuntu-latest
     
-  #   defaults:
-  #     run:
-  #       working-directory: ./frontend
+    defaults:
+      run:
+        working-directory: ./frontend
 
-  #   strategy:
-  #     matrix:
-  #       node-version: [20.x]
+    strategy:
+      matrix:
+        node-version: [20.x]
 
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - run: ls
-  #     - run: cat package.json
-  #     - name: Setup Node
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: 20
-  #     - name: Install dependencies
-  #       run: yarn install
-  #     - name: Build app
-  #       run: yarn build-prod
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: yarn install
+      - name: Build app
+        run: yarn build-prod
     
       
   
