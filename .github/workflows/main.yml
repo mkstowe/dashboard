@@ -73,3 +73,8 @@ jobs:
         # run: yarn deploy
       - name: Deploy
         uses: google-github-actions/deploy-appengine@v2
+        with:
+          deliverables: |-
+            dispatch.yaml 
+            frontend/frontend.yaml 
+            backend/backend.yaml
