@@ -37,8 +37,8 @@
       top: 12%;
       left: 12%;
 
-      width: 125px;
-      height: 125px;
+      width: 30% !important;
+      height: 30% !important;
 
       container-name: entity-icon;
       container-type: inline-size;
@@ -190,10 +190,10 @@
 }
 
 @container card (max-width: 350px) {
-  .entity-icon {
-    width: 100px !important;
-    height: 100px !important;
-  }
+  // .entity-icon {
+  //   width: 100px !important;
+  //   height: 100px !important;
+  // }
 
   .name-state {
     .entity-name {
@@ -219,10 +219,10 @@
 }
 
 @container card (max-width: 250px) {
-  .entity-icon {
-    width: 75px !important;
-    height: 75px !important;
-  }
+  // .entity-icon {
+  //   width: 75px !important;
+  //   height: 75px !important;
+  // }
 
   .name-state {
     .entity-name {
@@ -236,10 +236,10 @@
 }
 
 @container card (max-width: 200px) {
-  .entity-icon {
-    width: 75px !important;
-    height: 75px !important;
-  }
+  // .entity-icon {
+  //   width: 75px !important;
+  //   height: 75px !important;
+  // }
 
   .name-state {
     .entity-name {
@@ -253,8 +253,8 @@
 }
 
 @container card (max-width: 150px) {
-  .entity-icon {
-    width: 50px !important;
-    height: 50px !important;
-  }
+  // .entity-icon {
+    // width: 50px !important;
+    // height: 50px !important;
+  // }
 }
